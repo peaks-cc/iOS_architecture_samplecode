@@ -9,15 +9,8 @@
 import UIKit
 
 class RepositoryTableViewCell: UITableViewCell {
-    
     @IBOutlet weak var fullNameLabel: UILabel!
     @IBOutlet weak var numberOfIssuesLabel: UILabel!
     @IBOutlet weak var numberOfForksLabel: UILabel!
-
-    override func awakeFromNib() {
-        super.awakeFromNib()
-
-        print(#function)
-    }
 }
 

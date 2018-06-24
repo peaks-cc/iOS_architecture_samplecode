@@ -68,7 +68,7 @@
             </tableViewCellContentView>
             <connections>
                 <outlet property="fullNameLabel" destination="3Sr-R5-mKN" id="GVL-w7-HD2"/>
-                <outlet property="numberOfFalksLabel" destination="r97-60-XTR" id="EZg-1i-738"/>
+                <outlet property="numberOfForksLabel" destination="r97-60-XTR" id="KrR-1G-Dg1"/>
                 <outlet property="numberOfIssuesLabel" destination="mwb-Ix-RFf" id="ReC-JZ-K2E"/>
             </connections>
             <point key="canvasLocation" x="-27" y="170"/>
