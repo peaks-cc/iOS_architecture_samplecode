@@ -17,7 +17,25 @@ class ViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         repositoryListPresenter.viewDidLoad()
+
+        tableView.register(UINib(nibName: "RepositoryTableViewCell", bundle: nil), forCellReuseIdentifier: "RepositoryTableViewCell")
+
+        tableView.estimatedRowHeight = 80
+        tableView.rowHeight = UITableViewAutomaticDimension
     }
 
+}
+
+extension ViewController: UITableViewDataSource {
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        return 100
+    }
+
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        let cell = tableView.dequeueReusableCell(withIdentifier: "RepositoryTableViewCell") as! RepositoryTableViewCell
+        cell.fullNameLabel.text = "ktanaka117/ScrollingFollowView"
+
+        return cell
+    }
 }
 
