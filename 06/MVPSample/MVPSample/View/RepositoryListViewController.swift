@@ -33,7 +33,6 @@ extension ViewController: UITableViewDataSource {
 
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "RepositoryTableViewCell") as! RepositoryTableViewCell
-        cell.fullNameLabel.text = "ktanaka117/ScrollingFollowView"
 
         return cell
     }
