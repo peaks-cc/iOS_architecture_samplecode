@@ -23,11 +23,16 @@ class RepositoryListPresenter {
     }
 
     func viewDidLoad() {
-        gitHubClient.fetchRepositoryList { [weak self] repositories in
-            self?.repositories = repositories
-            
-            DispatchQueue.main.async {
-                self?.repositoryListViewController.reload()
+        gitHubClient.fetchRepositoryList { [weak self] result in
+            switch result {
+            case .success(let repositories):
+                self?.repositories = repositories
+
+                DispatchQueue.main.async {
+                    self?.repositoryListViewController.reload()
+                }
+            case .error(let error):
+                ()
             }
         }
     }

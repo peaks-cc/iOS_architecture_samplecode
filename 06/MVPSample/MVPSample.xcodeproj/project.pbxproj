@@ -19,6 +19,7 @@
 		2962EDE220DF9BFB000F9E15 /* RepositoryTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2962EDE120DF9BFB000F9E15 /* RepositoryTableViewCell.swift */; };
 		2962EDE420DFA0A7000F9E15 /* Repository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2962EDE320DFA0A7000F9E15 /* Repository.swift */; };
 		2962EDE620DFA3CA000F9E15 /* Items.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2962EDE520DFA3CA000F9E15 /* Items.swift */; };
+		2962EDE820E0626F000F9E15 /* Result.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2962EDE720E0626F000F9E15 /* Result.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -48,6 +49,7 @@
 		2962EDE120DF9BFB000F9E15 /* RepositoryTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RepositoryTableViewCell.swift; sourceTree = "<group>"; };
 		2962EDE320DFA0A7000F9E15 /* Repository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Repository.swift; sourceTree = "<group>"; };
 		2962EDE520DFA3CA000F9E15 /* Items.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Items.swift; sourceTree = "<group>"; };
+		2962EDE720E0626F000F9E15 /* Result.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Result.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -115,6 +117,7 @@
 				2962EDDD20DF90B9000F9E15 /* GitHubClient.swift */,
 				2962EDE520DFA3CA000F9E15 /* Items.swift */,
 				2962EDE320DFA0A7000F9E15 /* Repository.swift */,
+				2962EDE720E0626F000F9E15 /* Result.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -246,6 +249,7 @@
 				2962EDE220DF9BFB000F9E15 /* RepositoryTableViewCell.swift in Sources */,
 				2962EDE620DFA3CA000F9E15 /* Items.swift in Sources */,
 				2962EDDE20DF90B9000F9E15 /* GitHubClient.swift in Sources */,
+				2962EDE820E0626F000F9E15 /* Result.swift in Sources */,
 				2962EDE420DFA0A7000F9E15 /* Repository.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
