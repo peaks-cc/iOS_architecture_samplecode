@@ -12,5 +12,11 @@ class RepositoryTableViewCell: UITableViewCell {
     @IBOutlet weak var fullNameLabel: UILabel!
     @IBOutlet weak var numberOfIssuesLabel: UILabel!
     @IBOutlet weak var numberOfForksLabel: UILabel!
+
+    func set(repository: Repository) {
+        fullNameLabel.text = repository.fullName
+        numberOfIssuesLabel.text = "\(repository.numberOfIssues)"
+        numberOfForksLabel.text = "\(repository.numberOfForks)"
+    }
 }
 

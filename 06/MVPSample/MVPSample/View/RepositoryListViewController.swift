@@ -8,7 +8,7 @@
 
 import UIKit
 
-class ViewController: UIViewController {
+class RepositoryListViewController: UIViewController {
 
     @IBOutlet weak var tableView: UITableView!
 
@@ -16,6 +16,7 @@ class ViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        repositoryListPresenter.inject(repositoryListViewController: self)
         repositoryListPresenter.viewDidLoad()
 
         tableView.register(UINib(nibName: "RepositoryTableViewCell", bundle: nil), forCellReuseIdentifier: "RepositoryTableViewCell")
@@ -24,15 +25,19 @@ class ViewController: UIViewController {
         tableView.rowHeight = UITableViewAutomaticDimension
     }
 
+    func reload() {
+        tableView.reloadData()
+    }
 }
 
-extension ViewController: UITableViewDataSource {
+extension RepositoryListViewController: UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return 100
+        return repositoryListPresenter.repositories.count
     }
 
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "RepositoryTableViewCell") as! RepositoryTableViewCell
+        cell.set(repository: repositoryListPresenter.repositories[indexPath.row])
 
         return cell
     }
