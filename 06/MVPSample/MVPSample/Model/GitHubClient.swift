@@ -12,10 +12,12 @@ class GitHubClient {
 
     func fetchRepositoryList(completionHandler: () -> ()) {
         let url = URL(string: "https://api.github.com/search/repositories?q=language:swift")!
+        let decoder = JSONDecoder()
+
         let session = URLSession.shared.dataTask(with: url) { data, response, error in
             do {
-                let json = try JSONSerialization.jsonObject(with: data!, options: JSONSerialization.ReadingOptions.allowFragments)
-                print(json)
+                let items = try decoder.decode(Items.self, from: data!)
+                print(items)
             } catch {
                 print(error)
             }
