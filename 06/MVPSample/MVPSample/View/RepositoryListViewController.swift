@@ -32,7 +32,7 @@ class RepositoryListViewController: UIViewController {
 
 extension RepositoryListViewController: UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return repositoryListPresenter.repositories.count
+        return repositoryListPresenter.numberOfRepositories
     }
 
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {

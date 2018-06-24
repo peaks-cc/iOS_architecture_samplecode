@@ -18,6 +18,9 @@ class RepositoryListPresenter {
     }
 
     private(set) var repositories: [Repository] = []
+    var numberOfRepositories: Int {
+        return repositories.count
+    }
 
     func viewDidLoad() {
         gitHubClient.fetchRepositoryList { [weak self] repositories in
