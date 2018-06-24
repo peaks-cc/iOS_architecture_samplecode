@@ -10,6 +10,8 @@ import UIKit
 
 class ViewController: UIViewController {
 
+    @IBOutlet weak var tableView: UITableView!
+    
     private let repositoryListPresenter = RepositoryListPresenter()
 
     override func viewDidLoad() {
