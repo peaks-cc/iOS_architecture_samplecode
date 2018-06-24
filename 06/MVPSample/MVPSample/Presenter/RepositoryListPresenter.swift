@@ -13,7 +13,7 @@ class RepositoryListPresenter {
     private let gitHubClient = GitHubClient()
 
     func viewDidLoad() {
-        gitHubClient.getRepositoryList {
+        gitHubClient.fetchRepositoryList {
             ()
         }
     }

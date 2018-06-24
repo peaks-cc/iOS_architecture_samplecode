@@ -10,7 +10,7 @@ import Foundation
 
 class GitHubClient {
 
-    func getRepositoryList(completionHandler: () -> ()) {
+    func fetchRepositoryList(completionHandler: () -> ()) {
         let url = URL(string: "https://api.github.com/search/repositories?q=language:swift")!
         let session = URLSession.shared.dataTask(with: url) { data, response, error in
             do {
