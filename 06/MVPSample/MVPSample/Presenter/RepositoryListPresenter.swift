@@ -24,8 +24,9 @@ class RepositoryListPresenter {
 
     func viewDidLoad() {
         gitHubClient.fetchRepositoryList { [weak self] repositories in
+            self?.repositories = repositories
+            
             DispatchQueue.main.async {
-                self?.repositories = repositories
                 self?.repositoryListViewController.reload()
             }
         }
