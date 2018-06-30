@@ -1,0 +1,25 @@
+PODS:
+  - Mockingjay (2.0.1):
+    - Mockingjay/Core (= 2.0.1)
+    - Mockingjay/XCTest (= 2.0.1)
+  - Mockingjay/Core (2.0.1):
+    - URITemplate (~> 2.0)
+  - Mockingjay/XCTest (2.0.1):
+    - Mockingjay/Core
+  - URITemplate (2.0.3)
+
+DEPENDENCIES:
+  - Mockingjay
+
+SPEC REPOS:
+  https://github.com/cocoapods/specs.git:
+    - Mockingjay
+    - URITemplate
+
+SPEC CHECKSUMS:
+  Mockingjay: 11a621880d2887f1775bdcf824341eb68f218450
+  URITemplate: ace0c4c46dcf8afe6e89b4060621852886b15c3b
+
+PODFILE CHECKSUM: 8ee8583f18b42517253be3e7daba4b2ea03a9d75
+
+COCOAPODS: 1.5.3
