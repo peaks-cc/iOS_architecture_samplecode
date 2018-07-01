@@ -32,7 +32,6 @@ final class TodoStore: Store {
             let todo = Todo(id: id,
                             isCompleted: false,
                             text: text)
-            lastID += 1
             todos.append(todo)
 
         case .deleteCompletedTodos:
