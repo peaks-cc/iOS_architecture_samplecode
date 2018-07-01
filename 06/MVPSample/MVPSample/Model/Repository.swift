@@ -19,3 +19,9 @@ struct Repository: Decodable {
         case numberOfForks = "forks_count"
     }
 }
+
+extension Repository: Equatable {
+    static func == (lhs: Repository, rhs: Repository) -> Bool {
+        return lhs.fullName == rhs.fullName && lhs.numberOfIssues == rhs.numberOfIssues && lhs.numberOfForks == rhs.numberOfForks
+    }
+}
