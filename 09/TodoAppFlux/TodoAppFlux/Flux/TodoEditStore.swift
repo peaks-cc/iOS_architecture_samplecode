@@ -8,7 +8,7 @@
 
 import Flux
 
-final class TodoEditStore: Store {
+final class TodoEditStore: Store<TodoAction> {
     static let shared = TodoEditStore()
 
     private(set) var id: Todo.ID?
@@ -17,11 +17,7 @@ final class TodoEditStore: Store {
         super.init(dispatcher: dispatcher)
     }
 
-    func onDispatch(_ action: Action) {
-        guard let action = action as? TodoAction else {
-            return
-        }
-
+    override func onDispatch(_ action: TodoAction) {
         switch action {
         case let .startEditingTodo(id):
             self.id = id

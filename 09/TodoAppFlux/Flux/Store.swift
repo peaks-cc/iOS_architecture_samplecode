@@ -6,11 +6,6 @@
 //  Copyright © 2018年 marty-suzuki. All rights reserved.
 //
 
-public protocol StoreProtocol {
-    func onDispatch(_ action: Action)
-}
-
-public typealias Store = FluxStore & StoreProtocol
 public typealias Subscription = String
 
 final class Emitter {
@@ -37,10 +32,13 @@ final class Emitter {
     }
 }
 
-open class FluxStore {
+open class Store<ActionType: Action> {
     private lazy var dispatchToken: DispatchToken = {
-        return self.dispatcher.register(callback: { [weak self] payload in
-            self?.invokeOnDispatch(payload)
+        return self.dispatcher.register(callback: { [weak self] action in
+            guard let action = action as? ActionType else {
+                return
+            }
+            self?.invokeOnDispatch(action)
         })
     }()
 
@@ -59,14 +57,18 @@ open class FluxStore {
         _ = dispatchToken
     }
 
-    private func invokeOnDispatch(_ payload: Action) {
+    private func invokeOnDispatch(_ action: ActionType) {
         self.changed = false
-        if let onDispatch = (self as? StoreProtocol)?.onDispatch {
-            onDispatch(payload)
-        }
+
+        onDispatch(action)
+
         if changed {
             emitter.emit()
         }
+    }
+
+    open func onDispatch(_ action: ActionType) {
+        // must override
     }
 
     public func emitChange() {
