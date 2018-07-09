@@ -11,13 +11,16 @@ import Flux
 
 final class TodoListViewController: UIViewController {
     @IBOutlet private weak var tableView: UITableView!
+    @IBOutlet private weak var clearCompletedButton: UIBarButtonItem!
+    @IBOutlet private weak var itemsLeftLabel: UILabel!
 
     private lazy var addButtonItem = UIBarButtonItem(barButtonSystemItem: .add,
                                                      target: self,
                                                      action: #selector(self.addButtonTap(_:)))
-    private lazy var editAllButtonItem = UIBarButtonItem(barButtonSystemItem: .edit,
-                                                         target: self,
-                                                         action: #selector(self.editAllButtonTap(_:)))
+    private lazy var toggleAllButtonItem = UIBarButtonItem(title: "",
+                                                           style: .plain,
+                                                           target: self,
+                                                           action: #selector(self.toggleAllButtonTap(_:)))
 
     private let todoStore: TodoStore
     private let draftStore: TodoDraftStore
@@ -54,13 +57,16 @@ final class TodoListViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        navigationItem.leftBarButtonItem = editAllButtonItem
+        navigationItem.leftBarButtonItem = toggleAllButtonItem
         navigationItem.rightBarButtonItem = addButtonItem
 
         tableView.register(UITableViewCell.self, forCellReuseIdentifier: cellIdentifier)
         tableView.dataSource = self
         tableView.delegate = self
-        updateEditAllButtonEnabled()
+
+        updateToggleAllButtonEnabled()
+        updateClearCompletedButton()
+        updateItemsLeftLabel()
 
         _ = todoStoreSubscription
     }
@@ -69,19 +75,37 @@ final class TodoListViewController: UIViewController {
         presentEditViewController()
     }
 
-    @objc private func editAllButtonTap(_ button: UIBarButtonItem) {
-        showEditAllActionSheet()
+    @objc private func toggleAllButtonTap(_ button: UIBarButtonItem) {
+        actionCreator.toggleAllTodos()
+    }
+    @IBAction func clearCompletedButtonTap(_ button: UIBarButtonItem) {
+        actionCreator.deleteCompletedTodos()
     }
 
     private func todoStoreChanged() {
         tableView.beginUpdates()
         tableView.reloadSections(IndexSet(integer: 0), with: .fade)
         tableView.endUpdates()
-        updateEditAllButtonEnabled()
+
+        updateToggleAllButtonEnabled()
+        updateClearCompletedButton()
+        updateItemsLeftLabel()
     }
 
-    private func updateEditAllButtonEnabled() {
-        editAllButtonItem.isEnabled = todoStore.todos.count > 0
+    private func updateToggleAllButtonEnabled() {
+        let todos = todoStore.todos
+        let isAllCompleted = todos.reduce(todos.count > 0) { $1.isCompleted && $0 }
+        toggleAllButtonItem.title = isAllCompleted ? "☑︎" : "☐"
+    }
+
+    private func updateClearCompletedButton() {
+        let completedCount = todoStore.todos.filter { $0.isCompleted }.count
+        clearCompletedButton.isEnabled = completedCount > 0
+        clearCompletedButton.title = "Clear Completed (\(completedCount))"
+    }
+
+    private func updateItemsLeftLabel() {
+        itemsLeftLabel.text = "\(todoStore.todos.count) items left"
     }
 
     private func presentEditViewController() {
@@ -91,20 +115,6 @@ final class TodoListViewController: UIViewController {
                                                         actionCreator: actionCreator)
         let navigationController = UINavigationController(rootViewController: editViewController)
         present(navigationController, animated: true, completion: nil)
-    }
-
-    private func showEditAllActionSheet() {
-        let actionSheet = UIAlertController(title: "Select Action",
-                                            message: nil,
-                                            preferredStyle: .actionSheet)
-        actionSheet.addAction(UIAlertAction(title: "Incomplete All", style: .default) { [weak self] _ in
-            self?.actionCreator.toggleAllTodos()
-        })
-        actionSheet.addAction(UIAlertAction(title: "Remove All Completed", style: .destructive) { [weak self] _ in
-            self?.actionCreator.deleteCompletedTodos()
-        })
-        actionSheet.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: nil))
-        present(actionSheet, animated: true, completion: nil)
     }
 
     private func showEditActionSheet(with todo: Todo) {

@@ -46,11 +46,12 @@ final class TodoStore: Store<TodoAction> {
                                 text: text)
 
         case .toggleAllTodos:
+            let isAllCompleted = todos.reduce(todos.count > 0) { $1.isCompleted && $0 }
             todos = todos.map {
                 Todo(id: $0.id,
-                     isCompleted: false,
+                     isCompleted: !isAllCompleted,
                      text: $0.text)
-            }
+                }
 
         case let .toggleTodo(id):
             guard let index = todos.index(where: { $0.id == id }) else {

@@ -11,12 +11,22 @@ import UIKit
 final class TodoEditViewController: UIViewController {
     private enum EditType {
         case new
-        case update(id: Todo.ID)
+        case edit(id: Todo.ID)
     }
 
-    @IBOutlet private weak var cancelButton: UIButton!
-    @IBOutlet private weak var doneButton: UIButton!
-    @IBOutlet private weak var textField: UITextField!
+    private lazy var cancelButton = UIBarButtonItem(title: "Cancel",
+                                                    style: .plain,
+                                                    target: self,
+                                                    action: #selector(self.cancelButtonTap(_:)))
+    private lazy var addButton = UIBarButtonItem(title: "Add",
+                                                    style: .plain,
+                                                    target: self,
+                                                    action: #selector(self.addButtonTap(_:)))
+    @IBOutlet private weak var textField: UITextField! {
+        didSet {
+            textField.placeholder = "What needs to be done?"
+        }
+    }
 
     private let todoStore: TodoStore
     private let draftStore: TodoDraftStore
@@ -56,7 +66,7 @@ final class TodoEditViewController: UIViewController {
         self.notificationCenter = notificationCenter
 
         if let id = editStore.id {
-            self.editType = .update(id: id)
+            self.editType = .edit(id: id)
         } else {
             self.editType = .new
         }
@@ -75,32 +85,37 @@ final class TodoEditViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
 
+        navigationItem.leftBarButtonItem = cancelButton
+        navigationItem.rightBarButtonItem = addButton
+
+        let typeName: String
         switch editType {
         case .new:
-            title = "Add Todo"
-            doneButton.setTitle("Add", for: .normal)
-        case let .update(id):
-            title = "Update Todo"
-            doneButton.setTitle("Update", for: .normal)
+            typeName = "Add"
+        case let .edit(id):
+            typeName = "Edit"
 
             if let todo = todoStore.todos.first(where: { $0.id == id }) {
                 textField.text = todo.text
             }
         }
 
+        title = "\(typeName) Todo"
+        addButton.title = typeName
+
         _ = textDidChangeObserver
     }
 
-    @IBAction private func cancelButtonTap(_ button: UIButton) {
+    @objc private func cancelButtonTap(_ button: UIBarButtonItem) {
         dismiss(animated: true, completion: nil)
     }
 
-    @IBAction private func doneButtonTap(_ button: UIButton) {
+    @objc private func addButtonTap(_ button: UIBarButtonItem) {
         if let text = draftStore.text {
             switch editType {
             case .new:
                 actionCreator.addTodo(text: text)
-            case let .update(id):
+            case let .edit(id):
                 actionCreator.editTodo(id: id, text: text)
                 actionCreator.stopEditingTodo()
             }

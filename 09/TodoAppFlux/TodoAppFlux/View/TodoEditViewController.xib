@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="14109" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="14113" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
@@ -12,8 +12,6 @@
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="TodoEditViewController" customModule="TodoAppFlux" customModuleProvider="target">
             <connections>
-                <outlet property="cancelButton" destination="geJ-Th-kWx" id="hL1-9v-IP4"/>
-                <outlet property="doneButton" destination="yQT-cP-Xdr" id="6uo-03-2ra"/>
                 <outlet property="textField" destination="afB-iu-uso" id="fdT-Za-0B5"/>
                 <outlet property="view" destination="iN0-l3-epB" id="WWi-jS-Uvo"/>
             </connections>
@@ -24,7 +22,7 @@
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
                 <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="fillEqually" spacing="16" translatesAutoresizingMaskIntoConstraints="NO" id="E1o-G6-K4B">
-                    <rect key="frame" x="16" y="36" width="343" height="76"/>
+                    <rect key="frame" x="16" y="36" width="343" height="30"/>
                     <subviews>
                         <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="afB-iu-uso">
                             <rect key="frame" x="0.0" y="0.0" width="343" height="30"/>
@@ -32,25 +30,6 @@
                             <fontDescription key="fontDescription" type="system" pointSize="14"/>
                             <textInputTraits key="textInputTraits"/>
                         </textField>
-                        <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" spacing="16" translatesAutoresizingMaskIntoConstraints="NO" id="xMQ-5n-IY9">
-                            <rect key="frame" x="0.0" y="46" width="343" height="30"/>
-                            <subviews>
-                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="geJ-Th-kWx">
-                                    <rect key="frame" x="0.0" y="0.0" width="163.5" height="30"/>
-                                    <state key="normal" title="Cancel"/>
-                                    <connections>
-                                        <action selector="cancelButtonTap:" destination="-1" eventType="touchUpInside" id="wWv-3h-exu"/>
-                                    </connections>
-                                </button>
-                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="yQT-cP-Xdr">
-                                    <rect key="frame" x="179.5" y="0.0" width="163.5" height="30"/>
-                                    <state key="normal" title="Done"/>
-                                    <connections>
-                                        <action selector="doneButtonTap:" destination="-1" eventType="touchUpInside" id="5le-mt-QM1"/>
-                                    </connections>
-                                </button>
-                            </subviews>
-                        </stackView>
                     </subviews>
                 </stackView>
             </subviews>
