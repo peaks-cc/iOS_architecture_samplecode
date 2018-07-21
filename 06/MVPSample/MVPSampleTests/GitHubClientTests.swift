@@ -37,19 +37,21 @@ class GitHubClientTests: XCTestCase {
     }
 
     func testリポジトリ一覧が返ってくること() throws {
+        // json
         let path = Bundle(for: type(of: self)).path(forResource: "Repositories", ofType: "json")!
         let url = URL(string: "file://" + path)!
         let data = try Data(contentsOf: url)
         let anyJson = try JSONSerialization.jsonObject(with: data, options: .allowFragments)
 
+        let decoder = JSONDecoder()
+        let items = try decoder.decode(Items.self, from: data)
+        let expect = Items(repositories: items.repositories).repositories
+
+        // stub
         let request = http(.get, uri: "https://api.github.com/search/repositories?q=language:swift")
         stub(request, json(anyJson))
 
         let exp = expectation(description: #function)
-
-        let decoder = JSONDecoder()
-        let items = try decoder.decode(Items.self, from: data)
-        let expect = Items(repositories: items.repositories).repositories
 
         let client = GitHubClient()
         client.fetchRepositoryList { result in
