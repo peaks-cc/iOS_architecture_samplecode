@@ -11,6 +11,10 @@
 		B5F18A8D21032EB4000560D3 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = B5F18A8C21032EB4000560D3 /* Assets.xcassets */; };
 		B5F18A9021032EB4000560D3 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = B5F18A8E21032EB4000560D3 /* LaunchScreen.storyboard */; };
 		B5F18A9B21032EB4000560D3 /* SupervisingControllerSampleTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5F18A9A21032EB4000560D3 /* SupervisingControllerSampleTests.swift */; };
+		B5F18AAB21033079000560D3 /* RepositoryTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5F18AA821033079000560D3 /* RepositoryTableViewCell.swift */; };
+		B5F18AAC21033079000560D3 /* RepositoryTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = B5F18AA921033079000560D3 /* RepositoryTableViewCell.xib */; };
+		B5F18AAD21033079000560D3 /* RepositoryListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5F18AAA21033079000560D3 /* RepositoryListViewController.swift */; };
+		B5F18AB021033080000560D3 /* RepositoryList.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = B5F18AAE21033080000560D3 /* RepositoryList.storyboard */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -32,6 +36,10 @@
 		B5F18A9621032EB4000560D3 /* SupervisingControllerSampleTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = SupervisingControllerSampleTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		B5F18A9A21032EB4000560D3 /* SupervisingControllerSampleTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SupervisingControllerSampleTests.swift; sourceTree = "<group>"; };
 		B5F18A9C21032EB4000560D3 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		B5F18AA821033079000560D3 /* RepositoryTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RepositoryTableViewCell.swift; sourceTree = "<group>"; };
+		B5F18AA921033079000560D3 /* RepositoryTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = RepositoryTableViewCell.xib; sourceTree = "<group>"; };
+		B5F18AAA21033079000560D3 /* RepositoryListViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RepositoryListViewController.swift; sourceTree = "<group>"; };
+		B5F18AAF21033080000560D3 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/RepositoryList.storyboard; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -103,6 +111,10 @@
 		B5F18AA621032FFE000560D3 /* View */ = {
 			isa = PBXGroup;
 			children = (
+				B5F18AAA21033079000560D3 /* RepositoryListViewController.swift */,
+				B5F18AA821033079000560D3 /* RepositoryTableViewCell.swift */,
+				B5F18AAE21033080000560D3 /* RepositoryList.storyboard */,
+				B5F18AA921033079000560D3 /* RepositoryTableViewCell.xib */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -195,6 +207,8 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				B5F18AB021033080000560D3 /* RepositoryList.storyboard in Resources */,
+				B5F18AAC21033079000560D3 /* RepositoryTableViewCell.xib in Resources */,
 				B5F18A9021032EB4000560D3 /* LaunchScreen.storyboard in Resources */,
 				B5F18A8D21032EB4000560D3 /* Assets.xcassets in Resources */,
 			);
@@ -215,6 +229,8 @@
 			buildActionMask = 2147483647;
 			files = (
 				B5F18A8621032EB2000560D3 /* AppDelegate.swift in Sources */,
+				B5F18AAB21033079000560D3 /* RepositoryTableViewCell.swift in Sources */,
+				B5F18AAD21033079000560D3 /* RepositoryListViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -243,6 +259,14 @@
 				B5F18A8F21032EB4000560D3 /* Base */,
 			);
 			name = LaunchScreen.storyboard;
+			sourceTree = "<group>";
+		};
+		B5F18AAE21033080000560D3 /* RepositoryList.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				B5F18AAF21033080000560D3 /* Base */,
+			);
+			name = RepositoryList.storyboard;
 			sourceTree = "<group>";
 		};
 /* End PBXVariantGroup section */
