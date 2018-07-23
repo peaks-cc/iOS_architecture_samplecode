@@ -23,6 +23,10 @@ class RepositoryListPresenter {
     }
 
     func viewDidLoad() {
+        getRepositoryList()
+    }
+
+    private func getRepositoryList() {
         gitHubClient.fetchRepositoryList { [weak self] result in
             switch result {
             case .success(let repositories):
@@ -36,5 +40,4 @@ class RepositoryListPresenter {
             }
         }
     }
-
 }
