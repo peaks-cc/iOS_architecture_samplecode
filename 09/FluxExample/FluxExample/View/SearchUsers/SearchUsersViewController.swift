@@ -17,7 +17,8 @@ final class SearchUsersViewController: UIViewController {
     private let actionCreator: ActionCreator
     private let dataSource: SearchUsersDataSource
 
-    private lazy var userStoreSubscription: Subscription = {
+    private var showUserSubscription: Subscription?
+    private lazy var reloadSubscription: Subscription = {
         return userStore.addListener { [weak self] in
             DispatchQueue.main.async {
                 self?.tableView.reloadSections(IndexSet(integer: 0) , with: .fade)
@@ -48,7 +49,38 @@ final class SearchUsersViewController: UIViewController {
         dataSource.configure(tableView)
         searchBar.delegate = self
 
-        _ = userStoreSubscription
+        _ = reloadSubscription
+    }
+
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+
+        subscribeStore()
+    }
+
+    override func viewDidDisappear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+
+        unsubscribeStore()
+    }
+
+    private func unsubscribeStore() {
+        if let subscription = showUserSubscription {
+            userStore.removeListener(subscription)
+            showUserSubscription = nil
+        }
+    }
+
+    private func subscribeStore() {
+        guard showUserSubscription == nil else {
+            return
+        }
+
+        showUserSubscription = userStore.addListener { [weak self] in
+            DispatchQueue.main.async {
+                self?.showUserRepositories()
+            }
+        }
     }
 
     private func showUserRepositories() {

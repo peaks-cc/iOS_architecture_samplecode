@@ -19,6 +19,9 @@
 		3758BAF5210F90BD0052234A /* RepositoryDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3758BAF3210F90BD0052234A /* RepositoryDetailViewController.swift */; };
 		3758BAF6210F90BD0052234A /* RepositoryDetailViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3758BAF4210F90BD0052234A /* RepositoryDetailViewController.xib */; };
 		3758BAF9210F91300052234A /* WebKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3758BAF8210F91300052234A /* WebKit.framework */; };
+		3758BAFB2110C0950052234A /* FavoritesDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3758BAFA2110C0950052234A /* FavoritesDataSource.swift */; };
+		3758BAFE2110C8F00052234A /* LocalCache.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3758BAFD2110C8F00052234A /* LocalCache.swift */; };
+		3758BB002110CB290052234A /* LocalCacheKey.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3758BAFF2110CB290052234A /* LocalCacheKey.swift */; };
 		37C273E1210F572500F89B82 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37C273E0210F572500F89B82 /* AppDelegate.swift */; };
 		37C273E6210F572500F89B82 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 37C273E4210F572500F89B82 /* Main.storyboard */; };
 		37C273E8210F572500F89B82 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 37C273E7210F572500F89B82 /* Assets.xcassets */; };
@@ -59,6 +62,9 @@
 		3758BAF3210F90BD0052234A /* RepositoryDetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RepositoryDetailViewController.swift; sourceTree = "<group>"; };
 		3758BAF4210F90BD0052234A /* RepositoryDetailViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = RepositoryDetailViewController.xib; sourceTree = "<group>"; };
 		3758BAF8210F91300052234A /* WebKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = WebKit.framework; path = System/Library/Frameworks/WebKit.framework; sourceTree = SDKROOT; };
+		3758BAFA2110C0950052234A /* FavoritesDataSource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavoritesDataSource.swift; sourceTree = "<group>"; };
+		3758BAFD2110C8F00052234A /* LocalCache.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocalCache.swift; sourceTree = "<group>"; };
+		3758BAFF2110CB290052234A /* LocalCacheKey.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocalCacheKey.swift; sourceTree = "<group>"; };
 		37C273DD210F572500F89B82 /* FluxExample.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = FluxExample.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		37C273E0210F572500F89B82 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		37C273E5210F572500F89B82 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
@@ -125,6 +131,7 @@
 			children = (
 				3758BAE5210F7E5D0052234A /* FavoritesViewController.swift */,
 				3758BAE6210F7E5D0052234A /* FavoritesViewController.xib */,
+				3758BAFA2110C0950052234A /* FavoritesDataSource.swift */,
 			);
 			path = Favorites;
 			sourceTree = "<group>";
@@ -156,6 +163,15 @@
 			name = Frameworks;
 			sourceTree = "<group>";
 		};
+		3758BAFC2110C8DD0052234A /* Util */ = {
+			isa = PBXGroup;
+			children = (
+				3758BAFD2110C8F00052234A /* LocalCache.swift */,
+				3758BAFF2110CB290052234A /* LocalCacheKey.swift */,
+			);
+			path = Util;
+			sourceTree = "<group>";
+		};
 		37C273D4210F572500F89B82 = {
 			isa = PBXGroup;
 			children = (
@@ -179,6 +195,7 @@
 			isa = PBXGroup;
 			children = (
 				37C273E0210F572500F89B82 /* AppDelegate.swift */,
+				3758BAFC2110C8DD0052234A /* Util */,
 				3758BADE210F7C7A0052234A /* View */,
 				37C2740F210F667500F89B82 /* Github */,
 				37C27400210F576E00F89B82 /* Flux */,
@@ -355,6 +372,7 @@
 				37C27420210F730300F89B82 /* Store.swift in Sources */,
 				3758BAF1210F89DD0052234A /* UserRepositoriesDataSource.swift in Sources */,
 				37C2741C210F70A500F89B82 /* ActionCreator.swift in Sources */,
+				3758BAFE2110C8F00052234A /* LocalCache.swift in Sources */,
 				37C27422210F75FC00F89B82 /* GithubUserStore.swift in Sources */,
 				37C27404210F57E700F89B82 /* Action.swift in Sources */,
 				37C27413210F669B00F89B82 /* Github.Repository.swift in Sources */,
@@ -362,7 +380,9 @@
 				3758BAE7210F7E5D0052234A /* FavoritesViewController.swift in Sources */,
 				37C27402210F57AF00F89B82 /* Dispatcher.swift in Sources */,
 				3758BAEE210F86330052234A /* UserRepositoriesViewController.swift in Sources */,
+				3758BAFB2110C0950052234A /* FavoritesDataSource.swift in Sources */,
 				3758BAF5210F90BD0052234A /* RepositoryDetailViewController.swift in Sources */,
+				3758BB002110CB290052234A /* LocalCacheKey.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

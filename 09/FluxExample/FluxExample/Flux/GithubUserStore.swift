@@ -35,7 +35,8 @@ final class GithubUserStore: Store {
         case .addRepositories,
              .clearRepositories,
              .repositorySelected,
-             .repositoryUnselected:
+             .repositoryUnselected,
+             .loadFavoriteRepositories:
             return
         }
         emitChange()

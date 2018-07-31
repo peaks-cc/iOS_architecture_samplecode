@@ -10,11 +10,14 @@ final class ActionCreator {
     
     private let dispatcher: Dispatcher
     private let apiSession: GithubApiRequestable
+    private let localCache: LocalCacheable
 
     init(dispatcher: Dispatcher = .shared,
-         apiSession: GithubApiRequestable = Github.ApiSession.shared) {
+         apiSession: GithubApiRequestable = Github.ApiSession.shared,
+         localCache: LocalCacheable = LocalCache.shared) {
         self.dispatcher = dispatcher
         self.apiSession = apiSession
+        self.localCache = localCache
     }
 }
 
@@ -42,6 +45,22 @@ extension ActionCreator {
 
     func setIsSearchUsersFieldEditing(_ isEditing: Bool) {
         dispatcher.dispatch(.isSeachUsersFieldEditing(isEditing))
+    }
+
+    func addFavoriteRepository(_ repository: Github.Repository) {
+        let repositories = localCache[.favorites] + [repository]
+        localCache[.favorites] = repositories
+        dispatcher.dispatch(.loadFavoriteRepositories(repositories))
+    }
+
+    func removeFavoriteRepository(_ repository: Github.Repository) {
+        let repositories = localCache[.favorites].filter { $0.id != repository.id }
+        localCache[.favorites] = repositories
+        dispatcher.dispatch(.loadFavoriteRepositories(repositories))
+    }
+
+    func loadFavoriteRepositories() {
+        dispatcher.dispatch(.loadFavoriteRepositories(localCache[.favorites]))
     }
 }
 

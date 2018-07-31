@@ -13,6 +13,8 @@ final class GithubRepositoryStore: Store {
 
     private(set) var repositories: [Github.Repository] = []
     private(set) var selectedRepository: Github.Repository?
+    private(set) var favorites: [Github.Repository] = []
+    private(set) var selectedFavoriteRepository: Github.Repository?
 
     override init(dispatcher: Dispatcher = .shared) {
         super.init(dispatcher: dispatcher)
@@ -28,6 +30,8 @@ final class GithubRepositoryStore: Store {
             self.selectedRepository = repository
         case .repositoryUnselected:
             self.selectedRepository = nil
+        case let .loadFavoriteRepositories(repositories):
+            self.favorites = repositories
 
         case .addUsers,
              .clearUsers,

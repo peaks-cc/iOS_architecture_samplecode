@@ -11,6 +11,7 @@
         <!--Tab Bar Controller-->
         <scene sceneID="nGW-BI-6KO">
             <objects>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="spe-1Q-nwp" userLabel="First Responder" sceneMemberID="firstResponder"/>
                 <tabBarController id="wXs-LR-lEO" sceneMemberID="viewController">
                     <tabBar key="tabBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="i12-KF-G8i">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="49"/>
@@ -18,7 +19,6 @@
                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                     </tabBar>
                 </tabBarController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="spe-1Q-nwp" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="-230" y="41"/>
         </scene>

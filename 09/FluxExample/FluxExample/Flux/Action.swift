@@ -22,4 +22,5 @@ enum Action {
     case clearRepositories
     case repositorySelected(Github.Repository)
     case repositoryUnselected
+    case loadFavoriteRepositories([Github.Repository])
 }
