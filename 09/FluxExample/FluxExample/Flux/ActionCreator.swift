@@ -47,20 +47,8 @@ extension ActionCreator {
         dispatcher.dispatch(.isSeachUsersFieldEditing(isEditing))
     }
 
-    func addFavoriteRepository(_ repository: Github.Repository) {
-        let repositories = localCache[.favorites] + [repository]
-        localCache[.favorites] = repositories
-        dispatcher.dispatch(.loadFavoriteRepositories(repositories))
-    }
-
-    func removeFavoriteRepository(_ repository: Github.Repository) {
-        let repositories = localCache[.favorites].filter { $0.id != repository.id }
-        localCache[.favorites] = repositories
-        dispatcher.dispatch(.loadFavoriteRepositories(repositories))
-    }
-
-    func loadFavoriteRepositories() {
-        dispatcher.dispatch(.loadFavoriteRepositories(localCache[.favorites]))
+    func clearUsers() {
+        dispatcher.dispatch(.clearUsers)
     }
 }
 
@@ -78,11 +66,31 @@ extension ActionCreator {
         }
     }
 
+    func clearRepositories() {
+        dispatcher.dispatch(.clearRepositories)
+    }
+
     func setSelectedRepository(_ repository: Github.Repository?) {
         if let repository = repository {
             dispatcher.dispatch(.repositorySelected(repository))
         } else {
             dispatcher.dispatch(.repositoryUnselected)
         }
+    }
+
+    func addFavoriteRepository(_ repository: Github.Repository) {
+        let repositories = localCache[.favorites] + [repository]
+        localCache[.favorites] = repositories
+        dispatcher.dispatch(.loadFavoriteRepositories(repositories))
+    }
+
+    func removeFavoriteRepository(_ repository: Github.Repository) {
+        let repositories = localCache[.favorites].filter { $0.id != repository.id }
+        localCache[.favorites] = repositories
+        dispatcher.dispatch(.loadFavoriteRepositories(repositories))
+    }
+
+    func loadFavoriteRepositories() {
+        dispatcher.dispatch(.loadFavoriteRepositories(localCache[.favorites]))
     }
 }

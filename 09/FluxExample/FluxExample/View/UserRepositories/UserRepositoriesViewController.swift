@@ -28,6 +28,7 @@ final class UserRepositoriesViewController: UIViewController {
 
     deinit {
         actionCreator.setSelectedUser(nil)
+        actionCreator.clearRepositories()
     }
 
     init(userStore: GithubUserStore = .shared,

@@ -15,8 +15,8 @@ final class SearchUsersDataSource: NSObject {
 
     private let cellIdentifier = "Cell"
     private var imageDataList: [IndexPath: Data] = [:]
-    private let imageCache: NSCache<NSIndexPath, NSData> = {
-        let cache = NSCache<NSIndexPath, NSData>()
+    private let imageCache: NSCache<NSURL, NSData> = {
+        let cache = NSCache<NSURL, NSData>()
         cache.countLimit = 50
         return cache
     }()
@@ -64,7 +64,7 @@ extension SearchUsersDataSource: UITableViewDataSource {
             }
         }
 
-        if let data = imageCache.object(forKey: indexPath as NSIndexPath) as Data? {
+        if let data = imageCache.object(forKey: user.avatarURL as NSURL) as Data? {
             setImage(data, false)
         } else {
             let size = CGSize(width: cell.bounds.size.height, height: cell.bounds.size.height)
@@ -75,11 +75,11 @@ extension SearchUsersDataSource: UITableViewDataSource {
             cell.imageView?.image = UIGraphicsGetImageFromCurrentImageContext()
             UIGraphicsEndImageContext()
 
-            URLSession.shared.dataTask(with: user.avatarURL) { [indexPath, weak self] data, _, _ in
+            URLSession.shared.dataTask(with: user.avatarURL) { [indexPath, user, weak self] data, _, _ in
                 guard let data = data else {
                     return
                 }
-                self?.imageCache.setObject(data as NSData, forKey: indexPath as NSIndexPath)
+                self?.imageCache.setObject(data as NSData, forKey: user.avatarURL as NSURL)
                 DispatchQueue.main.async {
                     guard tableView.indexPath(for: cell) == indexPath else {
                         return

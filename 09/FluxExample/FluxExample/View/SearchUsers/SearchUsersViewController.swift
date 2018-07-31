@@ -122,6 +122,7 @@ extension SearchUsersViewController: UISearchBarDelegate {
 
     func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
         if let text = searchBar.text, !text.isEmpty {
+            actionCreator.clearUsers()
             actionCreator.searchUsers(query: text)
             actionCreator.setIsSearchUsersFieldEditing(false)
         }
