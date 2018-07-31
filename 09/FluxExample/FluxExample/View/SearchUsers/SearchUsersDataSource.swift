@@ -14,6 +14,12 @@ final class SearchUsersDataSource: NSObject {
     private let actionCreator: ActionCreator
 
     private let cellIdentifier = "Cell"
+    private var imageDataList: [IndexPath: Data] = [:]
+    private let imageCache: NSCache<NSIndexPath, NSData> = {
+        let cache = NSCache<NSIndexPath, NSData>()
+        cache.countLimit = 50
+        return cache
+    }()
 
     init(userStore: GithubUserStore,
          actionCreator: ActionCreator) {
@@ -40,6 +46,48 @@ extension SearchUsersDataSource: UITableViewDataSource {
 
         let user = userStore.users[indexPath.row]
         cell.textLabel?.text = user.login
+
+        let setImage: (Data, Bool) -> () = { data, animated in
+            guard let imageView = cell.imageView else {
+                return
+            }
+
+            let image = UIImage(data: data)
+            if animated {
+                UIView.transition(with: imageView,
+                                  duration: 0.3,
+                                  options: .transitionCrossDissolve,
+                                  animations: { imageView.image = image },
+                                  completion: nil)
+            } else {
+                imageView.image = image
+            }
+        }
+
+        if let data = imageCache.object(forKey: indexPath as NSIndexPath) as Data? {
+            setImage(data, false)
+        } else {
+            let size = CGSize(width: cell.bounds.size.height, height: cell.bounds.size.height)
+            let rect = CGRect(x: 0, y: 0, width: size.width, height: size.height)
+            UIGraphicsBeginImageContextWithOptions(size, false, 1)
+            UIColor.white.set()
+            UIRectFill(rect)
+            cell.imageView?.image = UIGraphicsGetImageFromCurrentImageContext()
+            UIGraphicsEndImageContext()
+
+            URLSession.shared.dataTask(with: user.avatarURL) { [indexPath, weak self] data, _, _ in
+                guard let data = data else {
+                    return
+                }
+                self?.imageCache.setObject(data as NSData, forKey: indexPath as NSIndexPath)
+                DispatchQueue.main.async {
+                    guard tableView.indexPath(for: cell) == indexPath else {
+                        return
+                    }
+                    setImage(data, true)
+                }
+            }.resume()
+        }
 
         return cell
     }

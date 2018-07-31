@@ -22,7 +22,6 @@ final class SearchUsersViewController: UIViewController {
         return userStore.addListener { [weak self] in
             DispatchQueue.main.async {
                 self?.tableView.reloadSections(IndexSet(integer: 0) , with: .fade)
-                self?.showUserRepositories()
                 self?.refrectEditing()
             }
         }
@@ -48,6 +47,8 @@ final class SearchUsersViewController: UIViewController {
 
         dataSource.configure(tableView)
         searchBar.delegate = self
+
+        subscribeStore()
 
         _ = reloadSubscription
     }

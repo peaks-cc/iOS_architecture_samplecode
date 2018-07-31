@@ -46,8 +46,6 @@ final class FavoritesViewController: UIViewController {
 
         dataSource.configure(tableView)
         _ = reloadSubscription
-
-        actionCreator.loadFavoriteRepositories()
     }
 
     override func viewDidAppear(_ animated: Bool) {

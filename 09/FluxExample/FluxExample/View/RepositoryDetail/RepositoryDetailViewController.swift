@@ -11,6 +11,7 @@ import WebKit
 
 final class RepositoryDetailViewController: UIViewController {
 
+    @IBOutlet private weak var progressView: UIProgressView!
     @IBOutlet private weak var webviewContainer: UIView! {
         didSet {
             webview.translatesAutoresizingMaskIntoConstraints = false
@@ -48,6 +49,19 @@ final class RepositoryDetailViewController: UIViewController {
         }
     }()
 
+    private lazy var progressObservation: NSKeyValueObservation = {
+        return webview.observe(\.estimatedProgress, options: .new) { [weak self] _, change in
+            guard let progress = change.newValue else {
+                return
+            }
+            UIView.animate(withDuration: 0.3) {
+                let isShown = 0.0..<1.0 ~= progress
+                self?.progressView.alpha = isShown ? 1 : 0
+                self?.progressView.setProgress(Float(progress), animated: isShown)
+            }
+        }
+    }()
+
     private var isFavorite: Bool {
         return repositoryStore.favorites.contains {
             $0.id == repositoryStore.selectedRepository?.id
@@ -57,6 +71,7 @@ final class RepositoryDetailViewController: UIViewController {
     deinit {
         actionCreator.setSelectedRepository(nil)
         repositoryStore.removeListener(repositoryStoreSubscription)
+        progressObservation.invalidate()
     }
 
     init(repositoryStore: GithubRepositoryStore = .shared,
@@ -81,10 +96,10 @@ final class RepositoryDetailViewController: UIViewController {
         }
 
         navigationItem.rightBarButtonItem = favoriteButton
-
         updateFavoriteButton()
 
         _ = repositoryStoreSubscription
+        _ = progressObservation
 
         webview.load(URLRequest(url: repository.htmlURL))
     }

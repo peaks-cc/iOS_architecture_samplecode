@@ -11,6 +11,7 @@
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="RepositoryDetailViewController" customModule="FluxExample" customModuleProvider="target">
             <connections>
+                <outlet property="progressView" destination="0gU-M1-qgd" id="rgB-Si-LH2"/>
                 <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
                 <outlet property="webviewContainer" destination="eKE-vZ-S1G" id="Xyb-u4-tTn"/>
             </connections>
@@ -24,12 +25,21 @@
                     <rect key="frame" x="0.0" y="20" width="375" height="647"/>
                     <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                 </view>
+                <progressView opaque="NO" contentMode="scaleToFill" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="0gU-M1-qgd">
+                    <rect key="frame" x="0.0" y="20" width="375" height="2"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="2" id="Vek-dt-08U"/>
+                    </constraints>
+                </progressView>
             </subviews>
             <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
             <constraints>
                 <constraint firstItem="eKE-vZ-S1G" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" id="DVK-QY-T2h"/>
+                <constraint firstItem="0gU-M1-qgd" firstAttribute="top" secondItem="fnl-2z-Ty3" secondAttribute="top" id="MKj-IT-DUb"/>
                 <constraint firstItem="eKE-vZ-S1G" firstAttribute="bottom" secondItem="fnl-2z-Ty3" secondAttribute="bottom" id="PBX-Gs-iCL"/>
                 <constraint firstItem="eKE-vZ-S1G" firstAttribute="trailing" secondItem="fnl-2z-Ty3" secondAttribute="trailing" id="Rvv-qT-RSt"/>
+                <constraint firstItem="0gU-M1-qgd" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" id="XKd-mU-mfg"/>
+                <constraint firstAttribute="trailing" secondItem="0gU-M1-qgd" secondAttribute="trailing" id="jwy-el-98p"/>
                 <constraint firstItem="eKE-vZ-S1G" firstAttribute="top" secondItem="fnl-2z-Ty3" secondAttribute="top" id="kJH-yn-4VF"/>
             </constraints>
             <viewLayoutGuide key="safeArea" id="fnl-2z-Ty3"/>

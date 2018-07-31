@@ -40,6 +40,7 @@ extension FavoritesDataSource: UITableViewDataSource {
 
         let repository = repositoryStore.favorites[indexPath.row]
         cell.textLabel?.text = repository.fullName
+        cell.detailTextLabel?.text = "⭐️\(repository.stargazersCount) 🍴\(repository.forksCount)"
 
         return cell
     }
