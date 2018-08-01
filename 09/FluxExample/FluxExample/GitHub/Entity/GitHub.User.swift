@@ -1,5 +1,5 @@
 //
-//  Github.User.swift
+//  GitHub.User.swift
 //  FluxExample
 //
 //  Created by marty-suzuki on 2018/07/31.
@@ -8,7 +8,7 @@
 
 import Foundation
 
-extension Github {
+extension GitHub {
     struct User: Codable {
         let login: String
         let id: Int

@@ -10,12 +10,12 @@ import UIKit
 
 final class UserRepositoriesDataSource: NSObject {
 
-    private let repositoryStore: GithubRepositoryStore
+    private let repositoryStore: GitHubRepositoryStore
     private let actionCreator: ActionCreator
 
     private let cellIdentifier = "Cell"
 
-    init(repositoryStore: GithubRepositoryStore,
+    init(repositoryStore: GitHubRepositoryStore,
          actionCreator: ActionCreator) {
         self.repositoryStore = repositoryStore
         self.actionCreator = actionCreator

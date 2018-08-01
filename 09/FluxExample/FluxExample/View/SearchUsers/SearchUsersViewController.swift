@@ -13,7 +13,7 @@ final class SearchUsersViewController: UIViewController {
     @IBOutlet private weak var tableView: UITableView!
     @IBOutlet private weak var searchBar: UISearchBar!
 
-    private let userStore: GithubUserStore
+    private let userStore: GitHubUserStore
     private let actionCreator: ActionCreator
     private let dataSource: SearchUsersDataSource
 
@@ -27,7 +27,7 @@ final class SearchUsersViewController: UIViewController {
         }
     }()
 
-    init(userStore: GithubUserStore = .shared,
+    init(userStore: GitHubUserStore = .shared,
          actionCreator: ActionCreator = .init()) {
         self.userStore = userStore
         self.actionCreator = actionCreator

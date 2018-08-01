@@ -10,7 +10,7 @@ import UIKit
 
 final class SearchUsersDataSource: NSObject {
 
-    private let userStore: GithubUserStore
+    private let userStore: GitHubUserStore
     private let actionCreator: ActionCreator
 
     private let cellIdentifier = "Cell"
@@ -21,7 +21,7 @@ final class SearchUsersDataSource: NSObject {
         return cache
     }()
 
-    init(userStore: GithubUserStore,
+    init(userStore: GitHubUserStore,
          actionCreator: ActionCreator) {
         self.userStore = userStore
         self.actionCreator = actionCreator
@@ -97,5 +97,14 @@ extension SearchUsersDataSource: UITableViewDelegate {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         let user = userStore.users[indexPath.row]
         actionCreator.setSelectedUser(user)
+    }
+
+    func scrollViewDidScroll(_ scrollView: UIScrollView) {
+        if let query = userStore.query, let next = userStore.pagination?.next,
+            next != userStore.pagination?.last &&
+            (scrollView.contentSize.height - scrollView.bounds.size.height) <= scrollView.contentOffset.y &&
+            !userStore.isFetching {
+            actionCreator.searchUsers(query: query, page: next)
+        }
     }
 }

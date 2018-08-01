@@ -10,17 +10,29 @@ enum Action {
 
     // MARK: - Github.User
 
-    case addUsers([Github.User])
+    case addUsers([GitHub.User])
     case clearUsers
-    case userSelected(Github.User)
+    case searchUsersPagination(GitHub.Pagination)
+    case clearSearchUsersPagination
+    case searchQuery(String)
+    case clearSearchQuery
+    case userSelected(GitHub.User)
     case userUnselected
     case isSeachUsersFieldEditing(Bool)
+    case isSearchUsersFetching(Bool)
 
     // MARK: -  Github.Repository
 
-    case addRepositories([Github.Repository])
+    case addRepositories([GitHub.Repository])
     case clearRepositories
-    case repositorySelected(Github.Repository)
+    case repositoriesPagination(GitHub.Pagination)
+    case clearRepositoriesPagination
+    case repositorySelected(GitHub.Repository)
     case repositoryUnselected
-    case loadFavoriteRepositories([Github.Repository])
+    case loadFavoriteRepositories([GitHub.Repository])
+
+    // MARK: - Others
+
+    case error(Error)
+    case clearError
 }

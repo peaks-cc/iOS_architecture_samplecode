@@ -38,7 +38,7 @@ final class RepositoryDetailViewController: UIViewController {
                                                       target: self,
                                                       action: #selector(self.favoriteButtonTap(_:)))
 
-    private let repositoryStore: GithubRepositoryStore
+    private let repositoryStore: GitHubRepositoryStore
     private let actionCreator: ActionCreator
 
     private lazy var repositoryStoreSubscription: Subscription = {
@@ -74,7 +74,7 @@ final class RepositoryDetailViewController: UIViewController {
         progressObservation.invalidate()
     }
 
-    init(repositoryStore: GithubRepositoryStore = .shared,
+    init(repositoryStore: GitHubRepositoryStore = .shared,
          actionCreator: ActionCreator = .init()) {
         self.repositoryStore = repositoryStore
         self.actionCreator = actionCreator

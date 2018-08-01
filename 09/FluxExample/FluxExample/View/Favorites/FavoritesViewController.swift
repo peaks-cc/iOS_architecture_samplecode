@@ -12,7 +12,7 @@ final class FavoritesViewController: UIViewController {
 
     @IBOutlet private weak var tableView: UITableView!
 
-    private let repositoryStore: GithubRepositoryStore
+    private let repositoryStore: GitHubRepositoryStore
     private let actionCreator: ActionCreator
     private let dataSource: FavoritesDataSource
 
@@ -25,7 +25,7 @@ final class FavoritesViewController: UIViewController {
         }
     }()
 
-    init(repositoryStore: GithubRepositoryStore = .shared,
+    init(repositoryStore: GitHubRepositoryStore = .shared,
          actionCreator: ActionCreator = .init()) {
         self.repositoryStore = repositoryStore
         self.actionCreator = actionCreator

@@ -21,9 +21,9 @@ struct LocalCacheKey<Value: LocalCacheValue>: LocalCacheKeys {
 }
 
 extension LocalCacheKeys {
-    static var favorites: LocalCacheKey<[Github.Repository]> {
-        return LocalCacheKey<[Github.Repository]>("favorites", defaultValue: [])
+    static var favorites: LocalCacheKey<[GitHub.Repository]> {
+        return LocalCacheKey("favorites", defaultValue: [])
     }
 }
 
-extension Github.Repository: LocalCacheValue {}
+extension GitHub.Repository: LocalCacheValue {}

@@ -12,8 +12,8 @@ final class UserRepositoriesViewController: UIViewController {
 
     @IBOutlet private weak var tableView: UITableView!
 
-    private let userStore: GithubUserStore
-    private let repositoryStore: GithubRepositoryStore
+    private let userStore: GitHubUserStore
+    private let repositoryStore: GitHubRepositoryStore
     private let actionCreator: ActionCreator
     private let dataSource: UserRepositoriesDataSource
 
@@ -31,8 +31,8 @@ final class UserRepositoriesViewController: UIViewController {
         actionCreator.clearRepositories()
     }
 
-    init(userStore: GithubUserStore = .shared,
-         repositoryStore: GithubRepositoryStore = .shared,
+    init(userStore: GitHubUserStore = .shared,
+         repositoryStore: GitHubRepositoryStore = .shared,
          actionCreator: ActionCreator = .init()) {
         self.userStore = userStore
         self.repositoryStore = repositoryStore

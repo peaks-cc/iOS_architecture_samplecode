@@ -13,40 +13,12 @@ final class AppDelegate: UIResponder, UIApplicationDelegate {
 
     var window: UIWindow?
 
-    private lazy var logic = Logic(window: self.window)
+    private let actionCreator = ActionCreator()
+    private let repositoryStore = GitHubRepositoryStore.shared
+    private let userStore = GitHubUserStore.shared
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
-        return logic.application(application, didFinishLaunchingWithOptions: launchOptions)
-    }
-}
-
-extension AppDelegate {
-    final class Logic {
-        let window: () -> UIWindow?
-
-        private let actionCreator: ActionCreator
-        private let repositoryStore: GithubRepositoryStore
-        private let userStore: GithubUserStore
-
-        init(window: @escaping @autoclosure () -> UIWindow?,
-             actionCreator: ActionCreator = .init(),
-             repositoryStore: GithubRepositoryStore = .shared,
-             userStore: GithubUserStore = .shared) {
-            self.window = window
-            self.actionCreator = actionCreator
-            self.repositoryStore = repositoryStore
-            self.userStore = userStore
-        }
-    }
-}
-
-protocol ApplicationProtocol {}
-
-extension UIApplication: ApplicationProtocol {}
-
-extension AppDelegate.Logic {
-    func application(_ application: ApplicationProtocol, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
-        if let tabBarController = window()?.rootViewController as? UITabBarController {
+        if let tabBarController = window?.rootViewController as? UITabBarController {
             let values: [(UINavigationController, UITabBarSystemItem)] = [
                 (UINavigationController(rootViewController: SearchUsersViewController()), .search),
                 (UINavigationController(rootViewController: FavoritesViewController()), .favorites)

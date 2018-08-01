@@ -9,11 +9,11 @@
 final class ActionCreator {
     
     private let dispatcher: Dispatcher
-    private let apiSession: GithubApiRequestable
+    private let apiSession: GitHubApiRequestable
     private let localCache: LocalCacheable
 
     init(dispatcher: Dispatcher = .shared,
-         apiSession: GithubApiRequestable = Github.ApiSession.shared,
+         apiSession: GitHubApiRequestable = GitHub.ApiSession.shared,
          localCache: LocalCacheable = LocalCache.shared) {
         self.dispatcher = dispatcher
         self.apiSession = apiSession
@@ -24,18 +24,22 @@ final class ActionCreator {
 // MARK: - Github.User
 
 extension ActionCreator {
-    func searchUsers(query: String) {
-        apiSession.searchUsers(query: query) { [dispatcher] result in
+    func searchUsers(query: String, page: Int = 1) {
+        dispatcher.dispatch(.searchQuery(query))
+        dispatcher.dispatch(.isSearchUsersFetching(true))
+        apiSession.searchUsers(query: query, page: page) { [dispatcher] result in
             switch result {
-            case let .success(users):
+            case let .success(users, pagination):
                 dispatcher.dispatch(.addUsers(users))
+                dispatcher.dispatch(.searchUsersPagination(pagination))
             case let .failure(error):
-                break
+                dispatcher.dispatch(.error(error))
             }
+            dispatcher.dispatch(.isSearchUsersFetching(false))
         }
     }
 
-    func setSelectedUser(_ user: Github.User?) {
+    func setSelectedUser(_ user: GitHub.User?) {
         if let user = user {
             dispatcher.dispatch(.userSelected(user))
         } else {
@@ -58,10 +62,11 @@ extension ActionCreator {
     func fetchRepositories(username: String) {
         apiSession.repositories(username: username) { [dispatcher] result in
             switch result {
-            case let .success(repositories):
+            case let .success(repositories, pagination):
                 dispatcher.dispatch(.addRepositories(repositories))
+                dispatcher.dispatch(.repositoriesPagination(pagination))
             case let .failure(error):
-                break
+                dispatcher.dispatch(.error(error))
             }
         }
     }
@@ -70,7 +75,7 @@ extension ActionCreator {
         dispatcher.dispatch(.clearRepositories)
     }
 
-    func setSelectedRepository(_ repository: Github.Repository?) {
+    func setSelectedRepository(_ repository: GitHub.Repository?) {
         if let repository = repository {
             dispatcher.dispatch(.repositorySelected(repository))
         } else {
@@ -78,13 +83,13 @@ extension ActionCreator {
         }
     }
 
-    func addFavoriteRepository(_ repository: Github.Repository) {
+    func addFavoriteRepository(_ repository: GitHub.Repository) {
         let repositories = localCache[.favorites] + [repository]
         localCache[.favorites] = repositories
         dispatcher.dispatch(.loadFavoriteRepositories(repositories))
     }
 
-    func removeFavoriteRepository(_ repository: Github.Repository) {
+    func removeFavoriteRepository(_ repository: GitHub.Repository) {
         let repositories = localCache[.favorites].filter { $0.id != repository.id }
         localCache[.favorites] = repositories
         dispatcher.dispatch(.loadFavoriteRepositories(repositories))

@@ -1,5 +1,5 @@
 //
-//  Github.ItemsResponse.swift
+//  GitHub.ItemsResponse.swift
 //  FluxExample
 //
 //  Created by marty-suzuki on 2018/07/31.
@@ -8,7 +8,7 @@
 
 import Foundation
 
-extension Github {
+extension GitHub {
     struct ItemsResponse<Item: Decodable>: Decodable {
         let totalCount: Int
         let incompleteResults: Bool
