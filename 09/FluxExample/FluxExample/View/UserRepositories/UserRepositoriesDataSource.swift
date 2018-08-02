@@ -11,13 +11,16 @@ import UIKit
 final class UserRepositoriesDataSource: NSObject {
 
     private let repositoryStore: GitHubRepositoryStore
+    private let userStore: GitHubUserStore
     private let actionCreator: ActionCreator
 
     private let cellIdentifier = "Cell"
 
     init(repositoryStore: GitHubRepositoryStore,
+         userStore: GitHubUserStore,
          actionCreator: ActionCreator) {
         self.repositoryStore = repositoryStore
+        self.userStore = userStore
         self.actionCreator = actionCreator
     }
 
@@ -47,5 +50,14 @@ extension UserRepositoriesDataSource: UITableViewDelegate {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         let repository = repositoryStore.repositories[indexPath.row]
         actionCreator.setSelectedRepository(repository)
+    }
+
+    func scrollViewDidScroll(_ scrollView: UIScrollView) {
+        if let username = userStore.selectedUser?.login, let next = repositoryStore.pagination?.next,
+            repositoryStore.pagination?.last != nil &&
+            (scrollView.contentSize.height - scrollView.bounds.size.height) <= scrollView.contentOffset.y &&
+            !repositoryStore.isFetching {
+            actionCreator.fetchRepositories(username: username, page: next)
+        }
     }
 }

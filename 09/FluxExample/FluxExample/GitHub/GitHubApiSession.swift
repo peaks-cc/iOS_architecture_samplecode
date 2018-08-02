@@ -1,5 +1,5 @@
 //
-//  GitHub.ApiSession.swift
+//  GitHubApiSession.swift
 //  FluxExample
 //
 //  Created by marty-suzuki on 2018/07/31.
@@ -10,7 +10,7 @@ import GitHub
 
 protocol GitHubApiRequestable: class {
     func searchUsers(query: String, page: Int, completion: @escaping (GitHub.Result<([GitHub.User], GitHub.Pagination)>) -> ())
-    func repositories(username: String, completion: @escaping (GitHub.Result<([GitHub.Repository], GitHub.Pagination)>) -> ())
+    func repositories(username: String, page: Int, completion: @escaping (GitHub.Result<([GitHub.Repository], GitHub.Pagination)>) -> ())
 }
 
 final class GitHubApiSession: GitHubApiRequestable {
@@ -30,8 +30,8 @@ final class GitHubApiSession: GitHubApiRequestable {
         }
     }
 
-    func repositories(username: String, completion: @escaping (GitHub.Result<([GitHub.Repository], GitHub.Pagination)>) -> ()) {
-        let request = UserReposRequest(username: username, type: nil, sort: nil, direction: nil, page: nil, perPage: nil)
+    func repositories(username: String, page: Int, completion: @escaping (GitHub.Result<([GitHub.Repository], GitHub.Pagination)>) -> ()) {
+        let request = UserReposRequest(username: username, type: nil, sort: nil, direction: nil, page: page, perPage: nil)
         session.send(request, completion: completion)
     }
 }

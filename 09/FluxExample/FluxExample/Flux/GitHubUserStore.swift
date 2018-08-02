@@ -57,7 +57,8 @@ final class GitHubUserStore: Store {
              .repositoryUnselected,
              .loadFavoriteRepositories,
              .repositoriesPagination,
-             .clearRepositoriesPagination:
+             .clearRepositoriesPagination,
+             .isUserRepositoriesFetching:
             return
         }
         emitChange()

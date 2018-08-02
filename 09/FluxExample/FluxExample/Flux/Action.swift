@@ -32,6 +32,7 @@ enum Action {
     case repositorySelected(GitHub.Repository)
     case repositoryUnselected
     case loadFavoriteRepositories([GitHub.Repository])
+    case isUserRepositoriesFetching(Bool)
 
     // MARK: - Others
 

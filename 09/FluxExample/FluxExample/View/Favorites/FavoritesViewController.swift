@@ -83,6 +83,8 @@ final class FavoritesViewController: UIViewController {
         if repositoryStore.selectedRepository == nil {
             return
         }
+        unsubscribeStore()
+        
         let vc = RepositoryDetailViewController()
         navigationController?.pushViewController(vc, animated: true)
     }

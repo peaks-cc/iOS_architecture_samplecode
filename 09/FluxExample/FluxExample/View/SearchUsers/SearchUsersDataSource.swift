@@ -101,7 +101,7 @@ extension SearchUsersDataSource: UITableViewDelegate {
 
     func scrollViewDidScroll(_ scrollView: UIScrollView) {
         if let query = userStore.query, let next = userStore.pagination?.next,
-            next != userStore.pagination?.last &&
+            userStore.pagination?.last != nil &&
             (scrollView.contentSize.height - scrollView.bounds.size.height) <= scrollView.contentOffset.y &&
             !userStore.isFetching {
             actionCreator.searchUsers(query: query, page: next)

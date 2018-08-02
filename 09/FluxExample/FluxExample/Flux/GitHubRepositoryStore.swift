@@ -14,6 +14,7 @@ final class GitHubRepositoryStore: Store {
     private(set) var repositories: [GitHub.Repository] = []
     private(set) var pagination: GitHub.Pagination?
     private(set) var selectedRepository: GitHub.Repository?
+    private(set) var isFetching = false
     private(set) var favorites: [GitHub.Repository] = []
     private(set) var selectedFavoriteRepository: GitHub.Repository?
     private(set) var error: Error?
@@ -38,6 +39,8 @@ final class GitHubRepositoryStore: Store {
             self.pagination = pagination
         case .clearRepositoriesPagination:
             self.pagination = nil
+        case let .isUserRepositoriesFetching(isFetching):
+            self.isFetching = isFetching
 
         case let .error(e):
             self.error = e

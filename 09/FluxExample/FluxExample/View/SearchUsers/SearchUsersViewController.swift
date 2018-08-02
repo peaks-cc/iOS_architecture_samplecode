@@ -17,11 +17,13 @@ final class SearchUsersViewController: UIViewController {
     private let actionCreator: ActionCreator
     private let dataSource: SearchUsersDataSource
 
+    private let debounce = DispatchQueue.main.debounce(delay: .milliseconds(300))
+
     private var showUserSubscription: Subscription?
     private lazy var reloadSubscription: Subscription = {
         return userStore.addListener { [weak self] in
-            DispatchQueue.main.async {
-                self?.tableView.reloadSections(IndexSet(integer: 0) , with: .fade)
+            self?.debounce {
+                self?.tableView.reloadData()
                 self?.refrectEditing()
             }
         }
@@ -59,12 +61,6 @@ final class SearchUsersViewController: UIViewController {
         subscribeStore()
     }
 
-    override func viewDidDisappear(_ animated: Bool) {
-        super.viewDidAppear(animated)
-
-        unsubscribeStore()
-    }
-
     private func unsubscribeStore() {
         if let subscription = showUserSubscription {
             userStore.removeListener(subscription)
@@ -88,6 +84,8 @@ final class SearchUsersViewController: UIViewController {
         if userStore.selectedUser == nil {
             return
         }
+        unsubscribeStore()
+
         let vc = UserRepositoriesViewController()
         navigationController?.pushViewController(vc, animated: true)
     }

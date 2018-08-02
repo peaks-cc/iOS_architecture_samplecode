@@ -61,8 +61,9 @@ extension ActionCreator {
 // MARK: Github.Repository
 
 extension ActionCreator {
-    func fetchRepositories(username: String) {
-        apiSession.repositories(username: username) { [dispatcher] result in
+    func fetchRepositories(username: String,  page: Int = 1) {
+        dispatcher.dispatch(.isUserRepositoriesFetching(true))
+        apiSession.repositories(username: username, page: page) { [dispatcher] result in
             switch result {
             case let .success(repositories, pagination):
                 dispatcher.dispatch(.addRepositories(repositories))
@@ -70,6 +71,7 @@ extension ActionCreator {
             case let .failure(error):
                 dispatcher.dispatch(.error(error))
             }
+            dispatcher.dispatch(.isUserRepositoriesFetching(false))
         }
     }
 
