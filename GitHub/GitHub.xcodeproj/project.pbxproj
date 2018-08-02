@@ -80,6 +80,7 @@
 		EDE18D632112F7C2000D5EAE /* GitHub */ = {
 			isa = PBXGroup;
 			children = (
+				37F208F52113684900DC452F /* View */,
 				EDE18D6D2112F80D000D5EAE /* Entity */,
 				EDE18D6C2112F803000D5EAE /* API */,
 				EDE18D642112F7C2000D5EAE /* GitHub.h */,
@@ -91,7 +92,6 @@
 		EDE18D6C2112F803000D5EAE /* API */ = {
 			isa = PBXGroup;
 			children = (
-				37F208F52113684900DC452F /* View */,
 				EDE18D6E2112F81C000D5EAE /* Session.swift */,
 				EDE18D792112F8CF000D5EAE /* Response */,
 				EDE18D782112F8A8000D5EAE /* Request */,
