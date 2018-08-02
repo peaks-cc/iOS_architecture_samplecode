@@ -1,33 +1,33 @@
 //
-//  GitHub.Pagination.swift
-//  FluxExample
+//  Pagination.swift
+//  GitHub
 //
-//  Created by marty-suzuki on 2018/08/02.
+//  Created by 鈴木大貴 on 2018/08/02.
 //  Copyright © 2018年 marty-suzuki. All rights reserved.
 //
 
 import Foundation
 
-extension GitHub {
-    struct Pagination {
-        var next: Int?
-        var last: Int?
-        var first: Int?
-        var prev: Int?
-    }
+public struct Pagination {
+    public var next: Int?
+    public var last: Int?
+    public var first: Int?
+    public var prev: Int?
 }
 
-extension GitHub.Pagination {
-    private static let regex = try! NSRegularExpression(pattern: ".*<https://api.github.com/.*page=(\\d+).*>; rel=\"(.*)\"", options: [])
+extension Pagination {
+    private enum Const {
+        static let regex = try! NSRegularExpression(pattern: ".*<https://api.github.com/.*page=(\\d+).*>; rel=\"(.*)\"", options: [])
+    }
 
     init(link: String) {
         let values = link.split(separator: ",")
 
         self = values.reduce(GitHub.Pagination(next: nil, last: nil, first: nil, prev: nil)) { pagination, value in
             let string = String(value)
-            let results = GitHub.Pagination.regex.matches(in: string,
-                                                          options: [],
-                                                          range: NSRange(location: 0, length: (string as NSString).length))
+            let results = Const.regex.matches(in: string,
+                                              options: [],
+                                              range: NSRange(location: 0, length: (string as NSString).length))
 
             let values = results.compactMap { result -> (Int, String)? in
                 let values = (0..<result.numberOfRanges).reduce((nil, nil)) { values, index -> (Int?, String?) in

@@ -6,6 +6,8 @@
 //  Copyright © 2018年 marty-suzuki. All rights reserved.
 //
 
+import GitHub
+
 enum Action {
 
     // MARK: - Github.User

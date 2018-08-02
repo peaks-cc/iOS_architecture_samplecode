@@ -6,7 +6,7 @@
 //  Copyright © 2018年 marty-suzuki. All rights reserved.
 //
 
-import Foundation
+import GitHub
 
 final class GitHubRepositoryStore: Store {
     static let shared = GitHubRepositoryStore()

@@ -6,6 +6,8 @@
 //  Copyright © 2018年 marty-suzuki. All rights reserved.
 //
 
+import GitHub
+
 final class ActionCreator {
     
     private let dispatcher: Dispatcher
@@ -13,7 +15,7 @@ final class ActionCreator {
     private let localCache: LocalCacheable
 
     init(dispatcher: Dispatcher = .shared,
-         apiSession: GitHubApiRequestable = GitHub.ApiSession.shared,
+         apiSession: GitHubApiRequestable = GitHubApiSession.shared,
          localCache: LocalCacheable = LocalCache.shared) {
         self.dispatcher = dispatcher
         self.apiSession = apiSession
