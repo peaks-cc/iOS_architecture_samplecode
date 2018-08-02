@@ -16,11 +16,15 @@ public enum SessionError: Error {
 }
 
 public final class Session {
+
+    private let accessToken: () -> AccessToken?
     private let additionalHeaderFields: () -> [String: String]?
     private let session: URLSession
 
-    public init(additionalHeaderFields: @escaping () -> [String: String]? = { nil },
+    public init(accessToken: @escaping () -> AccessToken? = { nil },
+                additionalHeaderFields: @escaping () -> [String: String]? = { nil },
                 session: URLSession = .shared) {
+        self.accessToken = accessToken
         self.additionalHeaderFields = additionalHeaderFields
         self.session = session
     }
@@ -42,10 +46,18 @@ public final class Session {
         }
 
         urlRequest.httpMethod = request.method.rawValue
+
+        let headerFields: [String: String]
         if let additionalHeaderFields = additionalHeaderFields() {
-            urlRequest.allHTTPHeaderFields = request.headerFields.merging(additionalHeaderFields, uniquingKeysWith: +)
+            headerFields = request.headerFields.merging(additionalHeaderFields, uniquingKeysWith: +)
         } else {
-            urlRequest.allHTTPHeaderFields = request.headerFields
+            headerFields = request.headerFields
+        }
+        if let token = accessToken() {
+            let authorization = ["Authorization": "token \(token.accessToken)"]
+            urlRequest.allHTTPHeaderFields = headerFields.merging(authorization, uniquingKeysWith: +)
+        } else {
+            urlRequest.allHTTPHeaderFields = headerFields
         }
 
         let task = session.dataTask(with: urlRequest) { data, response, error in

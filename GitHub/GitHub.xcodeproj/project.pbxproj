@@ -7,6 +7,9 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		37F208F72113685A00DC452F /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37F208F62113685A00DC452F /* LoginViewController.swift */; };
+		37F208F921136FDC00DC452F /* LoginOauthAccessTokenRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37F208F821136FDC00DC452F /* LoginOauthAccessTokenRequest.swift */; };
+		37F208FB211371A500DC452F /* AccessToken.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37F208FA211371A500DC452F /* AccessToken.swift */; };
 		EDE18D662112F7C2000D5EAE /* GitHub.h in Headers */ = {isa = PBXBuildFile; fileRef = EDE18D642112F7C2000D5EAE /* GitHub.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		EDE18D6F2112F81C000D5EAE /* Session.swift in Sources */ = {isa = PBXBuildFile; fileRef = EDE18D6E2112F81C000D5EAE /* Session.swift */; };
 		EDE18D712112F838000D5EAE /* Repository.swift in Sources */ = {isa = PBXBuildFile; fileRef = EDE18D702112F838000D5EAE /* Repository.swift */; };
@@ -21,6 +24,9 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		37F208F62113685A00DC452F /* LoginViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
+		37F208F821136FDC00DC452F /* LoginOauthAccessTokenRequest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginOauthAccessTokenRequest.swift; sourceTree = "<group>"; };
+		37F208FA211371A500DC452F /* AccessToken.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccessToken.swift; sourceTree = "<group>"; };
 		EDE18D612112F7C2000D5EAE /* GitHub.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = GitHub.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		EDE18D642112F7C2000D5EAE /* GitHub.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = GitHub.h; sourceTree = "<group>"; };
 		EDE18D652112F7C2000D5EAE /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -47,6 +53,14 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		37F208F52113684900DC452F /* View */ = {
+			isa = PBXGroup;
+			children = (
+				37F208F62113685A00DC452F /* LoginViewController.swift */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
 		EDE18D572112F7C1000D5EAE = {
 			isa = PBXGroup;
 			children = (
@@ -77,6 +91,7 @@
 		EDE18D6C2112F803000D5EAE /* API */ = {
 			isa = PBXGroup;
 			children = (
+				37F208F52113684900DC452F /* View */,
 				EDE18D6E2112F81C000D5EAE /* Session.swift */,
 				EDE18D792112F8CF000D5EAE /* Response */,
 				EDE18D782112F8A8000D5EAE /* Request */,
@@ -89,6 +104,7 @@
 			children = (
 				EDE18D702112F838000D5EAE /* Repository.swift */,
 				EDE18D722112F852000D5EAE /* User.swift */,
+				37F208FA211371A500DC452F /* AccessToken.swift */,
 			);
 			path = Entity;
 			sourceTree = "<group>";
@@ -100,6 +116,7 @@
 				EDE18D7E2112FA37000D5EAE /* SearchUsersRequest.swift */,
 				EDE18D802112FA79000D5EAE /* UserReposRequest.swift */,
 				EDE18D84211337DA000D5EAE /* SearchRepositoriesRequest.swift */,
+				37F208F821136FDC00DC452F /* LoginOauthAccessTokenRequest.swift */,
 			);
 			path = Request;
 			sourceTree = "<group>";
@@ -194,15 +211,18 @@
 			buildActionMask = 2147483647;
 			files = (
 				EDE18D6F2112F81C000D5EAE /* Session.swift in Sources */,
+				37F208FB211371A500DC452F /* AccessToken.swift in Sources */,
 				EDE18D7B2112F8F6000D5EAE /* Request.swift in Sources */,
 				EDE18D812112FA79000D5EAE /* UserReposRequest.swift in Sources */,
 				EDE18D712112F838000D5EAE /* Repository.swift in Sources */,
 				EDE18D772112F880000D5EAE /* Pagination.swift in Sources */,
 				EDE18D7F2112FA37000D5EAE /* SearchUsersRequest.swift in Sources */,
 				EDE18D7D2112F944000D5EAE /* Result.swift in Sources */,
+				37F208F921136FDC00DC452F /* LoginOauthAccessTokenRequest.swift in Sources */,
 				EDE18D732112F852000D5EAE /* User.swift in Sources */,
 				EDE18D752112F868000D5EAE /* ItemsResponse.swift in Sources */,
 				EDE18D85211337DA000D5EAE /* SearchRepositoriesRequest.swift in Sources */,
+				37F208F72113685A00DC452F /* LoginViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

@@ -18,3 +18,23 @@ session.request(request) { result in
     }
 }
 ```
+
+- LoginViewController
+- LoginViewControllerDelegate
+
+```swift
+let vc = LoginViewController(clientID: "", clientSecret: "", redirectURL: "")
+vc.loginDelegate = self
+```
+
+```swift
+extension ViewController: LoginViewControllerDelegate {
+    func loginViewController(_ viewController: LoginViewController, didReceive accessToken: AccessToken) {
+        // do something
+    }
+
+    func loginViewController(_ viewController: LoginViewController, didReceive error: Error) {
+        // do something
+    }
+}
+```
