@@ -91,6 +91,10 @@ private final class LoginWebViewController: UIViewController {
         }
     }()
 
+    deinit {
+        progressObservation.invalidate()
+    }
+
     init(clientID: String,
          clientSecret: String,
          redirectURL: String) {
@@ -129,7 +133,7 @@ private final class LoginWebViewController: UIViewController {
         })
 
         webView.navigationDelegate = self
-        let url = URL(string: "https://github.com/login/oauth/authorize?client_id=\(clientID)&redirect_uri=\(redirectURL)")!
+        let url = URL(string: "https://github.com/login/oauth/authorize?client_id=\(clientID)&redirect_uri=\(redirectURL)&scope=public_repo")!
         webView.load(URLRequest(url: url))
 
         _ = progressObservation
