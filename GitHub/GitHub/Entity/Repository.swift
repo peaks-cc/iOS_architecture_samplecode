@@ -54,4 +54,48 @@ public struct Repository: Codable {
         case openIssuesCount = "open_issues_count"
         case defaultBranch = "default_branch"
     }
+
+    public init(id: Int,
+                nodeID: String,
+                name: String,
+                fullName: String,
+                owner: User,
+                isPrivate: Bool,
+                htmlURL: URL,
+                description: String?,
+                isFork: Bool,
+                url: URL,
+                createdAt: String,
+                updatedAt: String,
+                pushedAt: String,
+                homepage: String?,
+                size: Int,
+                stargazersCount: Int,
+                watchersCount: Int,
+                language: String?,
+                forksCount: Int,
+                openIssuesCount: Int,
+                defaultBranch: String) {
+        self.id = id
+        self.nodeID = nodeID
+        self.name = name
+        self.fullName = fullName
+        self.owner = owner
+        self.isPrivate = isPrivate
+        self.htmlURL = htmlURL
+        self.description = description
+        self.isFork = isFork
+        self.url = url
+        self.createdAt = createdAt
+        self.updatedAt = updatedAt
+        self.pushedAt = pushedAt
+        self.homepage = homepage
+        self.size = size
+        self.stargazersCount = stargazersCount
+        self.watchersCount = watchersCount
+        self.language = language
+        self.forksCount = forksCount
+        self.openIssuesCount = openIssuesCount
+        self.defaultBranch = defaultBranch
+    }
 }

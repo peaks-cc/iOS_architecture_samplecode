@@ -22,11 +22,16 @@
 		3758BAFB2110C0950052234A /* FavoritesDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3758BAFA2110C0950052234A /* FavoritesDataSource.swift */; };
 		3758BAFE2110C8F00052234A /* LocalCache.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3758BAFD2110C8F00052234A /* LocalCache.swift */; };
 		3758BB002110CB290052234A /* LocalCacheKey.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3758BAFF2110CB290052234A /* LocalCacheKey.swift */; };
+		375AE5312115F024009D589D /* ActionCreatorTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 375AE5302115F024009D589D /* ActionCreatorTests.swift */; };
+		375AE5352115F08F009D589D /* MockGitHubApiSession.swift in Sources */ = {isa = PBXBuildFile; fileRef = 375AE5342115F08F009D589D /* MockGitHubApiSession.swift */; };
+		375AE5372115F159009D589D /* MockLocalCache.swift in Sources */ = {isa = PBXBuildFile; fileRef = 375AE5362115F159009D589D /* MockLocalCache.swift */; };
+		375AE5392115FDCA009D589D /* GitHubUserStoreTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 375AE5382115FDCA009D589D /* GitHubUserStoreTests.swift */; };
+		377D47292115EC21004336B5 /* DispatcherTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 377D47282115EC21004336B5 /* DispatcherTests.swift */; };
+		377D472B2115ED3E004336B5 /* GitHub.framework in Copy Frameworks */ = {isa = PBXBuildFile; fileRef = EDC053D12113411D002770F5 /* GitHub.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		37C273E1210F572500F89B82 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37C273E0210F572500F89B82 /* AppDelegate.swift */; };
 		37C273E6210F572500F89B82 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 37C273E4210F572500F89B82 /* Main.storyboard */; };
 		37C273E8210F572500F89B82 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 37C273E7210F572500F89B82 /* Assets.xcassets */; };
 		37C273EB210F572500F89B82 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 37C273E9210F572500F89B82 /* LaunchScreen.storyboard */; };
-		37C273F6210F572500F89B82 /* FluxExampleTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37C273F5210F572500F89B82 /* FluxExampleTests.swift */; };
 		37C27402210F57AF00F89B82 /* Dispatcher.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37C27401210F57AF00F89B82 /* Dispatcher.swift */; };
 		37C27404210F57E700F89B82 /* Action.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37C27403210F57E700F89B82 /* Action.swift */; };
 		37C2740E210F5F7600F89B82 /* GitHubApiSession.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37C2740D210F5F7600F89B82 /* GitHubApiSession.swift */; };
@@ -49,6 +54,17 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXCopyFilesBuildPhase section */
+		377D472A2115ED2B004336B5 /* Copy Frameworks */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 10;
+			files = (
+				377D472B2115ED3E004336B5 /* GitHub.framework in Copy Frameworks */,
+			);
+			name = "Copy Frameworks";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		EDC053CD211340E3002770F5 /* Embed Frameworks */ = {
 			isa = PBXCopyFilesBuildPhase;
 			buildActionMask = 2147483647;
@@ -78,6 +94,11 @@
 		3758BAFA2110C0950052234A /* FavoritesDataSource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavoritesDataSource.swift; sourceTree = "<group>"; };
 		3758BAFD2110C8F00052234A /* LocalCache.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocalCache.swift; sourceTree = "<group>"; };
 		3758BAFF2110CB290052234A /* LocalCacheKey.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocalCacheKey.swift; sourceTree = "<group>"; };
+		375AE5302115F024009D589D /* ActionCreatorTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActionCreatorTests.swift; sourceTree = "<group>"; };
+		375AE5342115F08F009D589D /* MockGitHubApiSession.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MockGitHubApiSession.swift; sourceTree = "<group>"; };
+		375AE5362115F159009D589D /* MockLocalCache.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MockLocalCache.swift; sourceTree = "<group>"; };
+		375AE5382115FDCA009D589D /* GitHubUserStoreTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GitHubUserStoreTests.swift; sourceTree = "<group>"; };
+		377D47282115EC21004336B5 /* DispatcherTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DispatcherTests.swift; sourceTree = "<group>"; };
 		37C273DD210F572500F89B82 /* FluxExample.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = FluxExample.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		37C273E0210F572500F89B82 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		37C273E5210F572500F89B82 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
@@ -85,7 +106,6 @@
 		37C273EA210F572500F89B82 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		37C273EC210F572500F89B82 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		37C273F1210F572500F89B82 /* FluxExampleTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = FluxExampleTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
-		37C273F5210F572500F89B82 /* FluxExampleTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FluxExampleTests.swift; sourceTree = "<group>"; };
 		37C273F7210F572500F89B82 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		37C27401210F57AF00F89B82 /* Dispatcher.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Dispatcher.swift; sourceTree = "<group>"; };
 		37C27403210F57E700F89B82 /* Action.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Action.swift; sourceTree = "<group>"; };
@@ -186,6 +206,25 @@
 			path = Util;
 			sourceTree = "<group>";
 		};
+		375AE5322115F060009D589D /* Tests */ = {
+			isa = PBXGroup;
+			children = (
+				377D47282115EC21004336B5 /* DispatcherTests.swift */,
+				375AE5302115F024009D589D /* ActionCreatorTests.swift */,
+				375AE5382115FDCA009D589D /* GitHubUserStoreTests.swift */,
+			);
+			path = Tests;
+			sourceTree = "<group>";
+		};
+		375AE5332115F070009D589D /* Mock */ = {
+			isa = PBXGroup;
+			children = (
+				375AE5342115F08F009D589D /* MockGitHubApiSession.swift */,
+				375AE5362115F159009D589D /* MockLocalCache.swift */,
+			);
+			path = Mock;
+			sourceTree = "<group>";
+		};
 		37C273D4210F572500F89B82 = {
 			isa = PBXGroup;
 			children = (
@@ -224,7 +263,8 @@
 		37C273F4210F572500F89B82 /* FluxExampleTests */ = {
 			isa = PBXGroup;
 			children = (
-				37C273F5210F572500F89B82 /* FluxExampleTests.swift */,
+				375AE5332115F070009D589D /* Mock */,
+				375AE5322115F060009D589D /* Tests */,
 				37C273F7210F572500F89B82 /* Info.plist */,
 			);
 			path = FluxExampleTests;
@@ -279,6 +319,7 @@
 				37C273ED210F572500F89B82 /* Sources */,
 				37C273EE210F572500F89B82 /* Frameworks */,
 				37C273EF210F572500F89B82 /* Resources */,
+				377D472A2115ED2B004336B5 /* Copy Frameworks */,
 			);
 			buildRules = (
 			);
@@ -382,7 +423,11 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				37C273F6210F572500F89B82 /* FluxExampleTests.swift in Sources */,
+				375AE5392115FDCA009D589D /* GitHubUserStoreTests.swift in Sources */,
+				375AE5372115F159009D589D /* MockLocalCache.swift in Sources */,
+				375AE5312115F024009D589D /* ActionCreatorTests.swift in Sources */,
+				375AE5352115F08F009D589D /* MockGitHubApiSession.swift in Sources */,
+				377D47292115EC21004336B5 /* DispatcherTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -575,7 +620,8 @@
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				BUNDLE_LOADER = "$(TEST_HOST)";
-				CODE_SIGN_STYLE = Automatic;
+				CODE_SIGN_STYLE = Manual;
+				DEVELOPMENT_TEAM = "";
 				INFOPLIST_FILE = FluxExampleTests/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
@@ -584,6 +630,7 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = "jp.marty-suzuki.FluxExampleTests";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_VERSION = 4.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/FluxExample.app/FluxExample";
@@ -595,7 +642,8 @@
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				BUNDLE_LOADER = "$(TEST_HOST)";
-				CODE_SIGN_STYLE = Automatic;
+				CODE_SIGN_STYLE = Manual;
+				DEVELOPMENT_TEAM = "";
 				INFOPLIST_FILE = FluxExampleTests/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
@@ -604,6 +652,7 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = "jp.marty-suzuki.FluxExampleTests";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_VERSION = 4.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/FluxExample.app/FluxExample";

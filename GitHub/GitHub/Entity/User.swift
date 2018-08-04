@@ -27,4 +27,22 @@ public struct User: Codable {
         case receivedEventsURL = "received_events_url"
         case type
     }
+
+    public init(login: String,
+                id: Int,
+                nodeID: String,
+                avatarURL: URL,
+                gravatarID: String,
+                url: URL,
+                receivedEventsURL: URL,
+                type: String) {
+        self.login = login
+        self.id = id
+        self.nodeID = nodeID
+        self.avatarURL = avatarURL
+        self.gravatarID = gravatarID
+        self.url = url
+        self.receivedEventsURL = receivedEventsURL
+        self.type = type
+    }
 }

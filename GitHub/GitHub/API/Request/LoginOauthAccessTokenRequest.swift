@@ -8,14 +8,14 @@
 
 import Foundation
 
-internal struct LoginOauthAccessTokenRequest: Request {
-    typealias Response = AccessToken
+public struct LoginOauthAccessTokenRequest: Request {
+    public typealias Response = AccessToken
 
-    let baseURL = URL(string: "https://github.com")!
-    let method: HttpMethod = .post
-    let path = "/login/oauth/access_token"
+    public let baseURL = URL(string: "https://github.com")!
+    public let method: HttpMethod = .post
+    public let path = "/login/oauth/access_token"
 
-    var queryParameters: [String : String]? {
+    public var queryParameters: [String : String]? {
         let params: [String: String] = [
             "client_id": clientID,
             "client_secret": clientSecret,
@@ -24,11 +24,11 @@ internal struct LoginOauthAccessTokenRequest: Request {
         return params
     }
 
-    let clientID: String
-    let clientSecret: String
-    let code: String
+    public let clientID: String
+    public let clientSecret: String
+    public let code: String
 
-    init(clientID: String, clientSecret: String, code: String) {
+    public init(clientID: String, clientSecret: String, code: String) {
         self.clientID = clientID
         self.clientSecret = clientSecret
         self.code = code
