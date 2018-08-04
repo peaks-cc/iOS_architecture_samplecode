@@ -9,7 +9,7 @@
 import GitHub
 
 final class GitHubRepositoryStore: Store {
-    static let shared = GitHubRepositoryStore()
+    static let shared = GitHubRepositoryStore(dispatcher: .shared)
 
     private(set) var repositories: [GitHub.Repository] = []
     private(set) var pagination: GitHub.Pagination?
@@ -19,14 +19,10 @@ final class GitHubRepositoryStore: Store {
     private(set) var selectedFavoriteRepository: GitHub.Repository?
     private(set) var error: Error?
 
-    override init(dispatcher: Dispatcher = .shared) {
-        super.init(dispatcher: dispatcher)
-    }
-
     override func onDispatch(_ action: Action) {
         switch action {
         case let .addRepositories(repositories):
-            self.repositories = self.repositories + repositories
+            self.repositories.append(contentsOf: repositories)
         case .clearRepositories:
             self.repositories.removeAll()
         case let .repositorySelected(repository):

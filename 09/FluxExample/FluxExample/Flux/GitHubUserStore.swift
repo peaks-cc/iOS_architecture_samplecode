@@ -9,7 +9,7 @@
 import GitHub
 
 final class GitHubUserStore: Store {
-    static let shared = GitHubUserStore()
+    static let shared = GitHubUserStore(dispatcher: .shared)
 
     private(set) var users: [GitHub.User] = []
     private(set) var pagination: GitHub.Pagination?
@@ -19,14 +19,10 @@ final class GitHubUserStore: Store {
     private(set) var isSeachUsersFieldEditing = false
     private(set) var error: Error?
 
-    override init(dispatcher: Dispatcher = .shared) {
-        super.init(dispatcher: dispatcher)
-    }
-
     override func onDispatch(_ action: Action) {
         switch action {
         case let .addUsers(users):
-            self.users = self.users + users
+            self.users.append(contentsOf: users)
         case .clearUsers:
             self.users.removeAll()
         case let .userSelected(user):

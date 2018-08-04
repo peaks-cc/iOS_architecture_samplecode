@@ -23,7 +23,7 @@ final class GitHubUserStoreTests: XCTestCase {
 
     private var dependency: Dependency!
 
-    func makeUser() -> GitHub.User {
+    private func makeUser() -> GitHub.User {
         return GitHub.User(login: "username",
                            id: 1,
                            nodeID: "",
@@ -43,19 +43,30 @@ final class GitHubUserStoreTests: XCTestCase {
     func testAddUsers() {
         XCTAssertTrue(dependency.store.users.isEmpty)
 
+        let expect = expectation(description: "waiting store changes")
+        _ = dependency.store.addListener {
+            expect.fulfill()
+        }
+
         let users = [makeUser(), makeUser()]
         dependency.dispatcher.dispatch(.addUsers(users))
-
+        wait(for: [expect], timeout: 0.1)
         XCTAssertEqual(dependency.store.users.count, users.count)
     }
 
     func testClearUsers() {
         let users = [makeUser(), makeUser()]
+
         dependency.dispatcher.dispatch(.addUsers(users))
         XCTAssertFalse(dependency.store.users.isEmpty)
 
-        dependency.dispatcher.dispatch(.clearUsers)
+        let expect = expectation(description: "waiting store changes")
+        _ = dependency.store.addListener {
+            expect.fulfill()
+        }
 
+        dependency.dispatcher.dispatch(.clearUsers)
+        wait(for: [expect], timeout: 0.1)
         XCTAssertTrue(dependency.store.users.isEmpty)
     }
 }

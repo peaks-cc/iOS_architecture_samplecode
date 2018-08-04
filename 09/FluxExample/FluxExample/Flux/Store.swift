@@ -11,60 +11,50 @@ import Foundation
 typealias Subscription = NSObjectProtocol
 
 class Store {
+    private enum NotificationName {
+        static let storeChanged = Notification.Name("store-changed")
+    }
+
     private lazy var dispatchToken: DispatchToken = {
-        return self.dispatcher.register(callback: { [weak self] action in
-            self?.invokeOnDispatch(action)
+        return dispatcher.register(callback: { [weak self] action in
+            self?.onDispatch(action)
         })
     }()
 
+    private let dispatcher: Dispatcher
     private let notificationCenter: NotificationCenter
-    private let storeChangedNotificationName = Notification.Name("store-changed-notification")
-
-    private(set) var changed: Bool
-    let dispatcher: Dispatcher
 
     deinit {
         dispatcher.unregister(dispatchToken)
     }
 
     init(dispatcher: Dispatcher) {
-        self.changed = false
         self.dispatcher = dispatcher
         self.notificationCenter = NotificationCenter()
         _ = dispatchToken
-    }
-
-    private func invokeOnDispatch(_ action: Action) {
-        self.changed = false
-
-        onDispatch(action)
-
-        if changed {
-            notificationCenter.post(name: storeChangedNotificationName, object: nil)
-        }
     }
 
     func onDispatch(_ action: Action) {
         fatalError("must override")
     }
 
-    func emitChange() {
-        changed = true
+    final func emitChange() {
+        notificationCenter.post(name: NotificationName.storeChanged, object: nil)
     }
 
-    func addListener(callback: @escaping () -> ()) -> Subscription {
-        let using: (Notification) -> () = { [storeChangedNotificationName] notification in
-            if notification.name == storeChangedNotificationName {
+    final func addListener(callback: @escaping () -> ()) -> Subscription {
+        let using: (Notification) -> () = { notification in
+            if notification.name == NotificationName.storeChanged {
                 callback()
             }
         }
-        return notificationCenter.addObserver(forName: storeChangedNotificationName,
+        return notificationCenter.addObserver(forName: NotificationName.storeChanged,
                                               object: nil,
                                               queue: nil,
                                               using: using)
     }
 
-    func removeListener(_ subscription: Subscription) {
+    final func removeListener(_ subscription: Subscription) {
         notificationCenter.removeObserver(subscription)
     }
 }

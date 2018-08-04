@@ -26,6 +26,7 @@
 		375AE5352115F08F009D589D /* MockGitHubApiSession.swift in Sources */ = {isa = PBXBuildFile; fileRef = 375AE5342115F08F009D589D /* MockGitHubApiSession.swift */; };
 		375AE5372115F159009D589D /* MockLocalCache.swift in Sources */ = {isa = PBXBuildFile; fileRef = 375AE5362115F159009D589D /* MockLocalCache.swift */; };
 		375AE5392115FDCA009D589D /* GitHubUserStoreTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 375AE5382115FDCA009D589D /* GitHubUserStoreTests.swift */; };
+		375AE53B21162935009D589D /* SearchUsersViewControllerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 375AE53A21162935009D589D /* SearchUsersViewControllerTests.swift */; };
 		377D47292115EC21004336B5 /* DispatcherTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 377D47282115EC21004336B5 /* DispatcherTests.swift */; };
 		377D472B2115ED3E004336B5 /* GitHub.framework in Copy Frameworks */ = {isa = PBXBuildFile; fileRef = EDC053D12113411D002770F5 /* GitHub.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		37C273E1210F572500F89B82 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37C273E0210F572500F89B82 /* AppDelegate.swift */; };
@@ -98,6 +99,7 @@
 		375AE5342115F08F009D589D /* MockGitHubApiSession.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MockGitHubApiSession.swift; sourceTree = "<group>"; };
 		375AE5362115F159009D589D /* MockLocalCache.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MockLocalCache.swift; sourceTree = "<group>"; };
 		375AE5382115FDCA009D589D /* GitHubUserStoreTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GitHubUserStoreTests.swift; sourceTree = "<group>"; };
+		375AE53A21162935009D589D /* SearchUsersViewControllerTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchUsersViewControllerTests.swift; sourceTree = "<group>"; };
 		377D47282115EC21004336B5 /* DispatcherTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DispatcherTests.swift; sourceTree = "<group>"; };
 		37C273DD210F572500F89B82 /* FluxExample.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = FluxExample.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		37C273E0210F572500F89B82 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -212,6 +214,7 @@
 				377D47282115EC21004336B5 /* DispatcherTests.swift */,
 				375AE5302115F024009D589D /* ActionCreatorTests.swift */,
 				375AE5382115FDCA009D589D /* GitHubUserStoreTests.swift */,
+				375AE53A21162935009D589D /* SearchUsersViewControllerTests.swift */,
 			);
 			path = Tests;
 			sourceTree = "<group>";
@@ -428,6 +431,7 @@
 				375AE5312115F024009D589D /* ActionCreatorTests.swift in Sources */,
 				375AE5352115F08F009D589D /* MockGitHubApiSession.swift in Sources */,
 				377D47292115EC21004336B5 /* DispatcherTests.swift in Sources */,
+				375AE53B21162935009D589D /* SearchUsersViewControllerTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

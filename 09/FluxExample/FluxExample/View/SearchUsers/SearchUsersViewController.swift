@@ -10,8 +10,8 @@ import UIKit
 
 final class SearchUsersViewController: UIViewController {
 
-    @IBOutlet private weak var tableView: UITableView!
-    @IBOutlet private weak var searchBar: UISearchBar!
+    @IBOutlet private(set) weak var tableView: UITableView!
+    @IBOutlet private(set) weak var searchBar: UISearchBar!
 
     private let userStore: GitHubUserStore
     private let actionCreator: ActionCreator
@@ -28,6 +28,10 @@ final class SearchUsersViewController: UIViewController {
             }
         }
     }()
+
+    deinit {
+        userStore.removeListener(reloadSubscription)
+    }
 
     init(userStore: GitHubUserStore = .shared,
          actionCreator: ActionCreator = .init()) {

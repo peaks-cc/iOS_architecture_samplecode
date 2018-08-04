@@ -26,7 +26,7 @@ final class ActionCreatorTests: XCTestCase {
         }
     }
 
-    func makeUser() -> GitHub.User {
+    private func makeUser() -> GitHub.User {
         return GitHub.User(login: "username",
                            id: 1,
                            nodeID: "",
@@ -37,7 +37,7 @@ final class ActionCreatorTests: XCTestCase {
                            type: "")
     }
 
-    func makePagination() -> GitHub.Pagination {
+    private func makePagination() -> GitHub.Pagination {
         return GitHub.Pagination(next: nil, last: nil, first: nil, prev: nil)
     }
 
@@ -52,11 +52,10 @@ final class ActionCreatorTests: XCTestCase {
     func testSearchUsers() {
         let users = [makeUser()]
         let pagination = makePagination()
-        let expect = expectation(description: "waiting Action.addUsers")
-
         dependency.apiSession.searchUsersResult = .success((users, pagination))
 
-        let callback: (Action) -> () = { action in
+        let expect = expectation(description: "waiting Action.addUsers")
+        _ = dependency.dispatcher.register { action in
             switch action {
             case let .addUsers(_users):
                 XCTAssertEqual(_users.count, users.count)
@@ -68,22 +67,17 @@ final class ActionCreatorTests: XCTestCase {
                  .searchUsersPagination:
                 return
             default:
-                XCTFail("It must be Action.addUsers")
+                XCTFail("Unexpected Action: \(action)")
             }
         }
-
-        let token = dependency.dispatcher.register(callback: callback)
+        
         dependency.actionCreator.searchUsers(query: "username")
-
         wait(for: [expect], timeout: 0.1)
-
-        dependency.dispatcher.unregister(token)
     }
     
     func testClearUser() {
         let expect = expectation(description: "waiting Action.clearUsers")
-
-        let callback: (Action) -> () = { action in
+        _ = dependency.dispatcher.register { action in
             if case .clearUsers = action {
                 expect.fulfill()
             } else {
@@ -91,11 +85,7 @@ final class ActionCreatorTests: XCTestCase {
             }
         }
 
-        let token = dependency.dispatcher.register(callback: callback)
         dependency.actionCreator.clearUsers()
-
         wait(for: [expect], timeout: 0.1)
-
-        dependency.dispatcher.unregister(token)
     }
 }
