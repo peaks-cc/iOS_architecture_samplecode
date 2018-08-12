@@ -1,0 +1,12 @@
+[submodule "15/FluxPlusExample/Carthage/Checkouts/iOS_architecture_samplecode"]
+	path = 15/FluxPlusExample/Carthage/Checkouts/iOS_architecture_samplecode
+	url = https://github.com/peaks-cc/iOS_architecture_samplecode.git
+[submodule "15/FluxWithRxSwift/Carthage/Checkouts/iOS_architecture_samplecode"]
+	path = 15/FluxWithRxSwift/Carthage/Checkouts/iOS_architecture_samplecode
+	url = https://github.com/peaks-cc/iOS_architecture_samplecode.git
+[submodule "15/FluxWithRxSwift/Carthage/Checkouts/RxSwift"]
+	path = 15/FluxWithRxSwift/Carthage/Checkouts/RxSwift
+	url = https://github.com/ReactiveX/RxSwift.git
+[submodule "15/FluxPlusExample/Carthage/Checkouts/RxSwift"]
+	path = 15/FluxPlusExample/Carthage/Checkouts/RxSwift
+	url = https://github.com/ReactiveX/RxSwift.git
