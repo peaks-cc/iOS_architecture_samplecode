@@ -10,18 +10,12 @@ import UIKit
 
 final class UserRepositoriesDataSource: NSObject {
 
-    private let repositoryStore: GitHubRepositoryStore
-    private let userStore: GitHubUserStore
-    private let actionCreator: GitHubRepositoryActionCreator
+    private let flux: Flux
 
     private let cellIdentifier = "Cell"
 
-    init(repositoryStore: GitHubRepositoryStore,
-         userStore: GitHubUserStore,
-         actionCreator: GitHubRepositoryActionCreator) {
-        self.repositoryStore = repositoryStore
-        self.userStore = userStore
-        self.actionCreator = actionCreator
+    init(flux: Flux) {
+        self.flux = flux
     }
 
     func configure(_ tableView: UITableView) {
@@ -33,13 +27,13 @@ final class UserRepositoriesDataSource: NSObject {
 
 extension UserRepositoriesDataSource: UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return repositoryStore.repositories.count
+        return flux.repositoryStore.repositories.value.count
     }
 
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: cellIdentifier, for: indexPath)
 
-        let repository = repositoryStore.repositories[indexPath.row]
+        let repository = flux.repositoryStore.repositories.value[indexPath.row]
         cell.textLabel?.text = repository.fullName
 
         return cell
@@ -48,16 +42,16 @@ extension UserRepositoriesDataSource: UITableViewDataSource {
 
 extension UserRepositoriesDataSource: UITableViewDelegate {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        let repository = repositoryStore.repositories[indexPath.row]
-        actionCreator.setSelectedRepository(repository)
+        let repository = flux.repositoryStore.repositories.value[indexPath.row]
+        flux.repositoryActionCreator.setSelectedRepository(repository)
     }
 
     func scrollViewDidScroll(_ scrollView: UIScrollView) {
-        if let username = userStore.selectedUser?.login, let next = repositoryStore.pagination?.next,
-            repositoryStore.pagination?.last != nil &&
+        if let username = flux.userStore.selectedUser?.login, let next = flux.repositoryStore.pagination.value?.next,
+            flux.repositoryStore.pagination.value?.last != nil &&
             (scrollView.contentSize.height - scrollView.bounds.size.height) <= scrollView.contentOffset.y &&
-            !repositoryStore.isFetching {
-            actionCreator.fetchRepositories(username: username, page: next)
+            !flux.repositoryStore.isFetching.value {
+            flux.repositoryActionCreator.fetchRepositories(username: username, page: next)
         }
     }
 }

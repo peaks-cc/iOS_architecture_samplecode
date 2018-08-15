@@ -1,6 +1,6 @@
 //
 //  SearchUsersViewController.swift
-//  FluxWithRxSwift
+//  FluxPlusExample
 //
 //  Created by 鈴木大貴 on 2018/08/10.
 //  Copyright © 2018年 marty-suzuki. All rights reserved.
@@ -17,12 +17,19 @@ final class SearchUsersViewController: UIViewController {
     @IBOutlet private(set) weak var searchBar: UISearchBar!
 
     private let flux: Flux
-    private let dataSource: SearchUsersDataSource
+
+    private lazy var viewModel = SearchUsersViewModel(searchText: searchBar.rx.text.asObservable(),
+        cancelButtonClicked: searchBar.rx.cancelButtonClicked.asObservable(),
+                                                      textDidBeginEditing: searchBar.rx.textDidBeginEditing.asObservable(),
+                                                      searchButtonClicked: searchBar.rx.searchButtonClicked.asObservable(),
+                                                      flux: flux)
+
+    private lazy var dataSource = SearchUsersDataSource(viewModel: viewModel)
+
     private let disposeBag = DisposeBag()
 
     init(flux: Flux = .shared) {
         self.flux = flux
-        self.dataSource = SearchUsersDataSource(flux: flux)
 
         super.init(nibName: "SearchUsersViewController", bundle: nil)
     }
@@ -38,14 +45,13 @@ final class SearchUsersViewController: UIViewController {
 
         dataSource.configure(tableView)
 
-        flux.userStore.usersObservable
-            .map { _ in }
+        viewModel.reloadData
             .bind(to: Binder(tableView) { tableView, _ in
                 tableView.reloadData()
             })
             .disposed(by: disposeBag)
 
-        flux.userStore.isFieldEditingObservable
+        viewModel.isFieldEditing
             .bind(to: Binder(self) { me, isFieldEditing in
                 UIView.animate(withDuration: 0.3) {
                     if isFieldEditing {
@@ -64,36 +70,10 @@ final class SearchUsersViewController: UIViewController {
             })
             .disposed(by: disposeBag)
 
-        flux.userStore.selectedUserObservable
-            .flatMap { user -> Observable<Void> in
-                user == nil ? .empty() : .just(())
-            }
+        viewModel.showUserRepositories
             .bind(to: Binder(self) { me, _ in
                 let vc = UserRepositoriesViewController()
                 me.navigationController?.pushViewController(vc, animated: true)
-            })
-            .disposed(by: disposeBag)
-
-        searchBar.rx.cancelButtonClicked
-            .subscribe(onNext: { [actionCreator = flux.userActionCreator] in
-                actionCreator.setIsSearchUsersFieldEditing(false)
-            })
-            .disposed(by: disposeBag)
-
-        searchBar.rx.textDidBeginEditing
-            .subscribe(onNext: { [actionCreator = flux.userActionCreator] in
-                actionCreator.setIsSearchUsersFieldEditing(true)
-            })
-            .disposed(by: disposeBag)
-
-        searchBar.rx.searchButtonClicked
-            .withLatestFrom(searchBar.rx.text)
-            .subscribe(onNext: { [actionCreator = flux.userActionCreator] text in
-                if let text = text, !text.isEmpty {
-                    actionCreator.clearUsers()
-                    actionCreator.searchUsers(query: text)
-                    actionCreator.setIsSearchUsersFieldEditing(false)
-                }
             })
             .disposed(by: disposeBag)
     }

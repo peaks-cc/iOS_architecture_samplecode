@@ -1,6 +1,6 @@
 //
 //  UserRepositoriesViewController.swift
-//  FluxWithRxSwift
+//  FluxPlusExample
 //
 //  Created by 鈴木大貴 on 2018/08/13.
 //  Copyright © 2018年 marty-suzuki. All rights reserved.
@@ -16,18 +16,12 @@ final class UserRepositoriesViewController: UIViewController {
     @IBOutlet weak var tableView: UITableView!
 
     private let flux: Flux
-
-    private let dataSource: UserRepositoriesDataSource
+    private lazy var viewModel = UserRepositoriesViewModel(flux: flux)
+    private lazy var dataSource = UserRepositoriesDataSource(viewModel: viewModel)
     private let disposeBag = DisposeBag()
-
-    deinit {
-        flux.userActionCreator.setSelectedUser(nil)
-        flux.repositoryActionCreator.clearRepositories()
-    }
 
     init(flux: Flux = .shared) {
         self.flux = flux
-        self.dataSource = UserRepositoriesDataSource(flux: flux)
 
         super.init(nibName: "UserRepositoriesViewController", bundle: nil)
 
@@ -41,30 +35,25 @@ final class UserRepositoriesViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        guard let user = flux.userStore.selectedUser else {
-            return
-        }
-
-        title = user.login
-
         dataSource.configure(tableView)
 
-        flux.repositoryStore.repositories.asObservable()
+        viewModel.title
+            .bind(to: Binder(self) { me, title in
+                me.title = title
+            })
+            .disposed(by: disposeBag)
+
+        viewModel.reloadData
             .bind(to: Binder(tableView) { tableView, _ in
                 tableView.reloadData()
             })
             .disposed(by: disposeBag)
 
-        flux.repositoryStore.selectedRepository.asObservable()
-            .flatMap { repository -> Observable<Void> in
-                repository == nil ? .empty() : .just(())
-            }
+        viewModel.showRepositoryDetail
             .bind(to: Binder(self) { me, _ in
                 let vc = RepositoryDetailViewController()
                 me.navigationController?.pushViewController(vc, animated: true)
             })
             .disposed(by: disposeBag)
-
-        flux.repositoryActionCreator.fetchRepositories(username: user.login)
     }
 }

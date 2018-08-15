@@ -1,6 +1,6 @@
 //
 //  SearchUsersDataSource.swift
-//  FluxWithRxSwift
+//  FluxPlusExample
 //
 //  Created by 鈴木大貴 on 2018/08/10.
 //  Copyright © 2018年 marty-suzuki. All rights reserved.
@@ -10,7 +10,7 @@ import UIKit
 
 final class SearchUsersDataSource: NSObject {
 
-    private let flux: Flux
+    private let viewModel: SearchUsersViewModel
 
     private let cellIdentifier = "Cell"
     private var imageDataList: [IndexPath: Data] = [:]
@@ -21,8 +21,8 @@ final class SearchUsersDataSource: NSObject {
     }()
     private var blankImage: UIImage?
 
-    init(flux: Flux) {
-        self.flux = flux
+    init(viewModel: SearchUsersViewModel) {
+        self.viewModel = viewModel
 
         super.init()
     }
@@ -36,13 +36,13 @@ final class SearchUsersDataSource: NSObject {
 
 extension SearchUsersDataSource: UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return flux.userStore.users.count
+        return viewModel.users.value.count
     }
 
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: cellIdentifier, for: indexPath)
 
-        let user = flux.userStore.users[indexPath.row]
+        let user = viewModel.users.value[indexPath.row]
         cell.textLabel?.text = user.login
         setImage(to: cell, url: user.avatarURL, indexPath: indexPath, tableView: tableView)
 
@@ -52,16 +52,12 @@ extension SearchUsersDataSource: UITableViewDataSource {
 
 extension SearchUsersDataSource: UITableViewDelegate {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        let user = flux.userStore.users[indexPath.row]
-        flux.userActionCreator.setSelectedUser(user)
+        viewModel.selectedIndexPath(indexPath)
     }
 
     func scrollViewDidScroll(_ scrollView: UIScrollView) {
-        if let query = flux.userStore.query, let next = flux.userStore.pagination?.next,
-            flux.userStore.pagination?.last != nil &&
-            (scrollView.contentSize.height - scrollView.bounds.size.height) <= scrollView.contentOffset.y &&
-            !flux.userStore.isFetching {
-            flux.userActionCreator.searchUsers(query: query, page: next)
+        if (scrollView.contentSize.height - scrollView.bounds.size.height) <= scrollView.contentOffset.y {
+            viewModel.reachBottom()
         }
     }
 }

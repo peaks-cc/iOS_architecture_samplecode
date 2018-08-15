@@ -1,6 +1,6 @@
 //
 //  GitHubRepositoryStore.swift
-//  FluxWithRxSwift
+//  FluxPlusExample
 //
 //  Created by 鈴木大貴 on 2018/08/12.
 //  Copyright © 2018年 marty-suzuki. All rights reserved.

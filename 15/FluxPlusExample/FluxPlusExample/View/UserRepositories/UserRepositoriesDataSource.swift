@@ -1,6 +1,6 @@
 //
-//  FavoritesDataSource.swift
-//  FluxWithRxSwift
+//  UserRepositoriesDataSource.swift
+//  FluxPlusExample
 //
 //  Created by 鈴木大貴 on 2018/08/13.
 //  Copyright © 2018年 marty-suzuki. All rights reserved.
@@ -8,16 +8,14 @@
 
 import UIKit
 
-final class FavoritesDataSource: NSObject {
+final class UserRepositoriesDataSource: NSObject {
 
-    private let flux: Flux
+    private let viewModel: UserRepositoriesViewModel
 
     private let cellIdentifier = "Cell"
 
-    init(flux: Flux) {
-        self.flux = flux
-
-        super.init()
+    init(viewModel: UserRepositoriesViewModel) {
+        self.viewModel = viewModel
     }
 
     func configure(_ tableView: UITableView) {
@@ -27,25 +25,28 @@ final class FavoritesDataSource: NSObject {
     }
 }
 
-extension FavoritesDataSource: UITableViewDataSource {
+extension UserRepositoriesDataSource: UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return flux.repositoryStore.favorites.value.count
+        return viewModel.repositories.value.count
     }
 
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: cellIdentifier, for: indexPath)
 
-        let repository = flux.repositoryStore.favorites.value[indexPath.row]
+        let repository = viewModel.repositories.value[indexPath.row]
         cell.textLabel?.text = repository.fullName
-        cell.detailTextLabel?.text = "⭐️\(repository.stargazersCount) 🍴\(repository.forksCount)"
 
         return cell
     }
 }
 
-extension FavoritesDataSource: UITableViewDelegate {
+extension UserRepositoriesDataSource: UITableViewDelegate {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        let repository = flux.repositoryStore.favorites.value[indexPath.row]
-        flux.repositoryActionCreator.setSelectedRepository(repository)
+        viewModel.selectedIndexPath(indexPath)
+    }
+
+    func scrollViewDidScroll(_ scrollView: UIScrollView) {
+        viewModel.reachBottom()
     }
 }
+

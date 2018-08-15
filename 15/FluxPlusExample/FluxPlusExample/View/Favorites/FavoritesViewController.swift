@@ -1,6 +1,6 @@
 //
 //  FavoritesViewController.swift
-//  FluxWithRxSwift
+//  FluxPlusExample
 //
 //  Created by 鈴木大貴 on 2018/08/13.
 //  Copyright © 2018年 marty-suzuki. All rights reserved.
@@ -16,13 +16,15 @@ final class FavoritesViewController: UIViewController {
     @IBOutlet private weak var tableView: UITableView!
 
     private let flux: Flux
+    private lazy var viewModel = FavoritesViewModel(viewDidAppear: self.extension.viewDidAppear,
+                                                    viewDidDisappear: self.extension.viewDidDisappear,
+                                                    flux: flux)
+    private lazy var dataSource = FavoritesDataSource(viewModel: viewModel)
 
-    private let dataSource: FavoritesDataSource
     private let disposeBag = DisposeBag()
 
     init(flux: Flux = .shared) {
         self.flux = flux
-        self.dataSource = FavoritesDataSource(flux: flux)
 
         super.init(nibName: "FavoritesViewController", bundle: nil)
     }
@@ -38,27 +40,16 @@ final class FavoritesViewController: UIViewController {
 
         dataSource.configure(tableView)
 
-        flux.repositoryStore.favorites.asObservable()
+        viewModel.reloadData
             .bind(to: Binder(tableView) { tableView, _ in
                 tableView.reloadData()
             })
             .disposed(by: disposeBag)
 
-        Observable.merge(self.extension.viewDidAppear.map { _ in true },
-                         self.extension.viewDidDisappear.map { _ in false })
-            .flatMapLatest { [repositoryStore = flux.repositoryStore] canSubscribe -> Observable<GitHub.Repository?> in
-                if canSubscribe {
-                    return repositoryStore.selectedRepository.changed
-                } else {
-                    return .empty()
-                }
-            }
-            .flatMap { favorite -> Observable<Void> in
-                favorite == nil ? .empty() : .just(())
-            }
+        viewModel.showRepositoryDetail
             .bind(to: Binder(self) { me, _ in
                 let vc = RepositoryDetailViewController()
-                 me.navigationController?.pushViewController(vc, animated: true)
+                me.navigationController?.pushViewController(vc, animated: true)
             })
             .disposed(by: disposeBag)
     }

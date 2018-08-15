@@ -1,6 +1,6 @@
 //
 //  RepositoryDetailViewController.swift
-//  FluxWithRxSwift
+//  FluxPlusExample
 //
 //  Created by 鈴木大貴 on 2018/08/13.
 //  Copyright © 2018年 marty-suzuki. All rights reserved.
@@ -39,16 +39,15 @@ final class RepositoryDetailViewController: UIViewController {
     private lazy var favoriteButton = UIBarButtonItem(title: nil, style: .plain, target: nil, action: nil)
 
     private let flux: Flux
+    private lazy var viewModel = RepositoryDetailViewModel(estimatedProgress: webview.rx.observeWeakly(Double.self, #keyPath(WKWebView.estimatedProgress)),
+                                                           favoriteButtonTap: favoriteButton.rx.tap.asObservable(),
+                                                           flux: flux)
 
     private let disposeBag = DisposeBag()
 
-    deinit {
-        flux.repositoryActionCreator.setSelectedRepository(nil)
-    }
-
     init(flux: Flux = .shared) {
         self.flux = flux
-
+        
         super.init(nibName: "RepositoryDetailViewController", bundle: nil)
 
         hidesBottomBarWhenPushed = true
@@ -63,10 +62,7 @@ final class RepositoryDetailViewController: UIViewController {
 
         navigationItem.rightBarButtonItem = favoriteButton
 
-        webview.rx.observeWeakly(Double.self, #keyPath(WKWebView.estimatedProgress))
-            .flatMap { estimatedProgress -> Observable<Double> in
-                estimatedProgress.map(Observable.just) ?? .empty()
-            }
+        viewModel.estimatedProgress
             .bind(to: Binder(self) { me, progress in
                 UIView.animate(withDuration: 0.3) {
                     let isShown = 0.0..<1.0 ~= progress
@@ -76,38 +72,13 @@ final class RepositoryDetailViewController: UIViewController {
             })
             .disposed(by: disposeBag)
 
-        let repository = flux.repositoryStore.selectedRepository.asObservable()
-            .flatMap { repository -> Observable<GitHub.Repository> in
-                repository.map(Observable.just) ?? .empty()
-            }
-            .share(replay: 1, scope: .whileConnected)
-
-        let isFavorite = flux.repositoryStore.favorites.asObservable()
-            .withLatestFrom(repository) { ($0, $1) }
-            .map { respositories, repository -> Bool in
-                respositories.contains { $0.id == repository.id }
-            }
-            .share(replay: 1, scope: .whileConnected)
-
-        isFavorite
-            .bind(to: Binder(favoriteButton) { button, isFavorite in
-                button.title = isFavorite ? "🌟 Unstar" : "⭐️ Star"
+        viewModel.favoriteButtonTitile
+            .bind(to: Binder(favoriteButton) { button, title in
+                button.title = title
             })
             .disposed(by: disposeBag)
 
-        favoriteButton.rx.tap.asObservable()
-            .withLatestFrom(isFavorite)
-            .withLatestFrom(repository) { ($0, $1) }
-            .subscribe(onNext: { [actionCreator = flux.repositoryActionCreator] isFavorite, repository in
-                if isFavorite {
-                    actionCreator.removeFavoriteRepository(repository)
-                } else {
-                    actionCreator.addFavoriteRepository(repository)
-                }
-            })
-            .disposed(by: disposeBag)
-
-        repository
+        viewModel.repository
             .bind(to: Binder(webview) { webview, repository in
                 webview.load(URLRequest(url: repository.htmlURL))
             })

@@ -26,6 +26,11 @@
 		ED6B63D0212098AA003C4EB1 /* LocalCacheKey.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED6B63CF212098AA003C4EB1 /* LocalCacheKey.swift */; };
 		ED6B63D421209A4E003C4EB1 /* RepositoryDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED6B63D221209A4E003C4EB1 /* RepositoryDetailViewController.swift */; };
 		ED6B63D521209A4E003C4EB1 /* RepositoryDetailViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = ED6B63D321209A4E003C4EB1 /* RepositoryDetailViewController.xib */; };
+		EDE96251212137D900F96CA2 /* RxProperty.swift in Sources */ = {isa = PBXBuildFile; fileRef = EDE96250212137D900F96CA2 /* RxProperty.swift */; };
+		EDE9628721216E4E00F96CA2 /* Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = EDE9628621216E4E00F96CA2 /* Extension.swift */; };
+		EDE9628921216EE700F96CA2 /* UIViewController.extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = EDE9628821216EE700F96CA2 /* UIViewController.extension.swift */; };
+		EDE9629421228E2F00F96CA2 /* Flux.swift in Sources */ = {isa = PBXBuildFile; fileRef = EDE9629321228E2F00F96CA2 /* Flux.swift */; };
+		EDE96296212290D700F96CA2 /* Flux.make.swift in Sources */ = {isa = PBXBuildFile; fileRef = EDE96295212290D700F96CA2 /* Flux.make.swift */; };
 		EDEC6AF72120695000BFCC9B /* GitHubRepositoryStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = EDEC6AF62120695000BFCC9B /* GitHubRepositoryStore.swift */; };
 		EDEC6AF921206A9300BFCC9B /* GitHubRepositoryDispatcher.swift in Sources */ = {isa = PBXBuildFile; fileRef = EDEC6AF821206A9300BFCC9B /* GitHubRepositoryDispatcher.swift */; };
 		EDEC6AFB21208AC600BFCC9B /* GitHubRepositoryActionCreator.swift in Sources */ = {isa = PBXBuildFile; fileRef = EDEC6AFA21208AC600BFCC9B /* GitHubRepositoryActionCreator.swift */; };
@@ -71,6 +76,12 @@
 		ED6B63CF212098AA003C4EB1 /* LocalCacheKey.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocalCacheKey.swift; sourceTree = "<group>"; };
 		ED6B63D221209A4E003C4EB1 /* RepositoryDetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RepositoryDetailViewController.swift; sourceTree = "<group>"; };
 		ED6B63D321209A4E003C4EB1 /* RepositoryDetailViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = RepositoryDetailViewController.xib; sourceTree = "<group>"; };
+		EDE38F3121241C3900CA2480 /* Nuke.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Nuke.framework; path = Carthage/Build/iOS/Nuke.framework; sourceTree = "<group>"; };
+		EDE96250212137D900F96CA2 /* RxProperty.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = RxProperty.swift; path = External/RxProperty/RxProperty.swift; sourceTree = SOURCE_ROOT; };
+		EDE9628621216E4E00F96CA2 /* Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Extension.swift; sourceTree = "<group>"; };
+		EDE9628821216EE700F96CA2 /* UIViewController.extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIViewController.extension.swift; sourceTree = "<group>"; };
+		EDE9629321228E2F00F96CA2 /* Flux.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Flux.swift; sourceTree = "<group>"; };
+		EDE96295212290D700F96CA2 /* Flux.make.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Flux.make.swift; sourceTree = "<group>"; };
 		EDEC6AF62120695000BFCC9B /* GitHubRepositoryStore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GitHubRepositoryStore.swift; sourceTree = "<group>"; };
 		EDEC6AF821206A9300BFCC9B /* GitHubRepositoryDispatcher.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GitHubRepositoryDispatcher.swift; sourceTree = "<group>"; };
 		EDEC6AFA21208AC600BFCC9B /* GitHubRepositoryActionCreator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GitHubRepositoryActionCreator.swift; sourceTree = "<group>"; };
@@ -125,6 +136,7 @@
 		ED02EF9B211CA2BF00A3E915 /* FluxWithRxSwift */ = {
 			isa = PBXGroup;
 			children = (
+				EDE9628521216E3B00F96CA2 /* Extension */,
 				ED6B63CC21209887003C4EB1 /* Util */,
 				ED02EFBF211CA37900A3E915 /* Flux */,
 				ED02EFBE211CA36E00A3E915 /* View */,
@@ -143,6 +155,7 @@
 			children = (
 				ED02EFB1211CA2C200A3E915 /* FluxWithRxSwiftTests.swift */,
 				ED02EFB3211CA2C200A3E915 /* Info.plist */,
+				EDE96295212290D700F96CA2 /* Flux.make.swift */,
 			);
 			path = FluxWithRxSwiftTests;
 			sourceTree = "<group>";
@@ -169,6 +182,7 @@
 		ED02EFBF211CA37900A3E915 /* Flux */ = {
 			isa = PBXGroup;
 			children = (
+				EDE9629321228E2F00F96CA2 /* Flux.swift */,
 				ED02EFCC211CA70000A3E915 /* GitHubRepository */,
 				ED02EFCB211CA6F800A3E915 /* GitHubUser */,
 			);
@@ -178,6 +192,7 @@
 		ED02EFC4211CA41C00A3E915 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				EDE38F3121241C3900CA2480 /* Nuke.framework */,
 				ED02EFC7211CA41D00A3E915 /* GitHub.framework */,
 				ED02EFC6211CA41D00A3E915 /* RxCocoa.framework */,
 				ED02EFC5211CA41D00A3E915 /* RxSwift.framework */,
@@ -218,6 +233,7 @@
 		ED6B63CC21209887003C4EB1 /* Util */ = {
 			isa = PBXGroup;
 			children = (
+				EDE96250212137D900F96CA2 /* RxProperty.swift */,
 				ED6B63CD21209893003C4EB1 /* LocalCache.swift */,
 				ED6B63CF212098AA003C4EB1 /* LocalCacheKey.swift */,
 			);
@@ -231,6 +247,15 @@
 				ED6B63D321209A4E003C4EB1 /* RepositoryDetailViewController.xib */,
 			);
 			path = RepositoryDetail;
+			sourceTree = "<group>";
+		};
+		EDE9628521216E3B00F96CA2 /* Extension */ = {
+			isa = PBXGroup;
+			children = (
+				EDE9628621216E4E00F96CA2 /* Extension.swift */,
+				EDE9628821216EE700F96CA2 /* UIViewController.extension.swift */,
+			);
+			path = Extension;
 			sourceTree = "<group>";
 		};
 		EDEC6AFC21208E4B00BFCC9B /* UserRepositories */ = {
@@ -388,12 +413,16 @@
 				ED6B63D0212098AA003C4EB1 /* LocalCacheKey.swift in Sources */,
 				ED02EFCE211CA72800A3E915 /* GitHubUserDispatcher.swift in Sources */,
 				ED02EFD2211CA73C00A3E915 /* GitHubUserStore.swift in Sources */,
+				EDE9628921216EE700F96CA2 /* UIViewController.extension.swift in Sources */,
 				ED02EF9D211CA2BF00A3E915 /* AppDelegate.swift in Sources */,
+				EDE9629421228E2F00F96CA2 /* Flux.swift in Sources */,
 				EDEC6B092120930E00BFCC9B /* FavoritesDataSource.swift in Sources */,
 				EDEC6AF72120695000BFCC9B /* GitHubRepositoryStore.swift in Sources */,
+				EDE9628721216E4E00F96CA2 /* Extension.swift in Sources */,
 				EDEC6AF921206A9300BFCC9B /* GitHubRepositoryDispatcher.swift in Sources */,
 				EDEC6AFF21208E6800BFCC9B /* UserRepositoriesViewController.swift in Sources */,
 				EDEC6B0221208E8700BFCC9B /* UserRepositoriesDataSource.swift in Sources */,
+				EDE96251212137D900F96CA2 /* RxProperty.swift in Sources */,
 				ED02EFDB211CB37600A3E915 /* SearchUsersViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -403,6 +432,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				ED02EFB2211CA2C200A3E915 /* FluxWithRxSwiftTests.swift in Sources */,
+				EDE96296212290D700F96CA2 /* Flux.make.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -561,6 +591,7 @@
 					"$(PROJECT_DIR)/Carthage/Build/iOS",
 				);
 				INFOPLIST_FILE = FluxWithRxSwift/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -584,6 +615,7 @@
 					"$(PROJECT_DIR)/Carthage/Build/iOS",
 				);
 				INFOPLIST_FILE = FluxWithRxSwift/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
