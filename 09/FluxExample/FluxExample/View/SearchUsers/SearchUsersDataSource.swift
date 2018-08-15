@@ -20,6 +20,7 @@ final class SearchUsersDataSource: NSObject {
         cache.countLimit = 50
         return cache
     }()
+    private var blankImage: UIImage?
 
     init(userStore: GitHubUserStore,
          actionCreator: ActionCreator) {
@@ -46,48 +47,7 @@ extension SearchUsersDataSource: UITableViewDataSource {
 
         let user = userStore.users[indexPath.row]
         cell.textLabel?.text = user.login
-
-        let setImage: (Data, Bool) -> () = { data, animated in
-            guard let imageView = cell.imageView else {
-                return
-            }
-
-            let image = UIImage(data: data)
-            if animated {
-                UIView.transition(with: imageView,
-                                  duration: 0.3,
-                                  options: .transitionCrossDissolve,
-                                  animations: { imageView.image = image },
-                                  completion: nil)
-            } else {
-                imageView.image = image
-            }
-        }
-
-        if let data = imageCache.object(forKey: user.avatarURL as NSURL) as Data? {
-            setImage(data, false)
-        } else {
-            let size = CGSize(width: cell.bounds.size.height, height: cell.bounds.size.height)
-            let rect = CGRect(x: 0, y: 0, width: size.width, height: size.height)
-            UIGraphicsBeginImageContextWithOptions(size, false, 1)
-            UIColor.white.set()
-            UIRectFill(rect)
-            cell.imageView?.image = UIGraphicsGetImageFromCurrentImageContext()
-            UIGraphicsEndImageContext()
-
-            URLSession.shared.dataTask(with: user.avatarURL) { [indexPath, user, weak self] data, _, _ in
-                guard let data = data else {
-                    return
-                }
-                self?.imageCache.setObject(data as NSData, forKey: user.avatarURL as NSURL)
-                DispatchQueue.main.async {
-                    guard tableView.indexPath(for: cell) == indexPath else {
-                        return
-                    }
-                    setImage(data, true)
-                }
-            }.resume()
-        }
+        setImage(to: cell, url: user.avatarURL, indexPath: indexPath, tableView: tableView)
 
         return cell
     }
@@ -105,6 +65,59 @@ extension SearchUsersDataSource: UITableViewDelegate {
             (scrollView.contentSize.height - scrollView.bounds.size.height) <= scrollView.contentOffset.y &&
             !userStore.isFetching {
             actionCreator.searchUsers(query: query, page: next)
+        }
+    }
+}
+
+extension SearchUsersDataSource {
+    func setImage(to cell: UITableViewCell, url: URL, indexPath: IndexPath, tableView: UITableView) {
+        let setImage: (Data, Bool) -> () = { data, animated in
+            guard let imageView = cell.imageView else {
+                return
+            }
+
+            let image = UIImage(data: data)
+            if animated {
+                UIView.transition(with: imageView,
+                                  duration: 0.3,
+                                  options: .transitionCrossDissolve,
+                                  animations: { imageView.image = image },
+                                  completion: nil)
+            } else {
+                imageView.image = image
+            }
+        }
+
+        if let data = imageCache.object(forKey: url as NSURL) as Data? {
+            setImage(data, false)
+        } else {
+            let image: UIImage?
+            if let blankImage = blankImage {
+                image = blankImage
+            } else {
+                let size = CGSize(width: cell.bounds.size.height, height: cell.bounds.size.height)
+                let rect = CGRect(x: 0, y: 0, width: size.width, height: size.height)
+                UIGraphicsBeginImageContextWithOptions(size, false, 1)
+                UIColor.white.set()
+                UIRectFill(rect)
+                image = UIGraphicsGetImageFromCurrentImageContext()
+                UIGraphicsEndImageContext()
+                blankImage = image
+            }
+            cell.imageView?.image = image
+
+            URLSession.shared.dataTask(with: url) { [indexPath, url, weak self] data, _, _ in
+                guard let data = data else {
+                    return
+                }
+                self?.imageCache.setObject(data as NSData, forKey: url as NSURL)
+                DispatchQueue.main.async {
+                    guard tableView.indexPath(for: cell) == indexPath else {
+                        return
+                    }
+                    setImage(data, true)
+                }
+            }.resume()
         }
     }
 }
