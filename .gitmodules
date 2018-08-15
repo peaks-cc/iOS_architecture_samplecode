@@ -16,9 +16,3 @@
 [submodule "15/FluxPlusExample/External/RxProperty"]
 	path = 15/FluxPlusExample/External/RxProperty
 	url = https://github.com/inamiy/RxProperty.git
-[submodule "15/FluxPlusExample/Carthage/Checkouts/Nuke"]
-	path = 15/FluxPlusExample/Carthage/Checkouts/Nuke
-	url = https://github.com/kean/Nuke.git
-[submodule "15/FluxWithRxSwift/Carthage/Checkouts/Nuke"]
-	path = 15/FluxWithRxSwift/Carthage/Checkouts/Nuke
-	url = https://github.com/kean/Nuke.git
