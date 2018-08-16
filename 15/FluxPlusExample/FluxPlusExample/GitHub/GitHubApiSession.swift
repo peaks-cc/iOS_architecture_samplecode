@@ -10,8 +10,8 @@ import GitHub
 import RxSwift
 
 protocol GitHubApiRequestable: class {
-    func searchUsers(query: String, page: Int) -> Single<([GitHub.User], GitHub.Pagination)>
-    func repositories(username: String, page: Int) -> Single<([GitHub.Repository], GitHub.Pagination)>
+    func searchUsers(query: String, page: Int) -> Observable<([GitHub.User], GitHub.Pagination)>
+    func repositories(username: String, page: Int) -> Observable<([GitHub.Repository], GitHub.Pagination)>
 }
 
 final class GitHubApiSession: GitHubApiRequestable {
@@ -19,7 +19,7 @@ final class GitHubApiSession: GitHubApiRequestable {
 
     private let session = GitHub.Session()
 
-    func searchUsers(query: String, page: Int) -> Single<([GitHub.User], GitHub.Pagination)> {
+    func searchUsers(query: String, page: Int) -> Observable<([GitHub.User], GitHub.Pagination)> {
         return Single.create { [session] event in
             let request = SearchUsersRequest(query: query, sort: nil, order: nil, page: page, perPage: nil)
             let task = session.send(request) { result in
@@ -34,9 +34,10 @@ final class GitHubApiSession: GitHubApiRequestable {
                 task?.cancel()
             }
         }
+        .asObservable()
     }
 
-    func repositories(username: String, page: Int) -> Single<([GitHub.Repository], GitHub.Pagination)> {
+    func repositories(username: String, page: Int) -> Observable<([GitHub.Repository], GitHub.Pagination)> {
         return Single.create { [session] event in
             let request = UserReposRequest(username: username, type: nil, sort: nil, direction: nil, page: page, perPage: nil)
             let task = session.send(request) { result in
@@ -51,5 +52,6 @@ final class GitHubApiSession: GitHubApiRequestable {
                 task?.cancel()
             }
         }
+        .asObservable()
     }
 }

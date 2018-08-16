@@ -25,7 +25,6 @@ final class GitHubUserActionCreator {
         let usersAndPagination = _fetchRepositories
             .flatMap { query, page -> Observable<GitHub.Result<([GitHub.User], GitHub.Pagination)>> in
                 apiSession.searchUsers(query: query, page: page)
-                    .asObservable()
                     .map { .success($0) }
                     .catchError { .just(.failure($0)) }
             }

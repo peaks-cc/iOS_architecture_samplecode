@@ -38,7 +38,7 @@ final class FavoritesViewController: UIViewController {
 
         dataSource.configure(tableView)
 
-        flux.repositoryStore.favorites.asObservable()
+        flux.repositoryStore.favoritesObservable
             .bind(to: Binder(tableView) { tableView, _ in
                 tableView.reloadData()
             })
@@ -48,7 +48,7 @@ final class FavoritesViewController: UIViewController {
                          self.extension.viewDidDisappear.map { _ in false })
             .flatMapLatest { [repositoryStore = flux.repositoryStore] canSubscribe -> Observable<GitHub.Repository?> in
                 if canSubscribe {
-                    return repositoryStore.selectedRepository.changed
+                    return repositoryStore.selectedRepositoryObservable.skip(1)
                 } else {
                     return .empty()
                 }

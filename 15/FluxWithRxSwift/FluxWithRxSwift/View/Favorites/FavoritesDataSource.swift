@@ -29,13 +29,13 @@ final class FavoritesDataSource: NSObject {
 
 extension FavoritesDataSource: UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return flux.repositoryStore.favorites.value.count
+        return flux.repositoryStore.favorites.count
     }
 
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: cellIdentifier, for: indexPath)
 
-        let repository = flux.repositoryStore.favorites.value[indexPath.row]
+        let repository = flux.repositoryStore.favorites[indexPath.row]
         cell.textLabel?.text = repository.fullName
         cell.detailTextLabel?.text = "⭐️\(repository.stargazersCount) 🍴\(repository.forksCount)"
 
@@ -45,7 +45,7 @@ extension FavoritesDataSource: UITableViewDataSource {
 
 extension FavoritesDataSource: UITableViewDelegate {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        let repository = flux.repositoryStore.favorites.value[indexPath.row]
+        let repository = flux.repositoryStore.favorites[indexPath.row]
         flux.repositoryActionCreator.setSelectedRepository(repository)
     }
 }

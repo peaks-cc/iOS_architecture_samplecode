@@ -13,19 +13,10 @@ import RxSwift
 final class GitHubRepositoryStore {
     static let shared = GitHubRepositoryStore()
 
-    let repositories: Property<[GitHub.Repository]>
     private let _repositories = BehaviorRelay<[GitHub.Repository]>(value: [])
-
-    let pagination: Property<GitHub.Pagination?>
     private let _pagination = BehaviorRelay<GitHub.Pagination?>(value: nil)
-
-    let selectedRepository: Property<GitHub.Repository?>
     private let _selectedRepository = BehaviorRelay<GitHub.Repository?>(value: nil)
-
-    let isFetching: Property<Bool>
     private let _isFetching = BehaviorRelay<Bool>(value: false)
-
-    let favorites: Property<[GitHub.Repository]>
     private let _favorites = BehaviorRelay<[GitHub.Repository]>(value: [])
 
     let error: Observable<Error>
@@ -33,12 +24,6 @@ final class GitHubRepositoryStore {
     private let disposeBag = DisposeBag()
 
     init(dispatcher: GitHubRepositoryDispatcher = .shared) {
-        self.repositories = Property(_repositories)
-        self.pagination = Property(_pagination)
-        self.selectedRepository = Property(_selectedRepository)
-        self.isFetching = Property(_isFetching)
-        self.favorites = Property(_favorites)
-
         self.error = dispatcher.error.asObservable()
 
         dispatcher.addRepositories
@@ -66,5 +51,43 @@ final class GitHubRepositoryStore {
         dispatcher.favorites
             .bind(to: _favorites)
             .disposed(by: disposeBag)
+    }
+}
+
+// MARK: - Values
+extension GitHubRepositoryStore {
+    var repositories: [GitHub.Repository] {
+        return _repositories.value
+    }
+    var pagination: GitHub.Pagination? {
+        return _pagination.value
+    }
+    var selectedRepository: GitHub.Repository? {
+        return _selectedRepository.value
+    }
+    var isFetching: Bool {
+        return _isFetching.value
+    }
+    var favorites: [GitHub.Repository] {
+        return _favorites.value
+    }
+}
+
+// MARK: - Observables
+extension GitHubRepositoryStore {
+    var repositoriesObservable: Observable<[GitHub.Repository]> {
+        return _repositories.asObservable()
+    }
+    var paginationObservable: Observable<GitHub.Pagination?> {
+        return _pagination.asObservable()
+    }
+    var selectedRepositoryObservable: Observable<GitHub.Repository?> {
+        return _selectedRepository.asObservable()
+    }
+    var isFetchingObservable: Observable<Bool> {
+        return _isFetching.asObservable()
+    }
+    var favoritesObservable: Observable<[GitHub.Repository]> {
+        return _favorites.asObservable()
     }
 }

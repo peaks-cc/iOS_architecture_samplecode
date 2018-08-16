@@ -11,11 +11,19 @@
 		ED02EF8E211CA1B800A3E915 /* GitHub.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = ED02EF8B211CA1B800A3E915 /* GitHub.framework */; };
 		ED02EF8F211CA1B800A3E915 /* RxSwift.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = ED02EF8C211CA1B800A3E915 /* RxSwift.framework */; };
 		ED02EFD7211CB28400A3E915 /* GitHubApiSession.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED02EFD6211CB28400A3E915 /* GitHubApiSession.swift */; };
+		ED71C1F521247D5400DF7952 /* SearchUsersViewModelTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED71C1F421247D5400DF7952 /* SearchUsersViewModelTests.swift */; };
+		EDE38F472124706100CA2480 /* Flux.make.swift in Sources */ = {isa = PBXBuildFile; fileRef = EDE38F462124706100CA2480 /* Flux.make.swift */; };
+		EDE38F492124707D00CA2480 /* MockGitHubApiSession.swift in Sources */ = {isa = PBXBuildFile; fileRef = EDE38F482124707D00CA2480 /* MockGitHubApiSession.swift */; };
+		EDE38F4B212470A800CA2480 /* MockLocalCache.swift in Sources */ = {isa = PBXBuildFile; fileRef = EDE38F4A212470A800CA2480 /* MockLocalCache.swift */; };
+		EDE38F4C212470CE00CA2480 /* GitHub.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = ED02EF8B211CA1B800A3E915 /* GitHub.framework */; };
+		EDE38F4D212470CE00CA2480 /* RxCocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = ED02EF8A211CA1B800A3E915 /* RxCocoa.framework */; };
+		EDE38F4E212470CE00CA2480 /* RxSwift.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = ED02EF8C211CA1B800A3E915 /* RxSwift.framework */; };
+		EDE38F502124711A00CA2480 /* GitHubUserActionCreatorTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = EDE38F4F2124711A00CA2480 /* GitHubUserActionCreatorTests.swift */; };
+		EDE38F522124715000CA2480 /* GitHubUserStoreTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = EDE38F512124715000CA2480 /* GitHubUserStoreTests.swift */; };
 		EDE5DFA22118187500F5DE2B /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = EDE5DFA12118187500F5DE2B /* AppDelegate.swift */; };
 		EDE5DFA72118187500F5DE2B /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = EDE5DFA52118187500F5DE2B /* Main.storyboard */; };
 		EDE5DFA92118187700F5DE2B /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = EDE5DFA82118187700F5DE2B /* Assets.xcassets */; };
 		EDE5DFAC2118187700F5DE2B /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = EDE5DFAA2118187700F5DE2B /* LaunchScreen.storyboard */; };
-		EDE5DFB72118187700F5DE2B /* FluxPlusExampleTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = EDE5DFB62118187700F5DE2B /* FluxPlusExampleTests.swift */; };
 		EDE9625421213B2D00F96CA2 /* RxProperty.swift in Sources */ = {isa = PBXBuildFile; fileRef = EDE9625321213B2D00F96CA2 /* RxProperty.swift */; };
 		EDE9625721213B6200F96CA2 /* LocalCache.swift in Sources */ = {isa = PBXBuildFile; fileRef = EDE9625521213B6200F96CA2 /* LocalCache.swift */; };
 		EDE9625821213B6200F96CA2 /* LocalCacheKey.swift in Sources */ = {isa = PBXBuildFile; fileRef = EDE9625621213B6200F96CA2 /* LocalCacheKey.swift */; };
@@ -61,6 +69,12 @@
 		ED02EF8B211CA1B800A3E915 /* GitHub.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = GitHub.framework; path = Carthage/Build/iOS/GitHub.framework; sourceTree = "<group>"; };
 		ED02EF8C211CA1B800A3E915 /* RxSwift.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = RxSwift.framework; path = Carthage/Build/iOS/RxSwift.framework; sourceTree = "<group>"; };
 		ED02EFD6211CB28400A3E915 /* GitHubApiSession.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GitHubApiSession.swift; sourceTree = "<group>"; };
+		ED71C1F421247D5400DF7952 /* SearchUsersViewModelTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchUsersViewModelTests.swift; sourceTree = "<group>"; };
+		EDE38F462124706100CA2480 /* Flux.make.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Flux.make.swift; sourceTree = "<group>"; };
+		EDE38F482124707D00CA2480 /* MockGitHubApiSession.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MockGitHubApiSession.swift; sourceTree = "<group>"; };
+		EDE38F4A212470A800CA2480 /* MockLocalCache.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MockLocalCache.swift; sourceTree = "<group>"; };
+		EDE38F4F2124711A00CA2480 /* GitHubUserActionCreatorTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GitHubUserActionCreatorTests.swift; sourceTree = "<group>"; };
+		EDE38F512124715000CA2480 /* GitHubUserStoreTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GitHubUserStoreTests.swift; sourceTree = "<group>"; };
 		EDE5DF9E2118187500F5DE2B /* FluxPlusExample.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = FluxPlusExample.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		EDE5DFA12118187500F5DE2B /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		EDE5DFA62118187500F5DE2B /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
@@ -68,7 +82,6 @@
 		EDE5DFAB2118187700F5DE2B /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		EDE5DFAD2118187700F5DE2B /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		EDE5DFB22118187700F5DE2B /* FluxPlusExampleTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = FluxPlusExampleTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
-		EDE5DFB62118187700F5DE2B /* FluxPlusExampleTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FluxPlusExampleTests.swift; sourceTree = "<group>"; };
 		EDE5DFB82118187700F5DE2B /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		EDE9625321213B2D00F96CA2 /* RxProperty.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = RxProperty.swift; path = External/RxProperty/RxProperty.swift; sourceTree = SOURCE_ROOT; };
 		EDE9625521213B6200F96CA2 /* LocalCache.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LocalCache.swift; sourceTree = "<group>"; };
@@ -115,6 +128,9 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				EDE38F4C212470CE00CA2480 /* GitHub.framework in Frameworks */,
+				EDE38F4D212470CE00CA2480 /* RxCocoa.framework in Frameworks */,
+				EDE38F4E212470CE00CA2480 /* RxSwift.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -138,6 +154,42 @@
 				EDE9626821213E7B00F96CA2 /* GitHub.Result.swift */,
 			);
 			path = GitHub;
+			sourceTree = "<group>";
+		};
+		ED71C1F621247D5A00DF7952 /* Flux */ = {
+			isa = PBXGroup;
+			children = (
+				EDE38F4F2124711A00CA2480 /* GitHubUserActionCreatorTests.swift */,
+				EDE38F512124715000CA2480 /* GitHubUserStoreTests.swift */,
+			);
+			path = Flux;
+			sourceTree = "<group>";
+		};
+		ED71C1F721247D6500DF7952 /* ViewModel */ = {
+			isa = PBXGroup;
+			children = (
+				ED71C1F421247D5400DF7952 /* SearchUsersViewModelTests.swift */,
+			);
+			path = ViewModel;
+			sourceTree = "<group>";
+		};
+		EDE38F4421246FDD00CA2480 /* Tests */ = {
+			isa = PBXGroup;
+			children = (
+				ED71C1F721247D6500DF7952 /* ViewModel */,
+				ED71C1F621247D5A00DF7952 /* Flux */,
+			);
+			path = Tests;
+			sourceTree = "<group>";
+		};
+		EDE38F4521246FE600CA2480 /* Mock */ = {
+			isa = PBXGroup;
+			children = (
+				EDE38F462124706100CA2480 /* Flux.make.swift */,
+				EDE38F482124707D00CA2480 /* MockGitHubApiSession.swift */,
+				EDE38F4A212470A800CA2480 /* MockLocalCache.swift */,
+			);
+			path = Mock;
 			sourceTree = "<group>";
 		};
 		EDE5DF952118187500F5DE2B = {
@@ -179,7 +231,8 @@
 		EDE5DFB52118187700F5DE2B /* FluxPlusExampleTests */ = {
 			isa = PBXGroup;
 			children = (
-				EDE5DFB62118187700F5DE2B /* FluxPlusExampleTests.swift */,
+				EDE38F4521246FE600CA2480 /* Mock */,
+				EDE38F4421246FDD00CA2480 /* Tests */,
 				EDE5DFB82118187700F5DE2B /* Info.plist */,
 			);
 			path = FluxPlusExampleTests;
@@ -342,6 +395,7 @@
 					};
 					EDE5DFB12118187700F5DE2B = {
 						CreatedOnToolsVersion = 9.4.1;
+						LastSwiftMigration = 0940;
 						TestTargetID = EDE5DF9D2118187500F5DE2B;
 					};
 				};
@@ -446,7 +500,12 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				EDE5DFB72118187700F5DE2B /* FluxPlusExampleTests.swift in Sources */,
+				EDE38F522124715000CA2480 /* GitHubUserStoreTests.swift in Sources */,
+				ED71C1F521247D5400DF7952 /* SearchUsersViewModelTests.swift in Sources */,
+				EDE38F502124711A00CA2480 /* GitHubUserActionCreatorTests.swift in Sources */,
+				EDE38F492124707D00CA2480 /* MockGitHubApiSession.swift in Sources */,
+				EDE38F4B212470A800CA2480 /* MockLocalCache.swift in Sources */,
+				EDE38F472124706100CA2480 /* Flux.make.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -647,7 +706,13 @@
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				BUNDLE_LOADER = "$(TEST_HOST)";
-				CODE_SIGN_STYLE = Automatic;
+				CLANG_ENABLE_MODULES = YES;
+				CODE_SIGN_STYLE = Manual;
+				DEVELOPMENT_TEAM = "";
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/Carthage/Build/iOS",
+				);
 				INFOPLIST_FILE = FluxPlusExampleTests/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
@@ -656,6 +721,8 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = "jp.marty-suzuki.FluxPlusExampleTests";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE_SPECIFIER = "";
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				SWIFT_VERSION = 4.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/FluxPlusExample.app/FluxPlusExample";
@@ -667,7 +734,13 @@
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				BUNDLE_LOADER = "$(TEST_HOST)";
-				CODE_SIGN_STYLE = Automatic;
+				CLANG_ENABLE_MODULES = YES;
+				CODE_SIGN_STYLE = Manual;
+				DEVELOPMENT_TEAM = "";
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/Carthage/Build/iOS",
+				);
 				INFOPLIST_FILE = FluxPlusExampleTests/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
@@ -676,6 +749,7 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = "jp.marty-suzuki.FluxPlusExampleTests";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_VERSION = 4.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/FluxPlusExample.app/FluxPlusExample";

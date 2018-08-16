@@ -20,15 +20,14 @@ final class GitHubRepositoryActionCreator {
     private let disposeBag = DisposeBag()
 
     init(dispatcher: GitHubRepositoryDispatcher = .shared,
-         localCache: LocalCacheable = LocalCache.shared,
-         apiSession: GitHubApiRequestable = GitHubApiSession.shared) {
+         apiSession: GitHubApiRequestable = GitHubApiSession.shared,
+         localCache: LocalCacheable = LocalCache.shared) {
         self.dispatcher = dispatcher
         self.localCache = localCache
 
         let repositoriesAndPagination = _fetchRepositories
             .flatMap { username, page -> Observable<GitHub.Result<([GitHub.Repository], GitHub.Pagination)>> in
                 apiSession.repositories(username: username, page: page)
-                    .asObservable()
                     .map { .success($0) }
                     .catchError { .just(.failure($0)) }
             }

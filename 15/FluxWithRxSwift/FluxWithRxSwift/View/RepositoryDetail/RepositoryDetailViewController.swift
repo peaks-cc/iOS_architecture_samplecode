@@ -76,13 +76,13 @@ final class RepositoryDetailViewController: UIViewController {
             })
             .disposed(by: disposeBag)
 
-        let repository = flux.repositoryStore.selectedRepository.asObservable()
+        let repository = flux.repositoryStore.selectedRepositoryObservable
             .flatMap { repository -> Observable<GitHub.Repository> in
                 repository.map(Observable.just) ?? .empty()
             }
             .share(replay: 1, scope: .whileConnected)
 
-        let isFavorite = flux.repositoryStore.favorites.asObservable()
+        let isFavorite = flux.repositoryStore.favoritesObservable
             .withLatestFrom(repository) { ($0, $1) }
             .map { respositories, repository -> Bool in
                 respositories.contains { $0.id == repository.id }

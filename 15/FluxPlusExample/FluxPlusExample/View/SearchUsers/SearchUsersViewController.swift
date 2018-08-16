@@ -19,7 +19,7 @@ final class SearchUsersViewController: UIViewController {
     private let flux: Flux
 
     private lazy var viewModel = SearchUsersViewModel(searchText: searchBar.rx.text.asObservable(),
-        cancelButtonClicked: searchBar.rx.cancelButtonClicked.asObservable(),
+                                                      cancelButtonClicked: searchBar.rx.cancelButtonClicked.asObservable(),
                                                       textDidBeginEditing: searchBar.rx.textDidBeginEditing.asObservable(),
                                                       searchButtonClicked: searchBar.rx.searchButtonClicked.asObservable(),
                                                       flux: flux)

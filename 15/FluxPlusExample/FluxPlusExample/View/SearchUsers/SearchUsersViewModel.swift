@@ -12,9 +12,6 @@ import RxSwift
 
 final class SearchUsersViewModel {
     let users: Property<[GitHub.User]>
-    let pagination: Property<GitHub.Pagination?>
-    let isFetching: Property<Bool>
-    let query: Property<String?>
 
     let reloadData: Observable<Void>
     let isFieldEditing: Observable<Bool>
@@ -34,9 +31,6 @@ final class SearchUsersViewModel {
         let actionCreator = flux.userActionCreator
 
         self.users = store.users
-        self.pagination = store.pagination
-        self.isFetching = store.isFetching
-        self.query = store.query
 
         self.reloadData = store.users.asObservable()
             .map { _ in }
@@ -81,9 +75,9 @@ final class SearchUsersViewModel {
             .disposed(by: disposeBag)
 
         _reachBottom
-            .withLatestFrom(query.asObservable())
-            .withLatestFrom(pagination.asObservable()) { ($0, $1) }
-            .withLatestFrom(isFetching.asObservable()) { ($0.0, $0.1, $1) }
+            .withLatestFrom(store.query.asObservable())
+            .withLatestFrom(store.pagination.asObservable()) { ($0, $1) }
+            .withLatestFrom(store.isFetching.asObservable()) { ($0.0, $0.1, $1) }
             .flatMap { query, pagination, isFetching -> Observable<(String, Int)> in
                 if let query = query, let next = pagination?.next,
                     pagination?.last != nil && !isFetching {
