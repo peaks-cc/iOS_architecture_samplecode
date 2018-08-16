@@ -25,24 +25,20 @@ final class GitHubUserActionCreator {
     func searchUsers(query: String, page: Int = 1) {
         dispatcher.searchQuery.accept(query)
         dispatcher.isFetching.accept(true)
-        apiSession.searchUsers(query: query, page: page) { [dispatcher] result in
-            switch result {
-            case let .success(users, pagination):
+        _ = apiSession.searchUsers(query: query, page: page)
+            .take(1)
+            .subscribe(onNext: { [dispatcher] users, pagination in
                 dispatcher.addUsers.accept(users)
                 dispatcher.pagination.accept(pagination)
-            case let .failure(error):
+                dispatcher.isFetching.accept(false)
+            }, onError: { [dispatcher] error in
                 dispatcher.error.accept(error)
-            }
-            dispatcher.isFetching.accept(false)
-        }
+                dispatcher.isFetching.accept(false)
+            })
     }
 
     func setSelectedUser(_ user: GitHub.User?) {
-        if let user = user {
-            dispatcher.selectedUser.accept(user)
-        } else {
-            dispatcher.selectedUser.accept(nil)
-        }
+        dispatcher.selectedUser.accept(user)
     }
 
     func setIsSearchUsersFieldEditing(_ isEditing: Bool) {

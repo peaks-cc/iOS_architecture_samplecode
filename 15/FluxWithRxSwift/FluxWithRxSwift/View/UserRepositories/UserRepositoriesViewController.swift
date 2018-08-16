@@ -49,13 +49,16 @@ final class UserRepositoriesViewController: UIViewController {
 
         dataSource.configure(tableView)
 
-        flux.repositoryStore.repositoriesObservable
+        let store = flux.repositoryStore
+        let actionCreator = flux.repositoryActionCreator
+
+        store.repositoriesObservable
             .bind(to: Binder(tableView) { tableView, _ in
                 tableView.reloadData()
             })
             .disposed(by: disposeBag)
 
-        flux.repositoryStore.selectedRepositoryObservable
+        store.selectedRepositoryObservable
             .flatMap { repository -> Observable<Void> in
                 repository == nil ? .empty() : .just(())
             }
@@ -65,6 +68,6 @@ final class UserRepositoriesViewController: UIViewController {
             })
             .disposed(by: disposeBag)
 
-        flux.repositoryActionCreator.fetchRepositories(username: user.login)
+        actionCreator.fetchRepositories(username: user.login)
     }
 }

@@ -27,16 +27,16 @@ final class GitHubRepositoryActionCreator {
 
     func fetchRepositories(username: String,  page: Int = 1) {
         dispatcher.isFetching.accept(true)
-        apiSession.repositories(username: username, page: page) { [dispatcher] result in
-            switch result {
-            case let .success(repositories, pagination):
+        _ = apiSession.repositories(username: username, page: page)
+            .take(1)
+            .subscribe(onNext: { [dispatcher] repositories, pagination in
                 dispatcher.addRepositories.accept(repositories)
                 dispatcher.pagination.accept(pagination)
-            case let .failure(error):
+                dispatcher.isFetching.accept(false)
+            }, onError: { [dispatcher]  error in
                 dispatcher.error.accept(error)
-            }
-            dispatcher.isFetching.accept(false)
-        }
+                dispatcher.isFetching.accept(false)
+            })
     }
 
     func clearRepositories() {

@@ -63,6 +63,9 @@ final class RepositoryDetailViewController: UIViewController {
 
         navigationItem.rightBarButtonItem = favoriteButton
 
+        let store = flux.repositoryStore
+        let actionCreator = flux.repositoryActionCreator
+
         webview.rx.observeWeakly(Double.self, #keyPath(WKWebView.estimatedProgress))
             .flatMap { estimatedProgress -> Observable<Double> in
                 estimatedProgress.map(Observable.just) ?? .empty()
@@ -76,13 +79,13 @@ final class RepositoryDetailViewController: UIViewController {
             })
             .disposed(by: disposeBag)
 
-        let repository = flux.repositoryStore.selectedRepositoryObservable
+        let repository = store.selectedRepositoryObservable
             .flatMap { repository -> Observable<GitHub.Repository> in
                 repository.map(Observable.just) ?? .empty()
             }
             .share(replay: 1, scope: .whileConnected)
 
-        let isFavorite = flux.repositoryStore.favoritesObservable
+        let isFavorite = store.favoritesObservable
             .withLatestFrom(repository) { ($0, $1) }
             .map { respositories, repository -> Bool in
                 respositories.contains { $0.id == repository.id }
@@ -98,7 +101,7 @@ final class RepositoryDetailViewController: UIViewController {
         favoriteButton.rx.tap.asObservable()
             .withLatestFrom(isFavorite)
             .withLatestFrom(repository) { ($0, $1) }
-            .subscribe(onNext: { [actionCreator = flux.repositoryActionCreator] isFavorite, repository in
+            .subscribe(onNext: { isFavorite, repository in
                 if isFavorite {
                     actionCreator.removeFavoriteRepository(repository)
                 } else {

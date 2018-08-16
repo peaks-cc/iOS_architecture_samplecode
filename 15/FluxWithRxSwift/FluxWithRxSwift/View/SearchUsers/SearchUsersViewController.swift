@@ -38,14 +38,17 @@ final class SearchUsersViewController: UIViewController {
 
         dataSource.configure(tableView)
 
-        flux.userStore.usersObservable
+        let store = flux.userStore
+        let actionCreator = flux.userActionCreator
+
+        store.usersObservable
             .map { _ in }
             .bind(to: Binder(tableView) { tableView, _ in
                 tableView.reloadData()
             })
             .disposed(by: disposeBag)
 
-        flux.userStore.isFieldEditingObservable
+        store.isFieldEditingObservable
             .bind(to: Binder(self) { me, isFieldEditing in
                 UIView.animate(withDuration: 0.3) {
                     if isFieldEditing {
@@ -64,7 +67,7 @@ final class SearchUsersViewController: UIViewController {
             })
             .disposed(by: disposeBag)
 
-        flux.userStore.selectedUserObservable
+        store.selectedUserObservable
             .flatMap { user -> Observable<Void> in
                 user == nil ? .empty() : .just(())
             }
@@ -75,20 +78,20 @@ final class SearchUsersViewController: UIViewController {
             .disposed(by: disposeBag)
 
         searchBar.rx.cancelButtonClicked
-            .subscribe(onNext: { [actionCreator = flux.userActionCreator] in
+            .subscribe(onNext: {
                 actionCreator.setIsSearchUsersFieldEditing(false)
             })
             .disposed(by: disposeBag)
 
         searchBar.rx.textDidBeginEditing
-            .subscribe(onNext: { [actionCreator = flux.userActionCreator] in
+            .subscribe(onNext: {
                 actionCreator.setIsSearchUsersFieldEditing(true)
             })
             .disposed(by: disposeBag)
 
         searchBar.rx.searchButtonClicked
             .withLatestFrom(searchBar.rx.text)
-            .subscribe(onNext: { [actionCreator = flux.userActionCreator] text in
+            .subscribe(onNext: { text in
                 if let text = text, !text.isEmpty {
                     actionCreator.clearUsers()
                     actionCreator.searchUsers(query: text)

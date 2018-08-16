@@ -54,7 +54,6 @@ final class GitHubUserActionCreatorTests: XCTestCase {
     func testSearchUsers() {
         let users = [makeUser()]
         let pagination = makePagination()
-        dependency.apiSession.searchUsersResult = .success((users, pagination))
 
         let expect = expectation(description: "waiting dispatcher.addUsers")
         let disposable = dependency.dispatcher.addUsers
@@ -66,6 +65,7 @@ final class GitHubUserActionCreatorTests: XCTestCase {
             })
 
         dependency.actionCreator.searchUsers(query: "username")
+        dependency.apiSession.setSearchUsersResult(users: users, pagination: pagination)
         wait(for: [expect], timeout: 0.1)
 
         disposable.dispose()

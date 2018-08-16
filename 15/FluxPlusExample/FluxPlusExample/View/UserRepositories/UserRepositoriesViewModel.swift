@@ -33,8 +33,10 @@ final class UserRepositoriesViewModel {
     init(flux: Flux) {
 
         let store = flux.repositoryStore
+        let actionCreator = flux.repositoryActionCreator
+
         self.userActionCreator = flux.userActionCreator
-        self.repositoryActionCreator = flux.repositoryActionCreator
+        self.repositoryActionCreator = actionCreator
 
         self.repositories = store.repositories
 
@@ -51,8 +53,6 @@ final class UserRepositoriesViewModel {
             .share(replay: 1, scope: .whileConnected)
 
         self.title = username
-
-        let actionCreator = flux.repositoryActionCreator
 
         _selectedIndexPath
             .withLatestFrom(repositories.asObservable()) { $1[$0.row] }
