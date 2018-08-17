@@ -43,11 +43,7 @@ final class SearchUsersViewControllerTests: XCTestCase {
                            receivedEventsURL: URL(string: "https://github.com/")!,
                            type: "")
     }
-
-    private func makePagination() -> GitHub.Pagination {
-        return GitHub.Pagination(next: nil, last: nil, first: nil, prev: nil)
-    }
-
+    
     private var dependency: Dependency!
 
     override func setUp() {
@@ -58,38 +54,18 @@ final class SearchUsersViewControllerTests: XCTestCase {
     
     func testSearchButtonClicked() {
         let query = "username"
-        let users = [makeUser()]
-        let pagination = makePagination()
-        dependency.apiSession.searchUsersResult = .success((users, pagination))
 
-        let expect1 = expectation(description: "waiting Action.addUsers")
-        let expect2 = expectation(description: "waiting Action.searchQuery")
-        let expect3 = expectation(description: "waiting Action.clearUsers")
-        _ = dependency.dispatcher.register { action in
-            switch action {
-            case let .addUsers(_users):
-                XCTAssertEqual(_users.count, users.count)
-                XCTAssertNotNil(_users.first)
-                XCTAssertEqual(_users.first?.login, users.first?.login)
-                expect1.fulfill()
-            case let .searchQuery(_query):
-                XCTAssertEqual(_query, query)
-                expect2.fulfill()
-            case .clearUsers:
-                expect3.fulfill()
-            case .isSeachUsersFieldEditing,
-                 .isSearchUsersFetching,
-                 .searchUsersPagination:
-                return
-            default:
-                XCTFail("Unexpected Action: \(action)")
-            }
+        let expect = expectation(description: "waiting called apiSession.searchUsers")
+        dependency.apiSession.searchUsersParams = { _query, _page in
+            XCTAssertEqual(_query, query)
+            XCTAssertEqual(_page, 1)
+            expect.fulfill()
         }
 
         let searchBar = dependency.viewController.searchBar!
         searchBar.text = query
         searchBar.delegate!.searchBarSearchButtonClicked!(searchBar)
-        wait(for: [expect1, expect2, expect3], timeout: 0.1)
+        wait(for: [expect], timeout: 0.1)
     }
 
     func testReloadData() {
