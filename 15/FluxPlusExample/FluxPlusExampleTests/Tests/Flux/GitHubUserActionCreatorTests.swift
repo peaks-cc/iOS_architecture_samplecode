@@ -21,7 +21,7 @@ final class GitHubUserActionCreatorTests: XCTestCase {
         let dispatcher: GitHubUserDispatcher
 
         init() {
-            let flux = Flux.make(apiSession: apiSession)
+            let flux = Flux.mock(apiSession: apiSession)
 
             self.actionCreator = flux.userActionCreator
             self.dispatcher = flux.userDispatcher

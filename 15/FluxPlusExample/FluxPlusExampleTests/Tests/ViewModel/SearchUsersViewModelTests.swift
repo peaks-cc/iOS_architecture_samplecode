@@ -30,7 +30,7 @@ final class SearchUsersViewModelTests: XCTestCase {
         let searchButtonClicked = PublishRelay<Void>()
 
         init() {
-            let flux = Flux.make(apiSession: apiSession)
+            let flux = Flux.mock(apiSession: apiSession)
 
             self.actionCreator = flux.userActionCreator
             self.store = flux.userStore

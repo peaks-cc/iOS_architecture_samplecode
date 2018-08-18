@@ -12,7 +12,7 @@
 		ED02EF8F211CA1B800A3E915 /* RxSwift.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = ED02EF8C211CA1B800A3E915 /* RxSwift.framework */; };
 		ED02EFD7211CB28400A3E915 /* GitHubApiSession.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED02EFD6211CB28400A3E915 /* GitHubApiSession.swift */; };
 		ED71C1F521247D5400DF7952 /* SearchUsersViewModelTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED71C1F421247D5400DF7952 /* SearchUsersViewModelTests.swift */; };
-		EDE38F472124706100CA2480 /* Flux.make.swift in Sources */ = {isa = PBXBuildFile; fileRef = EDE38F462124706100CA2480 /* Flux.make.swift */; };
+		EDE38F472124706100CA2480 /* Flux.mock.swift in Sources */ = {isa = PBXBuildFile; fileRef = EDE38F462124706100CA2480 /* Flux.mock.swift */; };
 		EDE38F492124707D00CA2480 /* MockGitHubApiSession.swift in Sources */ = {isa = PBXBuildFile; fileRef = EDE38F482124707D00CA2480 /* MockGitHubApiSession.swift */; };
 		EDE38F4B212470A800CA2480 /* MockLocalCache.swift in Sources */ = {isa = PBXBuildFile; fileRef = EDE38F4A212470A800CA2480 /* MockLocalCache.swift */; };
 		EDE38F4C212470CE00CA2480 /* GitHub.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = ED02EF8B211CA1B800A3E915 /* GitHub.framework */; };
@@ -70,7 +70,7 @@
 		ED02EF8C211CA1B800A3E915 /* RxSwift.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = RxSwift.framework; path = Carthage/Build/iOS/RxSwift.framework; sourceTree = "<group>"; };
 		ED02EFD6211CB28400A3E915 /* GitHubApiSession.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GitHubApiSession.swift; sourceTree = "<group>"; };
 		ED71C1F421247D5400DF7952 /* SearchUsersViewModelTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchUsersViewModelTests.swift; sourceTree = "<group>"; };
-		EDE38F462124706100CA2480 /* Flux.make.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Flux.make.swift; sourceTree = "<group>"; };
+		EDE38F462124706100CA2480 /* Flux.mock.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Flux.mock.swift; sourceTree = "<group>"; };
 		EDE38F482124707D00CA2480 /* MockGitHubApiSession.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MockGitHubApiSession.swift; sourceTree = "<group>"; };
 		EDE38F4A212470A800CA2480 /* MockLocalCache.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MockLocalCache.swift; sourceTree = "<group>"; };
 		EDE38F4F2124711A00CA2480 /* GitHubUserActionCreatorTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GitHubUserActionCreatorTests.swift; sourceTree = "<group>"; };
@@ -185,7 +185,7 @@
 		EDE38F4521246FE600CA2480 /* Mock */ = {
 			isa = PBXGroup;
 			children = (
-				EDE38F462124706100CA2480 /* Flux.make.swift */,
+				EDE38F462124706100CA2480 /* Flux.mock.swift */,
 				EDE38F482124707D00CA2480 /* MockGitHubApiSession.swift */,
 				EDE38F4A212470A800CA2480 /* MockLocalCache.swift */,
 			);
@@ -505,7 +505,7 @@
 				EDE38F502124711A00CA2480 /* GitHubUserActionCreatorTests.swift in Sources */,
 				EDE38F492124707D00CA2480 /* MockGitHubApiSession.swift in Sources */,
 				EDE38F4B212470A800CA2480 /* MockLocalCache.swift in Sources */,
-				EDE38F472124706100CA2480 /* Flux.make.swift in Sources */,
+				EDE38F472124706100CA2480 /* Flux.mock.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
