@@ -9,8 +9,10 @@
 import Foundation
 
 public enum SessionError: Error {
+
     case noData(HTTPURLResponse)
     case noResponse
+    case unacceptableStatusCode(Int, Message?)
     case failedToCreateComponents(URL)
     case failedToCreateURL(URLComponents)
 }
@@ -66,18 +68,24 @@ public final class Session {
                 return
             }
 
-            guard let resposne = response as? HTTPURLResponse else {
+            guard let response = response as? HTTPURLResponse else {
                 completion(.failure(SessionError.noResponse))
                 return
             }
 
             guard let data = data else {
-                completion(.failure(SessionError.noData(resposne)))
+                completion(.failure(SessionError.noData(response)))
+                return
+            }
+
+            guard  200..<300 ~= response.statusCode else {
+                let message = try? JSONDecoder().decode(SessionError.Message.self, from: data)
+                completion(.failure(SessionError.unacceptableStatusCode(response.statusCode, message)))
                 return
             }
 
             let pagination: Pagination
-            if let link = resposne.allHeaderFields["Link"] as? String {
+            if let link = response.allHeaderFields["Link"] as? String {
                 pagination = Pagination(link: link)
             } else {
                 pagination = Pagination(next: nil, last: nil, first: nil, prev: nil)
@@ -94,5 +102,17 @@ public final class Session {
         task.resume()
 
         return task
+    }
+}
+
+extension SessionError {
+    public struct Message: Decodable {
+        public let documentationURL: URL
+        public let message: String
+
+        private enum CodingKeys: String, CodingKey {
+            case documentationURL = "documentation_url"
+            case message
+        }
     }
 }
