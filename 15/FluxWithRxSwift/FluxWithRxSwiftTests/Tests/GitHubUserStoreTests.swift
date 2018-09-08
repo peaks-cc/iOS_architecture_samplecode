@@ -20,7 +20,7 @@ final class GitHubRepositoryStoreTests: XCTestCase {
         let dispatcher: GitHubUserDispatcher
 
         init() {
-            let flux = Flux.make()
+            let flux = Flux.mock()
 
             self.store = flux.userStore
             self.dispatcher = flux.userDispatcher

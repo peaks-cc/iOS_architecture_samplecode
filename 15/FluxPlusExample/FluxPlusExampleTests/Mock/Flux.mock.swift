@@ -1,15 +1,15 @@
 //
-//  Flux.make.swift
-//  FluxWithRxSwiftTests
+//  Flux.mock.swift
+//  FluxPlusExampleTests
 //
-//  Created by 鈴木大貴 on 2018/08/14.
+//  Created by 鈴木大貴 on 2018/08/15.
 //  Copyright © 2018年 marty-suzuki. All rights reserved.
 //
 
-@testable import FluxWithRxSwift
+@testable import FluxPlusExample
 
 extension Flux {
-    static func make(apiSession: MockGitHubApiSession = .init(),
+    static func mock(apiSession: MockGitHubApiSession = .init(),
                      localCache: MockLocalCache = .init()) -> Flux {
         let repositoryDispatcher = GitHubRepositoryDispatcher()
         let repositoryActionCreator = GitHubRepositoryActionCreator(dispatcher: repositoryDispatcher,

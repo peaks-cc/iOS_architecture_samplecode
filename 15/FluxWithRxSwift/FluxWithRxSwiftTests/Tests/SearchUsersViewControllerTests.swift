@@ -1,14 +1,14 @@
 //
 //  SearchUsersViewControllerTests.swift
-//  FluxExampleTests
+//  FluxWithRxSwiftTests
 //
-//  Created by marty-suzuki on 2018/08/05.
+//  Created by 鈴木大貴 on 2018/08/19.
 //  Copyright © 2018年 marty-suzuki. All rights reserved.
 //
 
 import XCTest
 import GitHub
-@testable import FluxExample
+@testable import FluxWithRxSwift
 
 final class SearchUsersViewControllerTests: XCTestCase {
 
@@ -16,19 +16,18 @@ final class SearchUsersViewControllerTests: XCTestCase {
         let apiSession = MockGitHubApiSession()
         let localCache = MockLocalCache()
 
-        let dispatcher = Dispatcher()
-        let actionCreator: ActionCreator
+        let dispatcher: GitHubUserDispatcher
+        let actionCreator: GitHubUserActionCreator
         let store: GitHubUserStore
 
         let viewController: SearchUsersViewController
 
         init() {
-            self.actionCreator = ActionCreator(dispatcher: dispatcher,
-                                               apiSession: apiSession,
-                                               localCache: localCache)
-            self.store = GitHubUserStore(dispatcher: dispatcher)
-            self.viewController = SearchUsersViewController(userStore: store,
-                                                            actionCreator: actionCreator)
+            let flux = Flux.mock(apiSession: apiSession, localCache: localCache)
+            self.dispatcher = flux.userDispatcher
+            self.actionCreator = flux.userActionCreator
+            self.store = flux.userStore
+            self.viewController = SearchUsersViewController(flux: flux)
             viewController.loadViewIfNeeded()
         }
     }
@@ -43,7 +42,7 @@ final class SearchUsersViewControllerTests: XCTestCase {
                            receivedEventsURL: URL(string: "https://github.com/")!,
                            type: "")
     }
-    
+
     private var dependency: Dependency!
 
     override func setUp() {
@@ -51,21 +50,24 @@ final class SearchUsersViewControllerTests: XCTestCase {
 
         dependency = Dependency()
     }
-    
+
     func testSearchButtonClicked() {
         let query = "username"
 
         let expect = expectation(description: "waiting called apiSession.searchUsers")
-        dependency.apiSession.searchUsersParams = { _query, _page in
-            XCTAssertEqual(_query, query)
-            XCTAssertEqual(_page, 1)
-            expect.fulfill()
-        }
+        let disposable = dependency.apiSession.searchUsersParams
+            .subscribe(onNext: { _query, _page in
+                XCTAssertEqual(_query, query)
+                XCTAssertEqual(_page, 1)
+                expect.fulfill()
+            })
 
         let searchBar = dependency.viewController.searchBar!
         searchBar.text = query
+        searchBar.delegate!.searchBar!(searchBar, textDidChange: query)
         searchBar.delegate!.searchBarSearchButtonClicked!(searchBar)
-        wait(for: [expect], timeout: 0.1)
+        wait(for: [expect], timeout: 1)
+        disposable.dispose()
     }
 
     func testReloadData() {
@@ -73,7 +75,7 @@ final class SearchUsersViewControllerTests: XCTestCase {
         XCTAssertEqual(tableView.numberOfRows(inSection: 0), 0)
 
         let users = [makeUser(), makeUser()]
-        dependency.dispatcher.dispatch(.addUsers(users))
+        dependency.dispatcher.addUsers.accept(users)
 
         let expect = expectation(description: "waiting view reflection")
         DispatchQueue.main.asyncAfter(deadline: .now() + 1) {
