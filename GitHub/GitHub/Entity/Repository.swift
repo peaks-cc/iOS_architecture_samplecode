@@ -21,7 +21,7 @@ public struct Repository: Codable {
     public let url: URL
     public let createdAt: String
     public let updatedAt: String
-    public let pushedAt: String
+    public let pushedAt: String?
     public let homepage: String?
     public let size: Int
     public let stargazersCount: Int
