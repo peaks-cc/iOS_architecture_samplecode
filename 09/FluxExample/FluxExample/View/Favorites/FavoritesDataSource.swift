@@ -10,21 +10,20 @@ import UIKit
 
 final class FavoritesDataSource: NSObject {
 
-    private let repositoryStore: GitHubRepositoryStore
+    private let favoriteStore: FavoriteRepositoryStore
     private let actionCreator: ActionCreator
 
-    private let cellIdentifier = "Cell"
-
-    init(repositoryStore: GitHubRepositoryStore,
+    init(favoriteStore: FavoriteRepositoryStore,
          actionCreator: ActionCreator) {
-        self.repositoryStore = repositoryStore
+        self.favoriteStore = favoriteStore
         self.actionCreator = actionCreator
 
         super.init()
     }
 
     func configure(_ tableView: UITableView) {
-        tableView.register(UITableViewCell.self, forCellReuseIdentifier: cellIdentifier)
+        tableView.register(GitHubRepositoryCell.nib,
+                           forCellReuseIdentifier: GitHubRepositoryCell.identifier)
         tableView.dataSource = self
         tableView.delegate = self
     }
@@ -32,15 +31,16 @@ final class FavoritesDataSource: NSObject {
 
 extension FavoritesDataSource: UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return repositoryStore.favorites.count
+        return favoriteStore.repositories.count
     }
 
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: cellIdentifier, for: indexPath)
+        let cell = tableView.dequeueReusableCell(withIdentifier: GitHubRepositoryCell.identifier, for: indexPath)
 
-        let repository = repositoryStore.favorites[indexPath.row]
-        cell.textLabel?.text = repository.fullName
-        cell.detailTextLabel?.text = "⭐️\(repository.stargazersCount) 🍴\(repository.forksCount)"
+        if let repositoryCell = cell as? GitHubRepositoryCell {
+            let repository = favoriteStore.repositories[indexPath.row]
+            repositoryCell.configure(with: repository)
+        }
 
         return cell
     }
@@ -48,7 +48,8 @@ extension FavoritesDataSource: UITableViewDataSource {
 
 extension FavoritesDataSource: UITableViewDelegate {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        let repository = repositoryStore.favorites[indexPath.row]
+        tableView.deselectRow(at: indexPath, animated: false)
+        let repository = favoriteStore.repositories[indexPath.row]
         actionCreator.setSelectedRepository(repository)
     }
 }

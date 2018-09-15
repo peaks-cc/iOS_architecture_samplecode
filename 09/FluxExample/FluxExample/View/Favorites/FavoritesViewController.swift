@@ -12,24 +12,27 @@ final class FavoritesViewController: UIViewController {
 
     @IBOutlet private weak var tableView: UITableView!
 
-    private let repositoryStore: GitHubRepositoryStore
+    private let selectedStore: SelectedRepositoryStore
+    private let favoriteStore: FavoriteRepositoryStore
     private let actionCreator: ActionCreator
     private let dataSource: FavoritesDataSource
 
     private var showRepositorySubscription: Subscription?
     private lazy var reloadSubscription: Subscription = {
-        return repositoryStore.addListener { [weak self] in
+        return favoriteStore.addListener { [weak self] in
             DispatchQueue.main.async {
                 self?.tableView.reloadSections(IndexSet(integer: 0) , with: .fade)
             }
         }
     }()
 
-    init(repositoryStore: GitHubRepositoryStore = .shared,
+    init(selectedStore: SelectedRepositoryStore = .shared,
+         favoriteStore: FavoriteRepositoryStore = .shared,
          actionCreator: ActionCreator = .init()) {
-        self.repositoryStore = repositoryStore
+        self.selectedStore = selectedStore
+        self.favoriteStore = favoriteStore
         self.actionCreator = actionCreator
-        self.dataSource = FavoritesDataSource(repositoryStore: repositoryStore,
+        self.dataSource = FavoritesDataSource(favoriteStore: favoriteStore,
                                               actionCreator: actionCreator)
 
         super.init(nibName: "FavoritesViewController", bundle: nil)
@@ -62,7 +65,7 @@ final class FavoritesViewController: UIViewController {
 
     private func unsubscribeStore() {
         if let subscription = showRepositorySubscription {
-            repositoryStore.removeListener(subscription)
+            selectedStore.removeListener(subscription)
             showRepositorySubscription = nil
         }
     }
@@ -72,7 +75,7 @@ final class FavoritesViewController: UIViewController {
             return
         }
 
-        showRepositorySubscription = repositoryStore.addListener { [weak self] in
+        showRepositorySubscription = selectedStore.addListener { [weak self] in
             DispatchQueue.main.async {
                 self?.showRepositoryDetail()
             }
@@ -80,7 +83,7 @@ final class FavoritesViewController: UIViewController {
     }
 
     private func showRepositoryDetail() {
-        if repositoryStore.selectedRepository == nil {
+        if selectedStore.repository == nil {
             return
         }
         unsubscribeStore()

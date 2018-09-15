@@ -14,13 +14,14 @@ final class AppDelegate: UIResponder, UIApplicationDelegate {
     var window: UIWindow?
 
     private let actionCreator = ActionCreator()
-    private let repositoryStore = GitHubRepositoryStore.shared
-    private let userStore = GitHubUserStore.shared
+    private let searchStore = SearchRepositoryStore.shared
+    private let favoriteStore = FavoriteRepositoryStore.shared
+    private let selectedStore = SelectedRepositoryStore.shared
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
         if let tabBarController = window?.rootViewController as? UITabBarController {
             let values: [(UINavigationController, UITabBarSystemItem)] = [
-                (UINavigationController(rootViewController: SearchUsersViewController()), .search),
+                (UINavigationController(rootViewController: RepositorySearchViewController()), .search),
                 (UINavigationController(rootViewController: FavoritesViewController()), .favorites)
             ]
             values.enumerated().forEach {

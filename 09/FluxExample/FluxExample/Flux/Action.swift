@@ -10,32 +10,21 @@ import GitHub
 
 enum Action {
 
-    // MARK: - Github.User
+    // MARK: -  Search
 
-    case addUsers([GitHub.User])
-    case clearUsers
-    case searchUsersPagination(GitHub.Pagination)
-    case clearSearchUsersPagination
-    case searchQuery(String)
-    case clearSearchQuery
-    case userSelected(GitHub.User)
-    case userUnselected
-    case isSeachUsersFieldEditing(Bool)
-    case isSearchUsersFetching(Bool)
+    case searchQuery(String?)
+    case searchPagination(GitHub.Pagination?)
+    case searchRepositories([GitHub.Repository])
+    case clearSearchRepositories
+    case isRepositoriesFetching(Bool)
+    case isSearchFieldEditing(Bool)
+    case error(Error?)
 
-    // MARK: -  Github.Repository
+    // MARK: - Favorite
 
-    case addRepositories([GitHub.Repository])
-    case clearRepositories
-    case repositoriesPagination(GitHub.Pagination)
-    case clearRepositoriesPagination
-    case repositorySelected(GitHub.Repository)
-    case repositoryUnselected
     case loadFavoriteRepositories([GitHub.Repository])
-    case isUserRepositoriesFetching(Bool)
 
     // MARK: - Others
 
-    case error(Error)
-    case clearError
+    case selectedRepository(GitHub.Repository?)
 }

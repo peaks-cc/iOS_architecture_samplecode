@@ -38,11 +38,12 @@ final class RepositoryDetailViewController: UIViewController {
                                                       target: self,
                                                       action: #selector(self.favoriteButtonTap(_:)))
 
-    private let repositoryStore: GitHubRepositoryStore
+    private let selectedStore: SelectedRepositoryStore
+    private let favoriteStore: FavoriteRepositoryStore
     private let actionCreator: ActionCreator
 
     private lazy var repositoryStoreSubscription: Subscription = {
-        return repositoryStore.addListener { [weak self] in
+        return favoriteStore.addListener { [weak self] in
             DispatchQueue.main.async {
                 self?.updateFavoriteButton()
             }
@@ -63,20 +64,22 @@ final class RepositoryDetailViewController: UIViewController {
     }()
 
     private var isFavorite: Bool {
-        return repositoryStore.favorites.contains {
-            $0.id == repositoryStore.selectedRepository?.id
+        return favoriteStore.repositories.contains {
+            $0.id == selectedStore.repository?.id
         }
     }
 
     deinit {
         actionCreator.setSelectedRepository(nil)
-        repositoryStore.removeListener(repositoryStoreSubscription)
+        favoriteStore.removeListener(repositoryStoreSubscription)
         progressObservation.invalidate()
     }
 
-    init(repositoryStore: GitHubRepositoryStore = .shared,
+    init(selectedStore: SelectedRepositoryStore = .shared,
+         favoriteStore: FavoriteRepositoryStore = .shared,
          actionCreator: ActionCreator = .init()) {
-        self.repositoryStore = repositoryStore
+        self.selectedStore = selectedStore
+        self.favoriteStore = favoriteStore
         self.actionCreator = actionCreator
 
         super.init(nibName: "RepositoryDetailViewController", bundle: nil)
@@ -91,7 +94,7 @@ final class RepositoryDetailViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        guard let repository = repositoryStore.selectedRepository else {
+        guard let repository = selectedStore.repository else {
             return
         }
 
@@ -109,7 +112,7 @@ final class RepositoryDetailViewController: UIViewController {
     }
 
     @objc private func favoriteButtonTap(_ button: UIBarButtonItem) {
-        guard let repository = repositoryStore.selectedRepository else {
+        guard let repository = selectedStore.repository else {
             return
         }
 

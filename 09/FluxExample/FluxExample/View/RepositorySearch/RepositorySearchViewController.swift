@@ -1,27 +1,28 @@
 //
-//  SearchUsersViewController.swift
+//  RepositorySearchViewController.swift
 //  FluxExample
 //
-//  Created by marty-suzuki on 2018/07/31.
+//  Created by marty-suzuki on 2018/09/16.
 //  Copyright © 2018年 marty-suzuki. All rights reserved.
 //
 
 import UIKit
 
-final class SearchUsersViewController: UIViewController {
+final class RepositorySearchViewController: UIViewController {
 
     @IBOutlet private(set) weak var tableView: UITableView!
     @IBOutlet private(set) weak var searchBar: UISearchBar!
 
-    private let userStore: GitHubUserStore
+    private let searchStore: SearchRepositoryStore
+    private let selectedStore: SelectedRepositoryStore
     private let actionCreator: ActionCreator
-    private let dataSource: SearchUsersDataSource
+    private let dataSource: RepositorySearchDataSource
 
     private let debounce = DispatchQueue.main.debounce(delay: .milliseconds(300))
 
-    private var showUserSubscription: Subscription?
+    private var showRepositoryDetailSubscription: Subscription?
     private lazy var reloadSubscription: Subscription = {
-        return userStore.addListener { [weak self] in
+        return searchStore.addListener { [weak self] in
             self?.debounce {
                 self?.tableView.reloadData()
                 self?.refrectEditing()
@@ -30,16 +31,18 @@ final class SearchUsersViewController: UIViewController {
     }()
 
     deinit {
-        userStore.removeListener(reloadSubscription)
+        searchStore.removeListener(reloadSubscription)
     }
 
-    init(userStore: GitHubUserStore = .shared,
+    init(searchStore: SearchRepositoryStore = .shared,
+         selectedStore: SelectedRepositoryStore = .shared,
          actionCreator: ActionCreator = .init()) {
-        self.userStore = userStore
+        self.searchStore = searchStore
+        self.selectedStore = selectedStore
         self.actionCreator = actionCreator
-        self.dataSource = SearchUsersDataSource(userStore: userStore,
-                                                actionCreator: actionCreator)
-        super.init(nibName: "SearchUsersViewController", bundle: nil)
+        self.dataSource = RepositorySearchDataSource(searchStore: searchStore,
+                                                     actionCreator: actionCreator)
+        super.init(nibName: "RepositorySearchViewController", bundle: nil)
     }
 
     required init?(coder aDecoder: NSCoder) {
@@ -49,7 +52,7 @@ final class SearchUsersViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        title = "Search Users"
+        title = "Search Repositories"
 
         dataSource.configure(tableView)
         searchBar.delegate = self
@@ -65,19 +68,25 @@ final class SearchUsersViewController: UIViewController {
         subscribeStore()
     }
 
+    override func viewDidDisappear(_ animated: Bool) {
+        super.viewDidDisappear(animated)
+
+        unsubscribeStore()
+    }
+
     private func unsubscribeStore() {
-        if let subscription = showUserSubscription {
-            userStore.removeListener(subscription)
-            showUserSubscription = nil
+        if let subscription = showRepositoryDetailSubscription {
+            selectedStore.removeListener(subscription)
+            showRepositoryDetailSubscription = nil
         }
     }
 
     private func subscribeStore() {
-        guard showUserSubscription == nil else {
+        guard showRepositoryDetailSubscription == nil else {
             return
         }
 
-        showUserSubscription = userStore.addListener { [weak self] in
+        showRepositoryDetailSubscription = selectedStore.addListener { [weak self] in
             DispatchQueue.main.async {
                 self?.showUserRepositories()
             }
@@ -85,18 +94,17 @@ final class SearchUsersViewController: UIViewController {
     }
 
     private func showUserRepositories() {
-        if userStore.selectedUser == nil {
+        if selectedStore.repository == nil {
             return
         }
-        unsubscribeStore()
 
-        let vc = UserRepositoriesViewController()
+        let vc = RepositoryDetailViewController()
         navigationController?.pushViewController(vc, animated: true)
     }
 
     private func refrectEditing() {
         UIView.animate(withDuration: 0.3) {
-            if self.userStore.isSeachUsersFieldEditing {
+            if self.searchStore.isSearchFieldEditing {
                 self.view.backgroundColor = .black
                 self.tableView.isUserInteractionEnabled = false
                 self.tableView.alpha = 0.5
@@ -112,21 +120,21 @@ final class SearchUsersViewController: UIViewController {
     }
 }
 
-extension SearchUsersViewController: UISearchBarDelegate {
+extension RepositorySearchViewController: UISearchBarDelegate {
     func searchBarShouldBeginEditing(_ searchBar: UISearchBar) -> Bool {
-        actionCreator.setIsSearchUsersFieldEditing(true)
+        actionCreator.setIsSearchFieldEditing(true)
         return true
     }
 
     func searchBarCancelButtonClicked(_ searchBar: UISearchBar) {
-        actionCreator.setIsSearchUsersFieldEditing(false)
+        actionCreator.setIsSearchFieldEditing(false)
     }
 
     func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
         if let text = searchBar.text, !text.isEmpty {
-            actionCreator.clearUsers()
-            actionCreator.searchUsers(query: text)
-            actionCreator.setIsSearchUsersFieldEditing(false)
+            actionCreator.clearRepositories()
+            actionCreator.searchRepositories(query: text)
+            actionCreator.setIsSearchFieldEditing(false)
         }
     }
 }

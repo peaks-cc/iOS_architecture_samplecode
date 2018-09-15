@@ -9,8 +9,7 @@
 import GitHub
 
 protocol GitHubApiRequestable: class {
-    func searchUsers(query: String, page: Int, completion: @escaping (GitHub.Result<([GitHub.User], GitHub.Pagination)>) -> ())
-    func repositories(username: String, page: Int, completion: @escaping (GitHub.Result<([GitHub.Repository], GitHub.Pagination)>) -> ())
+    func searchRepositories(query: String, page: Int, completion: @escaping (GitHub.Result<([GitHub.Repository], GitHub.Pagination)>) -> ())
 }
 
 final class GitHubApiSession: GitHubApiRequestable {
@@ -18,8 +17,8 @@ final class GitHubApiSession: GitHubApiRequestable {
 
     private let session = GitHub.Session()
 
-    func searchUsers(query: String, page: Int, completion: @escaping (GitHub.Result<([GitHub.User], GitHub.Pagination)>) -> ()) {
-        let request = SearchUsersRequest(query: query, sort: nil, order: nil, page: page, perPage: nil)
+    func searchRepositories(query: String, page: Int, completion: @escaping (GitHub.Result<([GitHub.Repository], GitHub.Pagination)>) -> ()) {
+        let request = SearchRepositoriesRequest(query: query, sort: .stars, order: .desc, page: page, perPage: nil)
         session.send(request) { result in
             switch result {
             case let .success(response, pagination):
@@ -28,10 +27,5 @@ final class GitHubApiSession: GitHubApiRequestable {
                 completion(.failure(error))
             }
         }
-    }
-
-    func repositories(username: String, page: Int, completion: @escaping (GitHub.Result<([GitHub.Repository], GitHub.Pagination)>) -> ()) {
-        let request = UserReposRequest(username: username, type: nil, sort: nil, direction: nil, page: page, perPage: nil)
-        session.send(request, completion: completion)
     }
 }
