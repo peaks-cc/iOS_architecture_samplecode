@@ -11,22 +11,30 @@
 extension Flux {
     static func mock(apiSession: MockGitHubApiSession = .init(),
                      localCache: MockLocalCache = .init()) -> Flux {
-        let repositoryDispatcher = GitHubRepositoryDispatcher()
-        let repositoryActionCreator = GitHubRepositoryActionCreator(dispatcher: repositoryDispatcher,
-                                                                    apiSession: apiSession,
-                                                                    localCache: localCache)
-        let repositoryStore = GitHubRepositoryStore(dispatcher: repositoryDispatcher)
+        let searchRepositoryDispatcher = SearchRepositoryDispatcher()
+        let searchRepositoryActionCreator = SearchRepositoryActionCreator(dispatcher: searchRepositoryDispatcher,
+                                                                          apiSession: apiSession)
+        let searchRepositoryStore = SearchRepositoryStore(dispatcher: searchRepositoryDispatcher)
 
-        let userDispatcher = GitHubUserDispatcher()
-        let userActionCreator = GitHubUserActionCreator(dispatcher: userDispatcher,
-                                                        apiSession: apiSession)
-        let userStore = GitHubUserStore(dispatcher: userDispatcher)
+        let selectedRepositoryDispatcher = SelectedRepositoryDispatcher()
+        let selectedRepositoryActionCreator = SelectedRepositoryActionCreator(dispatcher: selectedRepositoryDispatcher)
+        let selectedRepositoryStore = SelectedRepositoryStore(dispatcher: selectedRepositoryDispatcher)
 
-        return Flux(repositoryDispatcher: repositoryDispatcher,
-                    repositoryActionCreator: repositoryActionCreator,
-                    repositoryStore: repositoryStore,
-                    userDispatcher: userDispatcher,
-                    userActionCreator: userActionCreator,
-                    userStore: userStore)
+        let favoriteRepositoryDispatcher = FavoriteRepositoryDispatcher()
+        let favoriteRepositoryActionCreator = FavoriteRepositoryActionCreator(dispatcher: favoriteRepositoryDispatcher,
+                                                                              localCache: localCache)
+        let favoriteRepositoryStore = FavoriteRepositoryStore(dispatcher: favoriteRepositoryDispatcher)
+
+        return Flux(searchRepositoryDispatcher: searchRepositoryDispatcher,
+                    searchRepositoryActionCreator: searchRepositoryActionCreator,
+                    searchRepositoryStore: searchRepositoryStore,
+
+                    selectedRepositoryDispatcher: selectedRepositoryDispatcher,
+                    selectedRepositoryActionCreator: selectedRepositoryActionCreator,
+                    selectedRepositoryStore: selectedRepositoryStore,
+
+                    favoriteRepositoryDispatcher: favoriteRepositoryDispatcher,
+                    favoriteRepositoryActionCreator: favoriteRepositoryActionCreator,
+                    favoriteRepositoryStore: favoriteRepositoryStore)
     }
 }

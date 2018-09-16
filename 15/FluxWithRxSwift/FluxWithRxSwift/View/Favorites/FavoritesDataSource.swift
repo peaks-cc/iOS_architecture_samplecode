@@ -10,18 +10,20 @@ import UIKit
 
 final class FavoritesDataSource: NSObject {
 
-    private let flux: Flux
+    private let favoriteStore: FavoriteRepositoryStore
+    private let selectedActionCreator: SelectedRepositoryActionCreator
 
     private let cellIdentifier = "Cell"
 
     init(flux: Flux) {
-        self.flux = flux
-
+        self.favoriteStore = flux.favoriteRepositoryStore
+        self.selectedActionCreator = flux.selectedRepositoryActionCreator
         super.init()
     }
 
     func configure(_ tableView: UITableView) {
-        tableView.register(UITableViewCell.self, forCellReuseIdentifier: cellIdentifier)
+        tableView.register(GitHubRepositoryCell.nib,
+                           forCellReuseIdentifier: GitHubRepositoryCell.identifier)
         tableView.dataSource = self
         tableView.delegate = self
     }
@@ -29,23 +31,24 @@ final class FavoritesDataSource: NSObject {
 
 extension FavoritesDataSource: UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return flux.repositoryStore.favorites.count
+        return favoriteStore.repositories.count
     }
 
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: cellIdentifier, for: indexPath)
+        let cell = tableView.dequeueReusableCell(withIdentifier: GitHubRepositoryCell.identifier, for: indexPath)
 
-        let repository = flux.repositoryStore.favorites[indexPath.row]
-        cell.textLabel?.text = repository.fullName
-        cell.detailTextLabel?.text = "⭐️\(repository.stargazersCount) 🍴\(repository.forksCount)"
-
+        if let repositoryCell = cell as? GitHubRepositoryCell {
+            let repository = favoriteStore.repositories[indexPath.row]
+            repositoryCell.configure(with: repository)
+        }
         return cell
     }
 }
 
 extension FavoritesDataSource: UITableViewDelegate {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        let repository = flux.repositoryStore.favorites[indexPath.row]
-        flux.repositoryActionCreator.setSelectedRepository(repository)
+        tableView.deselectRow(at: indexPath, animated: false)
+        let repository = favoriteStore.repositories[indexPath.row]
+        selectedActionCreator.setSelectedRepository(repository)
     }
 }

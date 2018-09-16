@@ -15,13 +15,15 @@ final class FavoritesViewController: UIViewController {
 
     @IBOutlet private weak var tableView: UITableView!
 
-    private let flux: Flux
+    private let favoriteStore: FavoriteRepositoryStore
+    private let selectedStore: SelectedRepositoryStore
 
     private let dataSource: FavoritesDataSource
     private let disposeBag = DisposeBag()
 
     init(flux: Flux = .shared) {
-        self.flux = flux
+        self.favoriteStore = flux.favoriteRepositoryStore
+        self.selectedStore = flux.selectedRepositoryStore
         self.dataSource = FavoritesDataSource(flux: flux)
 
         super.init(nibName: "FavoritesViewController", bundle: nil)
@@ -38,9 +40,7 @@ final class FavoritesViewController: UIViewController {
 
         dataSource.configure(tableView)
 
-        let store = flux.repositoryStore
-
-        store.favoritesObservable
+        favoriteStore.repositoriesObservable
             .bind(to: Binder(tableView) { tableView, _ in
                 tableView.reloadData()
             })
@@ -48,9 +48,9 @@ final class FavoritesViewController: UIViewController {
 
         Observable.merge(self.extension.viewDidAppear.map { _ in true },
                          self.extension.viewDidDisappear.map { _ in false })
-            .flatMapLatest { canSubscribe -> Observable<GitHub.Repository?> in
+            .flatMapLatest { [selectedStore] canSubscribe -> Observable<GitHub.Repository?> in
                 if canSubscribe {
-                    return store.selectedRepositoryObservable.skip(1)
+                    return selectedStore.repositoryObservable.skip(1)
                 } else {
                     return .empty()
                 }

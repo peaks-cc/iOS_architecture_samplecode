@@ -16,28 +16,30 @@ final class RepositoryDetailViewModel {
     let favoriteButtonTitile: Observable<String>
     let repository: Observable<GitHub.Repository>
 
-    private let actionCreator: GitHubRepositoryActionCreator
+    private let selectedActionCreator: SelectedRepositoryActionCreator
 
     private let disposeBag = DisposeBag()
 
     deinit {
-        actionCreator.setSelectedRepository(nil)
+        selectedActionCreator.setSelectedRepository(nil)
     }
 
     init(estimatedProgress: Observable<Double?>,
          favoriteButtonTap: Observable<Void>,
          flux: Flux) {
-        let store = flux.repositoryStore
-        let actionCreator = flux.repositoryActionCreator
+        let selectedStore = flux.selectedRepositoryStore
+        let selectedActionCreator = flux.selectedRepositoryActionCreator
+        let favoriteStore = flux.favoriteRepositoryStore
+        let favoriteActionCreator = flux.favoriteRepositoryActionCreator
 
-        self.actionCreator = actionCreator
+        self.selectedActionCreator = selectedActionCreator
 
         self.estimatedProgress = estimatedProgress
             .flatMap { estimatedProgress -> Observable<Double> in
                 estimatedProgress.map(Observable.just) ?? .empty()
             }
 
-        let repository = store.selectedRepository.asObservable()
+        let repository = selectedStore.repository.asObservable()
             .flatMap { repository -> Observable<GitHub.Repository> in
                 repository.map(Observable.just) ?? .empty()
             }
@@ -45,7 +47,7 @@ final class RepositoryDetailViewModel {
 
         self.repository = repository
 
-        let isFavorite = store.favorites.asObservable()
+        let isFavorite = favoriteStore.repositories.asObservable()
             .withLatestFrom(repository) { ($0, $1) }
             .map { respositories, repository -> Bool in
                 respositories.contains { $0.id == repository.id }
@@ -61,9 +63,9 @@ final class RepositoryDetailViewModel {
             .withLatestFrom(repository) { ($0, $1) }
             .subscribe(onNext: { isFavorite, repository in
                 if isFavorite {
-                    actionCreator.removeFavoriteRepository(repository)
+                    favoriteActionCreator.removeFavoriteRepository(repository)
                 } else {
-                    actionCreator.addFavoriteRepository(repository)
+                    favoriteActionCreator.addFavoriteRepository(repository)
                 }
             })
             .disposed(by: disposeBag)

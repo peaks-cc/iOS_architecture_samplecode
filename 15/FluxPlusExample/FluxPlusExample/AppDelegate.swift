@@ -13,10 +13,10 @@ final class AppDelegate: UIResponder, UIApplicationDelegate {
 
     var window: UIWindow?
 
-    private lazy var logic = AppDelegateLogic(window: window)
+    private lazy var handler = _AppDelegate(window: window)
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
-        return logic.application(application, didFinishLaunchingWithOptions: launchOptions)
+        return handler.application(application, didFinishLaunchingWithOptions: launchOptions)
     }
 }
 
@@ -24,7 +24,7 @@ protocol ApplicationProtocol {}
 
 extension UIApplication: ApplicationProtocol {}
 
-final class AppDelegateLogic {
+final class _AppDelegate {
 
     private let window: UIWindow?
     private let flux: Flux
@@ -37,7 +37,7 @@ final class AppDelegateLogic {
     func application(_ application: ApplicationProtocol, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
         if let tabBarController = window?.rootViewController as? UITabBarController {
             let values: [(UINavigationController, UITabBarSystemItem)] = [
-                (UINavigationController(rootViewController: SearchUsersViewController()), .search),
+                (UINavigationController(rootViewController: RepositorySearchViewController()), .search),
                 (UINavigationController(rootViewController: FavoritesViewController()), .favorites)
             ]
             values.enumerated().forEach {
@@ -45,7 +45,7 @@ final class AppDelegateLogic {
             }
             tabBarController.setViewControllers(values.map { $0.0 }, animated: false)
 
-            flux.repositoryActionCreator.loadFavoriteRepositories()
+            flux.favoriteRepositoryActionCreator.loadFavoriteRepositories()
         }
 
         return true

@@ -11,7 +11,6 @@ import UIKit
 final class FavoritesDataSource: NSObject {
 
     private let viewModel: FavoritesViewModel
-    private let cellIdentifier = "Cell"
 
     init(viewModel: FavoritesViewModel) {
         self.viewModel = viewModel
@@ -20,7 +19,8 @@ final class FavoritesDataSource: NSObject {
     }
 
     func configure(_ tableView: UITableView) {
-        tableView.register(UITableViewCell.self, forCellReuseIdentifier: cellIdentifier)
+        tableView.register(GitHubRepositoryCell.nib,
+                           forCellReuseIdentifier: GitHubRepositoryCell.identifier)
         tableView.dataSource = self
         tableView.delegate = self
     }
@@ -32,11 +32,12 @@ extension FavoritesDataSource: UITableViewDataSource {
     }
 
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: cellIdentifier, for: indexPath)
+        let cell = tableView.dequeueReusableCell(withIdentifier: GitHubRepositoryCell.identifier, for: indexPath)
 
-        let repository = viewModel.favorites.value[indexPath.row]
-        cell.textLabel?.text = repository.fullName
-        cell.detailTextLabel?.text = "⭐️\(repository.stargazersCount) 🍴\(repository.forksCount)"
+        if let repositoryCell = cell as? GitHubRepositoryCell {
+            let repository = viewModel.favorites.value[indexPath.row]
+            repositoryCell.configure(with: repository)
+        }
 
         return cell
     }
@@ -44,6 +45,7 @@ extension FavoritesDataSource: UITableViewDataSource {
 
 extension FavoritesDataSource: UITableViewDelegate {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        tableView.deselectRow(at: indexPath, animated: false)
         viewModel.selectedIndexPath(indexPath)
     }
 }

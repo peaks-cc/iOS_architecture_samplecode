@@ -13,3 +13,6 @@
 [submodule "15/FluxPlusExample/External/RxProperty"]
 	path = 15/FluxPlusExample/External/RxProperty
 	url = https://github.com/inamiy/RxProperty.git
+[submodule "15/FluxWithRxSwift/External/RxProperty"]
+        path = 15/FluxWithRxSwift/External/RxProperty
+        url = https://github.com/inamiy/RxProperty.git

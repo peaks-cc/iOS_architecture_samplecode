@@ -9,25 +9,37 @@
 final class Flux {
     static let shared = Flux()
 
-    let repositoryDispatcher: GitHubRepositoryDispatcher
-    let repositoryActionCreator: GitHubRepositoryActionCreator
-    let repositoryStore: GitHubRepositoryStore
+    let searchRepositoryDispatcher: SearchRepositoryDispatcher
+    let searchRepositoryActionCreator: SearchRepositoryActionCreator
+    let searchRepositoryStore: SearchRepositoryStore
 
-    let userDispatcher: GitHubUserDispatcher
-    let userActionCreator: GitHubUserActionCreator
-    let userStore: GitHubUserStore
+    let selectedRepositoryDispatcher: SelectedRepositoryDispatcher
+    let selectedRepositoryActionCreator: SelectedRepositoryActionCreator
+    let selectedRepositoryStore: SelectedRepositoryStore
 
-    init(repositoryDispatcher: GitHubRepositoryDispatcher = .shared,
-         repositoryActionCreator: GitHubRepositoryActionCreator = .shared,
-         repositoryStore: GitHubRepositoryStore = .shared,
-         userDispatcher: GitHubUserDispatcher = .shared,
-         userActionCreator: GitHubUserActionCreator = .shared,
-         userStore: GitHubUserStore = .shared) {
-        self.repositoryDispatcher = repositoryDispatcher
-        self.repositoryActionCreator = repositoryActionCreator
-        self.repositoryStore = repositoryStore
-        self.userDispatcher = userDispatcher
-        self.userActionCreator = userActionCreator
-        self.userStore = userStore
+    let favoriteRepositoryDispatcher: FavoriteRepositoryDispatcher
+    let favoriteRepositoryActionCreator: FavoriteRepositoryActionCreator
+    let favoriteRepositoryStore: FavoriteRepositoryStore
+
+    init(searchRepositoryDispatcher: SearchRepositoryDispatcher = .shared,
+         searchRepositoryActionCreator: SearchRepositoryActionCreator = .shared,
+         searchRepositoryStore: SearchRepositoryStore = .shared,
+         selectedRepositoryDispatcher: SelectedRepositoryDispatcher = .shared,
+         selectedRepositoryActionCreator: SelectedRepositoryActionCreator = .shared,
+         selectedRepositoryStore: SelectedRepositoryStore = .shared,
+         favoriteRepositoryDispatcher: FavoriteRepositoryDispatcher = .shared,
+         favoriteRepositoryActionCreator: FavoriteRepositoryActionCreator = .shared,
+         favoriteRepositoryStore: FavoriteRepositoryStore = .shared) {
+        self.searchRepositoryDispatcher = searchRepositoryDispatcher
+        self.searchRepositoryActionCreator = searchRepositoryActionCreator
+        self.searchRepositoryStore = searchRepositoryStore
+
+        self.selectedRepositoryDispatcher = selectedRepositoryDispatcher
+        self.selectedRepositoryActionCreator = selectedRepositoryActionCreator
+        self.selectedRepositoryStore = selectedRepositoryStore
+
+        self.favoriteRepositoryDispatcher = favoriteRepositoryDispatcher
+        self.favoriteRepositoryActionCreator = favoriteRepositoryActionCreator
+        self.favoriteRepositoryStore = favoriteRepositoryStore
     }
 }

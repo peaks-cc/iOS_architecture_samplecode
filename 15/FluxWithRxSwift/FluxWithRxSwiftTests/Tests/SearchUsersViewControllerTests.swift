@@ -2,7 +2,7 @@
 //  SearchUsersViewControllerTests.swift
 //  FluxWithRxSwiftTests
 //
-//  Created by 鈴木大貴 on 2018/08/19.
+//  Created by marty-suzuki on 2018/09/16.
 //  Copyright © 2018年 marty-suzuki. All rights reserved.
 //
 
@@ -16,31 +16,16 @@ final class SearchUsersViewControllerTests: XCTestCase {
         let apiSession = MockGitHubApiSession()
         let localCache = MockLocalCache()
 
-        let dispatcher: GitHubUserDispatcher
-        let actionCreator: GitHubUserActionCreator
-        let store: GitHubUserStore
+        let dispatcher: SearchRepositoryDispatcher
 
-        let viewController: SearchUsersViewController
+        let viewController: RepositorySearchViewController
 
         init() {
             let flux = Flux.mock(apiSession: apiSession, localCache: localCache)
-            self.dispatcher = flux.userDispatcher
-            self.actionCreator = flux.userActionCreator
-            self.store = flux.userStore
-            self.viewController = SearchUsersViewController(flux: flux)
+            self.dispatcher = flux.searchRepositoryDispatcher
+            self.viewController = RepositorySearchViewController(flux: flux)
             viewController.loadViewIfNeeded()
         }
-    }
-
-    private func makeUser() -> GitHub.User {
-        return GitHub.User(login: "username",
-                           id: 1,
-                           nodeID: "",
-                           avatarURL: URL(string: "https://github.com/")!,
-                           gravatarID: "",
-                           url: URL(string: "https://github.com/")!,
-                           receivedEventsURL: URL(string: "https://github.com/")!,
-                           type: "")
     }
 
     private var dependency: Dependency!
@@ -54,8 +39,8 @@ final class SearchUsersViewControllerTests: XCTestCase {
     func testSearchButtonClicked() {
         let query = "username"
 
-        let expect = expectation(description: "waiting called apiSession.searchUsers")
-        let disposable = dependency.apiSession.searchUsersParams
+        let expect = expectation(description: "waiting called apiSession.searchRepositories")
+        let disposable = dependency.apiSession.searchRepositoriesParams
             .subscribe(onNext: { _query, _page in
                 XCTAssertEqual(_query, query)
                 XCTAssertEqual(_page, 1)
@@ -74,12 +59,12 @@ final class SearchUsersViewControllerTests: XCTestCase {
         let tableView = dependency.viewController.tableView!
         XCTAssertEqual(tableView.numberOfRows(inSection: 0), 0)
 
-        let users = [makeUser(), makeUser()]
-        dependency.dispatcher.addUsers.accept(users)
+        let repositories: [GitHub.Repository] = [.mock(), .mock()]
+        dependency.dispatcher.addRepositories.accept(repositories)
 
         let expect = expectation(description: "waiting view reflection")
         DispatchQueue.main.asyncAfter(deadline: .now() + 1) {
-            XCTAssertEqual(tableView.numberOfRows(inSection: 0), users.count)
+            XCTAssertEqual(tableView.numberOfRows(inSection: 0), repositories.count)
             expect.fulfill()
         }
 

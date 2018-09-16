@@ -23,10 +23,11 @@ final class FavoritesViewModel {
     init(viewDidAppear: Observable<Void>,
          viewDidDisappear: Observable<Void>,
          flux: Flux) {
-        let store = flux.repositoryStore
-        let actionCreator = flux.repositoryActionCreator
+        let selectedStore = flux.selectedRepositoryStore
+        let selectedActionCreator = flux.selectedRepositoryActionCreator
+        let favoriteStore = flux.favoriteRepositoryStore
 
-        self.favorites = store.favorites
+        self.favorites = favoriteStore.repositories
 
         self.reloadData = favorites.asObservable()
             .map { _ in }
@@ -35,7 +36,7 @@ final class FavoritesViewModel {
                                                      viewDidDisappear.map { _ in false })
             .flatMapLatest { canSubscribe -> Observable<GitHub.Repository?> in
                 if canSubscribe {
-                    return store.selectedRepository.changed
+                    return selectedStore.repository.changed
                 } else {
                     return .empty()
                 }
@@ -47,7 +48,7 @@ final class FavoritesViewModel {
         _selectedIndexPath
             .withLatestFrom(favorites.asObservable()) { $1[$0.row] }
             .subscribe(onNext: { repository in
-                actionCreator.setSelectedRepository(repository)
+                selectedActionCreator.setSelectedRepository(repository)
             })
             .disposed(by: disposeBag)
     }

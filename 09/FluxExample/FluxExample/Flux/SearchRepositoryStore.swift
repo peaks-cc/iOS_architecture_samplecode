@@ -18,7 +18,6 @@ final class SearchRepositoryStore: Store {
     private(set) var error: Error?
 
     private(set) var repositories: [GitHub.Repository] = []
-    private(set) var selectedRepository: GitHub.Repository?
 
     override func onDispatch(_ action: Action) {
         switch action {
@@ -43,10 +42,8 @@ final class SearchRepositoryStore: Store {
         case let .searchQuery(query):
             self.query = query
 
-        case let .selectedRepository(repository):
-            self.selectedRepository = repository
-
-        case .loadFavoriteRepositories:
+        case .selectedRepository,
+             .loadFavoriteRepositories:
             return
 
         }

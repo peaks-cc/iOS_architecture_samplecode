@@ -37,7 +37,7 @@ final class AppDelegateLogic {
     func application(_ application: ApplicationProtocol, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
         if let tabBarController = window?.rootViewController as? UITabBarController {
             let values: [(UINavigationController, UITabBarSystemItem)] = [
-                (UINavigationController(rootViewController: SearchUsersViewController()), .search),
+                (UINavigationController(rootViewController: RepositorySearchViewController()), .search),
                 (UINavigationController(rootViewController: FavoritesViewController()), .favorites)
             ]
             values.enumerated().forEach {
@@ -45,7 +45,7 @@ final class AppDelegateLogic {
             }
             tabBarController.setViewControllers(values.map { $0.0 }, animated: false)
 
-            flux.repositoryActionCreator.loadFavoriteRepositories()
+            flux.favoriteRepositoryActionCreator.loadFavoriteRepositories()
         }
 
         return true

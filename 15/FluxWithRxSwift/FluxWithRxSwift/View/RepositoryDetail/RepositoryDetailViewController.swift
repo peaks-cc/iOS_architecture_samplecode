@@ -38,16 +38,22 @@ final class RepositoryDetailViewController: UIViewController {
 
     private lazy var favoriteButton = UIBarButtonItem(title: nil, style: .plain, target: nil, action: nil)
 
-    private let flux: Flux
+    private let favoriteStore: FavoriteRepositoryStore
+    private let favoriteActionCreator: FavoriteRepositoryActionCreator
+    private let selectedStore: SelectedRepositoryStore
+    private let selectedActionCreator: SelectedRepositoryActionCreator
 
     private let disposeBag = DisposeBag()
 
     deinit {
-        flux.repositoryActionCreator.setSelectedRepository(nil)
+       selectedActionCreator.setSelectedRepository(nil)
     }
 
     init(flux: Flux = .shared) {
-        self.flux = flux
+        self.favoriteStore = flux.favoriteRepositoryStore
+        self.favoriteActionCreator = flux.favoriteRepositoryActionCreator
+        self.selectedStore = flux.selectedRepositoryStore
+        self.selectedActionCreator = flux.selectedRepositoryActionCreator
 
         super.init(nibName: "RepositoryDetailViewController", bundle: nil)
 
@@ -63,9 +69,6 @@ final class RepositoryDetailViewController: UIViewController {
 
         navigationItem.rightBarButtonItem = favoriteButton
 
-        let store = flux.repositoryStore
-        let actionCreator = flux.repositoryActionCreator
-
         webview.rx.observeWeakly(Double.self, #keyPath(WKWebView.estimatedProgress))
             .flatMap { estimatedProgress -> Observable<Double> in
                 estimatedProgress.map(Observable.just) ?? .empty()
@@ -79,13 +82,13 @@ final class RepositoryDetailViewController: UIViewController {
             })
             .disposed(by: disposeBag)
 
-        let repository = store.selectedRepositoryObservable
+        let repository = selectedStore.repositoryObservable
             .flatMap { repository -> Observable<GitHub.Repository> in
                 repository.map(Observable.just) ?? .empty()
             }
             .share(replay: 1, scope: .whileConnected)
 
-        let isFavorite = store.favoritesObservable
+        let isFavorite = favoriteStore.repositoriesObservable
             .withLatestFrom(repository) { ($0, $1) }
             .map { respositories, repository -> Bool in
                 respositories.contains { $0.id == repository.id }
@@ -101,11 +104,11 @@ final class RepositoryDetailViewController: UIViewController {
         favoriteButton.rx.tap.asObservable()
             .withLatestFrom(isFavorite)
             .withLatestFrom(repository) { ($0, $1) }
-            .subscribe(onNext: { isFavorite, repository in
+            .subscribe(onNext: { [favoriteActionCreator] isFavorite, repository in
                 if isFavorite {
-                    actionCreator.removeFavoriteRepository(repository)
+                    favoriteActionCreator.removeFavoriteRepository(repository)
                 } else {
-                    actionCreator.addFavoriteRepository(repository)
+                    favoriteActionCreator.addFavoriteRepository(repository)
                 }
             })
             .disposed(by: disposeBag)
