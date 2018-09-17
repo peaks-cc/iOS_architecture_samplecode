@@ -1,25 +1,24 @@
 //
-//  GitHubRepositoryCell.swift
-//  GitHubClientTestSample
+//  RepositoryCell.swift
+//  GitHub
 //
 //  Created by marty-suzuki on 2018/09/08.
 //  Copyright © 2018年 marty-suzuki. All rights reserved.
 //
 
 import UIKit
-import GitHub
 
-final class GitHubRepositoryCell: UITableViewCell {
+public final class RepositoryCell: UITableViewCell {
 
-    class var identifier: String {
+    public class var identifier: String {
         return String(describing: self)
     }
 
-    class var nib: UINib {
-        return UINib(nibName: identifier, bundle: nil)
+    public class var nib: UINib {
+        return UINib(nibName: identifier, bundle: Bundle(for: self))
     }
 
-    @IBOutlet private weak var containerView: UIView! {
+    @IBOutlet public private(set) weak var containerView: UIView! {
         didSet {
             containerView.layer.cornerRadius = 8
             containerView.layer.masksToBounds = true
@@ -28,15 +27,15 @@ final class GitHubRepositoryCell: UITableViewCell {
         }
     }
 
-    @IBOutlet private weak var repositoryNameLabel: UILabel!
-    @IBOutlet private weak var descriptionLabel: UILabel!
+    @IBOutlet public private(set) weak var repositoryNameLabel: UILabel!
+    @IBOutlet public private(set) weak var descriptionLabel: UILabel!
 
-    @IBOutlet private weak var languageContainerView: UIView!
-    @IBOutlet private weak var languageLabel: UILabel!
+    @IBOutlet public private(set) weak var languageContainerView: UIView!
+    @IBOutlet public private(set) weak var languageLabel: UILabel!
 
-    @IBOutlet private weak var starLabel: UILabel!
+    @IBOutlet public private(set) weak var starLabel: UILabel!
 
-    func configure(with repository: GitHub.Repository) {
+    public func configure(with repository: GitHub.Repository) {
         repositoryNameLabel.text = repository.fullName
 
         if let description = repository.description {

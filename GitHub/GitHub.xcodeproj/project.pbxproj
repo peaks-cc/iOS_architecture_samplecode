@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		371D328B214F89540076E071 /* RepositoryCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 371D3289214F89540076E071 /* RepositoryCell.swift */; };
+		371D328C214F89540076E071 /* RepositoryCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 371D328A214F89540076E071 /* RepositoryCell.xib */; };
 		37F208F72113685A00DC452F /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37F208F62113685A00DC452F /* LoginViewController.swift */; };
 		37F208F921136FDC00DC452F /* LoginOauthAccessTokenRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37F208F821136FDC00DC452F /* LoginOauthAccessTokenRequest.swift */; };
 		37F208FB211371A500DC452F /* AccessToken.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37F208FA211371A500DC452F /* AccessToken.swift */; };
@@ -24,6 +26,8 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		371D3289214F89540076E071 /* RepositoryCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RepositoryCell.swift; sourceTree = "<group>"; };
+		371D328A214F89540076E071 /* RepositoryCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = RepositoryCell.xib; sourceTree = "<group>"; };
 		37F208F62113685A00DC452F /* LoginViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
 		37F208F821136FDC00DC452F /* LoginOauthAccessTokenRequest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginOauthAccessTokenRequest.swift; sourceTree = "<group>"; };
 		37F208FA211371A500DC452F /* AccessToken.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccessToken.swift; sourceTree = "<group>"; };
@@ -56,6 +60,8 @@
 		37F208F52113684900DC452F /* View */ = {
 			isa = PBXGroup;
 			children = (
+				371D3289214F89540076E071 /* RepositoryCell.swift */,
+				371D328A214F89540076E071 /* RepositoryCell.xib */,
 				37F208F62113685A00DC452F /* LoginViewController.swift */,
 			);
 			path = View;
@@ -200,6 +206,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				371D328C214F89540076E071 /* RepositoryCell.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -214,6 +221,7 @@
 				37F208FB211371A500DC452F /* AccessToken.swift in Sources */,
 				EDE18D7B2112F8F6000D5EAE /* Request.swift in Sources */,
 				EDE18D812112FA79000D5EAE /* UserReposRequest.swift in Sources */,
+				371D328B214F89540076E071 /* RepositoryCell.swift in Sources */,
 				EDE18D712112F838000D5EAE /* Repository.swift in Sources */,
 				EDE18D772112F880000D5EAE /* Pagination.swift in Sources */,
 				EDE18D7F2112FA37000D5EAE /* SearchUsersRequest.swift in Sources */,

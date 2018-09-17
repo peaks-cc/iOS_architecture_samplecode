@@ -30,8 +30,6 @@
 		37E3DBAF214D73C7003B923B /* SearchRepositoryStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37E3DBAE214D73C7003B923B /* SearchRepositoryStore.swift */; };
 		37E3DBB1214D77FF003B923B /* FavoriteRepositoryStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37E3DBB0214D77FF003B923B /* FavoriteRepositoryStore.swift */; };
 		37E3DBB3214D78A2003B923B /* SelectedRepositoryStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37E3DBB2214D78A2003B923B /* SelectedRepositoryStore.swift */; };
-		37E3DBB7214D7D03003B923B /* GitHubRepositoryCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 37E3DBB5214D7D03003B923B /* GitHubRepositoryCell.xib */; };
-		37E3DBB8214D7D03003B923B /* GitHubRepositoryCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37E3DBB6214D7D03003B923B /* GitHubRepositoryCell.swift */; };
 		37F611922113661C00729937 /* DispatchQueue.debounce.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37F611912113661C00729937 /* DispatchQueue.debounce.swift */; };
 		EDC053D321134124002770F5 /* GitHub.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = EDC053D12113411D002770F5 /* GitHub.framework */; };
 		EDC053D421134124002770F5 /* GitHub.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = EDC053D12113411D002770F5 /* GitHub.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
@@ -77,8 +75,6 @@
 		37E3DBAE214D73C7003B923B /* SearchRepositoryStore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchRepositoryStore.swift; sourceTree = "<group>"; };
 		37E3DBB0214D77FF003B923B /* FavoriteRepositoryStore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavoriteRepositoryStore.swift; sourceTree = "<group>"; };
 		37E3DBB2214D78A2003B923B /* SelectedRepositoryStore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelectedRepositoryStore.swift; sourceTree = "<group>"; };
-		37E3DBB5214D7D03003B923B /* GitHubRepositoryCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = GitHubRepositoryCell.xib; sourceTree = "<group>"; };
-		37E3DBB6214D7D03003B923B /* GitHubRepositoryCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GitHubRepositoryCell.swift; sourceTree = "<group>"; };
 		37F611912113661C00729937 /* DispatchQueue.debounce.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DispatchQueue.debounce.swift; sourceTree = "<group>"; };
 		EDC053D12113411D002770F5 /* GitHub.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = GitHub.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
@@ -99,7 +95,6 @@
 		3758BADE210F7C7A0052234A /* View */ = {
 			isa = PBXGroup;
 			children = (
-				37E3DBB4214D7CC1003B923B /* Common */,
 				37E3DBA3214D5F21003B923B /* RepositorySearch */,
 				3758BAF2210F90AA0052234A /* RepositoryDetail */,
 				3758BAE4210F7E3E0052234A /* Favorites */,
@@ -210,15 +205,6 @@
 			path = RepositorySearch;
 			sourceTree = "<group>";
 		};
-		37E3DBB4214D7CC1003B923B /* Common */ = {
-			isa = PBXGroup;
-			children = (
-				37E3DBB6214D7D03003B923B /* GitHubRepositoryCell.swift */,
-				37E3DBB5214D7D03003B923B /* GitHubRepositoryCell.xib */,
-			);
-			path = Common;
-			sourceTree = "<group>";
-		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -280,7 +266,6 @@
 			files = (
 				37E3DBA7214D5F74003B923B /* RepositorySearchViewController.xib in Resources */,
 				3758BAF6210F90BD0052234A /* RepositoryDetailViewController.xib in Resources */,
-				37E3DBB7214D7D03003B923B /* GitHubRepositoryCell.xib in Resources */,
 				37C273EB210F572500F89B82 /* LaunchScreen.storyboard in Resources */,
 				37C273E8210F572500F89B82 /* Assets.xcassets in Resources */,
 				37C273E6210F572500F89B82 /* Main.storyboard in Resources */,
@@ -309,7 +294,6 @@
 				3758BAE7210F7E5D0052234A /* FavoritesViewController.swift in Sources */,
 				37C27402210F57AF00F89B82 /* Dispatcher.swift in Sources */,
 				3758BAFB2110C0950052234A /* FavoritesDataSource.swift in Sources */,
-				37E3DBB8214D7D03003B923B /* GitHubRepositoryCell.swift in Sources */,
 				3758BAF5210F90BD0052234A /* RepositoryDetailViewController.swift in Sources */,
 				3758BB002110CB290052234A /* LocalCacheKey.swift in Sources */,
 				37E3DBAF214D73C7003B923B /* SearchRepositoryStore.swift in Sources */,
