@@ -19,7 +19,8 @@ final class FavoritesViewController: UIViewController {
     private lazy var viewModel = FavoritesViewModel(viewDidAppear: self.extension.viewDidAppear,
                                                     viewDidDisappear: self.extension.viewDidDisappear,
                                                     flux: flux)
-    private lazy var dataSource = FavoritesDataSource(viewModel: viewModel)
+    private lazy var dataSource = FavoritesDataSource(favorites: viewModel.favorites,
+                                                      selectedIndexPath: { [weak viewModel] in viewModel?.selectedIndexPath($0) })
 
     private let disposeBag = DisposeBag()
 

@@ -67,7 +67,7 @@ public struct Repository: Codable {
                 url: URL,
                 createdAt: String,
                 updatedAt: String,
-                pushedAt: String,
+                pushedAt: String?,
                 homepage: String?,
                 size: Int,
                 stargazersCount: Int,

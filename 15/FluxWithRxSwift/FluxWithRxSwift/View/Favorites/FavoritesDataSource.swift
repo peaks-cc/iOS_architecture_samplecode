@@ -7,13 +7,12 @@
 //
 
 import UIKit
+import GitHub
 
 final class FavoritesDataSource: NSObject {
 
     private let favoriteStore: FavoriteRepositoryStore
     private let selectedActionCreator: SelectedRepositoryActionCreator
-
-    private let cellIdentifier = "Cell"
 
     init(flux: Flux) {
         self.favoriteStore = flux.favoriteRepositoryStore
@@ -22,8 +21,8 @@ final class FavoritesDataSource: NSObject {
     }
 
     func configure(_ tableView: UITableView) {
-        tableView.register(GitHubRepositoryCell.nib,
-                           forCellReuseIdentifier: GitHubRepositoryCell.identifier)
+        tableView.register(GitHub.RepositoryCell.nib,
+                           forCellReuseIdentifier: GitHub.RepositoryCell.identifier)
         tableView.dataSource = self
         tableView.delegate = self
     }
@@ -35,9 +34,9 @@ extension FavoritesDataSource: UITableViewDataSource {
     }
 
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: GitHubRepositoryCell.identifier, for: indexPath)
+        let cell = tableView.dequeueReusableCell(withIdentifier: GitHub.RepositoryCell.identifier, for: indexPath)
 
-        if let repositoryCell = cell as? GitHubRepositoryCell {
+        if let repositoryCell = cell as? GitHub.RepositoryCell {
             let repository = favoriteStore.repositories[indexPath.row]
             repositoryCell.configure(with: repository)
         }

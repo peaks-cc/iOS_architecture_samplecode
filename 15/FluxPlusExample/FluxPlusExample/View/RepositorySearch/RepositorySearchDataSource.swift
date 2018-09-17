@@ -7,20 +7,27 @@
 //
 
 import UIKit
+import GitHub
 
 final class RepositorySearchDataSource: NSObject {
 
-    private let viewModel: RepositorySearchViewModel
+    private let repositories: Property<[GitHub.Repository]>
+    private let selectedIndexPath: (IndexPath) -> ()
+    private let reachBottom: () -> ()
 
-    init(viewModel: RepositorySearchViewModel) {
-        self.viewModel = viewModel
+    init(repositories: Property<[GitHub.Repository]>,
+         selectedIndexPath: @escaping (IndexPath) -> (),
+         reachBottom: @escaping () -> ()) {
+        self.repositories = repositories
+        self.selectedIndexPath = selectedIndexPath
+        self.reachBottom = reachBottom
 
         super.init()
     }
 
     func configure(_ tableView: UITableView) {
-        tableView.register(GitHubRepositoryCell.nib,
-                           forCellReuseIdentifier: GitHubRepositoryCell.identifier)
+        tableView.register(GitHub.RepositoryCell.nib,
+                           forCellReuseIdentifier: GitHub.RepositoryCell.identifier)
         tableView.dataSource = self
         tableView.delegate = self
     }
@@ -28,14 +35,14 @@ final class RepositorySearchDataSource: NSObject {
 
 extension RepositorySearchDataSource: UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return viewModel.repositories.value.count
+        return repositories.value.count
     }
 
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: GitHubRepositoryCell.identifier, for: indexPath)
+        let cell = tableView.dequeueReusableCell(withIdentifier: GitHub.RepositoryCell.identifier, for: indexPath)
 
-        if let repositoryCell = cell as? GitHubRepositoryCell {
-            let repository = viewModel.repositories.value[indexPath.row]
+        if let repositoryCell = cell as? GitHub.RepositoryCell {
+            let repository = repositories.value[indexPath.row]
             repositoryCell.configure(with: repository)
         }
 
@@ -46,12 +53,12 @@ extension RepositorySearchDataSource: UITableViewDataSource {
 extension RepositorySearchDataSource: UITableViewDelegate {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         tableView.deselectRow(at: indexPath, animated: false)
-        viewModel.selectedIndexPath(indexPath)
+        selectedIndexPath(indexPath)
     }
 
     func scrollViewDidScroll(_ scrollView: UIScrollView) {
         if (scrollView.contentSize.height - scrollView.bounds.size.height) <= scrollView.contentOffset.y {
-            viewModel.reachBottom()
+            reachBottom()
         }
     }
 }

@@ -14,7 +14,8 @@ final class RepositorySearchViewModel {
     let repositories: Property<[GitHub.Repository]>
 
     let reloadData: Observable<Void>
-    let isFieldEditing: Observable<Bool>
+    let editingLayout: Observable<Void>
+    let nonEditingLayout: Observable<Void>
     let showRepositoryDetail: Observable<Void>
 
     private let _selectedIndexPath = PublishRelay<IndexPath>()
@@ -39,7 +40,11 @@ final class RepositorySearchViewModel {
         self.reloadData = repositories.asObservable()
             .map { _ in }
 
-        self.isFieldEditing = searchStore.isSearchFieldEditing.asObservable()
+        self.editingLayout = searchStore.isSearchFieldEditing.asObservable()
+            .flatMap { $0 ? Observable.just(()) : .empty() }
+
+        self.nonEditingLayout = searchStore.isSearchFieldEditing.asObservable()
+            .flatMap { $0 ? .empty() : Observable.just(()) }
 
         self.showRepositoryDetail = Observable.merge(viewDidAppear.map { _ in true },
                                                      viewDidDisappear.map { _ in false })

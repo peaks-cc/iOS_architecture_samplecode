@@ -26,7 +26,9 @@ final class RepositorySearchViewController: UIViewController {
                                                            searchButtonClicked: searchBar.rx.searchButtonClicked.asObservable(),
                                                            flux: flux)
 
-    private lazy var dataSource = RepositorySearchDataSource(viewModel: viewModel)
+    private lazy var dataSource = RepositorySearchDataSource(repositories: viewModel.repositories,
+                                                             selectedIndexPath: { [weak viewModel] in viewModel?.selectedIndexPath($0) },
+                                                             reachBottom: { [weak viewModel] in viewModel?.reachBottom() })
 
     private let disposeBag = DisposeBag()
 
@@ -53,21 +55,25 @@ final class RepositorySearchViewController: UIViewController {
             })
             .disposed(by: disposeBag)
 
-        viewModel.isFieldEditing
-            .bind(to: Binder(self) { me, isFieldEditing in
+        viewModel.editingLayout
+            .bind(to: Binder(self) { me, _ in
                 UIView.animate(withDuration: 0.3) {
-                    if isFieldEditing {
-                        me.view.backgroundColor = .black
-                        me.tableView.isUserInteractionEnabled = false
-                        me.tableView.alpha = 0.5
-                        me.searchBar.setShowsCancelButton(true, animated: true)
-                    } else {
-                        me.searchBar.resignFirstResponder()
-                        me.view.backgroundColor = .white
-                        me.tableView.isUserInteractionEnabled = true
-                        me.tableView.alpha = 1
-                        me.searchBar.setShowsCancelButton(false, animated: true)
-                    }
+                    me.view.backgroundColor = .black
+                    me.tableView.isUserInteractionEnabled = false
+                    me.tableView.alpha = 0.5
+                    me.searchBar.setShowsCancelButton(true, animated: true)
+                }
+            })
+            .disposed(by: disposeBag)
+
+        viewModel.nonEditingLayout
+            .bind(to: Binder(self) { me, _ in
+                UIView.animate(withDuration: 0.3) {
+                    me.searchBar.resignFirstResponder()
+                    me.view.backgroundColor = .white
+                    me.tableView.isUserInteractionEnabled = true
+                    me.tableView.alpha = 1
+                    me.searchBar.setShowsCancelButton(false, animated: true)
                 }
             })
             .disposed(by: disposeBag)

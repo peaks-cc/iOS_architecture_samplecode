@@ -7,20 +7,24 @@
 //
 
 import UIKit
+import GitHub
 
 final class FavoritesDataSource: NSObject {
 
-    private let viewModel: FavoritesViewModel
+    private let favorites: Property<[GitHub.Repository]>
+    private let selectedIndexPath: (IndexPath) -> ()
 
-    init(viewModel: FavoritesViewModel) {
-        self.viewModel = viewModel
+    init(favorites: Property<[GitHub.Repository]>,
+         selectedIndexPath: @escaping (IndexPath) -> ()) {
+        self.favorites = favorites
+        self.selectedIndexPath = selectedIndexPath
 
         super.init()
     }
 
     func configure(_ tableView: UITableView) {
-        tableView.register(GitHubRepositoryCell.nib,
-                           forCellReuseIdentifier: GitHubRepositoryCell.identifier)
+        tableView.register(GitHub.RepositoryCell.nib,
+                           forCellReuseIdentifier: GitHub.RepositoryCell.identifier)
         tableView.dataSource = self
         tableView.delegate = self
     }
@@ -28,14 +32,14 @@ final class FavoritesDataSource: NSObject {
 
 extension FavoritesDataSource: UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return viewModel.favorites.value.count
+        return favorites.value.count
     }
 
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: GitHubRepositoryCell.identifier, for: indexPath)
+        let cell = tableView.dequeueReusableCell(withIdentifier: GitHub.RepositoryCell.identifier, for: indexPath)
 
-        if let repositoryCell = cell as? GitHubRepositoryCell {
-            let repository = viewModel.favorites.value[indexPath.row]
+        if let repositoryCell = cell as? GitHub.RepositoryCell {
+            let repository = favorites.value[indexPath.row]
             repositoryCell.configure(with: repository)
         }
 
@@ -46,6 +50,6 @@ extension FavoritesDataSource: UITableViewDataSource {
 extension FavoritesDataSource: UITableViewDelegate {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         tableView.deselectRow(at: indexPath, animated: false)
-        viewModel.selectedIndexPath(indexPath)
+        selectedIndexPath(indexPath)
     }
 }
