@@ -18,9 +18,7 @@ final class RepositorySearchViewController: UIViewController {
 
     private let flux: Flux
 
-    private lazy var viewModel = RepositorySearchViewModel(viewDidAppear: self.extension.viewDidAppear,
-                                                           viewDidDisappear: self.extension.viewDidDisappear,
-                                                           searchText: searchBar.rx.text.asObservable(),
+    private lazy var viewModel = RepositorySearchViewModel(searchText: searchBar.rx.text.asObservable(),
                                                            cancelButtonClicked: searchBar.rx.cancelButtonClicked.asObservable(),
                                                            textDidBeginEditing: searchBar.rx.textDidBeginEditing.asObservable(),
                                                            searchButtonClicked: searchBar.rx.searchButtonClicked.asObservable(),
@@ -75,13 +73,6 @@ final class RepositorySearchViewController: UIViewController {
                     me.tableView.alpha = 1
                     me.searchBar.setShowsCancelButton(false, animated: true)
                 }
-            })
-            .disposed(by: disposeBag)
-
-        viewModel.showRepositoryDetail
-            .bind(to: Binder(self) { me, _ in
-                let vc = RepositoryDetailViewController()
-                me.navigationController?.pushViewController(vc, animated: true)
             })
             .disposed(by: disposeBag)
     }

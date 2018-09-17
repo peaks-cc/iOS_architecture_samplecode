@@ -16,9 +16,7 @@ final class FavoritesViewController: UIViewController {
     @IBOutlet private weak var tableView: UITableView!
 
     private let flux: Flux
-    private lazy var viewModel = FavoritesViewModel(viewDidAppear: self.extension.viewDidAppear,
-                                                    viewDidDisappear: self.extension.viewDidDisappear,
-                                                    flux: flux)
+    private lazy var viewModel = FavoritesViewModel(flux: flux)
     private lazy var dataSource = FavoritesDataSource(favorites: viewModel.favorites,
                                                       selectedIndexPath: { [weak viewModel] in viewModel?.selectedIndexPath($0) })
 
@@ -44,13 +42,6 @@ final class FavoritesViewController: UIViewController {
         viewModel.reloadData
             .bind(to: Binder(tableView) { tableView, _ in
                 tableView.reloadData()
-            })
-            .disposed(by: disposeBag)
-
-        viewModel.showRepositoryDetail
-            .bind(to: Binder(self) { me, _ in
-                let vc = RepositoryDetailViewController()
-                me.navigationController?.pushViewController(vc, animated: true)
             })
             .disposed(by: disposeBag)
     }

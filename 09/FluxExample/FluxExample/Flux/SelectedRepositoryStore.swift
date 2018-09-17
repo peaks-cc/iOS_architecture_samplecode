@@ -25,7 +25,7 @@ final class SelectedRepositoryStore: Store {
              .isSearchFieldEditing,
              .error,
              .searchQuery,
-             .loadFavoriteRepositories:
+             .setFavoriteRepositories:
             return
         }
         emitChange()

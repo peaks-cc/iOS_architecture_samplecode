@@ -17,7 +17,6 @@ final class FavoritesViewController: UIViewController {
     private let actionCreator: ActionCreator
     private let dataSource: FavoritesDataSource
 
-    private var showRepositorySubscription: Subscription?
     private lazy var reloadSubscription: Subscription = {
         return favoriteStore.addListener { [weak self] in
             DispatchQueue.main.async {
@@ -49,46 +48,5 @@ final class FavoritesViewController: UIViewController {
 
         dataSource.configure(tableView)
         _ = reloadSubscription
-    }
-
-    override func viewDidAppear(_ animated: Bool) {
-        super.viewDidAppear(animated)
-
-        subscribeStore()
-    }
-
-    override func viewDidDisappear(_ animated: Bool) {
-        super.viewDidAppear(animated)
-
-        unsubscribeStore()
-    }
-
-    private func unsubscribeStore() {
-        if let subscription = showRepositorySubscription {
-            selectedStore.removeListener(subscription)
-            showRepositorySubscription = nil
-        }
-    }
-
-    private func subscribeStore() {
-        guard showRepositorySubscription == nil else {
-            return
-        }
-
-        showRepositorySubscription = selectedStore.addListener { [weak self] in
-            DispatchQueue.main.async {
-                self?.showRepositoryDetail()
-            }
-        }
-    }
-
-    private func showRepositoryDetail() {
-        if selectedStore.repository == nil {
-            return
-        }
-        unsubscribeStore()
-        
-        let vc = RepositoryDetailViewController()
-        navigationController?.pushViewController(vc, animated: true)
     }
 }

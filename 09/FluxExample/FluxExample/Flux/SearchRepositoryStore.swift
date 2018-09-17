@@ -43,7 +43,7 @@ final class SearchRepositoryStore: Store {
             self.query = query
 
         case .selectedRepository,
-             .loadFavoriteRepositories:
+             .setFavoriteRepositories:
             return
 
         }

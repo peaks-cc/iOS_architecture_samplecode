@@ -20,7 +20,6 @@ final class RepositorySearchViewController: UIViewController {
 
     private let debounce = DispatchQueue.main.debounce(delay: .milliseconds(300))
 
-    private var showRepositoryDetailSubscription: Subscription?
     private lazy var reloadSubscription: Subscription = {
         return searchStore.addListener { [weak self] in
             self?.debounce {
@@ -55,51 +54,9 @@ final class RepositorySearchViewController: UIViewController {
         title = "Search Repositories"
 
         dataSource.configure(tableView)
-        searchBar.delegate = self
-
-        subscribeStore()
+        searchBar.delegate = self 
 
         _ = reloadSubscription
-    }
-
-    override func viewDidAppear(_ animated: Bool) {
-        super.viewDidAppear(animated)
-
-        subscribeStore()
-    }
-
-    override func viewDidDisappear(_ animated: Bool) {
-        super.viewDidDisappear(animated)
-
-        unsubscribeStore()
-    }
-
-    private func unsubscribeStore() {
-        if let subscription = showRepositoryDetailSubscription {
-            selectedStore.removeListener(subscription)
-            showRepositoryDetailSubscription = nil
-        }
-    }
-
-    private func subscribeStore() {
-        guard showRepositoryDetailSubscription == nil else {
-            return
-        }
-
-        showRepositoryDetailSubscription = selectedStore.addListener { [weak self] in
-            DispatchQueue.main.async {
-                self?.showUserRepositories()
-            }
-        }
-    }
-
-    private func showUserRepositories() {
-        if selectedStore.repository == nil {
-            return
-        }
-
-        let vc = RepositoryDetailViewController()
-        navigationController?.pushViewController(vc, animated: true)
     }
 
     private func refrectEditing() {

@@ -7,6 +7,8 @@
 //
 
 import UIKit
+import RxCocoa
+import RxSwift
 
 @UIApplicationMain
 final class AppDelegate: UIResponder, UIApplicationDelegate {
@@ -29,6 +31,21 @@ final class _AppDelegate {
     private let window: UIWindow?
     private let flux: Flux
 
+    private lazy var showRepositoryDetailDisposable: Disposable = {
+        return flux.selectedRepositoryStore.repository.asObservable()
+            .flatMap { $0 == nil ? .empty() : Observable.just(()) }
+            .bind(to: Binder(self) { me, _ in
+                guard
+                    let tabBarController = me.window?.rootViewController as? UITabBarController,
+                    let navigationController = tabBarController.selectedViewController as? UINavigationController
+                else {
+                    return
+                }
+                let vc = RepositoryDetailViewController()
+                navigationController.pushViewController(vc, animated: true)
+            })
+    }()
+
     init(window: UIWindow?, flux: Flux = .shared) {
         self.window = window
         self.flux = flux
@@ -45,6 +62,7 @@ final class _AppDelegate {
             }
             tabBarController.setViewControllers(values.map { $0.0 }, animated: false)
 
+            _ = showRepositoryDetailDisposable
             flux.favoriteRepositoryActionCreator.loadFavoriteRepositories()
         }
 

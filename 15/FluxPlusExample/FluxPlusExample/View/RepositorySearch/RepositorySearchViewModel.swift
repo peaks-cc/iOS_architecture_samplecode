@@ -16,23 +16,19 @@ final class RepositorySearchViewModel {
     let reloadData: Observable<Void>
     let editingLayout: Observable<Void>
     let nonEditingLayout: Observable<Void>
-    let showRepositoryDetail: Observable<Void>
 
     private let _selectedIndexPath = PublishRelay<IndexPath>()
     private let _reachBottom = PublishRelay<Void>()
 
     private let disposeBag = DisposeBag()
 
-    init(viewDidAppear: Observable<Void>,
-         viewDidDisappear: Observable<Void>,
-         searchText: Observable<String?>,
+    init(searchText: Observable<String?>,
          cancelButtonClicked: Observable<Void>,
          textDidBeginEditing: Observable<Void>,
          searchButtonClicked: Observable<Void>,
          flux: Flux) {
         let searchStore = flux.searchRepositoryStore
         let searchActionCreator = flux.searchRepositoryActionCreator
-        let selectedStore = flux.selectedRepositoryStore
         let selectedActionCreator = flux.selectedRepositoryActionCreator
 
         self.repositories = searchStore.repositories
@@ -45,19 +41,6 @@ final class RepositorySearchViewModel {
 
         self.nonEditingLayout = searchStore.isSearchFieldEditing.asObservable()
             .flatMap { $0 ? .empty() : Observable.just(()) }
-
-        self.showRepositoryDetail = Observable.merge(viewDidAppear.map { _ in true },
-                                                     viewDidDisappear.map { _ in false })
-            .flatMapLatest { canSubscribe -> Observable<GitHub.Repository?> in
-                if canSubscribe {
-                    return selectedStore.repository.changed
-                } else {
-                    return .empty()
-                }
-            }
-            .flatMap { favorite -> Observable<Void> in
-                favorite == nil ? .empty() : .just(())
-            }
 
         cancelButtonClicked
             .subscribe(onNext: {

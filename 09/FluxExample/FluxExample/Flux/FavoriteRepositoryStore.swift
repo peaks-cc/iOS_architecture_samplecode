@@ -15,7 +15,7 @@ final class FavoriteRepositoryStore: Store {
 
     override func onDispatch(_ action: Action) {
         switch action {
-        case let .loadFavoriteRepositories(repositories):
+        case let .setFavoriteRepositories(repositories):
             self.repositories = repositories
 
         case .selectedRepository,

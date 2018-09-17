@@ -18,6 +18,23 @@ final class AppDelegate: UIResponder, UIApplicationDelegate {
     private let favoriteStore = FavoriteRepositoryStore.shared
     private let selectedStore = SelectedRepositoryStore.shared
 
+    private lazy var showRepositoryDetailSubscription: Subscription = {
+        return selectedStore.addListener { [weak self] in
+            DispatchQueue.main.async {
+                guard
+                    let me = self,
+                    me.selectedStore.repository != nil,
+                    let tabBarController = me.window?.rootViewController as? UITabBarController,
+                    let navigationController = tabBarController.selectedViewController as? UINavigationController
+                else {
+                    return
+                }
+                let vc = RepositoryDetailViewController()
+                navigationController.pushViewController(vc, animated: true)
+            }
+        }
+    }()
+
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
         if let tabBarController = window?.rootViewController as? UITabBarController {
             let values: [(UINavigationController, UITabBarSystemItem)] = [
@@ -30,6 +47,7 @@ final class AppDelegate: UIResponder, UIApplicationDelegate {
             tabBarController.setViewControllers(values.map { $0.0 }, animated: false)
         }
 
+        _ = showRepositoryDetailSubscription
         actionCreator.loadFavoriteRepositories()
 
         return true

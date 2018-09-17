@@ -45,24 +45,6 @@ final class FavoritesViewController: UIViewController {
                 tableView.reloadData()
             })
             .disposed(by: disposeBag)
-
-        Observable.merge(self.extension.viewDidAppear.map { _ in true },
-                         self.extension.viewDidDisappear.map { _ in false })
-            .flatMapLatest { [selectedStore] canSubscribe -> Observable<GitHub.Repository?> in
-                if canSubscribe {
-                    return selectedStore.repositoryObservable.skip(1)
-                } else {
-                    return .empty()
-                }
-            }
-            .flatMap { favorite -> Observable<Void> in
-                favorite == nil ? .empty() : .just(())
-            }
-            .bind(to: Binder(self) { me, _ in
-                let vc = RepositoryDetailViewController()
-                 me.navigationController?.pushViewController(vc, animated: true)
-            })
-            .disposed(by: disposeBag)
     }
 }
 

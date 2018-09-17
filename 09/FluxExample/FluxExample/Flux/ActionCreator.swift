@@ -56,17 +56,17 @@ extension ActionCreator {
     func addFavoriteRepository(_ repository: GitHub.Repository) {
         let repositories = localCache[.favorites] + [repository]
         localCache[.favorites] = repositories
-        dispatcher.dispatch(.loadFavoriteRepositories(repositories))
+        dispatcher.dispatch(.setFavoriteRepositories(repositories))
     }
 
     func removeFavoriteRepository(_ repository: GitHub.Repository) {
         let repositories = localCache[.favorites].filter { $0.id != repository.id }
         localCache[.favorites] = repositories
-        dispatcher.dispatch(.loadFavoriteRepositories(repositories))
+        dispatcher.dispatch(.setFavoriteRepositories(repositories))
     }
 
     func loadFavoriteRepositories() {
-        dispatcher.dispatch(.loadFavoriteRepositories(localCache[.favorites]))
+        dispatcher.dispatch(.setFavoriteRepositories(localCache[.favorites]))
     }
 }
 

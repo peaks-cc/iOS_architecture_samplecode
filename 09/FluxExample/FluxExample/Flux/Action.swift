@@ -22,7 +22,7 @@ enum Action {
 
     // MARK: - Favorite
 
-    case loadFavoriteRepositories([GitHub.Repository])
+    case setFavoriteRepositories([GitHub.Repository])
 
     // MARK: - Others
 

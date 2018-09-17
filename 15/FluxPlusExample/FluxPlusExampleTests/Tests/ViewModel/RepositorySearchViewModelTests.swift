@@ -28,8 +28,6 @@ final class RepositorySearchViewModelTests: XCTestCase {
 
         let viewModel: RepositorySearchViewModel
 
-        let viewDidAppear = PublishRelay<Void>()
-        let viewDidDisappear = PublishRelay<Void>()
         let searchText = PublishRelay<String?>()
         let cancelButtonClicked = PublishRelay<Void>()
         let textDidBeginEditing = PublishRelay<Void>()
@@ -46,9 +44,7 @@ final class RepositorySearchViewModelTests: XCTestCase {
             self.selectedDispatcher = flux.selectedRepositoryDispatcher
             self.selectedActionCreator = flux.selectedRepositoryActionCreator
 
-            self.viewModel = RepositorySearchViewModel(viewDidAppear: viewDidAppear.asObservable(),
-                                                       viewDidDisappear: viewDidDisappear.asObservable(),
-                                                       searchText: searchText.asObservable(),
+            self.viewModel = RepositorySearchViewModel(searchText: searchText.asObservable(),
                                                        cancelButtonClicked: cancelButtonClicked.asObservable(),
                                                        textDidBeginEditing: textDidBeginEditing.asObservable(),
                                                        searchButtonClicked: searchButtonClicked.asObservable(),

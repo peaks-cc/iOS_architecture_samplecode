@@ -69,24 +69,6 @@ final class RepositorySearchViewController: UIViewController {
             })
             .disposed(by: disposeBag)
 
-        Observable.merge(self.extension.viewDidAppear.map { _ in true },
-                         self.extension.viewDidDisappear.map { _ in false })
-            .flatMapLatest { [selectedStore] canSubscribe -> Observable<GitHub.Repository?> in
-                if canSubscribe {
-                    return selectedStore.repositoryObservable.skip(1)
-                } else {
-                    return .empty()
-                }
-            }
-            .flatMap { user -> Observable<Void> in
-                user == nil ? .empty() : .just(())
-            }
-            .bind(to: Binder(self) { me, _ in
-                let vc = RepositoryDetailViewController()
-                me.navigationController?.pushViewController(vc, animated: true)
-            })
-            .disposed(by: disposeBag)
-
         searchBar.rx.cancelButtonClicked
             .subscribe(onNext: { [searchActionCreator] in
                 searchActionCreator.setIsSearchFieldEditing(false)
