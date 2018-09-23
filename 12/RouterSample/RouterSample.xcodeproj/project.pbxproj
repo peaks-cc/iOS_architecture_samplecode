@@ -13,6 +13,7 @@
 		B5C8818F21577A4500185577 /* RouterSampleTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5C8818E21577A4500185577 /* RouterSampleTests.swift */; };
 		B5C8819D2157819100185577 /* SearchUser.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = B5C8819C2157819100185577 /* SearchUser.storyboard */; };
 		B5C8819F2157819E00185577 /* SearchUserViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5C8819E2157819E00185577 /* SearchUserViewController.swift */; };
+		B5C881A2215783F500185577 /* GitHub.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B5C881A1215783F500185577 /* GitHub.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -36,6 +37,7 @@
 		B5C8819021577A4500185577 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		B5C8819C2157819100185577 /* SearchUser.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = SearchUser.storyboard; sourceTree = "<group>"; };
 		B5C8819E2157819E00185577 /* SearchUserViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchUserViewController.swift; sourceTree = "<group>"; };
+		B5C881A1215783F500185577 /* GitHub.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = GitHub.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -43,6 +45,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				B5C881A2215783F500185577 /* GitHub.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -62,6 +65,7 @@
 				B5C8817821577A4300185577 /* RouterSample */,
 				B5C8818D21577A4500185577 /* RouterSampleTests */,
 				B5C8817721577A4300185577 /* Products */,
+				B5C881A0215783F500185577 /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -118,6 +122,14 @@
 			children = (
 			);
 			path = RepositoryDetail;
+			sourceTree = "<group>";
+		};
+		B5C881A0215783F500185577 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				B5C881A1215783F500185577 /* GitHub.framework */,
+			);
+			name = Frameworks;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
