@@ -15,7 +15,19 @@ final class SearchUserViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
 
+        setup()
+    }
+
+    private func setup() {
+        tableView.estimatedRowHeight = 64
+        tableView.rowHeight = UITableView.automaticDimension
         tableView.register(UINib(nibName: "UserCell", bundle: nil), forCellReuseIdentifier: "UserCell")
+    }
+}
+
+extension SearchUserViewController: UITableViewDelegate {
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        tableView.deselectRow(at: indexPath, animated: true)
     }
 }
 

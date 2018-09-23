@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		B5C4CB122157D82500715630 /* UserCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5C4CB112157D82500715630 /* UserCell.swift */; };
+		B5C4CB142157D91C00715630 /* UserCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = B5C4CB132157D91C00715630 /* UserCell.xib */; };
 		B5C8817A21577A4300185577 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5C8817921577A4300185577 /* AppDelegate.swift */; };
 		B5C8818121577A4500185577 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = B5C8818021577A4500185577 /* Assets.xcassets */; };
 		B5C8818421577A4500185577 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = B5C8818221577A4500185577 /* LaunchScreen.storyboard */; };
@@ -14,8 +16,6 @@
 		B5C8819D2157819100185577 /* SearchUser.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = B5C8819C2157819100185577 /* SearchUser.storyboard */; };
 		B5C8819F2157819E00185577 /* SearchUserViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5C8819E2157819E00185577 /* SearchUserViewController.swift */; };
 		B5C881A2215783F500185577 /* GitHub.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B5C881A1215783F500185577 /* GitHub.framework */; };
-		B5C881A6215789DA00185577 /* UserCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = B5C881A5215789DA00185577 /* UserCell.xib */; };
-		B5C881A821578B9300185577 /* UserCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5C881A721578B9300185577 /* UserCell.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -29,6 +29,8 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		B5C4CB112157D82500715630 /* UserCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserCell.swift; sourceTree = "<group>"; };
+		B5C4CB132157D91C00715630 /* UserCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = UserCell.xib; sourceTree = "<group>"; };
 		B5C8817621577A4300185577 /* RouterSample.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = RouterSample.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		B5C8817921577A4300185577 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		B5C8818021577A4500185577 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -40,8 +42,6 @@
 		B5C8819C2157819100185577 /* SearchUser.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = SearchUser.storyboard; sourceTree = "<group>"; };
 		B5C8819E2157819E00185577 /* SearchUserViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchUserViewController.swift; sourceTree = "<group>"; };
 		B5C881A1215783F500185577 /* GitHub.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = GitHub.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		B5C881A5215789DA00185577 /* UserCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = UserCell.xib; sourceTree = "<group>"; };
-		B5C881A721578B9300185577 /* UserCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserCell.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -86,8 +86,8 @@
 			isa = PBXGroup;
 			children = (
 				B5C8817921577A4300185577 /* AppDelegate.swift */,
-				B5C881A721578B9300185577 /* UserCell.swift */,
-				B5C881A5215789DA00185577 /* UserCell.xib */,
+				B5C4CB112157D82500715630 /* UserCell.swift */,
+				B5C4CB132157D91C00715630 /* UserCell.xib */,
 				B5C881992157814A00185577 /* SearchUser */,
 				B5C8819A2157815800185577 /* UserDetail */,
 				B5C8819B2157816000185577 /* RepositoryDetail */,
@@ -219,7 +219,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				B5C881A6215789DA00185577 /* UserCell.xib in Resources */,
+				B5C4CB142157D91C00715630 /* UserCell.xib in Resources */,
 				B5C8818421577A4500185577 /* LaunchScreen.storyboard in Resources */,
 				B5C8819D2157819100185577 /* SearchUser.storyboard in Resources */,
 				B5C8818121577A4500185577 /* Assets.xcassets in Resources */,
@@ -242,7 +242,7 @@
 			files = (
 				B5C8817A21577A4300185577 /* AppDelegate.swift in Sources */,
 				B5C8819F2157819E00185577 /* SearchUserViewController.swift in Sources */,
-				B5C881A821578B9300185577 /* UserCell.swift in Sources */,
+				B5C4CB122157D82500715630 /* UserCell.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

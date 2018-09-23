@@ -6,4 +6,9 @@
 //  Copyright © 2018年 Kenji Tanaka. All rights reserved.
 //
 
-import Foundation
+import UIKit
+
+class UserCell: UITableViewCell {
+    @IBOutlet weak var iconImageView: UIImageView!
+    @IBOutlet weak var nameLabel: UILabel!
+}
