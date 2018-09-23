@@ -17,7 +17,7 @@ final class AppDelegate: UIResponder, UIApplicationDelegate {
 
     private lazy var handler = _AppDelegate(window: window)
 
-    func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
+    func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
         return handler.application(application, didFinishLaunchingWithOptions: launchOptions)
     }
 }
@@ -51,9 +51,9 @@ final class _AppDelegate {
         self.flux = flux
     }
 
-    func application(_ application: ApplicationProtocol, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
+    func application(_ application: ApplicationProtocol, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
         if let tabBarController = window?.rootViewController as? UITabBarController {
-            let values: [(UINavigationController, UITabBarSystemItem)] = [
+            let values: [(UINavigationController, UITabBarItem.SystemItem)] = [
                 (UINavigationController(rootViewController: RepositorySearchViewController()), .search),
                 (UINavigationController(rootViewController: FavoritesViewController()), .favorites)
             ]

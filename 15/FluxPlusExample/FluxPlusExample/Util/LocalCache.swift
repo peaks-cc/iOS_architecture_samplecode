@@ -95,7 +95,8 @@ extension Array: LocalCacheValue where Element: LocalCacheValue {
     }
 
     static func getArray(key: String, cache: LocalCache) -> [[Element]]? {
-        return [Element].getArray(key: key, cache: cache)
+        assertionFailure("two dimensional array not supported yet")
+        return nil
     }
 
     static func set(key: String, value: [Element]?, cache: LocalCache) {
@@ -107,6 +108,6 @@ extension Array: LocalCacheValue where Element: LocalCacheValue {
     }
 
     static func set(key: String, array: [[Element]], cache: LocalCache) {
-        [Element].set(key: key, array: array, cache: cache)
+        assertionFailure("two dimensional array not supported yet")
     }
 }

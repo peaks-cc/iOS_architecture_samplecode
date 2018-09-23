@@ -406,10 +406,11 @@
 				TargetAttributes = {
 					EDE5DF9D2118187500F5DE2B = {
 						CreatedOnToolsVersion = 9.4.1;
+						LastSwiftMigration = 1000;
 					};
 					EDE5DFB12118187700F5DE2B = {
 						CreatedOnToolsVersion = 9.4.1;
-						LastSwiftMigration = 0940;
+						LastSwiftMigration = 1000;
 						TestTargetID = EDE5DF9D2118187500F5DE2B;
 					};
 				};
@@ -688,7 +689,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = "jp.marty-suzuki.FluxPlusExample";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
-				SWIFT_VERSION = 4.0;
+				SWIFT_VERSION = 4.2;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = Debug;
@@ -712,7 +713,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = "jp.marty-suzuki.FluxPlusExample";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
-				SWIFT_VERSION = 4.0;
+				SWIFT_VERSION = 4.2;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = Release;
@@ -739,7 +740,7 @@
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
-				SWIFT_VERSION = 4.0;
+				SWIFT_VERSION = 4.2;
 				TARGETED_DEVICE_FAMILY = "1,2";
 				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/FluxPlusExample.app/FluxPlusExample";
 			};
@@ -766,7 +767,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = "jp.marty-suzuki.FluxPlusExampleTests";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
-				SWIFT_VERSION = 4.0;
+				SWIFT_VERSION = 4.2;
 				TARGETED_DEVICE_FAMILY = "1,2";
 				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/FluxPlusExample.app/FluxPlusExample";
 			};
