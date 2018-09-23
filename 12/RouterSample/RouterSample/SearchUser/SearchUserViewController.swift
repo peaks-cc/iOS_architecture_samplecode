@@ -1,5 +1,5 @@
 //
-//  ViewController.swift
+//  SearchUserViewController.swift
 //  RouterSample
 //
 //  Created by Kenji Tanaka on 2018/09/23.
@@ -8,13 +8,9 @@
 
 import UIKit
 
-class ViewController: UIViewController {
-
+final class SearchUserViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
-        // Do any additional setup after loading the view, typically from a nib.
+        
     }
-
-
 }
-
