@@ -53,7 +53,13 @@ private final class LoginWebViewController: UIViewController {
     private let webView = WKWebView(frame: .zero, configuration: WKWebViewConfiguration())
     private let progressView = UIProgressView(progressViewStyle: .default)
 
-    private let activityIndicatorView = UIActivityIndicatorView(style: .whiteLarge)
+    private let activityIndicatorView: UIActivityIndicatorView = {
+        #if swift(>=4.2)
+        return UIActivityIndicatorView(style: .whiteLarge)
+        #else
+        return UIActivityIndicatorView(activityIndicatorStyle: .whiteLarge)
+        #endif
+    }()
     private lazy var alphaView: UIView = {
         let view = UIView(frame: .zero)
         view.backgroundColor = UIColor.black.withAlphaComponent(0.4)
