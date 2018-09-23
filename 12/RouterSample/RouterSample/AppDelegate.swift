@@ -8,6 +8,44 @@
 
 import UIKit
 
+// MEMO
+
+// - View
+//   - UserCell
+//     - UserView
+//   - UserSearchBar
+//   - UserView
+//     - icon
+//     - id
+//   - RepositoryCell
+//     - userName
+//     - name
+//     - description
+
+// - SearchUserViewController
+//   - View
+//     - UserCell
+//     - UserSearchBar
+//   - Feature
+//     - searchUser
+//     - transitionToUserDetail
+// - UserDetailViewController
+//   - View
+//     - UserView
+//     - RepositoryCell
+//   - Feature
+//     - transitionToWeb
+//     - transitionToRepositoryDetail
+// - RepositoryDetailViewController
+//   - View
+//     - UserView
+//     - SeeAlso(Repositories)
+//       - RepositoryCell
+//   - Feature
+//     - transitionToWeb
+//     - transitionToUserDetail
+//     - transitionToRepositoryDetail
+
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
 
