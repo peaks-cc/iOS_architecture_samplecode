@@ -35,9 +35,9 @@ final class AppDelegate: UIResponder, UIApplicationDelegate {
         }
     }()
 
-    func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
+    func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
         if let tabBarController = window?.rootViewController as? UITabBarController {
-            let values: [(UINavigationController, UITabBarSystemItem)] = [
+            let values: [(UINavigationController, UITabBarItem.SystemItem)] = [
                 (UINavigationController(rootViewController: RepositorySearchViewController()), .search),
                 (UINavigationController(rootViewController: FavoritesViewController()), .favorites)
             ]
