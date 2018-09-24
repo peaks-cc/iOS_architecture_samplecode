@@ -12,15 +12,17 @@ import GitHub
 protocol SearchUserPresenterProtocol {
     var users: [User] { get }
     func user(forRow row: Int) -> User?
+    func didSelectRow(at indexPath: IndexPath)
     func didTapSearchButton(text: String)
 }
 
 class SearchUserPresenter: SearchUserPresenterProtocol {
     private(set) var users: [User] = []
 
-    private var view: SearchUserViewProtocol!
+    private weak var view: SearchUserViewProtocol!
     private var model: SearchUserModelProtocol!
-    init(view: SearchUserViewProtocol, model: SearchUserModelProtocol) {
+    private var router: SearchUserRouterProtocol!
+    init(view: SearchUserViewProtocol, model: SearchUserModelProtocol, router: SearchUserRouterProtocol) {
         self.view = view
         self.model = model
     }
@@ -28,6 +30,11 @@ class SearchUserPresenter: SearchUserPresenterProtocol {
     func user(forRow row: Int) -> User? {
         guard row < users.count else { return nil }
         return users[row]
+    }
+
+    func didSelectRow(at indexPath: IndexPath) {
+        guard let user = user(forRow: indexPath.row) else { return }
+        router.transitionToUserDetail(user: user)
     }
 
     func didTapSearchButton(text: String) {

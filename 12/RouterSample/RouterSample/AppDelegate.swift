@@ -55,7 +55,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         let navigationController = UINavigationController(rootViewController: searchUserViewController)
 
         let model = SearchUserModel()
-        let presenter = SearchUserPresenter(view: searchUserViewController, model: model)
+        let router = SearchUserRouter(view: searchUserViewController)
+        let presenter = SearchUserPresenter(view: searchUserViewController, model: model, router: router)
         searchUserViewController.inject(presenter: presenter)
         
         window = UIWindow(frame: UIScreen.main.bounds)
