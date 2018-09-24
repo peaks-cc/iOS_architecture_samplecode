@@ -71,3 +71,6 @@ fastlane/test_output
 
 # Bundler
 vendor
+
+# AppCode
+.idea
