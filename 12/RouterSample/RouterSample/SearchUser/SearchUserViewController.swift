@@ -8,7 +8,7 @@
 
 import UIKit
 
-protocol SearchUserViewProtocol {
+protocol SearchUserViewProtocol: class, Transitioner {
     func reloadTableView()
 }
 
@@ -45,6 +45,7 @@ extension SearchUserViewController: UISearchBarDelegate {
 extension SearchUserViewController: UITableViewDelegate {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         tableView.deselectRow(at: indexPath, animated: true)
+        presenter.didSelectRow(at: indexPath)
     }
 }
 
