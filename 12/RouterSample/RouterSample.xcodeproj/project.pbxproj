@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		B5A089B52157F6D1007D640A /* SearchUserPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5A089B42157F6D1007D640A /* SearchUserPresenter.swift */; };
 		B5C4CB122157D82500715630 /* UserCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5C4CB112157D82500715630 /* UserCell.swift */; };
 		B5C4CB142157D91C00715630 /* UserCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = B5C4CB132157D91C00715630 /* UserCell.xib */; };
 		B5C8817A21577A4300185577 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5C8817921577A4300185577 /* AppDelegate.swift */; };
@@ -16,6 +17,7 @@
 		B5C8819D2157819100185577 /* SearchUser.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = B5C8819C2157819100185577 /* SearchUser.storyboard */; };
 		B5C8819F2157819E00185577 /* SearchUserViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5C8819E2157819E00185577 /* SearchUserViewController.swift */; };
 		B5C881A2215783F500185577 /* GitHub.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B5C881A1215783F500185577 /* GitHub.framework */; };
+		D31F74422F418B4713549AC1 /* SearchUserModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = D31F75B40F997A98D2EB692F /* SearchUserModel.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -29,6 +31,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		B5A089B42157F6D1007D640A /* SearchUserPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchUserPresenter.swift; sourceTree = "<group>"; };
 		B5C4CB112157D82500715630 /* UserCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserCell.swift; sourceTree = "<group>"; };
 		B5C4CB132157D91C00715630 /* UserCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = UserCell.xib; sourceTree = "<group>"; };
 		B5C8817621577A4300185577 /* RouterSample.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = RouterSample.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -42,6 +45,7 @@
 		B5C8819C2157819100185577 /* SearchUser.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = SearchUser.storyboard; sourceTree = "<group>"; };
 		B5C8819E2157819E00185577 /* SearchUserViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchUserViewController.swift; sourceTree = "<group>"; };
 		B5C881A1215783F500185577 /* GitHub.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = GitHub.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		D31F75B40F997A98D2EB692F /* SearchUserModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SearchUserModel.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -112,6 +116,8 @@
 			children = (
 				B5C8819C2157819100185577 /* SearchUser.storyboard */,
 				B5C8819E2157819E00185577 /* SearchUserViewController.swift */,
+				B5A089B42157F6D1007D640A /* SearchUserPresenter.swift */,
+				D31F75B40F997A98D2EB692F /* SearchUserModel.swift */,
 			);
 			path = SearchUser;
 			sourceTree = "<group>";
@@ -242,7 +248,9 @@
 			files = (
 				B5C8817A21577A4300185577 /* AppDelegate.swift in Sources */,
 				B5C8819F2157819E00185577 /* SearchUserViewController.swift in Sources */,
+				B5A089B52157F6D1007D640A /* SearchUserPresenter.swift in Sources */,
 				B5C4CB122157D82500715630 /* UserCell.swift in Sources */,
+				D31F74422F418B4713549AC1 /* SearchUserModel.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

@@ -7,8 +7,23 @@
 //
 
 import UIKit
+import GitHub
 
 class UserCell: UITableViewCell {
     @IBOutlet weak var iconImageView: UIImageView!
     @IBOutlet weak var nameLabel: UILabel!
+
+    func configure(user: User) {
+        let url = user.avatarURL
+        let task = URLSession.shared.dataTask(with: url) { data, response, error in
+            if let imageData = data {
+                DispatchQueue.main.async { [weak self] in
+                    self?.imageView?.image = UIImage(data: imageData)
+                }
+            }
+        }
+        task.resume()
+
+        nameLabel.text = user.login
+    }
 }
