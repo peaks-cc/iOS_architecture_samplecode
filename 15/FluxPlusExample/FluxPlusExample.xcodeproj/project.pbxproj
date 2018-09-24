@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		37BA6878215950FB004EF4A6 /* RepositorySearchViewControllerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37BA6877215950FB004EF4A6 /* RepositorySearchViewControllerTests.swift */; };
 		37E3DBBB214E5119003B923B /* SearchRepositoryStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37E3DBBA214E5119003B923B /* SearchRepositoryStore.swift */; };
 		37E3DBBD214E5124003B923B /* SearchRepositoryDispatcher.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37E3DBBC214E5124003B923B /* SearchRepositoryDispatcher.swift */; };
 		37E3DBBF214E5130003B923B /* SearchRepositoryActionCreator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37E3DBBE214E5130003B923B /* SearchRepositoryActionCreator.swift */; };
@@ -67,6 +68,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		37BA6877215950FB004EF4A6 /* RepositorySearchViewControllerTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RepositorySearchViewControllerTests.swift; sourceTree = "<group>"; };
 		37E3DBBA214E5119003B923B /* SearchRepositoryStore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchRepositoryStore.swift; sourceTree = "<group>"; };
 		37E3DBBC214E5124003B923B /* SearchRepositoryDispatcher.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchRepositoryDispatcher.swift; sourceTree = "<group>"; };
 		37E3DBBE214E5130003B923B /* SearchRepositoryActionCreator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchRepositoryActionCreator.swift; sourceTree = "<group>"; };
@@ -141,6 +143,14 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		37BA6876215950E0004EF4A6 /* View */ = {
+			isa = PBXGroup;
+			children = (
+				37BA6877215950FB004EF4A6 /* RepositorySearchViewControllerTests.swift */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
 		37E3DBB9214E5105003B923B /* Search */ = {
 			isa = PBXGroup;
 			children = (
@@ -231,6 +241,7 @@
 		EDE38F4421246FDD00CA2480 /* Tests */ = {
 			isa = PBXGroup;
 			children = (
+				37BA6876215950E0004EF4A6 /* View */,
 				ED71C1F721247D6500DF7952 /* ViewModel */,
 				ED71C1F621247D5A00DF7952 /* Flux */,
 			);
@@ -518,6 +529,7 @@
 				ED71C1F521247D5400DF7952 /* RepositorySearchViewModelTests.swift in Sources */,
 				37E3DBE0214E767D003B923B /* GitHub.Pagination.mock.swift in Sources */,
 				37E3DBE2214E8447003B923B /* GitHub.Repository.mock.swift in Sources */,
+				37BA6878215950FB004EF4A6 /* RepositorySearchViewControllerTests.swift in Sources */,
 				EDE38F502124711A00CA2480 /* SearchRepositoryActionCreatorTests.swift in Sources */,
 				EDE38F492124707D00CA2480 /* MockGitHubApiSession.swift in Sources */,
 				EDE38F4B212470A800CA2480 /* MockLocalCache.swift in Sources */,
