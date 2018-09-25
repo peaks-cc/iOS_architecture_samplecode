@@ -8,7 +8,7 @@
 
 import UIKit
 
-protocol SearchUserViewProtocol: class, Transitioner {
+protocol SearchUserViewProtocol: class, Transitioner where Self: UIViewController {
     func reloadTableView()
 }
 
@@ -67,8 +67,6 @@ extension SearchUserViewController: UITableViewDataSource {
 
 extension SearchUserViewController: SearchUserViewProtocol {
     func reloadTableView() {
-        DispatchQueue.main.async { [weak self] in
-            self?.tableView.reloadData()
-        }
+        tableView.reloadData()
     }
 }

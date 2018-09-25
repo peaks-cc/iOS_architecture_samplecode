@@ -22,9 +22,11 @@ class SearchUserPresenter: SearchUserPresenterProtocol {
     private weak var view: SearchUserViewProtocol!
     private var model: SearchUserModelProtocol!
     private var router: SearchUserRouterProtocol!
+
     init(view: SearchUserViewProtocol, model: SearchUserModelProtocol, router: SearchUserRouterProtocol) {
         self.view = view
         self.model = model
+        self.router = router
     }
 
     func user(forRow row: Int) -> User? {
@@ -43,7 +45,10 @@ class SearchUserPresenter: SearchUserPresenterProtocol {
             switch result {
             case .success(let users):
                 self?.users = users
-                self?.view.reloadTableView()
+                
+                DispatchQueue.main.async {
+                    self?.view.reloadTableView()
+                }
             case .failure(let error):
                 // TODO: Error Handling
                 ()
