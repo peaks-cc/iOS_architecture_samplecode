@@ -36,7 +36,7 @@ class SearchUserPresenter: SearchUserPresenterProtocol {
 
     func didSelectRow(at indexPath: IndexPath) {
         guard let user = user(forRow: indexPath.row) else { return }
-        router.transitionToUserDetail(user: user)
+        router.transitionToUserDetail(userName: user.login)
     }
 
     func didTapSearchButton(text: String) {
