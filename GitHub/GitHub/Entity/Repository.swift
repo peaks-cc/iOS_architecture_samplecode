@@ -16,6 +16,7 @@ public struct Repository: Codable {
     public let owner: User
     public let isPrivate: Bool
     public let htmlURL: URL
+    public let contributorsURL: URL
     public let description: String?
     public let isFork: Bool
     public let url: URL
@@ -39,6 +40,7 @@ public struct Repository: Codable {
         case owner
         case isPrivate = "private"
         case htmlURL = "html_url"
+        case contributorsURL = "contributors_url"
         case description
         case isFork = "fork"
         case url
@@ -62,6 +64,7 @@ public struct Repository: Codable {
                 owner: User,
                 isPrivate: Bool,
                 htmlURL: URL,
+                contributorsURL: URL,
                 description: String?,
                 isFork: Bool,
                 url: URL,
@@ -83,6 +86,7 @@ public struct Repository: Codable {
         self.owner = owner
         self.isPrivate = isPrivate
         self.htmlURL = htmlURL
+        self.contributorsURL = contributorsURL
         self.description = description
         self.isFork = isFork
         self.url = url

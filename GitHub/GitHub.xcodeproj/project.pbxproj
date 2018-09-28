@@ -12,6 +12,7 @@
 		37F208F72113685A00DC452F /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37F208F62113685A00DC452F /* LoginViewController.swift */; };
 		37F208F921136FDC00DC452F /* LoginOauthAccessTokenRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37F208F821136FDC00DC452F /* LoginOauthAccessTokenRequest.swift */; };
 		37F208FB211371A500DC452F /* AccessToken.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37F208FA211371A500DC452F /* AccessToken.swift */; };
+		D31F7EFBD54C468587D30458 /* RepositoryRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = D31F7DE30EE9D2461ACF020C /* RepositoryRequest.swift */; };
 		EDE18D662112F7C2000D5EAE /* GitHub.h in Headers */ = {isa = PBXBuildFile; fileRef = EDE18D642112F7C2000D5EAE /* GitHub.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		EDE18D6F2112F81C000D5EAE /* Session.swift in Sources */ = {isa = PBXBuildFile; fileRef = EDE18D6E2112F81C000D5EAE /* Session.swift */; };
 		EDE18D712112F838000D5EAE /* Repository.swift in Sources */ = {isa = PBXBuildFile; fileRef = EDE18D702112F838000D5EAE /* Repository.swift */; };
@@ -31,6 +32,7 @@
 		37F208F62113685A00DC452F /* LoginViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
 		37F208F821136FDC00DC452F /* LoginOauthAccessTokenRequest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginOauthAccessTokenRequest.swift; sourceTree = "<group>"; };
 		37F208FA211371A500DC452F /* AccessToken.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccessToken.swift; sourceTree = "<group>"; };
+		D31F7DE30EE9D2461ACF020C /* RepositoryRequest.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RepositoryRequest.swift; sourceTree = "<group>"; };
 		EDE18D612112F7C2000D5EAE /* GitHub.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = GitHub.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		EDE18D642112F7C2000D5EAE /* GitHub.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = GitHub.h; sourceTree = "<group>"; };
 		EDE18D652112F7C2000D5EAE /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -123,6 +125,7 @@
 				EDE18D802112FA79000D5EAE /* UserReposRequest.swift */,
 				EDE18D84211337DA000D5EAE /* SearchRepositoriesRequest.swift */,
 				37F208F821136FDC00DC452F /* LoginOauthAccessTokenRequest.swift */,
+				D31F7DE30EE9D2461ACF020C /* RepositoryRequest.swift */,
 			);
 			path = Request;
 			sourceTree = "<group>";
@@ -231,6 +234,7 @@
 				EDE18D752112F868000D5EAE /* ItemsResponse.swift in Sources */,
 				EDE18D85211337DA000D5EAE /* SearchRepositoriesRequest.swift in Sources */,
 				37F208F72113685A00DC452F /* LoginViewController.swift in Sources */,
+				D31F7EFBD54C468587D30458 /* RepositoryRequest.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
