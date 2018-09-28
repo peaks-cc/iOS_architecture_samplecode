@@ -5,11 +5,11 @@
 
 import UIKit
 
-protocol UserDetailViewProtocol: class {
+protocol UserDetailViewProtocol: class, Transitioner where Self: UIViewController {
     func reloadTableView()
 }
 
-class UserDetailViewController: UIViewController {
+final class UserDetailViewController: UIViewController {
     @IBOutlet weak var tableView: UITableView!
 
     private var presenter: UserDetailPresenterProtocol!
@@ -35,6 +35,7 @@ class UserDetailViewController: UIViewController {
 extension UserDetailViewController: UITableViewDelegate {
     public func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         tableView.deselectRow(at: indexPath, animated: true)
+        presenter.didSelectRowAt(indexPath: indexPath)
     }
 }
 

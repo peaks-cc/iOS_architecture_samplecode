@@ -6,7 +6,7 @@
 import UIKit
 import GitHub
 
-protocol SearchUserRouterProtocol {
+protocol SearchUserRouterProtocol: class {
     func transitionToUserDetail(userName: String)
 }
 
@@ -20,7 +20,8 @@ class SearchUserRouter: SearchUserRouterProtocol {
     func transitionToUserDetail(userName: String) {
         let userDetailVC = UIStoryboard(name: "UserDetail", bundle: nil).instantiateInitialViewController() as! UserDetailViewController
         let model = UserDetailModel()
-        let presenter = UserDetailPresenter(userName: userName, view: userDetailVC, model: model)
+        let router = UserDetailRouter(view: userDetailVC)
+        let presenter = UserDetailPresenter(userName: userName, view: userDetailVC, model: model, router: router)
         userDetailVC.inject(presenter: presenter)
 
         // なんかいいかんじの制約をprotocolにかけられないものか🤔

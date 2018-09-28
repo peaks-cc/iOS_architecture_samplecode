@@ -5,22 +5,32 @@
 
 import Foundation
 
+// fetchRepository
+// fetchContributors
+
 protocol RepositoryDetailModelProtocol {
     func fetchRepository()
 }
 
 class RepositoryDetailModel: RepositoryDetailModelProtocol {
+    private let userName: String
+    private let repositoryName: String
+
+    init(userName: String, repositoryName: String) {
+        self.userName = userName
+        self.repositoryName = repositoryName
+    }
+
     func fetchRepository() {
-        let session = GitHub.Session()
-        let
-        let request = UserReposRequest(username: userName, type: nil, sort: nil, direction: nil, page: nil, perPage: nil)
-        session.send(request) { result in
-            switch result {
-            case .success(let response):
-                completion(.success(response.0))
-            case .failure(let error):
-                completion(.failure(error))
-            }
-        }
+//        let session = GitHub.Session()
+//        let request
+//        session.send(request) { result in
+//            switch result {
+//            case .success(let response):
+//                completion(.success(response.0))
+//            case .failure(let error):
+//                completion(.failure(error))
+//            }
+//        }
     }
 }

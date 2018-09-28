@@ -3,7 +3,27 @@
 // Copyright (c) 2018 Kenji Tanaka. All rights reserved.
 //
 
-import Foundation
+import UIKit
 
-class UserDetailRouter {
+protocol UserDetailRouterProtocol: class {
+    func transitionToRepositoryDetail(userName: String, repositoryName: String)
+}
+
+class UserDetailRouter: UserDetailRouterProtocol {
+    private weak var view: UserDetailViewProtocol!
+
+    init(view: UserDetailViewProtocol) {
+        self.view = view
+    }
+
+    func transitionToRepositoryDetail(userName: String, repositoryName: String) {
+        let model = RepositoryDetailModel(userName: userName, repositoryName: repositoryName)
+        let presenter = RepositoryDetailPresenter(userName: userName, repositoryName: repositoryName, model: model)
+        let repositoryDetailVC = UIStoryboard(name: "RepositoryDetail", bundle: nil).instantiateInitialViewController() as! RepositoryDetailViewController
+        repositoryDetailVC.inject(presenter: presenter)
+
+        // FIXME: なんかいいかんじの制約をprotocolにかけられないものか🤔
+        let searchUserVC = view as! UserDetailViewController
+        view.push(from: searchUserVC, to: repositoryDetailVC, animated: true)
+    }
 }
