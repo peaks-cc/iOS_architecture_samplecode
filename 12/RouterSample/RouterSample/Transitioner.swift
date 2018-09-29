@@ -6,17 +6,35 @@
 import UIKit
 
 protocol Transitioner: class where Self: UIViewController {
-    func push(from: UIViewController, to: UIViewController, animated: Bool)
+    func push(_ viewController: UIViewController, animated: Bool)
+    func popViewController(animated: Bool)
+    func popToRootViewController(animated: Bool)
+    func popToViewController(_ viewController: UIViewController, animated: Bool)
     func present(viewController: UIViewController, animated: Bool, completion: (() -> ())?)
+    func dismiss(animated: Bool)
 }
 
 extension Transitioner {
-    func push(from: UIViewController, to: UIViewController, animated: Bool) {
-        guard let nc = from.navigationController else { return }
-        nc.pushViewController(to, animated: animated)
+    func push(_ viewController: UIViewController, animated: Bool) {
+        guard let nc = navigationController else { return }
+        nc.pushViewController(viewController, animated: animated)
+    }
+
+    func popViewController(animated: Bool) {
+
+    }
+
+    func popToRootViewController(animated: Bool) {
+    }
+
+    func popToViewController(_ viewController: UIViewController, animated: Bool) {
     }
 
     func present(viewController: UIViewController, animated: Bool, completion: (() -> ())? = nil) {
         present(viewController, animated: animated, completion: completion)
+    }
+
+    func dismiss(animated: Bool) {
+        dismiss(animated: animated)
     }
 }
