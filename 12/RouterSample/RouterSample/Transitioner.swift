@@ -17,6 +17,7 @@ protocol Transitioner: class where Self: UIViewController {
 extension Transitioner {
     func push(_ viewController: UIViewController, animated: Bool) {
         guard let nc = navigationController else { return }
+        // FIXME: ↑は強制アンラップで落としてあげた方が良いかもしれない？
         nc.pushViewController(viewController, animated: animated)
     }
 
