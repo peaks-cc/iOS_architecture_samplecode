@@ -5,8 +5,9 @@
 
 import UIKit
 
-protocol UserDetailViewProtocol: class, Transitioner where Self: UIViewController {
+protocol UserDetailViewProtocol: class {
     func reloadTableView()
+    func transitionToRepositoryDetail(userName: String, repositoryName: String)
 }
 
 final class UserDetailViewController: UIViewController {
@@ -56,5 +57,14 @@ extension UserDetailViewController: UITableViewDataSource {
 extension UserDetailViewController: UserDetailViewProtocol {
     func reloadTableView() {
         tableView.reloadData()
+    }
+
+    func transitionToRepositoryDetail(userName: String, repositoryName: String) {
+        let model = RepositoryDetailModel(userName: userName, repositoryName: repositoryName)
+        let presenter = RepositoryDetailPresenter(userName: userName, repositoryName: repositoryName, model: model)
+        let repositoryDetailVC = UIStoryboard(name: "RepositoryDetail", bundle: nil).instantiateInitialViewController() as! RepositoryDetailViewController
+        repositoryDetailVC.inject(presenter: presenter)
+
+        navigationController?.pushViewController(repositoryDetailVC, animated: true)
     }
 }
