@@ -22,6 +22,6 @@ class UserDetailRouter: UserDetailRouterProtocol {
         let repositoryDetailVC = UIStoryboard(name: "RepositoryDetail", bundle: nil).instantiateInitialViewController() as! RepositoryDetailViewController
         repositoryDetailVC.inject(presenter: presenter)
 
-        view.push(repositoryDetailVC, animated: true)
+        view.pushViewController(repositoryDetailVC, animated: true)
     }
 }

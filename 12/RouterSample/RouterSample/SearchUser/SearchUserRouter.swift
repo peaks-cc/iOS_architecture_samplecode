@@ -24,6 +24,6 @@ class SearchUserRouter: SearchUserRouterProtocol {
         let presenter = UserDetailPresenter(userName: userName, view: userDetailVC, model: model, router: router)
         userDetailVC.inject(presenter: presenter)
 
-        view.push(userDetailVC, animated: true)
+        view.pushViewController(userDetailVC, animated: true)
     }
 }
