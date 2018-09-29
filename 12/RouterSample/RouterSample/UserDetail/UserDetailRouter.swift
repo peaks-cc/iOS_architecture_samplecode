@@ -22,8 +22,6 @@ class UserDetailRouter: UserDetailRouterProtocol {
         let repositoryDetailVC = UIStoryboard(name: "RepositoryDetail", bundle: nil).instantiateInitialViewController() as! RepositoryDetailViewController
         repositoryDetailVC.inject(presenter: presenter)
 
-        // FIXME: なんかいいかんじの制約をprotocolにかけられないものか🤔
-        let searchUserVC = view as! UserDetailViewController
-        view.push(from: searchUserVC, to: repositoryDetailVC, animated: true)
+        view.push(repositoryDetailVC, animated: true)
     }
 }

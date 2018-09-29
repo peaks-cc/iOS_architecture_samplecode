@@ -24,8 +24,6 @@ class SearchUserRouter: SearchUserRouterProtocol {
         let presenter = UserDetailPresenter(userName: userName, view: userDetailVC, model: model, router: router)
         userDetailVC.inject(presenter: presenter)
 
-        // なんかいいかんじの制約をprotocolにかけられないものか🤔
-        let searchUserVC = view as! SearchUserViewController
-        view.push(from: searchUserVC, to: userDetailVC, animated: true)
+        view.push(userDetailVC, animated: true)
     }
 }
