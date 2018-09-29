@@ -21,7 +21,7 @@ class UserDetailPresenter: UserDetailPresenterProtocol {
     private var model: UserDetailModelProtocol!
     private var router: UserDetailRouterProtocol!
 
-    init(userName: String, view: UserDetailViewProtocol, model: UserDetailModelProtocol, router: UserDetailRouter) {
+    init(userName: String, view: UserDetailViewProtocol, model: UserDetailModelProtocol, router: UserDetailRouterProtocol) {
         self.userName = userName
         self.view = view
         self.model = model
