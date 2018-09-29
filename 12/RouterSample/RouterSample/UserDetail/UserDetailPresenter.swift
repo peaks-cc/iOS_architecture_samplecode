@@ -34,7 +34,7 @@ class UserDetailPresenter: UserDetailPresenterProtocol {
     }
 
     func viewDidLoad() {
-        model.fetchRepositories(forUserName: userName) { [weak self] result in
+        model.fetchRepositories() { [weak self] result in
             switch result {
             case .success(let repositories):
                 self?.repositories = repositories

@@ -19,7 +19,7 @@ class SearchUserRouter: SearchUserRouterProtocol {
 
     func transitionToUserDetail(userName: String) {
         let userDetailVC = UIStoryboard(name: "UserDetail", bundle: nil).instantiateInitialViewController() as! UserDetailViewController
-        let model = UserDetailModel()
+        let model = UserDetailModel(userName: userName)
         let router = UserDetailRouter(view: userDetailVC)
         let presenter = UserDetailPresenter(userName: userName, view: userDetailVC, model: model, router: router)
         userDetailVC.inject(presenter: presenter)

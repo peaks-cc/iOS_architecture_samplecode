@@ -7,11 +7,16 @@ import Foundation
 import GitHub
 
 protocol UserDetailModelProtocol {
-    func fetchRepositories(forUserName userName: String, completion: @escaping (Result<[Repository]>) -> ())
+    func fetchRepositories(completion: @escaping (Result<[Repository]>) -> ())
 }
 
 class UserDetailModel: UserDetailModelProtocol {
-    func fetchRepositories(forUserName userName: String, completion: @escaping (Result<[Repository]>) -> ()) {
+    private let userName: String!
+    init(userName: String) {
+        self.userName = userName
+    }
+
+    func fetchRepositories(completion: @escaping (Result<[Repository]>) -> ()) {
         let session = GitHub.Session()
         let request = UserReposRequest(username: userName, type: nil, sort: nil, direction: nil, page: nil, perPage: nil)
         session.send(request) { result in
