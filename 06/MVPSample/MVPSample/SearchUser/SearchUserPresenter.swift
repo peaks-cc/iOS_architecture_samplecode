@@ -10,7 +10,7 @@ import Foundation
 import GitHub
 
 protocol SearchUserPresenterProtocol {
-    var users: [User] { get }
+    var numberOfUsers: Int { get }
     func user(forRow row: Int) -> User?
     func didSelectRow(at indexPath: IndexPath)
     func didTapSearchButton(text: String)
@@ -25,6 +25,10 @@ class SearchUserPresenter: SearchUserPresenterProtocol {
     init(view: SearchUserViewProtocol, model: SearchUserModelProtocol) {
         self.view = view
         self.model = model
+    }
+
+    var numberOfUsers: Int {
+        return users.count
     }
 
     func user(forRow row: Int) -> User? {
