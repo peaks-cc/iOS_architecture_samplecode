@@ -7,10 +7,9 @@
 //
 
 import GitHub
-import RxSwift
 
 protocol GitHubApiRequestable: class {
-    func searchRepositories(query: String, page: Int)  -> Observable<([GitHub.Repository], GitHub.Pagination)>
+    func searchRepositories(query: String, page: Int, completion: @escaping (GitHub.Result<([GitHub.Repository], GitHub.Pagination)>) -> ())
 }
 
 final class GitHubApiSession: GitHubApiRequestable {
@@ -18,22 +17,15 @@ final class GitHubApiSession: GitHubApiRequestable {
 
     private let session = GitHub.Session()
 
-    func searchRepositories(query: String, page: Int)  -> Observable<([GitHub.Repository], GitHub.Pagination)> {
-        return Single.create { [session] event in
-            let request = SearchRepositoriesRequest(query: query, sort: .stars, order: .desc, page: page, perPage: nil)
-            let task = session.send(request) { result in
-                switch result {
-                case let .success(response, pagination):
-                    event(.success((response.items, pagination)))
-                case let .failure(error):
-                    event(.error(error))
-                }
-            }
-            return Disposables.create {
-                task?.cancel()
+    func searchRepositories(query: String, page: Int, completion: @escaping (GitHub.Result<([GitHub.Repository], GitHub.Pagination)>) -> ()) {
+        let request = SearchRepositoriesRequest(query: query, sort: .stars, order: .desc, page: page, perPage: nil)
+        session.send(request) { result in
+            switch result {
+            case let .success(response, pagination):
+                completion(.success((response.items, pagination)))
+            case let .failure(error):
+                completion(.failure(error))
             }
         }
-        .asObservable()
     }
 }
-
