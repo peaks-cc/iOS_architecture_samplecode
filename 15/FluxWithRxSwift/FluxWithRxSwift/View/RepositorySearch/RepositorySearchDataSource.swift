@@ -11,14 +11,13 @@ import GitHub
 
 final class RepositorySearchDataSource: NSObject {
 
-    private let searchActionCreator: SearchRepositoryActionCreator
+    private let actionCreator: ActionCreator
     private let searchStore: SearchRepositoryStore
-    private let selectedActionCreator: SelectedRepositoryActionCreator
 
-    init(flux: Flux) {
-        self.searchActionCreator = flux.searchRepositoryActionCreator
-        self.searchStore = flux.searchRepositoryStore
-        self.selectedActionCreator = flux.selectedRepositoryActionCreator
+    init(actionCreator: ActionCreator,
+         searchRepositoryStore: SearchRepositoryStore) {
+        self.actionCreator = actionCreator
+        self.searchStore = searchRepositoryStore
 
         super.init()
     }
@@ -51,7 +50,7 @@ extension RepositorySearchDataSource: UITableViewDelegate {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         tableView.deselectRow(at: indexPath, animated: false)
         let repository = searchStore.repositories[indexPath.row]
-        selectedActionCreator.setSelectedRepository(repository)
+        actionCreator.setSelectedRepository(repository)
     }
 
     func scrollViewDidScroll(_ scrollView: UIScrollView) {
@@ -59,7 +58,7 @@ extension RepositorySearchDataSource: UITableViewDelegate {
             searchStore.pagination?.last != nil &&
             (scrollView.contentSize.height - scrollView.bounds.size.height) <= scrollView.contentOffset.y &&
             !searchStore.isFetching {
-            searchActionCreator.searchRepositories(query: query, page: next)
+            actionCreator.searchRepositories(query: query, page: next)
         }
     }
 }

@@ -21,10 +21,13 @@ final class FavoritesViewController: UIViewController {
     private let dataSource: FavoritesDataSource
     private let disposeBag = DisposeBag()
 
-    init(flux: Flux = .shared) {
-        self.favoriteStore = flux.favoriteRepositoryStore
-        self.selectedStore = flux.selectedRepositoryStore
-        self.dataSource = FavoritesDataSource(flux: flux)
+    init(actionCreator: ActionCreator = .init(),
+         favoriteRepositoryStore: FavoriteRepositoryStore = .shared,
+         selectedRepositoryStore: SelectedRepositoryStore = .shared) {
+        self.favoriteStore = favoriteRepositoryStore
+        self.selectedStore = selectedRepositoryStore
+        self.dataSource = FavoritesDataSource(actionCreator: actionCreator,
+                                              favoriteRepositoryStore: favoriteRepositoryStore)
 
         super.init(nibName: "FavoritesViewController", bundle: nil)
     }

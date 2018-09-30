@@ -16,18 +16,21 @@ final class RepositorySearchViewController: UIViewController {
     @IBOutlet private(set) weak var tableView: UITableView!
     @IBOutlet private(set) weak var searchBar: UISearchBar!
 
+    private let actionCreator: ActionCreator
     private let searchStore: SearchRepositoryStore
-    private let searchActionCreator: SearchRepositoryActionCreator
     private let selectedStore: SelectedRepositoryStore
 
     private let dataSource: RepositorySearchDataSource
     private let disposeBag = DisposeBag()
 
-    init(flux: Flux = .shared) {
-        self.searchStore = flux.searchRepositoryStore
-        self.searchActionCreator = flux.searchRepositoryActionCreator
-        self.selectedStore = flux.selectedRepositoryStore
-        self.dataSource = RepositorySearchDataSource(flux: flux)
+    init(actionCreator: ActionCreator = .init(),
+         searchRepositoryStore: SearchRepositoryStore = .shared,
+         selectedRepositoryStore: SelectedRepositoryStore = .shared) {
+        self.searchStore = searchRepositoryStore
+        self.actionCreator = actionCreator
+        self.selectedStore = selectedRepositoryStore
+        self.dataSource = RepositorySearchDataSource(actionCreator: actionCreator,
+                                                     searchRepositoryStore: searchRepositoryStore)
 
         super.init(nibName: "RepositorySearchViewController", bundle: nil)
     }
@@ -70,24 +73,24 @@ final class RepositorySearchViewController: UIViewController {
             .disposed(by: disposeBag)
 
         searchBar.rx.cancelButtonClicked
-            .subscribe(onNext: { [searchActionCreator] in
-                searchActionCreator.setIsSearchFieldEditing(false)
+            .subscribe(onNext: { [actionCreator] in
+                actionCreator.setIsSearchFieldEditing(false)
             })
             .disposed(by: disposeBag)
 
         searchBar.rx.textDidBeginEditing
-            .subscribe(onNext: { [searchActionCreator] in
-                searchActionCreator.setIsSearchFieldEditing(true)
+            .subscribe(onNext: { [actionCreator] in
+                actionCreator.setIsSearchFieldEditing(true)
             })
             .disposed(by: disposeBag)
 
         searchBar.rx.searchButtonClicked
             .withLatestFrom(searchBar.rx.text)
-            .subscribe(onNext: { [searchActionCreator] text in
+            .subscribe(onNext: { [actionCreator] text in
                 if let text = text, !text.isEmpty {
-                    searchActionCreator.clearRepositories()
-                    searchActionCreator.searchRepositories(query: text)
-                    searchActionCreator.setIsSearchFieldEditing(false)
+                    actionCreator.clearRepositories()
+                    actionCreator.searchRepositories(query: text)
+                    actionCreator.setIsSearchFieldEditing(false)
                 }
             })
             .disposed(by: disposeBag)

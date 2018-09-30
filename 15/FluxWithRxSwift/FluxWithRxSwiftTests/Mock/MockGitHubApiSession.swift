@@ -17,22 +17,14 @@ final class MockGitHubApiSession: GitHubApiRequestable {
     private let _searchRepositoriesParams = PublishRelay<(String, Int)>()
     private let _searchRepositoriesResult = PublishRelay<([GitHub.Repository], GitHub.Pagination)>()
 
-    private var searchRepositoriesDisposeBag: DisposeBag?
 
     init() {
         self.searchRepositoriesParams = _searchRepositoriesParams.asObservable()
     }
 
-    func searchRepositories(query: String, page: Int, completion: @escaping (Result<([Repository], Pagination)>) -> ()) {
+    func searchRepositories(query: String, page: Int) -> Observable<([Repository], Pagination)> {
         _searchRepositoriesParams.accept((query, page))
-
-        let disposeBag = DisposeBag()
-        _searchRepositoriesResult
-            .map { Result.success($0) }
-            .subscribe(onNext: completion)
-            .disposed(by: disposeBag)
-
-        searchRepositoriesDisposeBag = disposeBag
+        return _searchRepositoriesResult.asObservable()
     }
 
     func setSearchRepositoriesResult(repositories: [GitHub.Repository], pagination: GitHub.Pagination) {

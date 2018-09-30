@@ -12,11 +12,12 @@ import GitHub
 final class FavoritesDataSource: NSObject {
 
     private let favoriteStore: FavoriteRepositoryStore
-    private let selectedActionCreator: SelectedRepositoryActionCreator
+    private let actionCreator: ActionCreator
 
-    init(flux: Flux) {
-        self.favoriteStore = flux.favoriteRepositoryStore
-        self.selectedActionCreator = flux.selectedRepositoryActionCreator
+    init(actionCreator: ActionCreator = .init(),
+         favoriteRepositoryStore: FavoriteRepositoryStore = .shared) {
+        self.favoriteStore = favoriteRepositoryStore
+        self.actionCreator = actionCreator
         super.init()
     }
 
@@ -48,6 +49,6 @@ extension FavoritesDataSource: UITableViewDelegate {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         tableView.deselectRow(at: indexPath, animated: false)
         let repository = favoriteStore.repositories[indexPath.row]
-        selectedActionCreator.setSelectedRepository(repository)
+        actionCreator.setSelectedRepository(repository)
     }
 }

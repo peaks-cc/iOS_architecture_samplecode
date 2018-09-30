@@ -19,38 +19,46 @@ final class SearchRepositoryStore {
     private let _isFetching = BehaviorRelay<Bool>(value: false)
     private let _repositories = BehaviorRelay<[GitHub.Repository]>(value: [])
 
-    let error: Observable<Error>
+    private let _error = PublishRelay<Error>()
 
     private let disposeBag = DisposeBag()
 
-    init(dispatcher: SearchRepositoryDispatcher = .shared) {
-        self.error = dispatcher.error.asObservable()
+    init(dispatcher: Dispatcher = .shared) {
 
-        dispatcher.query
-            .bind(to: _query)
-            .disposed(by: disposeBag)
+        dispatcher.register(callback: { [weak self] action in
+            guard let me = self else {
+                return
+            }
 
-        dispatcher.pagination
-            .bind(to: _pagination)
-            .disposed(by: disposeBag)
+            switch action {
+            case let .searchRepositories(repositories):
+                me._repositories.accept(me._repositories.value + repositories)
 
-        dispatcher.addRepositories
-            .withLatestFrom(_repositories) { $1 + $0 }
-            .bind(to: _repositories)
-            .disposed(by: disposeBag)
+            case .clearSearchRepositories:
+                me._repositories.accept([])
 
-        dispatcher.clearRepositories
-            .map { [] }
-            .bind(to: _repositories)
-            .disposed(by: disposeBag)
+            case let .searchPagination(pagination):
+                me._pagination.accept(pagination)
 
-        dispatcher.isSearchFieldEditing
-            .bind(to: _isSearchFieldEditing)
-            .disposed(by: disposeBag)
+            case let .isRepositoriesFetching(isFetching):
+                me._isFetching.accept(isFetching)
 
-        dispatcher.isFetching
-            .bind(to: _isFetching)
-            .disposed(by: disposeBag)
+            case let .isSearchFieldEditing(isEditing):
+                me._isSearchFieldEditing.accept(isEditing)
+
+            case let .error(error):
+                me._error.accept(error)
+
+            case let .searchQuery(query):
+                me._query.accept(query)
+
+            case .selectedRepository,
+                 .setFavoriteRepositories:
+                return
+
+            }
+        })
+        .disposed(by: disposeBag)
     }
 }
 
@@ -91,5 +99,9 @@ extension SearchRepositoryStore {
     }
     var queryObservable: Observable<String?> {
         return _query.asObservable()
+    }
+
+    var errorObservable: Observable<Error> {
+        return _error.asObservable()
     }
 }

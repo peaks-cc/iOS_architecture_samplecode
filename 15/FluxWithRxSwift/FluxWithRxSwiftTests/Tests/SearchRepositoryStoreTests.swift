@@ -17,13 +17,10 @@ final class SearchRepositoryStoreTests: XCTestCase {
     private struct Dependency {
 
         let store: SearchRepositoryStore
-        let dispatcher: SearchRepositoryDispatcher
+        let dispatcher = Dispatcher()
 
         init() {
-            let flux = Flux.mock()
-
-            self.store = flux.searchRepositoryStore
-            self.dispatcher = flux.searchRepositoryDispatcher
+            self.store = SearchRepositoryStore(dispatcher: dispatcher)
         }
     }
 
@@ -50,7 +47,7 @@ final class SearchRepositoryStoreTests: XCTestCase {
                 expect.fulfill()
             })
 
-        dependency.dispatcher.addRepositories.accept(repositories)
+        dependency.dispatcher.dispatch(.searchRepositories(repositories))
         wait(for: [expect], timeout: 0.1)
         disposable.dispose()
 
@@ -60,7 +57,7 @@ final class SearchRepositoryStoreTests: XCTestCase {
     func testClearRepositories() {
         let repositories: [GitHub.Repository] = [.mock(), .mock()]
 
-        dependency.dispatcher.addRepositories.accept(repositories)
+        dependency.dispatcher.dispatch(.searchRepositories(repositories))
         XCTAssertFalse(dependency.store.repositories.isEmpty)
 
         let expect = expectation(description: "waiting store changes")
@@ -71,7 +68,7 @@ final class SearchRepositoryStoreTests: XCTestCase {
                 expect.fulfill()
             })
 
-        dependency.dispatcher.clearRepositories.accept(())
+        dependency.dispatcher.dispatch(.clearSearchRepositories)
         wait(for: [expect], timeout: 0.1)
         disposable.dispose()
 

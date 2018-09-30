@@ -38,22 +38,23 @@ final class RepositoryDetailViewController: UIViewController {
 
     private lazy var favoriteButton = UIBarButtonItem(title: nil, style: .plain, target: nil, action: nil)
 
+
+    private let actionCreator: ActionCreator
     private let favoriteStore: FavoriteRepositoryStore
-    private let favoriteActionCreator: FavoriteRepositoryActionCreator
     private let selectedStore: SelectedRepositoryStore
-    private let selectedActionCreator: SelectedRepositoryActionCreator
 
     private let disposeBag = DisposeBag()
 
     deinit {
-       selectedActionCreator.setSelectedRepository(nil)
+       actionCreator.setSelectedRepository(nil)
     }
 
-    init(flux: Flux = .shared) {
-        self.favoriteStore = flux.favoriteRepositoryStore
-        self.favoriteActionCreator = flux.favoriteRepositoryActionCreator
-        self.selectedStore = flux.selectedRepositoryStore
-        self.selectedActionCreator = flux.selectedRepositoryActionCreator
+    init(actionCreator: ActionCreator = .init(),
+         favoriteRepositoryStore: FavoriteRepositoryStore = .shared,
+         selectedRepositoryStore: SelectedRepositoryStore = .shared) {
+        self.favoriteStore = favoriteRepositoryStore
+        self.actionCreator = actionCreator
+        self.selectedStore = selectedRepositoryStore
 
         super.init(nibName: "RepositoryDetailViewController", bundle: nil)
 
@@ -104,11 +105,11 @@ final class RepositoryDetailViewController: UIViewController {
         favoriteButton.rx.tap.asObservable()
             .withLatestFrom(isFavorite)
             .withLatestFrom(repository) { ($0, $1) }
-            .subscribe(onNext: { [favoriteActionCreator] isFavorite, repository in
+            .subscribe(onNext: { [actionCreator] isFavorite, repository in
                 if isFavorite {
-                    favoriteActionCreator.removeFavoriteRepository(repository)
+                    actionCreator.removeFavoriteRepository(repository)
                 } else {
-                    favoriteActionCreator.addFavoriteRepository(repository)
+                    actionCreator.addFavoriteRepository(repository)
                 }
             })
             .disposed(by: disposeBag)

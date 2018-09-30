@@ -17,10 +17,30 @@ final class FavoriteRepositoryStore {
 
     private let disposeBag = DisposeBag()
 
-    init(dispatcher: FavoriteRepositoryDispatcher = .shared) {
-        dispatcher.repositories
-            .bind(to: _repositories)
-            .disposed(by: disposeBag)
+    init(dispatcher: Dispatcher = .shared) {
+        
+        dispatcher.register(callback: { [weak self] action in
+            guard let me = self else {
+                return
+            }
+
+            switch action {
+            case let .setFavoriteRepositories(repositories):
+                me._repositories.accept(repositories)
+
+            case .selectedRepository,
+                 .searchRepositories,
+                 .clearSearchRepositories,
+                 .searchPagination,
+                 .isRepositoriesFetching,
+                 .isSearchFieldEditing,
+                 .searchQuery,
+                 .error:
+                return
+
+            }
+        })
+        .disposed(by: disposeBag)
     }
 }
 

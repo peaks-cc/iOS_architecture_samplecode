@@ -16,14 +16,19 @@ final class SearchUsersViewControllerTests: XCTestCase {
         let apiSession = MockGitHubApiSession()
         let localCache = MockLocalCache()
 
-        let dispatcher: SearchRepositoryDispatcher
+        let dispatcher = Dispatcher()
 
         let viewController: RepositorySearchViewController
 
         init() {
-            let flux = Flux.mock(apiSession: apiSession, localCache: localCache)
-            self.dispatcher = flux.searchRepositoryDispatcher
-            self.viewController = RepositorySearchViewController(flux: flux)
+            let actionCreator = ActionCreator(dispatcher: dispatcher,
+                                              apiSession: apiSession,
+                                              localCache: localCache)
+            let searchRepositoryStore = SearchRepositoryStore(dispatcher: dispatcher)
+            let selectedRepositoryStore = SelectedRepositoryStore(dispatcher: dispatcher)
+            self.viewController = RepositorySearchViewController(actionCreator: actionCreator,
+                                                                 searchRepositoryStore: searchRepositoryStore,
+                                                                 selectedRepositoryStore: selectedRepositoryStore)
             viewController.loadViewIfNeeded()
         }
     }
@@ -60,7 +65,7 @@ final class SearchUsersViewControllerTests: XCTestCase {
         XCTAssertEqual(tableView.numberOfRows(inSection: 0), 0)
 
         let repositories: [GitHub.Repository] = [.mock(), .mock()]
-        dependency.dispatcher.addRepositories.accept(repositories)
+        dependency.dispatcher.dispatch(.searchRepositories(repositories))
 
         let expect = expectation(description: "waiting view reflection")
         DispatchQueue.main.asyncAfter(deadline: .now() + 1) {
