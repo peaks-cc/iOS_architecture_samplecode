@@ -13,7 +13,7 @@ protocol SearchUserPresenterProtocol {
     var numberOfUsers: Int { get }
     func user(forRow row: Int) -> User?
     func didSelectRow(at indexPath: IndexPath)
-    func didTapSearchButton(text: String)
+    func didTapSearchButton(text: String?)
 }
 
 class SearchUserPresenter: SearchUserPresenterProtocol {
@@ -43,8 +43,10 @@ class SearchUserPresenter: SearchUserPresenterProtocol {
         router.transitionToUserDetail(userName: user.login)
     }
 
-    func didTapSearchButton(text: String) {
-        let query = text
+    func didTapSearchButton(text: String?) {
+        guard let query = text else { return }
+        guard !query.isEmpty else { return }
+
         model.fetchUser(query: query) { [weak self] result in
             switch result {
             case .success(let users):

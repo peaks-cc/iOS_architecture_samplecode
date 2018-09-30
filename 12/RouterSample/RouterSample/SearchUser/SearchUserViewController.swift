@@ -36,9 +36,7 @@ final class SearchUserViewController: UIViewController {
 
 extension SearchUserViewController: UISearchBarDelegate {
     func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
-        if let text = searchBar.text, !text.isEmpty {
-            presenter.didTapSearchButton(text: text)
-        }
+        presenter.didTapSearchButton(text: searchBar.text)
     }
 }
 
