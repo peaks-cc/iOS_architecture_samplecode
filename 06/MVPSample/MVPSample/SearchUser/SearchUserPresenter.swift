@@ -1,6 +1,6 @@
 //
 //  SearchUserPresenter.swift
-//  RouterSample
+//  MVPSample
 //
 //  Created by Kenji Tanaka on 2018/09/24.
 //  Copyright © 2018年 Kenji Tanaka. All rights reserved.
@@ -21,12 +21,10 @@ class SearchUserPresenter: SearchUserPresenterProtocol {
 
     private weak var view: SearchUserViewProtocol!
     private var model: SearchUserModelProtocol!
-    private var router: SearchUserRouterProtocol!
 
-    init(view: SearchUserViewProtocol, model: SearchUserModelProtocol, router: SearchUserRouterProtocol) {
+    init(view: SearchUserViewProtocol, model: SearchUserModelProtocol) {
         self.view = view
         self.model = model
-        self.router = router
     }
 
     var numberOfUsers: Int {
@@ -40,7 +38,7 @@ class SearchUserPresenter: SearchUserPresenterProtocol {
 
     func didSelectRow(at indexPath: IndexPath) {
         guard let user = user(forRow: indexPath.row) else { return }
-        router.transitionToUserDetail(userName: user.login)
+        view.transitionToUserDetail(userName: user.login)
     }
 
     func didTapSearchButton(text: String?) {

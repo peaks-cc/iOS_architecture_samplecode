@@ -1,6 +1,6 @@
 //
 //  SearchUserViewController.swift
-//  RouterSample
+//  MVPSample
 //
 //  Created by Kenji Tanaka on 2018/09/23.
 //  Copyright © 2018年 Kenji Tanaka. All rights reserved.
@@ -8,8 +8,9 @@
 
 import UIKit
 
-protocol SearchUserViewProtocol: class, Transitioner where Self: UIViewController {
+protocol SearchUserViewProtocol: class {
     func reloadTableView()
+    func transitionToUserDetail(userName: String)
 }
 
 final class SearchUserViewController: UIViewController {
@@ -66,5 +67,14 @@ extension SearchUserViewController: UITableViewDataSource {
 extension SearchUserViewController: SearchUserViewProtocol {
     func reloadTableView() {
         tableView.reloadData()
+    }
+
+    func transitionToUserDetail(userName: String) {
+        let userDetailVC = UIStoryboard(name: "UserDetail", bundle: nil).instantiateInitialViewController() as! UserDetailViewController
+        let model = UserDetailModel(userName: userName)
+        let presenter = UserDetailPresenter(userName: userName, view: userDetailVC, model: model)
+        userDetailVC.inject(presenter: presenter)
+
+        navigationController?.pushViewController(userDetailVC, animated: true)
     }
 }

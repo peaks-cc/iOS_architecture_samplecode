@@ -32,6 +32,7 @@ import UIKit
 // - UserDetailViewController
 //   - View
 //     - UserView
+//     - Followers
 //     - RepositoryCell
 //   - Feature
 //     - transitionToWeb
@@ -39,10 +40,10 @@ import UIKit
 // - RepositoryDetailViewController
 //   - View
 //     - UserView
-//     - SeeAlso(Repositories)
-//       - RepositoryCell
+//     - Description
+//     - Contributors
+//     - SeeMoreDetail
 //   - Feature
-//     - transitionToWeb
 //     - transitionToUserDetail
 //     - transitionToRepositoryDetail
 

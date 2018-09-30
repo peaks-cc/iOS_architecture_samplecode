@@ -3,10 +3,11 @@
 // Copyright (c) 2018 Kenji Tanaka. All rights reserved.
 //
 
-import Foundation
+import UIKit
+import GitHub
 
-protocol SearchUserRouterProtocol {
-    func transitionToUserDetail(user: User)
+protocol SearchUserRouterProtocol: class {
+    func transitionToUserDetail(userName: String)
 }
 
 class SearchUserRouter: SearchUserRouterProtocol {
@@ -16,7 +17,13 @@ class SearchUserRouter: SearchUserRouterProtocol {
         self.view = view
     }
 
-    func transitionToUserDetail(user: User) {
+    func transitionToUserDetail(userName: String) {
+        let userDetailVC = UIStoryboard(name: "UserDetail", bundle: nil).instantiateInitialViewController() as! UserDetailViewController
+        let model = UserDetailModel(userName: userName)
+        let router = UserDetailRouter(view: userDetailVC)
+        let presenter = UserDetailPresenter(userName: userName, view: userDetailVC, model: model, router: router)
+        userDetailVC.inject(presenter: presenter)
 
+        view.pushViewController(userDetailVC, animated: true)
     }
 }
