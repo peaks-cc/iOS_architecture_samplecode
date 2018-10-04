@@ -1,8 +1,8 @@
 //
 //  AppDelegate.swift
-//  MVVMSample
+//  RxMVVMSample
 //
-//  Created by Kenji Tanaka on 2018/09/23.
+//  Created by Kenji Tanaka on 2018/10/02.
 //  Copyright © 2018年 Kenji Tanaka. All rights reserved.
 //
 
@@ -14,8 +14,15 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     var window: UIWindow?
 
 
-    func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
-        // Override point for customization after application launch.
+    func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
+
+        let searchUserViewController = UIStoryboard(name: "SearchUser", bundle: nil).instantiateInitialViewController() as! SearchUserViewController
+        let navigationController = UINavigationController(rootViewController: searchUserViewController)
+
+        window = UIWindow(frame: UIScreen.main.bounds)
+        window?.rootViewController = navigationController
+        window?.makeKeyAndVisible()
+
         return true
     }
 
