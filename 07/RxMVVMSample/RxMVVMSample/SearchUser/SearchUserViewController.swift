@@ -14,7 +14,12 @@ final class SearchUserViewController: UIViewController, UISearchBarDelegate, UIT
     @IBOutlet weak var searchBar: UISearchBar!
     @IBOutlet weak var tableView: UITableView!
 
-    private var viewModel: SearchUserViewModel?
+    private lazy var viewModel = SearchUserViewModel(
+        searchBarText: searchBar.rx.text.asObservable(),
+        searchButtonClicked: searchBar.rx.searchButtonClicked.asObservable(),
+        itemSelected: tableView.rx.itemSelected.asObservable()
+    )
+
     private let disposeBag = DisposeBag()
 
     override func viewDidLoad() {
@@ -22,13 +27,13 @@ final class SearchUserViewController: UIViewController, UISearchBarDelegate, UIT
 
         setup()
 
-        viewModel = SearchUserViewModel(
-            searchBarTextObs: searchBar.rx.text.asObservable(),
-            searchButtonClicked: searchBar.rx.searchButtonClicked.asObservable(),
-            itemSelected: tableView.rx.itemSelected.asObservable(),
-            reloadData: reloadData,
-            transitionToUserDetail: transitionToUserDetail
-        )
+        viewModel.reloadData
+            .bind(to: reloadData)
+            .disposed(by: disposeBag)
+
+        viewModel.transitionToUserDetail
+            .bind(to: transitionToUserDetail)
+            .disposed(by: disposeBag)
     }
 
     private func setup() {
@@ -40,15 +45,13 @@ final class SearchUserViewController: UIViewController, UISearchBarDelegate, UIT
 
 extension SearchUserViewController: UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        // FIXME: なんか最初viewModelがnilになる...
-        // FIXME: ので、optionalにしてみた...
-        return viewModel?.users.value.count ?? 0
+        return viewModel.users.count
     }
 
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "UserCell") as! UserCell
 
-        guard let user = viewModel?.users.value[indexPath.row] else { return cell }
+        let user = viewModel.users[indexPath.row]
         cell.configure(user: user)
 
         return cell
@@ -56,13 +59,13 @@ extension SearchUserViewController: UITableViewDataSource {
 }
 
 extension SearchUserViewController {
-    private var reloadData: AnyObserver<Void> {
+    private var reloadData: Binder<Void> {
         return Binder(self) { me, _ in
             me.tableView.reloadData()
-            }.asObserver()
+        }
     }
 
-    private var transitionToUserDetail: AnyObserver<(String)> {
+    private var transitionToUserDetail: Binder<(String)> {
         return Binder(self) { me, userName in
             let userDetailVC = UIStoryboard(name: "UserDetail", bundle: nil).instantiateInitialViewController() as! UserDetailViewController
             let model = UserDetailModel(userName: userName)
@@ -70,6 +73,6 @@ extension SearchUserViewController {
             userDetailVC.inject(presenter: presenter)
 
             me.navigationController?.pushViewController(userDetailVC, animated: true)
-            }.asObserver()
+        }
     }
 }
