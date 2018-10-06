@@ -8,7 +8,7 @@
 
 import Foundation
 
-struct GitHubRepoViewModel {
+struct GitHubRepoViewData {
     let id: String
     let fullName: String
     let description: String
@@ -17,48 +17,49 @@ struct GitHubRepoViewModel {
     let isLiked: Bool
 }
 
-protocol ReposPresenterInput {
+protocol ReposPresenterProtocol {
     // キーワードを使ったサーチ
     func startFetch(using keywords: [String])
     // お気に入り済みリポジトリ一覧の取得
     func requestLikedRepos()
 
     // お気に入りの追加・削除
+
+
+    var output: ReposPresenterOutput? { get set }
 }
 
-protocol ReposPresenterOutput {
-    func didUpdate(_ viewModels: [GitHubRepoViewModel])
+protocol ReposPresenterOutput: AnyObject {
+    func update(by viewDataArray: [GitHubRepoViewData])
 }
 
-class ReposPresenter: ReposLikesUseCaseOutput, ReposPresenterInput {
+class ReposPresenter: ReposPresenterProtocol, ReposLikesUseCaseOutput {
 
-    let usecaseInput: ReposLikesUseCaseInput
-    var presenterOutput: ReposPresenterOutput?
+    private var useCase: ReposLikesUseCaseProtocol
+    weak var output: ReposPresenterOutput?
 
-    init(usecaseInput: ReposLikesUseCaseInput,
-         presenterOutput: ReposPresenterOutput?) {
-
-        self.usecaseInput = usecaseInput
-        self.presenterOutput = presenterOutput
+    init(useCase: ReposLikesUseCaseProtocol) {
+        self.useCase = useCase
+        self.useCase.output = self
     }
 
     func startFetch(using keywords: [String]) {
         // Use Caseに検索を依頼
-        usecaseInput.startFetch(using: keywords)
+        useCase.startFetch(using: keywords)
     }
 
     func requestLikedRepos() {
-        usecaseInput.requestLikedRepos()
+        useCase.requestLikedRepos()
     }
     
-    func useCaseDidReceive(_ repoStatus: [RepoStatus]) {
+    func useCaseDidUpdateStatuses(_ repoStatus: [GitHubRepoStatus]) {
         // 届いたペアをView用のモデルに変換
 //        <#code#>
     }
     
-    func useCaseDidUpdate(_ likes: [Like]) {
-//        <#code#>
-    }
+//    func useCaseDidUpdate(_ likes: [Like]) {
+////        <#code#>
+//    }
 
     func useCaseDidReceiveError(_ error: Error) {
 //        <#code#>

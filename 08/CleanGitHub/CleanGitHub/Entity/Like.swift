@@ -8,8 +8,8 @@
 
 import Foundation
 
-struct Like: Encodable {
-    let id: String
-    let isLiked: Bool
-}
-
+//struct Like: Encodable {
+//    let id: String
+//    let isLiked: Bool
+//}
+//

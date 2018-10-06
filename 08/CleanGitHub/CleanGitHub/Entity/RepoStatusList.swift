@@ -8,58 +8,79 @@
 
 import Foundation
 
-struct RepoStatus {
+struct GitHubRepoStatus: Equatable {
     let repo: GitHubRepo
-    let like: Like?
+    let isLiked: Bool
+
+    static func == (lhs: GitHubRepoStatus, rhs: GitHubRepoStatus) -> Bool {
+        return lhs.repo == rhs.repo
+    }
 }
 
-struct RepoStatusList {
+extension Array where Element == GitHubRepoStatus {
+    init(repos: [GitHubRepo], likes: [GitHubRepo.ID: Bool]) {
+        self = repos.map { repo in
+            GitHubRepoStatus(
+                repo: repo,
+                isLiked: likes[repo.id] ?? false
+            )
+        }
+    }
+}
+
+enum UniqueStrategy {
+    case ignoreNewOne
+    case replaceByNewOne
+    case removeOldOne
+}
+extension Array where Element: Equatable {
+    func unique(resolve: (Element, Element) -> UniqueStrategy) -> [Element] {
+        return reduce(into: []) { (result, newOne) in
+            switch result.firstIndex(of: newOne) {
+            case .none:
+                result.append(newOne)
+            case let prevIndex?:
+                let prev = result[prevIndex]
+                switch resolve(prev, newOne) {
+                case .ignoreNewOne:
+                    ()
+                case .replaceByNewOne:
+                    result[prevIndex] = newOne
+                case .removeOldOne:
+                    result.remove(at: prevIndex)
+                    result.append(newOne)
+                }
+            }
+        }
+    }
+}
+
+struct GitHubRepoStatusList {
     enum Error: Swift.Error {
-        case notFoundRepo(ofID: String)
+        case notFoundRepo(ofID: GitHubRepo.ID)
     }
+    private(set) var statuses: [GitHubRepoStatus]
 
-    private var repos = [GitHubRepo]()
-    var likes = [Like]()
-
-    mutating func register(repos: [GitHubRepo]) {
-        self.repos = repos
+    init(repos: [GitHubRepo], likes: [GitHubRepo.ID: Bool]) {
+        statuses = Array(repos: repos, likes: likes)
+            .unique(resolve: { _, _ in .ignoreNewOne })
     }
-    mutating func register(likes: [Like]) {
-        self.likes = likes
+    mutating func append(repos: [GitHubRepo], likes: [GitHubRepo.ID: Bool]) {
+        let newStatusesMayNotUnique = statuses + Array(repos: repos, likes: likes)
+        statuses = newStatusesMayNotUnique
+                .unique { _, _ in .removeOldOne }
     }
-
-    mutating func likeRepo(of id: String) throws {
-        try set(isLiked: true, of: id)
-    }
-    mutating func unlikeRepo(of id: String) throws {
-        try set(isLiked: false, of: id)
-    }
-
-    private mutating func set(isLiked: Bool, of id: String) throws {
-        guard repos.contains(where: { $0.id == id }) else {
+    mutating func set(isLiked: Bool, for id: GitHubRepo.ID) throws {
+        guard let index = statuses.firstIndex(where: { $0.repo.id == id }) else {
             throw Error.notFoundRepo(ofID: id)
         }
-        let newLike = Like(id: id, isLiked: isLiked)
-        // お気に入り情報がない場合は新しく追加
-        if let index = likes.firstIndex(where: { $0.id == id }) {
-            likes[index] = newLike
-        } else {
-            likes.append(newLike)
-        }
+        let currentStatus = statuses[index]
+        statuses[index] = GitHubRepoStatus(
+            repo: currentStatus.repo,
+            isLiked: isLiked
+        )
     }
-
-    func status(of id: String) throws -> RepoStatus {
-        guard let repo = repos.first(where: { $0.id == id }) else {
-            throw Error.notFoundRepo(ofID: id)
-        }
-        return RepoStatus(repo: repo,
-                          like: likes.first(where: { $0.id == id }))
-    }
-
-    var allStatus: [RepoStatus] {
-        return repos.map{ repo in
-            RepoStatus(repo: repo,
-                       like: likes.first(where: { $0.id == repo.id}))
-        }
+    subscript(id: GitHubRepo.ID) -> GitHubRepoStatus? {
+        return statuses.first(where: { $0.repo.id == id })
     }
 }

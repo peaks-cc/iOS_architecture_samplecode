@@ -8,25 +8,26 @@
 
 import Foundation
 
-class UserDefaultsDataStore: LikesGatewayProtocol {
-    func fetch(byNames names: [String], completion: (Result<[Like]>) -> Void) {
+protocol UserDefaultsProtocol {
+    func bool(forKey defaultName: String) -> Bool
+    func set(_ value: Bool, forKey defaultName: String)
+}
+extension UserDefaults: UserDefaultsProtocol {}
 
-        let likes = names.map { UserDefaults.standard.object(forKey: $0) }
-            .compactMap { $0 as? Like }
-        completion(Result.success(likes))
+final class UserDefaultsDataStore: LikesGatewayProtocol {
+    let userDefaults: UserDefaultsProtocol
+    init(userDefaults: UserDefaultsProtocol) {
+        self.userDefaults = userDefaults
     }
-
-    func save(liked: Bool, for repo: GitHubRepo, completion: (Result<Like>) -> Void) {
-
-        let encoder = JSONEncoder()
-        do {
-            let like: Like = .init(id: repo.id, isLiked: liked)
-
-            let data = try encoder.encode(like)
-            let jsonstr: String = String(data: data, encoding: .utf8)!
-            print(jsonstr)
-            UserDefaults.standard.set(jsonstr, forKey: repo.fullName)
-            completion(Result.success(like))
-        } catch { print(error.localizedDescription) }
+    func fetch(ids: [GitHubRepo.ID], completion: (Result<[GitHubRepo.ID: Bool]>) -> Void) {
+        let idsAndLikes: [(GitHubRepo.ID, Bool)] = ids.map { id in
+            (id, userDefaults.bool(forKey: id.rawValue))
+        }
+        let result = Dictionary(uniqueKeysWithValues: idsAndLikes)
+        completion(.success(result))
+    }
+    func save(liked: Bool, for id: GitHubRepo.ID, completion: (Result<Bool>) -> Void) {
+        userDefaults.set(liked, forKey: id.rawValue)
+        completion(.success(liked))
     }
 }
