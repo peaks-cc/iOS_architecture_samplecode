@@ -27,6 +27,10 @@ final class SearchUserViewController: UIViewController, UISearchBarDelegate, UIT
 
         setup()
 
+        viewModel.deselectRow
+            .bind(to: deselectRow)
+            .disposed(by: disposeBag)
+
         viewModel.reloadData
             .bind(to: reloadData)
             .disposed(by: disposeBag)
@@ -59,6 +63,12 @@ extension SearchUserViewController: UITableViewDataSource {
 }
 
 extension SearchUserViewController {
+    private var deselectRow: Binder<IndexPath> {
+        return Binder(self) { me, indexPath in
+            me.tableView.deselectRow(at: indexPath, animated: true)
+        }
+    }
+
     private var reloadData: Binder<Void> {
         return Binder(self) { me, _ in
             me.tableView.reloadData()

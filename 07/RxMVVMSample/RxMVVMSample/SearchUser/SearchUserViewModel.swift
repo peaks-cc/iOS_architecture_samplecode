@@ -22,6 +22,7 @@ class SearchUserViewModel {
     private let _users = BehaviorRelay<[User]>(value: [])
 
     // observables
+    let deselectRow: Observable<IndexPath>
     let reloadData: Observable<Void>
     let transitionToUserDetail: Observable<String>
 
@@ -31,6 +32,8 @@ class SearchUserViewModel {
          searchUserModel: SearchUserModelProtocol = SearchUserModel()) {
 
         self.searchUserModel = searchUserModel
+
+        self.deselectRow = itemSelected.map { $0 }
 
         self.reloadData = _users.map { _ in }
 
