@@ -11,51 +11,64 @@ import RxCocoa
 import GitHub
 
 class SearchUserViewModel {
-    // TODO: be injectable
-    private let searchUserModel = SearchUserModel()
+
+    private let searchUserModel: SearchUserModelProtocol
     private let disposeBag = DisposeBag()
 
+    // computed values
+    var users: [User] { return _users.value }
+
     // values
-    private(set) var users = BehaviorRelay<[User]>(value: [])
-    var searchBarText = BehaviorRelay<String?>(value: nil)
+    private let _users = BehaviorRelay<[User]>(value: [])
 
-    // events
-    var didTapSearchButton = PublishSubject<Void>()
+    // observables
+    let reloadData: Observable<Void>
+    let transitionToUserDetail: Observable<String>
 
-    init(searchBarTextObs: Observable<String?>, searchButtonClicked: Observable<Void>, itemSelected: Observable<IndexPath>, reloadData: AnyObserver<Void>, transitionToUserDetail: AnyObserver<String>) {
-        searchBarTextObs
-            .bind(to: searchBarText)
-            .disposed(by: disposeBag)
+    init(searchBarText: Observable<String?>,
+         searchButtonClicked: Observable<Void>,
+         itemSelected: Observable<IndexPath>,
+         searchUserModel: SearchUserModelProtocol = SearchUserModel()) {
 
-        searchButtonClicked
-            .bind(to: didTapSearchButton)
-            .disposed(by: disposeBag)
+        self.searchUserModel = searchUserModel
 
-        itemSelected.subscribe(onNext: { [weak self] indexPath in
-            guard let userName = self?.users.value[indexPath.row].login else { return }
-            transitionToUserDetail.onNext(userName)
-        }).disposed(by: disposeBag)
+        self.reloadData = _users.map { _ in }
 
-        users
-            .map{ _ in}
-            .subscribe { _ in
-                reloadData.onNext(())
-            }.disposed(by: disposeBag)
-
-        didTapSearchButton.subscribe(onNext: { [weak self] in
-            guard let strongSelf = self else { return }
-
-            // TODO: call api
-            guard let query = strongSelf.searchBarText.value else { return }
-            strongSelf.searchUserModel.fetchUser(query: query, completion: { result in
-                switch result {
-                case .success(let users):
-                    strongSelf.users.accept(users)
-                case .failure(let error):
-                    // TODO: Error Handling
-                    ()
+        self.transitionToUserDetail = itemSelected
+            .withLatestFrom(_users) { ($0, $1) }
+            .flatMap { indexPath, users -> Observable<String> in
+                guard indexPath.row < users.count else {
+                    return .empty()
                 }
+                return .just(users[indexPath.row].login)
+            }
+
+        let searchResponse = searchButtonClicked
+            .withLatestFrom(searchBarText)
+            .flatMapFirst { [weak self] text -> Observable<Event<[User]>> in
+                guard let me = self, let query = text else {
+                    return .empty()
+                }
+                return me.searchUserModel
+                    .fetchUser(query: query)
+                    .materialize()
+            }
+            .share()
+
+        searchResponse
+            .flatMap { event -> Observable<[User]> in
+                event.element.map(Observable.just) ?? .empty()
+            }
+            .bind(to: _users)
+            .disposed(by: disposeBag)
+
+        searchResponse
+            .flatMap { event -> Observable<Error> in
+                event.error.map(Observable.just) ?? .empty()
+            }
+            .subscribe(onNext: { error in
+                // TODO: Error Handling
             })
-        }).disposed(by: disposeBag)
+            .disposed(by: disposeBag)
     }
 }
