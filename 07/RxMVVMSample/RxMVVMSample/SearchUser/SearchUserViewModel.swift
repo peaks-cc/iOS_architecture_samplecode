@@ -10,8 +10,10 @@ import RxSwift
 import RxCocoa
 import GitHub
 
+// MVVMはもしかして、ViewとViewModelをprotocol化しなくても疎結合になる？
+// View -> ViewModelのフローはViewのユニットテストを書くことは（ほとんど）無いから、Viewをprotocol化しなくてよい？
+// ViewModel -> ViewのフローはViewModelに渡すのがObservableであってViewではないから、ViewModelをprotocol化しなくてよい？
 class SearchUserViewModel {
-
     private let searchUserModel: SearchUserModelProtocol
     private let disposeBag = DisposeBag()
 
