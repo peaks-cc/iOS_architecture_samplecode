@@ -80,10 +80,6 @@ extension SearchUserViewController {
     private var transitionToUserDetail: Binder<(String)> {
         return Binder(self) { me, userName in
             let userDetailVC = UIStoryboard(name: "UserDetail", bundle: nil).instantiateInitialViewController() as! UserDetailViewController
-            let model = UserDetailModel(userName: userName)
-            let presenter = UserDetailPresenter(userName: userName, view: userDetailVC, model: model)
-            userDetailVC.inject(presenter: presenter)
-
             me.navigationController?.pushViewController(userDetailVC, animated: true)
         }
     }

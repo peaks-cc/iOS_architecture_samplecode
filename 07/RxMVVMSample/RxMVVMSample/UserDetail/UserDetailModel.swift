@@ -4,26 +4,37 @@
 //
 
 import GitHub
+import RxSwift
 
 protocol UserDetailModelProtocol {
-    func fetchRepositories(completion: @escaping (Result<[Repository]>) -> ())
+    func fetchRepositories() -> Observable<[Repository]>
 }
 
 class UserDetailModel: UserDetailModelProtocol {
-    private let userName: String!
+    let session = Session()
+
+    private let userName: String
     init(userName: String) {
         self.userName = userName
     }
 
-    func fetchRepositories(completion: @escaping (Result<[Repository]>) -> ()) {
-        let session = Session()
-        let request = UserReposRequest(username: userName, type: nil, sort: nil, direction: nil, page: nil, perPage: nil)
-        session.send(request) { result in
-            switch result {
-            case .success(let response):
-                completion(.success(response.0))
-            case .failure(let error):
-                completion(.failure(error))
+    func fetchRepositories() -> Observable<[Repository]> {
+        return Observable.create { [weak self] observer in
+            guard let me = self else { return Disposables.create() }
+
+            let request = UserReposRequest(username: me.userName, type: nil, sort: nil, direction: nil, page: nil, perPage: nil)
+            let task = me.session.send(request) { result in
+                switch result {
+                case .success(let response):
+                    observer.onNext(response.0)
+                    observer.onCompleted()
+                case .failure(let error):
+                    observer.onError(error)
+                }
+            }
+
+            return Disposables.create {
+                task?.cancel()
             }
         }
     }

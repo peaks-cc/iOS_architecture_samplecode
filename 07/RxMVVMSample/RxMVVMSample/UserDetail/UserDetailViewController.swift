@@ -4,26 +4,32 @@
 //
 
 import UIKit
+import RxSwift
+import RxCocoa
 
-protocol UserDetailViewProtocol: class {
-    func reloadTableView()
-    func transitionToRepositoryDetail(userName: String, repositoryName: String)
-}
-
-final class UserDetailViewController: UIViewController {
+final class UserDetailViewController: UIViewController, UITableViewDelegate {
     @IBOutlet weak var tableView: UITableView!
 
-    private var presenter: UserDetailPresenterProtocol!
-    func inject(presenter: UserDetailPresenterProtocol) {
-        self.presenter = presenter
-    }
+    private lazy var viewModel = UserDetailViewModel(userName: "ktanaka117",
+                                                     itemSelected: tableView.rx.itemSelected.asObservable())
+    private let disposeBag = DisposeBag()
 
     override func viewDidLoad() {
         super.viewDidLoad()
 
         setup()
 
-        presenter.viewDidLoad()
+        viewModel.deselectRow
+            .bind(to: deselectRow)
+            .disposed(by: disposeBag)
+
+        viewModel.reloadData
+            .bind(to: reloadData)
+            .disposed(by: disposeBag)
+
+        viewModel.transitionToRepositoryDetail
+            .bind(to: transitionToRepositoryDetail)
+            .disposed(by: disposeBag)
     }
 
     private func setup() {
@@ -33,38 +39,43 @@ final class UserDetailViewController: UIViewController {
     }
 }
 
-extension UserDetailViewController: UITableViewDelegate {
-    public func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        tableView.deselectRow(at: indexPath, animated: true)
-        presenter.didSelectRowAt(indexPath: indexPath)
-    }
-}
-
 extension UserDetailViewController: UITableViewDataSource {
     public func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return presenter.repositories.count
+        return viewModel.repositories.count
     }
 
     public func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "RepositoryCell") as! RepositoryCell
-        if let repository = presenter.repository(forRow: indexPath.row) {
-            cell.configure(repository: repository)
-        }
+        let repository = viewModel.repositories[indexPath.row]
+        cell.configure(repository: repository)
         return cell
     }
 }
 
-extension UserDetailViewController: UserDetailViewProtocol {
-    func reloadTableView() {
-        tableView.reloadData()
+extension UserDetailViewController {
+    private var deselectRow: Binder<IndexPath> {
+        return Binder(self) { me, indexPath in
+            me.tableView.deselectRow(at: indexPath, animated: true)
+        }
     }
 
-    func transitionToRepositoryDetail(userName: String, repositoryName: String) {
-        let model = RepositoryDetailModel(userName: userName, repositoryName: repositoryName)
-        let presenter = RepositoryDetailPresenter(userName: userName, repositoryName: repositoryName, model: model)
-        let repositoryDetailVC = UIStoryboard(name: "RepositoryDetail", bundle: nil).instantiateInitialViewController() as! RepositoryDetailViewController
-        repositoryDetailVC.inject(presenter: presenter)
+    private var reloadData: Binder<Void> {
+        return Binder(self) { me, _ in
+            me.tableView.reloadData()
+        }
+    }
 
-        navigationController?.pushViewController(repositoryDetailVC, animated: true)
+    private var transitionToRepositoryDetail: Binder<(String, String)> {
+        return Binder(self) { me, info in
+            let userName = info.0
+            let repositoryName = info.1
+
+            let model = RepositoryDetailModel(userName: userName, repositoryName: repositoryName)
+            let presenter = RepositoryDetailPresenter(userName: userName, repositoryName: repositoryName, model: model)
+            let repositoryDetailVC = UIStoryboard(name: "RepositoryDetail", bundle: nil).instantiateInitialViewController() as! RepositoryDetailViewController
+            repositoryDetailVC.inject(presenter: presenter)
+
+            me.navigationController?.pushViewController(repositoryDetailVC, animated: true)
+        }
     }
 }
