@@ -16,7 +16,7 @@ class UserDetailViewModel {
 
     private let _repositories = BehaviorRelay<[Repository]>(value: [])
 
-    private lazy var model: UserDetailModelProtocol = UserDetailModel(userName: userName)
+    private let model: UserDetailModelProtocol
 
     private let disposeBag = DisposeBag()
 
@@ -24,8 +24,10 @@ class UserDetailViewModel {
     let reloadData: Observable<Void>
     let transitionToRepositoryDetail: Observable<(String, String)>
 
-    init(userName: String, itemSelected: Observable<IndexPath>) {
+    init(userName: String, itemSelected: Observable<IndexPath>, model: UserDetailModelProtocol?) {
         self.userName = userName
+
+        self.model = model ?? UserDetailModel(userName: userName)
 
         self.deselectRow = itemSelected.map { $0 }
         self.reloadData = _repositories.map { _ in }
@@ -39,7 +41,7 @@ class UserDetailViewModel {
                 return .just((userName, repositories[indexPath.row].name))
         }
 
-        let fetchRepositoriesResponse = model
+        let fetchRepositoriesResponse = self.model
             .fetchRepositories()
             .materialize()
 

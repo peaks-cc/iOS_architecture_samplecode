@@ -10,8 +10,14 @@ import RxCocoa
 final class UserDetailViewController: UIViewController, UITableViewDelegate {
     @IBOutlet weak var tableView: UITableView!
 
-    private lazy var viewModel = UserDetailViewModel(userName: "ktanaka117",
-                                                     itemSelected: tableView.rx.itemSelected.asObservable())
+    // FIXME: ViewControllerで使わいScreenStateが入ってしまうのが気持ちわるい。本来ViewModelが持っていればよいもの。
+    // ただし外部からViewModelを注入する場合、tableViewがnilで落ちる...。
+    var userName: String!
+    private lazy var viewModel = UserDetailViewModel(
+        userName: userName,
+        itemSelected: tableView.rx.itemSelected.asObservable(),
+        model: UserDetailModel(userName: userName))
+
     private let disposeBag = DisposeBag()
 
     override func viewDidLoad() {
