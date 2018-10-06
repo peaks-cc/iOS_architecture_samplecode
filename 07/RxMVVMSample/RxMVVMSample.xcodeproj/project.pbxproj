@@ -25,7 +25,6 @@
 		B547AB592163D16F0014E2CE /* RepositoryDetailModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = B547AB482163D16E0014E2CE /* RepositoryDetailModel.swift */; };
 		B547AB5A2163D16F0014E2CE /* SearchUser.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = B547AB4A2163D16F0014E2CE /* SearchUser.storyboard */; };
 		B547AB5B2163D16F0014E2CE /* SearchUserViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B547AB4B2163D16F0014E2CE /* SearchUserViewController.swift */; };
-		B547AB5C2163D16F0014E2CE /* SearchUserPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = B547AB4C2163D16F0014E2CE /* SearchUserPresenter.swift */; };
 		B547AB5D2163D16F0014E2CE /* SearchUserModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = B547AB4D2163D16F0014E2CE /* SearchUserModel.swift */; };
 		B5568EEC2165CAD200174DE8 /* SearchUserViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5568EEB2165CAD200174DE8 /* SearchUserViewModel.swift */; };
 		B5E156C1216653D900F7880D /* GitHub.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B5E156C0216653D900F7880D /* GitHub.framework */; };
@@ -86,7 +85,6 @@
 		B547AB482163D16E0014E2CE /* RepositoryDetailModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RepositoryDetailModel.swift; sourceTree = "<group>"; };
 		B547AB4A2163D16F0014E2CE /* SearchUser.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = SearchUser.storyboard; sourceTree = "<group>"; };
 		B547AB4B2163D16F0014E2CE /* SearchUserViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SearchUserViewController.swift; sourceTree = "<group>"; };
-		B547AB4C2163D16F0014E2CE /* SearchUserPresenter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SearchUserPresenter.swift; sourceTree = "<group>"; };
 		B547AB4D2163D16F0014E2CE /* SearchUserModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SearchUserModel.swift; sourceTree = "<group>"; };
 		B5568EEB2165CAD200174DE8 /* SearchUserViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchUserViewModel.swift; sourceTree = "<group>"; };
 		B5E156C0216653D900F7880D /* GitHub.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = GitHub.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -199,7 +197,6 @@
 			children = (
 				B547AB4A2163D16F0014E2CE /* SearchUser.storyboard */,
 				B547AB4B2163D16F0014E2CE /* SearchUserViewController.swift */,
-				B547AB4C2163D16F0014E2CE /* SearchUserPresenter.swift */,
 				B5568EEB2165CAD200174DE8 /* SearchUserViewModel.swift */,
 				B547AB4D2163D16F0014E2CE /* SearchUserModel.swift */,
 			);
@@ -384,7 +381,6 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				B547AB5C2163D16F0014E2CE /* SearchUserPresenter.swift in Sources */,
 				B547AB542163D16F0014E2CE /* RepositoryCell.swift in Sources */,
 				B547AB512163D16F0014E2CE /* UserDetailViewController.swift in Sources */,
 				B547AB522163D16F0014E2CE /* UserCell.swift in Sources */,
