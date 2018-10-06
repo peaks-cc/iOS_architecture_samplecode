@@ -27,6 +27,8 @@ final class SearchUserViewController: UIViewController, UISearchBarDelegate, UIT
 
         setup()
 
+        // viewModelから流れてきているイベントを拾うのはViewControllerの責務
+        // outputの流れ
         viewModel.deselectRow
             .bind(to: deselectRow)
             .disposed(by: disposeBag)

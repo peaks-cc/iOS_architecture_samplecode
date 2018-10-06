@@ -54,9 +54,9 @@ class SearchUserViewModel {
                 }
                 return me.searchUserModel
                     .fetchUser(query: query)
-                    .materialize()
+                    .materialize() // onNext、onError、onCompleteのイベントをObserver<Event>の型に分解
             }
-            .share()
+            .share() // hot observable化
 
         searchResponse
             .flatMap { event -> Observable<[User]> in
