@@ -54,12 +54,14 @@ final class RepositorySearchViewModel {
             })
             .disposed(by: disposeBag)
 
-        let text = searchText
-            .flatMap { $0.map(Observable.just) ?? .empty() }
-
         searchButtonClicked
-            .withLatestFrom(text)
-            .filter { !$0.isEmpty }
+            .withLatestFrom(searchText)
+            .flatMap { text -> Observable<String> in
+                guard let text = text, !text.isEmpty else {
+                    return .empty()
+                }
+                return .just(text)
+            }
             .subscribe(onNext: { text in
                 searchActionCreator.clearRepositories()
                 searchActionCreator.searchRepositories(query: text)
