@@ -13,7 +13,7 @@ import RxSwift
 final class RepositorySearchViewModel {
     let repositories: Property<[GitHub.Repository]>
 
-    let reloadData: Observable<Void>
+    let reloadRepositories: Observable<Void>
     let editingLayout: Observable<Void>
     let nonEditingLayout: Observable<Void>
 
@@ -33,7 +33,7 @@ final class RepositorySearchViewModel {
 
         self.repositories = searchStore.repositories
 
-        self.reloadData = repositories.asObservable()
+        self.reloadRepositories = repositories.asObservable()
             .map { _ in }
 
         self.editingLayout = searchStore.isSearchFieldEditing.asObservable()

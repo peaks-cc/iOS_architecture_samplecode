@@ -47,7 +47,7 @@ final class RepositorySearchViewController: UIViewController {
 
         dataSource.configure(tableView)
 
-        viewModel.reloadData
+        viewModel.reloadRepositories
             .bind(to: Binder(tableView) { tableView, _ in
                 tableView.reloadData()
             })

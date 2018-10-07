@@ -14,7 +14,7 @@ final class FavoritesViewModel {
     
     let favorites: Property<[GitHub.Repository]>
 
-    let reloadData: Observable<Void>
+    let reloadFavorites: Observable<Void>
 
     private let _selectedIndexPath = PublishRelay<IndexPath>()
     private let disposeBag = DisposeBag()
@@ -25,7 +25,7 @@ final class FavoritesViewModel {
 
         self.favorites = favoriteStore.repositories
 
-        self.reloadData = favorites.asObservable()
+        self.reloadFavorites = favorites.asObservable()
             .map { _ in }
 
         _selectedIndexPath
