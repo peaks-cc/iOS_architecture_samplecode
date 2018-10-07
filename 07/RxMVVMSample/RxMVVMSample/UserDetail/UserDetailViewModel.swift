@@ -24,7 +24,7 @@ class UserDetailViewModel {
     let reloadData: Observable<Void>
     let transitionToRepositoryDetail: Observable<(GitHub.User.Name, GitHub.Repository.Name)>
 
-    init(userName: GitHub.User.Name, itemSelected: Observable<IndexPath>, model: UserDetailModelProtocol?) {
+    init(userName: GitHub.User.Name, itemSelected: Observable<IndexPath>, model: UserDetailModelProtocol? = nil) {
         self.userName = userName
 
         self.model = model ?? UserDetailModel(userName: userName)

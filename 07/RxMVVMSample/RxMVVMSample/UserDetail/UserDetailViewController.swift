@@ -16,8 +16,7 @@ final class UserDetailViewController: UIViewController, UITableViewDelegate {
     var userName: GitHub.User.Name!
     private lazy var viewModel = UserDetailViewModel(
         userName: userName,
-        itemSelected: tableView.rx.itemSelected.asObservable(),
-        model: UserDetailModel(userName: userName))
+        itemSelected: tableView.rx.itemSelected.asObservable())
 
     private let disposeBag = DisposeBag()
 
