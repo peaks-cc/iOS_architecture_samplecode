@@ -11,7 +11,7 @@ import RxSwift
 import RxCocoa
 
 class UserDetailViewModel {
-    let userName: String
+    let userName: GitHub.User.Name
     var repositories: [Repository] { return _repositories.value }
 
     private let _repositories = BehaviorRelay<[Repository]>(value: [])
@@ -22,9 +22,9 @@ class UserDetailViewModel {
 
     let deselectRow: Observable<IndexPath>
     let reloadData: Observable<Void>
-    let transitionToRepositoryDetail: Observable<(String, String)>
+    let transitionToRepositoryDetail: Observable<(GitHub.User.Name, GitHub.Repository.Name)>
 
-    init(userName: String, itemSelected: Observable<IndexPath>, model: UserDetailModelProtocol?) {
+    init(userName: GitHub.User.Name, itemSelected: Observable<IndexPath>, model: UserDetailModelProtocol?) {
         self.userName = userName
 
         self.model = model ?? UserDetailModel(userName: userName)
@@ -33,12 +33,12 @@ class UserDetailViewModel {
         self.reloadData = _repositories.map { _ in }
         self.transitionToRepositoryDetail = itemSelected
             .withLatestFrom(_repositories) { ($0, $1) }
-            .flatMap { indexPath, repositories -> Observable<(String, String)> in
+            .flatMap { indexPath, repositories -> Observable<(GitHub.User.Name, GitHub.Repository.Name)> in
                 guard indexPath.row < repositories.count else {
                     return .empty()
                 }
 
-                return .just((userName, repositories[indexPath.row].name))
+                return .just((userName, repositories[indexPath.row].strictName))
         }
 
         let fetchRepositoriesResponse = self.model

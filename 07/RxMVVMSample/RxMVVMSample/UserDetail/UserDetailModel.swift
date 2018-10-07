@@ -13,8 +13,8 @@ protocol UserDetailModelProtocol {
 class UserDetailModel: UserDetailModelProtocol {
     let session = Session()
 
-    private let userName: String
-    init(userName: String) {
+    private let userName: GitHub.User.Name
+    init(userName: GitHub.User.Name) {
         self.userName = userName
     }
 
@@ -22,7 +22,7 @@ class UserDetailModel: UserDetailModelProtocol {
         return Observable.create { [weak self] observer in
             guard let me = self else { return Disposables.create() }
 
-            let request = UserReposRequest(username: me.userName, type: nil, sort: nil, direction: nil, page: nil, perPage: nil)
+            let request = UserReposRequest(username: me.userName.rawValue, type: nil, sort: nil, direction: nil, page: nil, perPage: nil)
             let task = me.session.send(request) { result in
                 switch result {
                 case .success(let response):

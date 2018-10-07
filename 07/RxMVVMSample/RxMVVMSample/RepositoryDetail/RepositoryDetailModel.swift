@@ -3,7 +3,7 @@
 // Copyright (c) 2018 Kenji Tanaka. All rights reserved.
 //
 
-import Foundation
+import GitHub
 
 // fetchRepository
 // fetchContributors
@@ -13,10 +13,10 @@ protocol RepositoryDetailModelProtocol {
 }
 
 class RepositoryDetailModel: RepositoryDetailModelProtocol {
-    private let userName: String
-    private let repositoryName: String
+    private let userName: GitHub.User.Name
+    private let repositoryName: GitHub.Repository.Name
 
-    init(userName: String, repositoryName: String) {
+    init(userName: GitHub.User.Name, repositoryName: GitHub.Repository.Name) {
         self.userName = userName
         self.repositoryName = repositoryName
     }

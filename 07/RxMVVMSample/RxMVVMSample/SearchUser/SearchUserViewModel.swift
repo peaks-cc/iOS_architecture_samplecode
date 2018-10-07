@@ -26,7 +26,7 @@ class SearchUserViewModel {
     // observables
     let deselectRow: Observable<IndexPath>
     let reloadData: Observable<Void>
-    let transitionToUserDetail: Observable<String>
+    let transitionToUserDetail: Observable<GitHub.User.Name>
 
     init(searchBarText: Observable<String?>,
          searchButtonClicked: Observable<Void>,
@@ -41,11 +41,11 @@ class SearchUserViewModel {
 
         self.transitionToUserDetail = itemSelected
             .withLatestFrom(_users) { ($0, $1) }
-            .flatMap { indexPath, users -> Observable<String> in
+            .flatMap { indexPath, users -> Observable<GitHub.User.Name> in
                 guard indexPath.row < users.count else {
                     return .empty()
                 }
-                return .just(users[indexPath.row].login)
+                return .just(users[indexPath.row].strictName)
             }
 
         let searchResponse = searchButtonClicked

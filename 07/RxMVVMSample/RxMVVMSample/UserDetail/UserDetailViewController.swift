@@ -3,6 +3,7 @@
 // Copyright (c) 2018 Kenji Tanaka. All rights reserved.
 //
 
+import GitHub
 import UIKit
 import RxSwift
 import RxCocoa
@@ -12,7 +13,7 @@ final class UserDetailViewController: UIViewController, UITableViewDelegate {
 
     // FIXME: ViewControllerで使わいScreenStateが入ってしまうのが気持ちわるい。本来ViewModelが持っていればよいもの。
     // ただし外部からViewModelを注入する場合、tableViewがnilで落ちる...。
-    var userName: String!
+    var userName: GitHub.User.Name!
     private lazy var viewModel = UserDetailViewModel(
         userName: userName,
         itemSelected: tableView.rx.itemSelected.asObservable(),
@@ -71,7 +72,7 @@ extension UserDetailViewController {
         }
     }
 
-    private var transitionToRepositoryDetail: Binder<(String, String)> {
+    private var transitionToRepositoryDetail: Binder<(GitHub.User.Name, GitHub.Repository.Name)> {
         return Binder(self) { me, info in
             let userName = info.0
             let repositoryName = info.1
