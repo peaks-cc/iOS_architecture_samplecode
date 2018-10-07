@@ -6,6 +6,7 @@
 //  Copyright © 2018年 Kenji Tanaka. All rights reserved.
 //
 
+import GitHub
 import UIKit
 import RxSwift
 import RxCocoa
@@ -77,7 +78,7 @@ extension SearchUserViewController {
         }
     }
 
-    private var transitionToUserDetail: Binder<(String)> {
+    private var transitionToUserDetail: Binder<(GitHub.User.Name)> {
         return Binder(self) { me, userName in
             let userDetailVC = UIStoryboard(name: "UserDetail", bundle: nil).instantiateInitialViewController() as! UserDetailViewController
             userDetailVC.userName = userName

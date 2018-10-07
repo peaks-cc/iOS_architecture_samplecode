@@ -3,7 +3,7 @@
 // Copyright (c) 2018 Kenji Tanaka. All rights reserved.
 //
 
-import Foundation
+import GitHub
 
 protocol RepositoryDetailPresenterProtocol {
     func viewDidLoad()
@@ -12,10 +12,10 @@ protocol RepositoryDetailPresenterProtocol {
 class RepositoryDetailPresenter: RepositoryDetailPresenterProtocol {
     private var model: RepositoryDetailModelProtocol
 
-    private let userName: String
-    private let repositoryName: String
+    private let userName: GitHub.User.Name
+    private let repositoryName: GitHub.Repository.Name
 
-    init(userName: String, repositoryName: String, model: RepositoryDetailModelProtocol) {
+    init(userName: GitHub.User.Name, repositoryName: GitHub.Repository.Name, model: RepositoryDetailModelProtocol) {
         self.userName = userName
         self.repositoryName = repositoryName
         self.model = model
