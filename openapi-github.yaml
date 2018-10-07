@@ -1,0 +1,750 @@
+swagger: '2.0'
+schemes:
+  - https
+host: api.github.com
+basePath: /
+x-hasEquivalentPaths: true
+info:
+  description: |
+    Powerful collaboration, code review, and code management for open source and private projects.
+  termsOfService: 'https://help.github.com/articles/github-terms-of-service/#b-api-terms'
+  title: GitHub
+  version: v3
+  x-apisguru-categories:
+    - collaboration
+    - developer_tools
+  x-logo:
+    url: 'http://assets-cdn.github.com/images/modules/logos_page/GitHub-Mark.png'
+  x-origin:
+    - format: swagger
+      url: 'https://raw.githubusercontent.com/APIs-guru/unofficial_openapi_specs/master/github.com/v3/swagger.yaml'
+      version: '2.0'
+  x-providerName: github.com
+  x-unofficialSpec: true
+externalDocs:
+  url: 'https://developer.github.com/v3/'
+consumes:
+  - application/json
+produces:
+  - application/json
+securityDefinitions:
+  oauth_2_0:
+    authorizationUrl: 'https://github.com/login/oauth/authorize'
+    description: |
+      OAuth2 is a protocol that lets external apps request authorization to private
+      details in a user's GitHub account without getting their password. This is
+      preferred over Basic Authentication because tokens can be limited to specific
+      types of data, and can be revoked by users at any time.
+    flow: accessCode
+    scopes:
+      'admin:org': ''
+      'admin:org_hook': ''
+      'admin:public_key': ''
+      'admin:repo_hook': ''
+      delete_repo: ''
+      gist: ''
+      notifications: ''
+      public_repo: ''
+      'read:org': ''
+      'read:public_key': ''
+      'read:repo_hook': ''
+      repo: ''
+      'repo:status': ''
+      repo_deployment: ''
+      user: ''
+      'user:email': ''
+      'user:follow': ''
+      'write:org': ''
+      'write:public_key': ''
+      'write:repo_hook': ''
+    tokenUrl: 'https://github.com/login/oauth/access_token'
+    type: oauth2
+paths:
+  user:
+    get:
+      description: Get the authenticated user.
+      parameters:
+        - description: |
+            You can check the current version of media type in responses.
+          in: header
+          name: X-GitHub-Media-Type
+          type: string
+        - description: Is used to set specified media type.
+          in: header
+          name: Accept
+          type: string
+        - in: header
+          name: X-RateLimit-Limit
+          type: integer
+        - in: header
+          name: X-RateLimit-Remaining
+          type: integer
+        - in: header
+          name: X-RateLimit-Reset
+          type: integer
+        - in: header
+          name: X-GitHub-Request-Id
+          type: integer
+      responses:
+        '200':
+          description: OK
+          schema:
+            $ref: '#/definitions/user'
+        '403':
+          description: |
+            API rate limit exceeded. See http://developer.github.com/v3/#rate-limiting
+            for details.
+  'users/{username}':
+    get:
+      description: Get a single user.
+      parameters:
+        - description: Name of user.
+          in: path
+          name: username
+          required: true
+          type: string
+        - description: |
+            You can check the current version of media type in responses.
+          in: header
+          name: X-GitHub-Media-Type
+          type: string
+        - description: Is used to set specified media type.
+          in: header
+          name: Accept
+          type: string
+        - in: header
+          name: X-RateLimit-Limit
+          type: integer
+        - in: header
+          name: X-RateLimit-Remaining
+          type: integer
+        - in: header
+          name: X-RateLimit-Reset
+          type: integer
+        - in: header
+          name: X-GitHub-Request-Id
+          type: integer
+      responses:
+        '200':
+          description: OK
+          schema:
+            $ref: '#/definitions/public_user'
+        '403':
+          description: |
+            API rate limit exceeded. See http://developer.github.com/v3/#rate-limiting
+            for details.
+  repositories:
+    get:
+      description: |
+        List all public repositories.
+        This provides a dump of every public repository, in the order that they
+        were created.
+        Note: Pagination is powered exclusively by the since parameter. is the
+        Link header to get the URL for the next page of repositories.
+      parameters:
+        - description: The page limti.
+          in: query
+          name: per_page
+          type: integer
+        - description: |
+            The time should be passed in as UTC in the ISO 8601 format: YYYY-MM-DDTHH:MM:SSZ.
+            Example: "2012-10-09T23:39:01Z".
+          in: query
+          name: since
+          type: string
+        - description: |
+            You can check the current version of media type in responses.
+          in: header
+          name: X-GitHub-Media-Type
+          type: string
+        - description: Is used to set specified media type.
+          in: header
+          name: Accept
+          type: string
+        - in: header
+          name: X-RateLimit-Limit
+          type: integer
+        - in: header
+          name: X-RateLimit-Remaining
+          type: integer
+        - in: header
+          name: X-RateLimit-Reset
+          type: integer
+        - in: header
+          name: X-GitHub-Request-Id
+          type: integer
+      responses:
+        '200':
+          description: OK
+          schema:
+            $ref: '#/definitions/public_repos'
+        '403':
+          description: |
+            API rate limit exceeded. See http://developer.github.com/v3/#rate-limiting
+            for details.
+  'repos/{owner}/{repo}':
+    get:
+      description: Get repository.
+      parameters:
+        - description: Name of repository owner.
+          in: path
+          name: owner
+          required: true
+          type: string
+        - description: Name of repository.
+          in: path
+          name: repo
+          required: true
+          type: string
+        - description: |
+            You can check the current version of media type in responses.
+          in: header
+          name: X-GitHub-Media-Type
+          type: string
+        - description: Is used to set specified media type.
+          in: header
+          name: Accept
+          type: string
+        - in: header
+          name: X-RateLimit-Limit
+          type: integer
+        - in: header
+          name: X-RateLimit-Remaining
+          type: integer
+        - in: header
+          name: X-RateLimit-Reset
+          type: integer
+        - in: header
+          name: X-GitHub-Request-Id
+          type: integer
+      responses:
+        '200':
+          description: OK
+          schema:
+            $ref: '#/definitions/repo'
+        '403':
+          description: |
+            API rate limit exceeded. See http://developer.github.com/v3/#rate-limiting
+            for details.
+  user/repos:
+    get:
+      description: |
+        List repositories for the authenticated user. Note that this does not include
+        repositories owned by organizations which the user can access. You can lis
+        user organizations and list organization repositories separately.
+      parameters:
+        - default: all
+          enum:
+            - all
+            - public
+            - private
+            - forks
+            - sources
+            - member
+          in: query
+          name: type
+          type: string
+        - description: |
+            You can check the current version of media type in responses.
+          in: header
+          name: X-GitHub-Media-Type
+          type: string
+        - description: Is used to set specified media type.
+          in: header
+          name: Accept
+          type: string
+        - in: header
+          name: X-RateLimit-Limit
+          type: integer
+        - in: header
+          name: X-RateLimit-Remaining
+          type: integer
+        - in: header
+          name: X-RateLimit-Reset
+          type: integer
+        - in: header
+          name: X-GitHub-Request-Id
+          type: integer
+      responses:
+        '200':
+          description: OK
+          schema:
+            $ref: '#/definitions/repos'
+        '403':
+          description: |
+            API rate limit exceeded. See http://developer.github.com/v3/#rate-limiting
+            for details.
+  'repos/{owner}/{repo}/readme':
+    get:
+      description: |
+        Get the README.
+        This method returns the preferred README for a repository.
+      parameters:
+        - description: Name of repository owner.
+          in: path
+          name: owner
+          required: true
+          type: string
+        - description: Name of repository.
+          in: path
+          name: repo
+          required: true
+          type: string
+        - description: The String name of the Commit/Branch/Tag. Defaults to master.
+          in: query
+          name: ref
+          type: string
+        - description: |
+            You can check the current version of media type in responses.
+          in: header
+          name: X-GitHub-Media-Type
+          type: string
+        - description: Is used to set specified media type.
+          in: header
+          name: Accept
+          type: string
+        - in: header
+          name: X-RateLimit-Limit
+          type: integer
+        - in: header
+          name: X-RateLimit-Remaining
+          type: integer
+        - in: header
+          name: X-RateLimit-Reset
+          type: integer
+        - in: header
+          name: X-GitHub-Request-Id
+          type: integer
+      responses:
+        '200':
+          description: OK
+          schema:
+            $ref: '#/definitions/readme'
+        '403':
+          description: |
+            API rate limit exceeded. See http://developer.github.com/v3/#rate-limiting
+            for details.
+definitions:
+  user:
+    required:
+      - id
+      - created_at
+      - email
+      - followers
+      - following
+      - login
+      - names
+      - public_gists
+      - public_repos
+      - type
+      - url
+    properties:
+      avatar_url:
+        type: string
+      bio:
+        type: string
+      blog:
+        type: string
+      collaborators:
+        type: integer
+      company:
+        type: string
+      created_at:
+        description: 'ISO 8601 format: YYYY-MM-DDTHH:MM:SSZ'
+        type: string
+      disk_usage:
+        type: integer
+      email:
+        type: string
+      followers:
+        type: integer
+      following:
+        type: integer
+      gravatar_id:
+        type: string
+      hireable:
+        type: boolean
+      html_url:
+        type: string
+      id:
+        type: integer
+      location:
+        type: string
+      login:
+        type: string
+      name:
+        type: string
+      owned_private_repos:
+        type: integer
+      private_gists:
+        type: integer
+      public_gists:
+        type: integer
+      public_repos:
+        type: integer
+      total_private_repos:
+        type: integer
+      type:
+        type: string
+      url:
+        type: string
+    type: object
+  public_repos:
+    items:
+      $ref: '#/definitions/public_repo'
+    type: array
+  repos:
+    items:
+      $ref: '#/definitions/repo'
+    type: array
+  repo:
+    required:
+      - id
+      - clone_url
+      - created_at
+      - fork
+      - forks
+      - forks_count
+      - full_name
+      - git_url
+      - has_downloads
+      - has_issues
+      - has_wiki
+      - html_url
+      - name
+      - open_issues
+      - open_issues_count
+      - owner
+      - private
+      - pushed_at
+      - size
+      - ssh_url
+      - updated_at
+      - url
+      - watchers
+      - watchers_count
+    properties:
+      clone_url:
+        type: string
+      created_at:
+        description: 'ISO 8601 format: YYYY-MM-DDTHH:MM:SSZ'
+        type: string
+      description:
+        type: string
+      fork:
+        type: boolean
+      forks:
+        type: integer
+      forks_count:
+        type: integer
+      full_name:
+        type: string
+      git_url:
+        type: string
+      has_downloads:
+        type: boolean
+      has_issues:
+        type: boolean
+      has_wiki:
+        type: boolean
+      homepage:
+        type: string
+      html_url:
+        type: string
+      id:
+        type: integer
+      language:
+        type: string
+      master_branch:
+        type: string
+      mirror_url:
+        type: string
+      name:
+        type: string
+      open_issues:
+        type: integer
+      open_issues_count:
+        type: integer
+      organization:
+        $ref: '#/definitions/organization'
+      owner:
+        $ref: '#/definitions/owner'
+      parent:
+        $ref: '#/definitions/parent'
+      private:
+        type: boolean
+      pushed_at:
+        description: 'ISO 8601 format: YYYY-MM-DDTHH:MM:SSZ'
+        type: string
+      size:
+        type: integer
+      source:
+        $ref: '#/definitions/source'
+      ssh_url:
+        type: string
+      svn_url:
+        type: string
+      updated_at:
+        description: 'ISO 8601 format: YYYY-MM-DDTHH:MM:SSZ'
+        type: string
+      url:
+        type: string
+      watchers:
+        type: integer
+      watchers_count:
+        type: integer
+    type: object
+  public_repo:
+    required:
+      - id
+      - fork
+      - full_name
+      - name
+      - owner
+      - private
+      - url
+    properties:
+      description:
+        type: string
+      fork:
+        type: boolean
+      full_name:
+        type: string
+      html_url:
+        type: string
+      id:
+        type: integer
+      name:
+        type: string
+      owner:
+        $ref: '#/definitions/owner'
+      private:
+        type: boolean
+      url:
+        type: string
+      type: object
+  owner:
+    required:
+      - id
+      - login
+      - url
+    properties:
+      avatar_url:
+        type: string
+      gravatar_id:
+        type: string
+      id:
+        type: integer
+      login:
+        type: string
+      url:
+        type: string
+    type: object
+  organization:
+    required:
+      - id
+      - login
+      - type
+      - url
+    properties:
+      avatar_url:
+        type: string
+      gravatar_id:
+        type: string
+      id:
+        type: integer
+      login:
+        type: string
+      type:
+        type: string
+      url:
+        type: string
+    type: object
+  parent:
+    description: Is present when the repo is a fork. Parent is the repo this repo was forked from.
+    required:
+      - id
+    properties:
+      clone_url:
+        type: string
+      created_at:
+        description: 'ISO 8601 format: YYYY-MM-DDTHH:MM:SSZ'
+        type: string
+      description:
+        type: string
+      fork:
+        type: boolean
+      forks:
+        type: integer
+      forks_count:
+        type: integer
+      full_name:
+        type: string
+      git_url:
+        type: string
+      homepage:
+        type: string
+      html_url:
+        type: string
+      id:
+        type: integer
+      language:
+        type: string
+      master_branch:
+        type: string
+      mirror_url:
+        type: string
+      name:
+        type: string
+      open_issues:
+        type: integer
+      open_issues_count:
+        type: integer
+      owner:
+        $ref: '#/definitions/owner'
+      private:
+        type: boolean
+      pushed_at:
+        description: 'ISO 8601 format: YYYY-MM-DDTHH:MM:SSZ'
+        type: string
+      size:
+        type: integer
+      ssh_url:
+        type: string
+      svn_url:
+        type: string
+      updated_at:
+        description: 'ISO 8601 format: YYYY-MM-DDTHH:MM:SSZ'
+        type: string
+      url:
+        type: string
+      watchers:
+        type: integer
+      watchers_count:
+        type: integer
+    type: object
+  source:
+    required:
+      - id
+    description: Is present when the repo is a fork. Source is the ultimate source for the network.
+    properties:
+      clone_url:
+        type: string
+      created_at:
+        description: 'ISO 8601 format: YYYY-MM-DDTHH:MM:SSZ'
+        type: string
+      description:
+        type: string
+      fork:
+        type: boolean
+      forks:
+        type: integer
+      forks_count:
+        type: integer
+      full_name:
+        type: string
+      git_url:
+        type: string
+      homepage:
+        type: string
+      html_url:
+        type: string
+      id:
+        type: integer
+      language:
+        type: string
+      master_branch:
+        type: string
+      mirror_url:
+        type: string
+      name:
+        type: string
+      open_issues:
+        type: integer
+      open_issues_count:
+        type: integer
+      owner:
+        $ref: '#/definitions/owner'
+      private:
+        type: boolean
+      pushed_at:
+        description: 'ISO 8601 format: YYYY-MM-DDTHH:MM:SSZ'
+        type: string
+      size:
+        type: integer
+      ssh_url:
+        type: string
+      svn_url:
+        type: string
+      updated_at:
+        description: 'ISO 8601 format: YYYY-MM-DDTHH:MM:SSZ'
+        type: string
+      url:
+        type: string
+      watchers:
+        type: integer
+      watchers_count:
+        type: integer
+    type: object
+  readme:
+    required:
+      - content
+      - encoding
+      - git_url
+      - html_url
+      - name
+      - path
+      - sha
+      - size
+      - type
+      - url
+    properties:
+      _links:
+        $ref: '#/definitions/links'
+      content:
+        type: string
+      encoding:
+        type: string
+      git_url:
+        type: string
+      html_url:
+        type: string
+      name:
+        type: string
+      path:
+        type: string
+      sha:
+        type: string
+      size:
+        type: integer
+      type:
+        type: string
+      url:
+        type: string
+    type: object
+  links:
+    properties:
+      git:
+        type: string
+      html:
+        type: string
+      self:
+        type: string
+    type: object
+  public_user:
+    required:
+     - id
+     - login
+     - url
+    properties:
+      avatar_url:
+        type: string
+      gravatar_id:
+        type: string
+      id:
+        type: integer
+      login:
+        type: string
+      url:
+        type: string
+    type: object

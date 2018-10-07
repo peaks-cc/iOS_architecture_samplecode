@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="14313.13.2" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina4_7" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
+    <dependencies>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14283.9"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="ServiceUnavailableViewController" customModule="ReduxExample" customModuleProvider="target">
+            <connections>
+                <outlet property="view" destination="iN0-l3-epB" id="QfR-nA-9Xf"/>
+            </connections>
+        </placeholder>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <view contentMode="scaleToFill" id="iN0-l3-epB">
+            <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+            <subviews>
+                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="unicorn" translatesAutoresizingMaskIntoConstraints="NO" id="EsU-Kk-7HB">
+                    <rect key="frame" x="67.5" y="123.5" width="240" height="240"/>
+                    <constraints>
+                        <constraint firstAttribute="width" constant="240" id="Hrd-E6-D23"/>
+                        <constraint firstAttribute="height" constant="240" id="ybS-di-D4o"/>
+                    </constraints>
+                </imageView>
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="We're having a really bad day." textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="rLZ-eJ-GWs">
+                    <rect key="frame" x="0.0" y="412" width="375" height="21"/>
+                    <fontDescription key="fontDescription" type="boldSystem" pointSize="17"/>
+                    <nil key="textColor"/>
+                    <nil key="highlightedColor"/>
+                </label>
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="The Unicorns have taken over. We're doing our best to get them under control and get GitHub back up and running." textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="sIf-22-OGS">
+                    <rect key="frame" x="20" y="483" width="335" height="61"/>
+                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                    <color key="textColor" white="0.33333333329999998" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                    <nil key="highlightedColor"/>
+                </label>
+            </subviews>
+            <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+            <constraints>
+                <constraint firstItem="rLZ-eJ-GWs" firstAttribute="top" secondItem="EsU-Kk-7HB" secondAttribute="bottom" constant="48.5" id="8u0-bq-qgd"/>
+                <constraint firstItem="EsU-Kk-7HB" firstAttribute="centerX" secondItem="vUN-kp-3ea" secondAttribute="centerX" id="CtI-02-r5h"/>
+                <constraint firstItem="EsU-Kk-7HB" firstAttribute="centerY" secondItem="vUN-kp-3ea" secondAttribute="centerY" constant="-100" id="PDl-KJ-Yj1"/>
+                <constraint firstItem="vUN-kp-3ea" firstAttribute="trailing" secondItem="rLZ-eJ-GWs" secondAttribute="trailing" id="PXS-Uw-yiK"/>
+                <constraint firstItem="rLZ-eJ-GWs" firstAttribute="leading" secondItem="vUN-kp-3ea" secondAttribute="leading" id="eXE-Bl-aik"/>
+                <constraint firstItem="sIf-22-OGS" firstAttribute="leading" secondItem="vUN-kp-3ea" secondAttribute="leading" constant="20" id="iIw-Jo-5aY"/>
+                <constraint firstItem="sIf-22-OGS" firstAttribute="top" secondItem="rLZ-eJ-GWs" secondAttribute="bottom" constant="50" id="qlN-2B-3SF"/>
+                <constraint firstItem="vUN-kp-3ea" firstAttribute="trailing" secondItem="sIf-22-OGS" secondAttribute="trailing" constant="20" id="tSU-Pu-XVJ"/>
+            </constraints>
+            <viewLayoutGuide key="safeArea" id="vUN-kp-3ea"/>
+        </view>
+    </objects>
+    <resources>
+        <image name="unicorn" width="400" height="409"/>
+    </resources>
+</document>
