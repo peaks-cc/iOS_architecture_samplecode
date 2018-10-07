@@ -39,7 +39,7 @@ final class FavoritesViewController: UIViewController {
 
         dataSource.configure(tableView)
 
-        viewModel.reloadData
+        viewModel.reloadFavorites
             .bind(to: Binder(tableView) { tableView, _ in
                 tableView.reloadData()
             })
