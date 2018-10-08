@@ -28,6 +28,16 @@ class ViewController: UIViewController, UITextFieldDelegate {
         viewModel.validationText
             .bind(to: validationLabel.rx.text)
             .disposed(by: disposeBag)
+
+        viewModel.loadLabelColor
+            .bind(to: loadLabelColor)
+            .disposed(by: disposeBag)
+    }
+
+    private var loadLabelColor: Binder<UIColor> {
+        return Binder(self) { me, color in
+            me.validationLabel.textColor = color
+        }
     }
 }
 
