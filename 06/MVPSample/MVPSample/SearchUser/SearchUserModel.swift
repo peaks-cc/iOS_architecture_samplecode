@@ -11,8 +11,7 @@ protocol SearchUserModelProtocol {
 }
 
 class SearchUserModel: SearchUserModelProtocol {
-    func fetchUser(query: String, completion: @escaping (Result<[User]
-    >) -> ()) {
+    func fetchUser(query: String, completion: @escaping (Result<[User]>) -> ()) {
         let session = GitHub.Session()
         let request = SearchUsersRequest(query: query, sort: nil, order: nil, page: nil, perPage: nil)
         session.send(request) { result in
