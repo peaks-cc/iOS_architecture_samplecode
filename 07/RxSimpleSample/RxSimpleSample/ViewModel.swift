@@ -22,38 +22,44 @@ class ViewModel {
 
         let event = Observable.combineLatest(idTextObservable, passwordTextObservable)
             .skip(1)
-            .flatMap { idText, passwordText -> Observable<Event<Void>> in
+            .flatMap { idText, passwordText -> Observable<Void> in
                 return model
                     .validate(idText: idText, passwordText: passwordText)
-                    .materialize()
             }
             .share()
 
+        // ②flatMap内にmapとcatchErrorをまとめると、mapでStringとUIColor両方を返す必要があるため、StringとUIColorを分けたストリームで扱えない
+//        let event = Observable.combineLatest(idTextObservable, passwordTextObservable)
+//            .skip(1)
+//            .flatMap { idText, passwordText -> Observable<Void> in
+//                return model
+//                    .validate(idText: idText, passwordText: passwordText)
+//                    .map { "OK!!!" }
+//                    .catchError({ error -> Observable<String> in
+//                        (error as? ModelError).flatMap { modelError -> Observable<String> in
+//                            Observable.just(modelError.errorText)
+//                            } ?? .empty()
+//                    })
+//            }
+//            .share()
+
+        // ①catchErrorの段階でonCompleteが呼ばれてしまうので、
         self.validationText = event
-            .flatMap { event -> Observable<String> in
-                switch event {
-                case .next:
-                    return .just("OK!!!")
-                case let .error(error as ModelError):
-                    return .just(error.errorText)
-                case .error, .completed:
-                    return .empty()
-                }
-            }
+            .map { "OK!!!" }
+            .catchError({ error -> Observable<String> in
+                (error as? ModelError).flatMap { modelError -> Observable<String> in
+                    Observable.just(modelError.errorText)
+                } ?? .empty()
+            })
             .startWith("IDとPasswordを入力してください。")
 
-
         self.loadLabelColor = event
-            .flatMap { event -> Observable<UIColor> in
-                switch event {
-                case .next:
-                    return .just(.green)
-                case .error:
-                    return .just(.red)
-                case .completed:
-                    return .empty()
-                }
-        }
+            .map { UIColor.green }
+            .catchError({ error -> Observable<UIColor> in
+                (error as? ModelError).map { modelError -> Observable<UIColor> in
+                    Observable.just(.red)
+                } ?? .empty()
+            })
     }
 }
 
