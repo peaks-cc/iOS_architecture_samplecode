@@ -8,7 +8,6 @@
 
 import UIKit
 import RxSwift
-//import RxCocoa
 
 protocol ViewModelProtocol {
     var validationText: Observable<String> { get }
