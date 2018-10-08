@@ -25,9 +25,6 @@ class ViewController: UIViewController, UITextFieldDelegate {
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        idTextField.delegate = self
-        passwordTextField.delegate = self
-
         viewModel.validationText
             .bind(to: validationLabel.rx.text)
             .disposed(by: disposeBag)
