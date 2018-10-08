@@ -6,7 +6,7 @@
 //  Copyright © 2018年 Kenji Tanaka. All rights reserved.
 //
 
-import Foundation
+import RxSwift
 
 enum ModelError: Error {
     case invalidId
@@ -15,28 +15,28 @@ enum ModelError: Error {
 }
 
 protocol ModelProtocol {
-    func validate(idText: String?, passwordText: String?) throws
+    func validate(idText: String?, passwordText: String?) -> Observable<Void>
 }
 
 class Model: ModelProtocol {
-    func validate(idText: String?, passwordText: String?) throws {
+    func validate(idText: String?, passwordText: String?) -> Observable<Void> {
         switch (idText, passwordText) {
         case (.none, .none):
-            throw ModelError.invalidIdAndPassword
+            return Observable.error(ModelError.invalidIdAndPassword)
         case (.none, .some):
-            throw ModelError.invalidId
+            return Observable.error(ModelError.invalidId)
         case (.some, .none):
-            throw ModelError.invalidPassword
+            return Observable.error(ModelError.invalidPassword)
         case (let idText?, let passwordText?):
             switch (idText.isEmpty, passwordText.isEmpty) {
             case (true, true):
-                throw ModelError.invalidIdAndPassword
+                return Observable.error(ModelError.invalidIdAndPassword)
             case (false, false):
-                return
+                return Observable.just(())
             case (true, false):
-                throw ModelError.invalidId
+                return Observable.error(ModelError.invalidId)
             case (false, true):
-                throw ModelError.invalidPassword
+                return Observable.error(ModelError.invalidPassword)
             }
         }
     }
