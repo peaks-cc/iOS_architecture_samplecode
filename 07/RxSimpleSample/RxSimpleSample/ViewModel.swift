@@ -16,7 +16,7 @@ protocol ViewModelProtocol {
 class ViewModel {
     let validationText: Observable<String>
 
-    private var _validationText = BehaviorRelay<String>(value: "IDとパスワードを入力してください。")
+    private let _validationText = BehaviorRelay<String>(value: "IDとパスワードを入力してください。")
     private let disposeBag = DisposeBag()
 
     init(idTextObservable: Observable<String?>, passwordTextObservable: Observable<String?>, model: ModelProtocol) {
