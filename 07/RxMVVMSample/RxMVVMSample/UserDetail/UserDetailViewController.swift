@@ -32,10 +32,6 @@ final class UserDetailViewController: UIViewController, UITableViewDelegate {
         viewModel.reloadData
             .bind(to: reloadData)
             .disposed(by: disposeBag)
-
-        viewModel.transitionToRepositoryDetail
-            .bind(to: transitionToRepositoryDetail)
-            .disposed(by: disposeBag)
     }
 
     private func setup() {
@@ -68,20 +64,6 @@ extension UserDetailViewController {
     private var reloadData: Binder<Void> {
         return Binder(self) { me, _ in
             me.tableView.reloadData()
-        }
-    }
-
-    private var transitionToRepositoryDetail: Binder<(GitHub.User.Name, GitHub.Repository.Name)> {
-        return Binder(self) { me, info in
-            let userName = info.0
-            let repositoryName = info.1
-
-            let model = RepositoryDetailModel(userName: userName, repositoryName: repositoryName)
-            let presenter = RepositoryDetailPresenter(userName: userName, repositoryName: repositoryName, model: model)
-            let repositoryDetailVC = UIStoryboard(name: "RepositoryDetail", bundle: nil).instantiateInitialViewController() as! RepositoryDetailViewController
-            repositoryDetailVC.inject(presenter: presenter)
-
-            me.navigationController?.pushViewController(repositoryDetailVC, animated: true)
         }
     }
 }
