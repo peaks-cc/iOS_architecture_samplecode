@@ -23,23 +23,29 @@ class ViewModel {
         self.validationText = _validationText.map { $0 }
 
         Observable.combineLatest(idTextObservable, passwordTextObservable)
-            .flatMap { idText, passwordText -> Observable<String> in
+            .map { idText, passwordText -> String in
                 let result = model.validate(idText: idText, passwordText: passwordText)
                 switch result {
                 case .none:
-                    return .just("OK!!!")
+                    return "OK!!!"
                 case .some(let error):
-                    switch error {
-                    case .invalidIdAndPassword:
-                        return .just("IDとPasswordが未入力です。")
-                    case .invalidId:
-                        return .just("IDが未入力です。")
-                    case .invalidPassword:
-                        return .just("Passwordが未入力です。")
-                    }
+                    return error.errorText
                 }
             }
             .bind(to: _validationText)
             .disposed(by: disposeBag)
+    }
+}
+
+extension ModelError {
+    fileprivate var errorText: String {
+        switch self {
+        case .invalidIdAndPassword:
+            return "IDとPasswordが未入力です。"
+        case .invalidId:
+            return "IDが未入力です。"
+        case .invalidPassword:
+            return "Passwordが未入力です。"
+        }
     }
 }
