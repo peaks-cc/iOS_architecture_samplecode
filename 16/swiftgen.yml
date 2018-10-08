@@ -1,0 +1,6 @@
+input_dir: ReduxExample
+output_dir: ReduxExample/Generated/
+xcassets:
+  - paths: Assets.xcassets
+    templateName: swift4
+    output: AssetsImages.swift

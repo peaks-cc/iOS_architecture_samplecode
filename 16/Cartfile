@@ -1,0 +1,9 @@
+# carthage bootstrap --platform ios --cache-builds --configuration Debug
+github "Instagram/IGListKit"
+github "SwiftyBeaver/SwiftyBeaver"
+github "ReactiveX/RxSwift"
+github "RxSwiftCommunity/RxOptional"
+github "onevcat/Kingfisher"
+github "ReSwift/ReSwift"
+github "kishikawakatsumi/KeychainAccess"
+github "keitaoouchi/MarkdownView"
