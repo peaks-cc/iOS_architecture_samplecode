@@ -22,24 +22,14 @@ class UserDetailViewModel {
 
     let deselectRow: Observable<IndexPath>
     let reloadData: Observable<Void>
-    let transitionToRepositoryDetail: Observable<(GitHub.User.Name, GitHub.Repository.Name)>
 
-    init(userName: GitHub.User.Name, itemSelected: Observable<IndexPath>, model: UserDetailModelProtocol?) {
+    init(userName: GitHub.User.Name, itemSelected: Observable<IndexPath>, model: UserDetailModelProtocol? = nil) {
         self.userName = userName
 
         self.model = model ?? UserDetailModel(userName: userName)
 
         self.deselectRow = itemSelected.map { $0 }
         self.reloadData = _repositories.map { _ in }
-        self.transitionToRepositoryDetail = itemSelected
-            .withLatestFrom(_repositories) { ($0, $1) }
-            .flatMap { indexPath, repositories -> Observable<(GitHub.User.Name, GitHub.Repository.Name)> in
-                guard indexPath.row < repositories.count else {
-                    return .empty()
-                }
-
-                return .just((userName, repositories[indexPath.row].strictName))
-        }
 
         let fetchRepositoriesResponse = self.model
             .fetchRepositories()

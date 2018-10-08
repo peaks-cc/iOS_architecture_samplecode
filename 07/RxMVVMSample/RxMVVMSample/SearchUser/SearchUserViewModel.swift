@@ -36,9 +36,7 @@ class SearchUserViewModel {
         self.searchUserModel = searchUserModel
 
         self.deselectRow = itemSelected.map { $0 }
-
         self.reloadData = _users.map { _ in }
-
         self.transitionToUserDetail = itemSelected
             .withLatestFrom(_users) { ($0, $1) }
             .flatMap { indexPath, users -> Observable<GitHub.User.Name> in

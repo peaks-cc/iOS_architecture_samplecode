@@ -21,10 +21,6 @@
 		B547AB532163D16F0014E2CE /* UserCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = B547AB412163D16E0014E2CE /* UserCell.xib */; };
 		B547AB542163D16F0014E2CE /* RepositoryCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B547AB422163D16E0014E2CE /* RepositoryCell.swift */; };
 		B547AB552163D16F0014E2CE /* RepositoryCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = B547AB432163D16E0014E2CE /* RepositoryCell.xib */; };
-		B547AB562163D16F0014E2CE /* RepositoryDetail.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = B547AB452163D16E0014E2CE /* RepositoryDetail.storyboard */; };
-		B547AB572163D16F0014E2CE /* RepositoryDetailPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = B547AB462163D16E0014E2CE /* RepositoryDetailPresenter.swift */; };
-		B547AB582163D16F0014E2CE /* RepositoryDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B547AB472163D16E0014E2CE /* RepositoryDetailViewController.swift */; };
-		B547AB592163D16F0014E2CE /* RepositoryDetailModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = B547AB482163D16E0014E2CE /* RepositoryDetailModel.swift */; };
 		B547AB5A2163D16F0014E2CE /* SearchUser.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = B547AB4A2163D16F0014E2CE /* SearchUser.storyboard */; };
 		B547AB5B2163D16F0014E2CE /* SearchUserViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B547AB4B2163D16F0014E2CE /* SearchUserViewController.swift */; };
 		B547AB5D2163D16F0014E2CE /* SearchUserModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = B547AB4D2163D16F0014E2CE /* SearchUserModel.swift */; };
@@ -83,10 +79,6 @@
 		B547AB412163D16E0014E2CE /* UserCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = UserCell.xib; sourceTree = "<group>"; };
 		B547AB422163D16E0014E2CE /* RepositoryCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RepositoryCell.swift; sourceTree = "<group>"; };
 		B547AB432163D16E0014E2CE /* RepositoryCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = RepositoryCell.xib; sourceTree = "<group>"; };
-		B547AB452163D16E0014E2CE /* RepositoryDetail.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = RepositoryDetail.storyboard; sourceTree = "<group>"; };
-		B547AB462163D16E0014E2CE /* RepositoryDetailPresenter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RepositoryDetailPresenter.swift; sourceTree = "<group>"; };
-		B547AB472163D16E0014E2CE /* RepositoryDetailViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RepositoryDetailViewController.swift; sourceTree = "<group>"; };
-		B547AB482163D16E0014E2CE /* RepositoryDetailModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RepositoryDetailModel.swift; sourceTree = "<group>"; };
 		B547AB4A2163D16F0014E2CE /* SearchUser.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = SearchUser.storyboard; sourceTree = "<group>"; };
 		B547AB4B2163D16F0014E2CE /* SearchUserViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SearchUserViewController.swift; sourceTree = "<group>"; };
 		B547AB4D2163D16F0014E2CE /* SearchUserModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SearchUserModel.swift; sourceTree = "<group>"; };
@@ -155,7 +147,6 @@
 				B50F97D3216905640000156F /* User+Extension.swift */,
 				B547AB422163D16E0014E2CE /* RepositoryCell.swift */,
 				B547AB432163D16E0014E2CE /* RepositoryCell.xib */,
-				B547AB442163D16E0014E2CE /* RepositoryDetail */,
 				B547AB492163D16F0014E2CE /* SearchUser */,
 				B547AB402163D16E0014E2CE /* UserCell.swift */,
 				B547AB412163D16E0014E2CE /* UserCell.xib */,
@@ -185,17 +176,6 @@
 				B547AB3F2163D16E0014E2CE /* UserDetailViewController.swift */,
 			);
 			path = UserDetail;
-			sourceTree = "<group>";
-		};
-		B547AB442163D16E0014E2CE /* RepositoryDetail */ = {
-			isa = PBXGroup;
-			children = (
-				B547AB452163D16E0014E2CE /* RepositoryDetail.storyboard */,
-				B547AB462163D16E0014E2CE /* RepositoryDetailPresenter.swift */,
-				B547AB472163D16E0014E2CE /* RepositoryDetailViewController.swift */,
-				B547AB482163D16E0014E2CE /* RepositoryDetailModel.swift */,
-			);
-			path = RepositoryDetail;
 			sourceTree = "<group>";
 		};
 		B547AB492163D16F0014E2CE /* SearchUser */ = {
@@ -306,7 +286,6 @@
 			files = (
 				B547AB262163399A0014E2CE /* LaunchScreen.storyboard in Resources */,
 				B547AB5A2163D16F0014E2CE /* SearchUser.storyboard in Resources */,
-				B547AB562163D16F0014E2CE /* RepositoryDetail.storyboard in Resources */,
 				B547AB232163399A0014E2CE /* Assets.xcassets in Resources */,
 				B547AB4E2163D16F0014E2CE /* UserDetail.storyboard in Resources */,
 				B547AB552163D16F0014E2CE /* RepositoryCell.xib in Resources */,
@@ -392,10 +371,7 @@
 				B547AB522163D16F0014E2CE /* UserCell.swift in Sources */,
 				B547AB5D2163D16F0014E2CE /* SearchUserModel.swift in Sources */,
 				B547AB5B2163D16F0014E2CE /* SearchUserViewController.swift in Sources */,
-				B547AB592163D16F0014E2CE /* RepositoryDetailModel.swift in Sources */,
-				B547AB582163D16F0014E2CE /* RepositoryDetailViewController.swift in Sources */,
 				B547AB4F2163D16F0014E2CE /* UserDetailModel.swift in Sources */,
-				B547AB572163D16F0014E2CE /* RepositoryDetailPresenter.swift in Sources */,
 				B5568EEC2165CAD200174DE8 /* SearchUserViewModel.swift in Sources */,
 				B50F97D22169055D0000156F /* Repository+Extension.swift in Sources */,
 				B547AB1C216339980014E2CE /* AppDelegate.swift in Sources */,

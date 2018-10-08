@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="14313.18" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina4_7" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14283.14"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" id="gTV-IL-0wX" customClass="ReadmeCell" customModule="ReduxExample" customModuleProvider="target">
+            <rect key="frame" x="0.0" y="0.0" width="320" height="240"/>
+            <autoresizingMask key="autoresizingMask"/>
+            <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
+                <rect key="frame" x="0.0" y="0.0" width="320" height="240"/>
+                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                <subviews>
+                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="jhl-ea-Jlz">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="240"/>
+                        <subviews>
+                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="yOw-AB-29X">
+                                <rect key="frame" x="0.0" y="0.0" width="320" height="240"/>
+                                <subviews>
+                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="yb1-pX-PGO">
+                                        <rect key="frame" x="0.0" y="0.0" width="320" height="120"/>
+                                        <subviews>
+                                            <activityIndicatorView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" animating="YES" style="gray" translatesAutoresizingMaskIntoConstraints="NO" id="1ge-3y-WvE">
+                                                <rect key="frame" x="150" y="50" width="20" height="20"/>
+                                            </activityIndicatorView>
+                                        </subviews>
+                                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        <constraints>
+                                            <constraint firstItem="1ge-3y-WvE" firstAttribute="centerY" secondItem="yb1-pX-PGO" secondAttribute="centerY" id="Hv6-af-GfW"/>
+                                            <constraint firstItem="1ge-3y-WvE" firstAttribute="centerX" secondItem="yb1-pX-PGO" secondAttribute="centerX" id="bhL-0i-6Kn"/>
+                                            <constraint firstAttribute="height" constant="120" id="pyz-EK-ixD"/>
+                                        </constraints>
+                                    </view>
+                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="84J-2Y-FQs">
+                                        <rect key="frame" x="0.0" y="120" width="320" height="120"/>
+                                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                    </view>
+                                </subviews>
+                            </stackView>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <constraints>
+                            <constraint firstAttribute="bottom" secondItem="yOw-AB-29X" secondAttribute="bottom" id="6hg-q6-aJJ"/>
+                            <constraint firstAttribute="width" constant="320" id="JEa-G1-Jww"/>
+                            <constraint firstAttribute="trailing" secondItem="yOw-AB-29X" secondAttribute="trailing" id="Ty0-tx-oTw"/>
+                            <constraint firstItem="yOw-AB-29X" firstAttribute="top" secondItem="jhl-ea-Jlz" secondAttribute="top" id="ctt-JO-8Uk"/>
+                            <constraint firstItem="yOw-AB-29X" firstAttribute="leading" secondItem="jhl-ea-Jlz" secondAttribute="leading" id="kcu-3C-rDt"/>
+                        </constraints>
+                    </view>
+                </subviews>
+            </view>
+            <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+            <constraints>
+                <constraint firstItem="jhl-ea-Jlz" firstAttribute="leading" secondItem="gTV-IL-0wX" secondAttribute="leading" id="hsm-80-bB6"/>
+                <constraint firstItem="jhl-ea-Jlz" firstAttribute="top" secondItem="gTV-IL-0wX" secondAttribute="top" id="iy5-Nd-JiA"/>
+                <constraint firstAttribute="trailing" secondItem="jhl-ea-Jlz" secondAttribute="trailing" id="k1d-Mc-HJL"/>
+                <constraint firstAttribute="bottom" secondItem="jhl-ea-Jlz" secondAttribute="bottom" id="x5i-tp-bAO"/>
+            </constraints>
+            <viewLayoutGuide key="safeArea" id="ZTg-uK-7eu"/>
+            <connections>
+                <outlet property="loadingView" destination="yb1-pX-PGO" id="rO6-UF-u2j"/>
+                <outlet property="markdownContainerView" destination="84J-2Y-FQs" id="IPC-Tp-HxP"/>
+                <outlet property="widthConstraint" destination="JEa-G1-Jww" id="3nz-RP-Alv"/>
+            </connections>
+        </collectionViewCell>
+    </objects>
+</document>

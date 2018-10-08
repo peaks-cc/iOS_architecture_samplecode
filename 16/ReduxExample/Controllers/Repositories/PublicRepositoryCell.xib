@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="14313.18" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina4_7" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14283.14"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" id="gTV-IL-0wX" customClass="PublicRepositoryCell" customModule="ReduxExample" customModuleProvider="target">
+            <rect key="frame" x="0.0" y="0.0" width="320" height="96"/>
+            <autoresizingMask key="autoresizingMask"/>
+            <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
+                <rect key="frame" x="0.0" y="0.0" width="320" height="96"/>
+                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                <subviews>
+                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="3dj-7h-egn">
+                        <rect key="frame" x="20" y="95.5" width="280" height="0.5"/>
+                        <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <constraints>
+                            <constraint firstAttribute="height" constant="0.5" id="NWa-sY-law"/>
+                        </constraints>
+                    </view>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="43u-jS-gV4">
+                        <rect key="frame" x="20" y="10" width="236" height="21"/>
+                        <fontDescription key="fontDescription" type="boldSystem" pointSize="17"/>
+                        <nil key="textColor"/>
+                        <nil key="highlightedColor"/>
+                    </label>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="JPz-LL-Y1H" customClass="Label" customModule="ReduxExample" customModuleProvider="target">
+                        <rect key="frame" x="20" y="39" width="236" height="14.5"/>
+                        <fontDescription key="fontDescription" type="system" pointSize="12"/>
+                        <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <nil key="highlightedColor"/>
+                    </label>
+                    <button opaque="NO" contentMode="scaleAspectFit" contentHorizontalAlignment="fill" contentVerticalAlignment="fill" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="I4D-SB-eig">
+                        <rect key="frame" x="264" y="10" width="36" height="36"/>
+                        <constraints>
+                            <constraint firstAttribute="width" constant="36" id="0hC-ly-sx1"/>
+                            <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="30" id="UjJ-cP-ixd"/>
+                            <constraint firstAttribute="height" constant="36" id="kGN-hE-as9"/>
+                            <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="30" id="stn-9W-SEG"/>
+                        </constraints>
+                        <state key="normal" image="favorite-off"/>
+                        <state key="selected" image="favorite-on"/>
+                        <state key="highlighted" image="favorite-on"/>
+                    </button>
+                </subviews>
+            </view>
+            <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+            <constraints>
+                <constraint firstItem="3dj-7h-egn" firstAttribute="leading" secondItem="gTV-IL-0wX" secondAttribute="leading" constant="20" id="2WV-Lf-Vca"/>
+                <constraint firstAttribute="trailing" secondItem="3dj-7h-egn" secondAttribute="trailing" constant="20" id="8DO-dW-L8k"/>
+                <constraint firstItem="I4D-SB-eig" firstAttribute="top" secondItem="gTV-IL-0wX" secondAttribute="top" constant="10" id="8SD-SR-2Oi"/>
+                <constraint firstItem="43u-jS-gV4" firstAttribute="leading" secondItem="gTV-IL-0wX" secondAttribute="leading" constant="20" id="Ac5-8u-ogS"/>
+                <constraint firstAttribute="trailing" secondItem="I4D-SB-eig" secondAttribute="trailing" constant="20" id="F61-5E-14h"/>
+                <constraint firstAttribute="bottom" secondItem="3dj-7h-egn" secondAttribute="bottom" id="KHE-jh-aUc"/>
+                <constraint firstItem="JPz-LL-Y1H" firstAttribute="top" secondItem="43u-jS-gV4" secondAttribute="bottom" constant="8" id="Srh-Oq-Doq"/>
+                <constraint firstItem="JPz-LL-Y1H" firstAttribute="leading" secondItem="43u-jS-gV4" secondAttribute="leading" id="Xeb-DD-972"/>
+                <constraint firstItem="JPz-LL-Y1H" firstAttribute="trailing" secondItem="43u-jS-gV4" secondAttribute="trailing" id="YS9-4T-sAQ"/>
+                <constraint firstItem="43u-jS-gV4" firstAttribute="top" secondItem="gTV-IL-0wX" secondAttribute="top" constant="10" id="n5B-pg-eU1"/>
+                <constraint firstItem="I4D-SB-eig" firstAttribute="leading" secondItem="43u-jS-gV4" secondAttribute="trailing" constant="8" id="zrS-2z-Me7"/>
+            </constraints>
+            <viewLayoutGuide key="safeArea" id="ZTg-uK-7eu"/>
+            <connections>
+                <outlet property="descriptionForRepositoryLabel" destination="JPz-LL-Y1H" id="QPb-R6-fus"/>
+                <outlet property="favoriteButton" destination="I4D-SB-eig" id="iTA-fp-mJh"/>
+                <outlet property="titleLabel" destination="43u-jS-gV4" id="LFV-u2-LKy"/>
+            </connections>
+            <point key="canvasLocation" x="137.59999999999999" y="123.23838080959521"/>
+        </collectionViewCell>
+    </objects>
+    <resources>
+        <image name="favorite-off" width="256" height="256"/>
+        <image name="favorite-on" width="256" height="256"/>
+    </resources>
+</document>
