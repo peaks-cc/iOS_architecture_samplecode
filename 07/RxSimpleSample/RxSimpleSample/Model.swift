@@ -8,7 +8,7 @@
 
 import Foundation
 
-enum ModelError {
+enum ModelError: Error {
     case invalidId
     case invalidPassword
     case invalidIdAndPassword
