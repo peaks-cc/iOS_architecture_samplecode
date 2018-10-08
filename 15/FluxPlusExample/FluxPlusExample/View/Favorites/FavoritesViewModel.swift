@@ -25,7 +25,7 @@ final class FavoritesViewModel {
 
         self.favorites = favoriteStore.repositories
 
-        self.reloadFavorites = favorites.asObservable()
+        self.reloadFavorites = favorites.changed
             .map { _ in }
 
         _selectedIndexPath

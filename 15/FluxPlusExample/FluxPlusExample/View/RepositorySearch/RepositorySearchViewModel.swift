@@ -33,7 +33,7 @@ final class RepositorySearchViewModel {
 
         self.repositories = searchStore.repositories
 
-        self.reloadRepositories = repositories.asObservable()
+        self.reloadRepositories = repositories.changed
             .map { _ in }
 
         self.editingLayout = searchStore.isSearchFieldEditing.asObservable()
