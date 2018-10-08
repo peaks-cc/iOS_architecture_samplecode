@@ -15,28 +15,28 @@ enum ModelError: Error {
 }
 
 protocol ModelProtocol {
-    func validate(idText: String?, passwordText: String?) -> ModelError?
+    func validate(idText: String?, passwordText: String?) throws
 }
 
 class Model: ModelProtocol {
-    func validate(idText: String?, passwordText: String?) -> ModelError? {
+    func validate(idText: String?, passwordText: String?) throws {
         switch (idText, passwordText) {
         case (.none, .none):
-            return .invalidIdAndPassword
+            throw ModelError.invalidIdAndPassword
         case (.none, .some):
-            return .invalidId
+            throw ModelError.invalidId
         case (.some, .none):
-            return .invalidPassword
+            throw ModelError.invalidPassword
         case (let idText?, let passwordText?):
             switch (idText.isEmpty, passwordText.isEmpty) {
             case (true, true):
-                return .invalidIdAndPassword
+                throw ModelError.invalidIdAndPassword
             case (false, false):
-                return nil
+                return
             case (true, false):
-                return .invalidId
+                throw ModelError.invalidId
             case (false, true):
-                return .invalidPassword
+                throw ModelError.invalidPassword
             }
         }
     }

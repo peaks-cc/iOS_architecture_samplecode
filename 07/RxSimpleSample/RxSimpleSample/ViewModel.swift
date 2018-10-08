@@ -24,13 +24,14 @@ class ViewModel {
 
         Observable.combineLatest(idTextObservable, passwordTextObservable)
             .map { idText, passwordText -> String in
-                let result = model.validate(idText: idText, passwordText: passwordText)
-                switch result {
-                case .none:
-                    return "OK!!!"
-                case .some(let error):
+                do {
+                    try model.validate(idText: idText, passwordText: passwordText)
+                } catch {
+                    guard let error = error as? ModelError else { fatalError("Unexpected Error.") }
                     return error.errorText
                 }
+
+                return "OK!!!"
             }
             .bind(to: _validationText)
             .disposed(by: disposeBag)

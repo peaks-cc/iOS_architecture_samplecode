@@ -14,40 +14,43 @@ class RxSimpleSampleTests: XCTestCase {
     func testValidation() {
         let model = Model()
 
-        XCTAssertEqual(
-            ModelError.invalidIdAndPassword,
-            model.validate(idText: nil, passwordText: nil)
-        )
+        do {
+            try model.validate(idText: nil, passwordText: nil)
+        } catch {
+            XCTAssertEqual(ModelError.invalidIdAndPassword, error as! ModelError)
+        }
 
-        XCTAssertEqual(
-            ModelError.invalidIdAndPassword,
-            model.validate(idText: "", passwordText: "")
-        )
+        do {
+            try model.validate(idText: "", passwordText: "")
+        } catch {
+            XCTAssertEqual(ModelError.invalidIdAndPassword, error as! ModelError)
+        }
 
-        XCTAssertEqual(
-            ModelError.invalidId,
-            model.validate(idText: nil, passwordText: "password")
-        )
+        do {
+            try model.validate(idText: nil, passwordText: "password")
+        } catch {
+            XCTAssertEqual(ModelError.invalidId, error as! ModelError)
+        }
 
-        XCTAssertEqual(
-            ModelError.invalidId,
-            model.validate(idText: "", passwordText: "password")
-        )
+        do {
+            try model.validate(idText: "", passwordText: "password")
+        } catch {
+            XCTAssertEqual(ModelError.invalidId, error as! ModelError)
+        }
 
-        XCTAssertEqual(
-            ModelError.invalidPassword,
-            model.validate(idText: "id", passwordText: nil)
-        )
+        do {
+            try model.validate(idText: "id", passwordText: nil)
+        } catch {
+            XCTAssertEqual(ModelError.invalidPassword, error as! ModelError)
+        }
 
-        XCTAssertEqual(
-            ModelError.invalidPassword,
-            model.validate(idText: "id", passwordText: "")
-        )
+        do {
+            try model.validate(idText: "id", passwordText: "")
+        } catch {
+            XCTAssertEqual(ModelError.invalidPassword, error as! ModelError)
+        }
 
-        XCTAssertEqual(
-            nil,
-            model.validate(idText: "id", passwordText: "password")
-        )
+        XCTAssertNoThrow(try model.validate(idText: "id", passwordText: "password"))
     }
 
 }
