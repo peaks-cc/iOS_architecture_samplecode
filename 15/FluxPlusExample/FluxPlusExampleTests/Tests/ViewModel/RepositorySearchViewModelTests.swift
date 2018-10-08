@@ -85,7 +85,6 @@ final class RepositorySearchViewModelTests: XCTestCase {
 
         let expect = expectation(description: "waiting viewModel.reloadData")
         let disposable = dependency.viewModel.reloadRepositories
-            .skip(1)
             .subscribe(onNext: {
                 expect.fulfill()
             })
