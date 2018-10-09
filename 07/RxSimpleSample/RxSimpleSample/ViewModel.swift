@@ -13,9 +13,11 @@ class ViewModel {
     let validationText: Observable<String>
     let loadLabelColor: Observable<UIColor>
 
-    init(idTextObservable: Observable<String?>, passwordTextObservable: Observable<String?>, model: ModelProtocol) {
-
-        let event = Observable.combineLatest(idTextObservable, passwordTextObservable)
+    init(idTextObservable: Observable<String?>,
+         passwordTextObservable: Observable<String?>,
+         model: ModelProtocol) {
+        let event = Observable
+            .combineLatest(idTextObservable, passwordTextObservable)
             .skip(1)
             .flatMap { idText, passwordText -> Observable<Event<Void>> in
                 return model
