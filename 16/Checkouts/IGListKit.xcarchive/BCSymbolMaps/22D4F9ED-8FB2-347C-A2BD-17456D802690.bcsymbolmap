@@ -1,0 +1,1412 @@
+BCSymbolMap Version: 2.0
+-[IGListMoveIndex initWithFrom:to:]
+-[IGListMoveIndex hash]
+-[IGListMoveIndex isEqual:]
+-[IGListMoveIndex compare:]
+-[IGListMoveIndex description]
+-[IGListMoveIndex from]
+-[IGListMoveIndex to]
+_OBJC_IVAR_$_IGListMoveIndex._from
+_OBJC_IVAR_$_IGListMoveIndex._to
+Apple LLVM version 10.0.0 (clang-1000.10.25.5)
+/Users/susieyy/.ghq/github.com/susieyy/ReduxExample/Carthage/Checkouts/IGListKit/Source/Common/IGListMoveIndex.m
+/Users/susieyy/.ghq/github.com/susieyy/ReduxExample/Carthage/Checkouts/IGListKit
+/Users/susieyy/.ghq/github.com/susieyy/ReduxExample/Carthage/Checkouts/IGListKit/Source/Common/IGListMoveIndex.h
+-[UICollectionView(DebugDescription) debugDescriptionLines]
+/Users/susieyy/.ghq/github.com/susieyy/ReduxExample/Carthage/Checkouts/IGListKit/Source/Internal/UICollectionView+DebugDescription.m
+-[IGListAdapter(DebugDescription) debugDescription]
+-[IGListAdapter(DebugDescription) debugDescriptionLines]
+/Users/susieyy/.ghq/github.com/susieyy/ReduxExample/Carthage/Checkouts/IGListKit/Source/Internal/IGListAdapter+DebugDescription.m
+-[IGListIndexSetResult initWithInserts:deletes:updates:moves:oldIndexMap:newIndexMap:]
+-[IGListIndexSetResult hasChanges]
+-[IGListIndexSetResult changeCount]
+-[IGListIndexSetResult resultForBatchUpdates]
+-[IGListIndexSetResult oldIndexForIdentifier:]
+-[IGListIndexSetResult newIndexForIdentifier:]
+-[IGListIndexSetResult description]
+-[IGListIndexSetResult inserts]
+-[IGListIndexSetResult deletes]
+-[IGListIndexSetResult updates]
+-[IGListIndexSetResult moves]
+-[IGListIndexSetResult .cxx_destruct]
+_OBJC_IVAR_$_IGListIndexSetResult._inserts
+_OBJC_IVAR_$_IGListIndexSetResult._deletes
+_OBJC_IVAR_$_IGListIndexSetResult._updates
+_OBJC_IVAR_$_IGListIndexSetResult._moves
+_OBJC_IVAR_$_IGListIndexSetResult._oldIndexMap
+_OBJC_IVAR_$_IGListIndexSetResult._newIndexMap
+/Users/susieyy/.ghq/github.com/susieyy/ReduxExample/Carthage/Checkouts/IGListKit/Source/Common/IGListIndexSetResult.m
+/Users/susieyy/.ghq/github.com/susieyy/ReduxExample/Carthage/Checkouts/IGListKit/Source/Common/IGListIndexSetResult.h
+-[IGListAdapterUpdater init]
+-[IGListAdapterUpdater hasChanges]
+-[IGListAdapterUpdater performReloadDataWithCollectionView:]
+-[IGListAdapterUpdater performBatchUpdatesWithCollectionView:]
+___62-[IGListAdapterUpdater performBatchUpdatesWithCollectionView:]_block_invoke
+___copy_helper_block_
+___destroy_helper_block_
+___62-[IGListAdapterUpdater performBatchUpdatesWithCollectionView:]_block_invoke.54
+___copy_helper_block_.57
+___destroy_helper_block_.58
+___62-[IGListAdapterUpdater performBatchUpdatesWithCollectionView:]_block_invoke.61
+___copy_helper_block_.64
+___destroy_helper_block_.65
+___62-[IGListAdapterUpdater performBatchUpdatesWithCollectionView:]_block_invoke.75
+___copy_helper_block_.76
+___destroy_helper_block_.77
+___62-[IGListAdapterUpdater performBatchUpdatesWithCollectionView:]_block_invoke.80
+___copy_helper_block_.83
+___destroy_helper_block_.84
+___62-[IGListAdapterUpdater performBatchUpdatesWithCollectionView:]_block_invoke.87
+___copy_helper_block_.94
+___destroy_helper_block_.95
+___62-[IGListAdapterUpdater performBatchUpdatesWithCollectionView:]_block_invoke.97
+___62-[IGListAdapterUpdater performBatchUpdatesWithCollectionView:]_block_invoke_2
+___copy_helper_block_.102
+___destroy_helper_block_.103
+___62-[IGListAdapterUpdater performBatchUpdatesWithCollectionView:]_block_invoke.112
+___copy_helper_block_.113
+___destroy_helper_block_.114
+___62-[IGListAdapterUpdater performBatchUpdatesWithCollectionView:]_block_invoke.116
+___copy_helper_block_.119
+___destroy_helper_block_.120
+___copy_helper_block_.124
+___destroy_helper_block_.125
+___62-[IGListAdapterUpdater performBatchUpdatesWithCollectionView:]_block_invoke.127
+___62-[IGListAdapterUpdater performBatchUpdatesWithCollectionView:]_block_invoke_2.128
+___copy_helper_block_.129
+___destroy_helper_block_.130
+___copy_helper_block_.132
+___destroy_helper_block_.133
+___convertReloadToDeleteInsert_block_invoke
+___copy_helper_block_.149
+___destroy_helper_block_.150
+-[IGListAdapterUpdater _flushCollectionView:withDiffResult:batchUpdates:fromObjects:]
+-[IGListAdapterUpdater _beginPerformBatchUpdatesToObjects:]
+-[IGListAdapterUpdater _performBatchUpdatesItemBlockApplied]
+-[IGListAdapterUpdater cleanStateBeforeUpdates]
+-[IGListAdapterUpdater _cleanStateAfterUpdates]
+-[IGListAdapterUpdater _queueUpdateWithCollectionView:]
+___55-[IGListAdapterUpdater _queueUpdateWithCollectionView:]_block_invoke
+___copy_helper_block_.230
+___destroy_helper_block_.231
+-[IGListAdapterUpdater objectLookupPointerFunctions]
+_IGListIdentifierHash
+_IGListIsEqual
+-[IGListAdapterUpdater performUpdateWithCollectionView:fromObjects:toObjectsBlock:animated:objectTransitionBlock:completion:]
+-[IGListAdapterUpdater performUpdateWithCollectionView:animated:itemUpdates:completion:]
+-[IGListAdapterUpdater insertItemsIntoCollectionView:indexPaths:]
+-[IGListAdapterUpdater deleteItemsFromCollectionView:indexPaths:]
+-[IGListAdapterUpdater moveItemInCollectionView:fromIndexPath:toIndexPath:]
+-[IGListAdapterUpdater reloadItemInCollectionView:fromIndexPath:toIndexPath:]
+-[IGListAdapterUpdater moveSectionInCollectionView:fromIndex:toIndex:]
+___70-[IGListAdapterUpdater moveSectionInCollectionView:fromIndex:toIndex:]_block_invoke
+___copy_helper_block_.274
+___destroy_helper_block_.275
+___70-[IGListAdapterUpdater moveSectionInCollectionView:fromIndex:toIndex:]_block_invoke.277
+-[IGListAdapterUpdater reloadDataWithCollectionView:reloadUpdateBlock:completion:]
+-[IGListAdapterUpdater reloadCollectionView:sections:]
+-[IGListAdapterUpdater delegate]
+-[IGListAdapterUpdater setDelegate:]
+-[IGListAdapterUpdater movesAsDeletesInserts]
+-[IGListAdapterUpdater setMovesAsDeletesInserts:]
+-[IGListAdapterUpdater allowsBackgroundReloading]
+-[IGListAdapterUpdater setAllowsBackgroundReloading:]
+-[IGListAdapterUpdater coalescanceTime]
+-[IGListAdapterUpdater setCoalescanceTime:]
+-[IGListAdapterUpdater experiments]
+-[IGListAdapterUpdater setExperiments:]
+-[IGListAdapterUpdater fromObjects]
+-[IGListAdapterUpdater setFromObjects:]
+-[IGListAdapterUpdater toObjectsBlock]
+-[IGListAdapterUpdater setToObjectsBlock:]
+-[IGListAdapterUpdater pendingTransitionToObjects]
+-[IGListAdapterUpdater setPendingTransitionToObjects:]
+-[IGListAdapterUpdater completionBlocks]
+-[IGListAdapterUpdater setCompletionBlocks:]
+-[IGListAdapterUpdater queuedUpdateIsAnimated]
+-[IGListAdapterUpdater setQueuedUpdateIsAnimated:]
+-[IGListAdapterUpdater batchUpdates]
+-[IGListAdapterUpdater setBatchUpdates:]
+-[IGListAdapterUpdater objectTransitionBlock]
+-[IGListAdapterUpdater setObjectTransitionBlock:]
+-[IGListAdapterUpdater reloadUpdates]
+-[IGListAdapterUpdater setReloadUpdates:]
+-[IGListAdapterUpdater hasQueuedReloadData]
+-[IGListAdapterUpdater setQueuedReloadData:]
+-[IGListAdapterUpdater state]
+-[IGListAdapterUpdater setState:]
+-[IGListAdapterUpdater applyingUpdateData]
+-[IGListAdapterUpdater setApplyingUpdateData:]
+-[IGListAdapterUpdater .cxx_destruct]
+_OBJC_IVAR_$_IGListAdapterUpdater._queuedUpdateIsAnimated
+_OBJC_IVAR_$_IGListAdapterUpdater._completionBlocks
+_OBJC_IVAR_$_IGListAdapterUpdater._batchUpdates
+_OBJC_IVAR_$_IGListAdapterUpdater._allowsBackgroundReloading
+___block_descriptor_tmp
+___block_descriptor_tmp.60
+___block_descriptor_tmp.66
+___block_descriptor_tmp.79
+___block_descriptor_tmp.86
+___block_descriptor_tmp.96
+___block_descriptor_tmp.104
+___block_descriptor_tmp.115
+___block_descriptor_tmp.121
+___block_descriptor_tmp.126
+___block_descriptor_tmp.131
+___block_descriptor_tmp.134
+___block_descriptor_tmp.152
+___block_descriptor_tmp.232
+___block_descriptor_tmp.276
+___block_descriptor_tmp.278
+___block_literal_global
+_OBJC_IVAR_$_IGListAdapterUpdater._delegate
+_OBJC_IVAR_$_IGListAdapterUpdater._movesAsDeletesInserts
+_OBJC_IVAR_$_IGListAdapterUpdater._coalescanceTime
+_OBJC_IVAR_$_IGListAdapterUpdater._experiments
+_OBJC_IVAR_$_IGListAdapterUpdater._fromObjects
+_OBJC_IVAR_$_IGListAdapterUpdater._toObjectsBlock
+_OBJC_IVAR_$_IGListAdapterUpdater._pendingTransitionToObjects
+_OBJC_IVAR_$_IGListAdapterUpdater._objectTransitionBlock
+_OBJC_IVAR_$_IGListAdapterUpdater._reloadUpdates
+_OBJC_IVAR_$_IGListAdapterUpdater._queuedReloadData
+_OBJC_IVAR_$_IGListAdapterUpdater._state
+_OBJC_IVAR_$_IGListAdapterUpdater._applyingUpdateData
+l_OBJC_PROTOCOL_$_NSObject
+l_OBJC_LABEL_PROTOCOL_$_NSObject
+l_OBJC_PROTOCOL_$_IGListUpdatingDelegate
+l_OBJC_LABEL_PROTOCOL_$_IGListUpdatingDelegate
+/Users/susieyy/.ghq/github.com/susieyy/ReduxExample/Carthage/Checkouts/IGListKit/Source/IGListAdapterUpdater.m
+/Users/susieyy/.ghq/github.com/susieyy/ReduxExample/Carthage/Checkouts/IGListKit/Source/Internal/IGListAdapterUpdaterInternal.h
+/Users/susieyy/.ghq/github.com/susieyy/ReduxExample/Carthage/Checkouts/IGListKit/Source/IGListAdapterUpdater.h
+__70-[IGListAdapterUpdater moveSectionInCollectionView:fromIndex:toIndex:]_block_invoke.277
+__destroy_helper_block_
+__copy_helper_block_
+__70-[IGListAdapterUpdater moveSectionInCollectionView:fromIndex:toIndex:]_block_invoke
+IGListIsEqual
+IGListIdentifierHash
+__55-[IGListAdapterUpdater _queueUpdateWithCollectionView:]_block_invoke
+IGListExperimentEnabled
+/Users/susieyy/.ghq/github.com/susieyy/ReduxExample/Carthage/Checkouts/IGListKit/Source/Common/IGListExperiments.h
+__convertReloadToDeleteInsert_block_invoke
+convertReloadToDeleteInsert
+__62-[IGListAdapterUpdater performBatchUpdatesWithCollectionView:]_block_invoke_2.128
+__62-[IGListAdapterUpdater performBatchUpdatesWithCollectionView:]_block_invoke.127
+__62-[IGListAdapterUpdater performBatchUpdatesWithCollectionView:]_block_invoke.116
+__62-[IGListAdapterUpdater performBatchUpdatesWithCollectionView:]_block_invoke.112
+__62-[IGListAdapterUpdater performBatchUpdatesWithCollectionView:]_block_invoke_2
+__62-[IGListAdapterUpdater performBatchUpdatesWithCollectionView:]_block_invoke.97
+__62-[IGListAdapterUpdater performBatchUpdatesWithCollectionView:]_block_invoke.87
+__62-[IGListAdapterUpdater performBatchUpdatesWithCollectionView:]_block_invoke.80
+__62-[IGListAdapterUpdater performBatchUpdatesWithCollectionView:]_block_invoke.75
+__62-[IGListAdapterUpdater performBatchUpdatesWithCollectionView:]_block_invoke.61
+__62-[IGListAdapterUpdater performBatchUpdatesWithCollectionView:]_block_invoke.54
+__62-[IGListAdapterUpdater performBatchUpdatesWithCollectionView:]_block_invoke
+objectsWithDuplicateIdentifiersRemoved
+/Users/susieyy/.ghq/github.com/susieyy/ReduxExample/Carthage/Checkouts/IGListKit/Source/Common/Internal/IGListArrayUtilsInternal.h
+-[IGListGenericSectionController didUpdateToObject:]
+-[IGListGenericSectionController object]
+-[IGListGenericSectionController .cxx_destruct]
+_OBJC_IVAR_$_IGListGenericSectionController._object
+/Users/susieyy/.ghq/github.com/susieyy/ReduxExample/Carthage/Checkouts/IGListKit/Source/IGListGenericSectionController.m
+/Users/susieyy/.ghq/github.com/susieyy/ReduxExample/Carthage/Checkouts/IGListKit/Source/IGListGenericSectionController.h
+-[IGListSectionMap(DebugDescription) debugDescriptionLines]
+/Users/susieyy/.ghq/github.com/susieyy/ReduxExample/Carthage/Checkouts/IGListKit/Source/Internal/IGListSectionMap+DebugDescription.m
+-[IGListCollectionView initWithFrame:]
+-[IGListCollectionView initWithFrame:listCollectionViewLayout:]
+-[IGListCollectionView _listLayout]
+-[IGListCollectionView reloadItemsAtIndexPaths:]
+-[IGListCollectionView reloadSections:]
+-[IGListCollectionView deleteItemsAtIndexPaths:]
+-[IGListCollectionView deleteSections:]
+-[IGListCollectionView insertItemsAtIndexPaths:]
+-[IGListCollectionView insertSections:]
+-[IGListCollectionView moveItemAtIndexPath:toIndexPath:]
+-[IGListCollectionView moveSection:toSection:]
+-[IGListCollectionView _didModifySections:]
+-[IGListCollectionView _didModifySection:]
+-[IGListCollectionView _didModifyIndexPaths:]
+/Users/susieyy/.ghq/github.com/susieyy/ReduxExample/Carthage/Checkouts/IGListKit/Source/IGListCollectionView.m
+-[IGListIndexPathResult initWithInserts:deletes:updates:moves:oldIndexPathMap:newIndexPathMap:]
+-[IGListIndexPathResult hasChanges]
+-[IGListIndexPathResult changeCount]
+-[IGListIndexPathResult resultForBatchUpdates]
+-[IGListIndexPathResult oldIndexPathForIdentifier:]
+-[IGListIndexPathResult newIndexPathForIdentifier:]
+-[IGListIndexPathResult description]
+-[IGListIndexPathResult inserts]
+-[IGListIndexPathResult deletes]
+-[IGListIndexPathResult updates]
+-[IGListIndexPathResult moves]
+-[IGListIndexPathResult .cxx_destruct]
+_OBJC_IVAR_$_IGListIndexPathResult._inserts
+_OBJC_IVAR_$_IGListIndexPathResult._deletes
+_OBJC_IVAR_$_IGListIndexPathResult._updates
+_OBJC_IVAR_$_IGListIndexPathResult._moves
+_OBJC_IVAR_$_IGListIndexPathResult._oldIndexPathMap
+_OBJC_IVAR_$_IGListIndexPathResult._newIndexPathMap
+/Users/susieyy/.ghq/github.com/susieyy/ReduxExample/Carthage/Checkouts/IGListKit/Source/Common/IGListIndexPathResult.m
+/Users/susieyy/.ghq/github.com/susieyy/ReduxExample/Carthage/Checkouts/IGListKit/Source/Common/IGListIndexPathResult.h
+-[IGListWorkingRangeHandler initWithWorkingRangeSize:]
+-[IGListWorkingRangeHandler willDisplayItemAtIndexPath:forListAdapter:]
+-[IGListWorkingRangeHandler didEndDisplayingItemAtIndexPath:forListAdapter:]
+-[IGListWorkingRangeHandler _updateWorkingRangesWithListAdapter:]
+-[IGListWorkingRangeHandler workingRangeSize]
+-[IGListWorkingRangeHandler .cxx_destruct]
+-[IGListWorkingRangeHandler .cxx_construct]
+___clang_call_terminate
+_OBJC_IVAR_$_IGListWorkingRangeHandler._workingRangeSize
+_OBJC_IVAR_$_IGListWorkingRangeHandler._visibleSectionIndices
+_OBJC_IVAR_$_IGListWorkingRangeHandler._workingRangeSectionControllers
+/Users/susieyy/.ghq/github.com/susieyy/ReduxExample/Carthage/Checkouts/IGListKit/Source/Internal/IGListWorkingRangeHandler.mm
+__construct_node<const _IGListWorkingRangeHandlerSectionControllerWrapper &>
+/Applications/Xcode-beta.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include/c++/v1/__hash_table
+~unique_ptr
+/Applications/Xcode-beta.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include/c++/v1/memory
+reset
+operator()
+deallocate
+__libcpp_deallocate
+/Applications/Xcode-beta.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include/c++/v1/new
+destroy<_IGListWorkingRangeHandlerSectionControllerWrapper>
+__destroy<_IGListWorkingRangeHandlerSectionControllerWrapper>
+~_IGListWorkingRangeHandlerSectionControllerWrapper
+operator->
+first
+__get
+construct<_IGListWorkingRangeHandlerSectionControllerWrapper, const _IGListWorkingRangeHandlerSectionControllerWrapper &>
+__construct<_IGListWorkingRangeHandlerSectionControllerWrapper, const _IGListWorkingRangeHandlerSectionControllerWrapper &>
+_IGListWorkingRangeHandlerSectionControllerWrapper
+unique_ptr<true, void>
+__compressed_pair<std::__1::__hash_node<_IGListWorkingRangeHandlerSectionControllerWrapper, void *> *&, std::__1::__hash_node_destructor<std::__1::allocator<std::__1::__hash_node<_IGListWorkingRangeHandlerSectionControllerWrapper, void *> > > >
+__compressed_pair_elem<std::__1::__hash_node_destructor<std::__1::allocator<std::__1::__hash_node<_IGListWorkingRangeHandlerSectionControllerWrapper, void *> > >, void>
+__compressed_pair_elem<std::__1::__hash_node<_IGListWorkingRangeHandlerSectionControllerWrapper, void *> *&, void>
+allocate
+__allocate
+__node_alloc
+__node_insert_multi
+__hash_iterator
+operator[]
+__constrain_hash
+__hash
+/Applications/Xcode-beta.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include/c++/v1/functional
+operator==
+bucket_count
+size
+max<unsigned long>
+/Applications/Xcode-beta.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include/c++/v1/algorithm
+max<unsigned long, std::__1::__less<unsigned long, unsigned long> >
+/Applications/Xcode-beta.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include/c++/v1/math.h
+__is_hash_power2
+max_load_factor
+__assign_multi<std::__1::__hash_const_iterator<std::__1::__hash_node<_IGListWorkingRangeHandlerSectionControllerWrapper, void *> *> >
+operator!=
+operator++
+__insert_multi<const _IGListWorkingRangeHandlerSectionControllerWrapper &>
+__emplace_multi<const _IGListWorkingRangeHandlerSectionControllerWrapper &>
+get
+operator*
+operator=
+__detach
+find<_IGListWorkingRangeHandlerSectionControllerWrapper>
+__rehash
+reset<std::__1::__hash_node_base<std::__1::__hash_node<_IGListWorkingRangeHandlerSectionControllerWrapper, void *> *> **>
+__throw_length_error
+/Applications/Xcode-beta.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include/c++/v1/stdexcept
+length_error
+get_deleter
+second
+rehash
+__next_hash_pow2
+__clz
+__tree_balance_after_insert<std::__1::__tree_node_base<void *> *>
+/Applications/Xcode-beta.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include/c++/v1/__tree
+__tree_left_rotate<std::__1::__tree_node_base<void *> *>
+__set_parent
+__tree_is_left_child<std::__1::__tree_node_base<void *> *>
+__parent_unsafe
+__tree_right_rotate<std::__1::__tree_node_base<void *> *>
+__insert_node_at
+__begin_node
+__emplace_unique_key_args<long, const long &>
+__tree_iterator
+__construct_node<const long &>
+construct<long, const long &>
+__construct<long, const long &>
+__find_equal<long>
+/Applications/Xcode-beta.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include/c++/v1/__functional_base
+__root_ptr
+__root
+__end_node
+__compressed_pair<std::__1::__hash_node<_IGListWorkingRangeHandlerIndexPath, void *> *&, std::__1::__hash_node_destructor<std::__1::allocator<std::__1::__hash_node<_IGListWorkingRangeHandlerIndexPath, void *> > > >
+__compressed_pair_elem<std::__1::__hash_node_destructor<std::__1::allocator<std::__1::__hash_node<_IGListWorkingRangeHandlerIndexPath, void *> > >, void>
+__compressed_pair_elem<std::__1::__hash_node<_IGListWorkingRangeHandlerIndexPath, void *> *&, void>
+erase
+find<_IGListWorkingRangeHandlerIndexPath>
+__erase_unique<_IGListWorkingRangeHandlerIndexPath>
+reset<std::__1::__hash_node_base<std::__1::__hash_node<_IGListWorkingRangeHandlerIndexPath, void *> *> **>
+~__hash_table
+__deallocate_node
+destroy
+unordered_set
+/Applications/Xcode-beta.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include/c++/v1/unordered_set
+__hash_table
+__compressed_pair<float, true>
+__compressed_pair_elem<float, void>
+__compressed_pair<true, void>
+__compressed_pair_elem
+__hash_node_base
+~unordered_set
+~set
+/Applications/Xcode-beta.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include/c++/v1/set
+~__tree
+find
+begin
+insert
+__insert_unique
+__emplace_unique_key_args<_IGListWorkingRangeHandlerSectionControllerWrapper, _IGListWorkingRangeHandlerSectionControllerWrapper>
+__construct_node_hash<_IGListWorkingRangeHandlerSectionControllerWrapper>
+construct<_IGListWorkingRangeHandlerSectionControllerWrapper, _IGListWorkingRangeHandlerSectionControllerWrapper>
+__construct<_IGListWorkingRangeHandlerSectionControllerWrapper, _IGListWorkingRangeHandlerSectionControllerWrapper>
+__compressed_pair<float, const std::__1::equal_to<_IGListWorkingRangeHandlerSectionControllerWrapper> &>
+__compressed_pair<nullptr_t, std::__1::__bucket_list_deallocator<std::__1::allocator<std::__1::__hash_node_base<std::__1::__hash_node<_IGListWorkingRangeHandlerSectionControllerWrapper, void *> *> *> > >
+__compressed_pair_elem<std::__1::__bucket_list_deallocator<std::__1::allocator<std::__1::__hash_node_base<std::__1::__hash_node<_IGListWorkingRangeHandlerSectionControllerWrapper, void *> *> *> >, void>
+__bucket_list_deallocator
+/Applications/Xcode-beta.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include/c++/v1/iterator
+operator--
+__tree_prev_iter<std::__1::__tree_node_base<void *> *, std::__1::__tree_end_node<std::__1::__tree_node_base<void *> *> *>
+__tree_max<std::__1::__tree_node_base<void *> *>
+set
+__tree
+__compressed_pair<int, const std::__1::less<long> &>
+__compressed_pair_elem<int, void>
+__tree_end_node
+__emplace_unique_key_args<_IGListWorkingRangeHandlerIndexPath, _IGListWorkingRangeHandlerIndexPath>
+__construct_node_hash<_IGListWorkingRangeHandlerIndexPath>
+construct<_IGListWorkingRangeHandlerIndexPath, _IGListWorkingRangeHandlerIndexPath>
+__construct<_IGListWorkingRangeHandlerIndexPath, _IGListWorkingRangeHandlerIndexPath>
+-[IGListMoveIndexPath initWithFrom:to:]
+-[IGListMoveIndexPath hash]
+-[IGListMoveIndexPath isEqual:]
+-[IGListMoveIndexPath compare:]
+-[IGListMoveIndexPath description]
+-[IGListMoveIndexPath from]
+-[IGListMoveIndexPath to]
+-[IGListMoveIndexPath .cxx_destruct]
+_OBJC_IVAR_$_IGListMoveIndexPath._from
+_OBJC_IVAR_$_IGListMoveIndexPath._to
+/Users/susieyy/.ghq/github.com/susieyy/ReduxExample/Carthage/Checkouts/IGListKit/Source/Common/IGListMoveIndexPath.m
+/Users/susieyy/.ghq/github.com/susieyy/ReduxExample/Carthage/Checkouts/IGListKit/Source/Common/IGListMoveIndexPath.h
+__ZL13IGListDiffingbllP7NSArrayIPU25objcproto14IGListDiffable11objc_objectES3_16IGListDiffOptionl
+__ZL24indexPathsAndPopulateMapP7NSArrayIPU25objcproto14IGListDiffable11objc_objectElP10NSMapTable
+____ZL13IGListDiffingbllP7NSArrayIPU25objcproto14IGListDiffable11objc_objectES3_16IGListDiffOptionl_block_invoke
+__ZL13addIndexToMapbllPU25objcproto14IGListDiffable11objc_objectP10NSMapTable
+____ZL13IGListDiffingbllP7NSArrayIPU25objcproto14IGListDiffable11objc_objectES3_16IGListDiffOptionl_block_invoke.19
+___copy_helper_block_.20
+___destroy_helper_block_.21
+__ZL20addIndexToCollectionbP11objc_objectll
+____ZL24indexPathsAndPopulateMapP7NSArrayIPU25objcproto14IGListDiffable11objc_objectElP10NSMapTable_block_invoke
+___copy_helper_block_.42
+___destroy_helper_block_.43
+__ZNK13IGListEqualIDclEP11objc_objectS1_
+___block_descriptor_tmp.22
+__ZL10NSNotFound
+___block_descriptor_tmp.44
+/Users/susieyy/.ghq/github.com/susieyy/ReduxExample/Carthage/Checkouts/IGListKit/Source/Common/IGListDiff.mm
+destroy<std::__1::pair<const id<NSObject>, IGListEntry> >
+__destroy<std::__1::pair<const id<NSObject>, IGListEntry> >
+~pair
+/Applications/Xcode-beta.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include/c++/v1/utility
+~IGListEntry
+~stack
+/Applications/Xcode-beta.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include/c++/v1/stack
+~deque
+/Applications/Xcode-beta.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include/c++/v1/deque
+/Applications/Xcode-beta.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include/c++/v1/vector
+__end_cap
+vector
+~__vector_base
+clear
+__destruct_at_end
+__construct_at_end
+construct<long>
+__construct<long>
+__vector_base
+pop_back
+/Applications/Xcode-beta.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include/c++/v1/__split_buffer
+back
+__back_spare
+__capacity
+__split_buffer
+__compressed_pair<nullptr_t, std::__1::allocator<long *> &>
+__compressed_pair_elem<std::__1::allocator<long *> &, void>
+__compressed_pair_elem<nullptr_t, void>
+push_front
+construct<long *, long *const &>
+__construct<long *, long *const &>
+~__split_buffer
+swap<long **>
+/Applications/Xcode-beta.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include/c++/v1/type_traits
+__construct_at_end<std::__1::move_iterator<long **> >
+operator!=<long **, long **>
+construct<long *, long *>
+__construct<long *, long *>
+__alloc
+move_backward<long **, long **>
+__move_backward<long *, long *>
+push_back
+move<long **, long **>
+__move<long *, long *>
+__add_back_capacity
+end
+pop_front
+__destruct_at_begin
+front
+capacity
+__front_spare
+__deque_iterator
+empty
+~__deque_base
+reset<std::__1::__hash_node_base<std::__1::__hash_node<std::__1::__hash_value_type<id<NSObject>, IGListEntry>, void *> *> **>
+/Applications/Xcode-beta.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include/c++/v1/unordered_map
+construct<IGListRecord>
+__construct<IGListRecord>
+IGListRecord
+___ZL24indexPathsAndPopulateMapP7NSArrayIPU25objcproto14IGListDiffable11objc_objectElP10NSMapTable_block_invoke
+addIndexToCollection
+__emplace_unique_key_args<id<NSObject>, const std::__1::piecewise_construct_t &, std::__1::tuple<const __strong id<NSObject> &>, std::__1::tuple<> >
+__construct_node_hash<const std::__1::piecewise_construct_t &, std::__1::tuple<const __strong id<NSObject> &>, std::__1::tuple<> >
+construct<std::__1::pair<const id<NSObject>, IGListEntry>, const std::__1::piecewise_construct_t &, std::__1::tuple<const __strong id<NSObject> &>, std::__1::tuple<> >
+__construct<std::__1::pair<const id<NSObject>, IGListEntry>, const std::__1::piecewise_construct_t &, std::__1::tuple<const __strong id<NSObject> &>, std::__1::tuple<> >
+pair<const __strong id<NSObject> &>
+pair<const __strong id<NSObject> &, 0>
+/Applications/Xcode-beta.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include/c++/v1/tuple
+IGListEntry
+___ZL13IGListDiffingbllP7NSArrayIPU25objcproto14IGListDiffable11objc_objectES3_16IGListDiffOptionl_block_invoke.19
+addIndexToMap
+___ZL13IGListDiffingbllP7NSArrayIPU25objcproto14IGListDiffable11objc_objectES3_16IGListDiffOptionl_block_invoke
+indexPathsAndPopulateMap
+IGListDiffPathsExperiment
+IGListDiffExperiment
+IGListDiffPaths
+IGListDiffing
+~unordered_map
+~vector
+pop
+top
+push
+IGListTableKey
+unordered_map
+NSMakeRange
+/Applications/Xcode-beta.app/Contents/Developer/Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS12.0.sdk/System/Library/Frameworks/Foundation.framework/Headers/NSRange.h
+IGListDiff
+-[IGListCollectionViewLayoutInvalidationContext ig_invalidateSupplementaryAttributes]
+-[IGListCollectionViewLayoutInvalidationContext setIg_invalidateSupplementaryAttributes:]
+-[IGListCollectionViewLayoutInvalidationContext ig_invalidateAllAttributes]
+-[IGListCollectionViewLayoutInvalidationContext setIg_invalidateAllAttributes:]
+-[IGListCollectionViewLayout initWithStickyHeaders:topContentInset:stretchToEdge:]
+-[IGListCollectionViewLayout initWithStickyHeaders:scrollDirection:topContentInset:stretchToEdge:]
+-[IGListCollectionViewLayout initWithCoder:]
+-[IGListCollectionViewLayout initialLayoutAttributesForAppearingItemAtIndexPath:]
+-[IGListCollectionViewLayout finalLayoutAttributesForDisappearingItemAtIndexPath:]
+-[IGListCollectionViewLayout layoutAttributesForElementsInRect:]
+-[IGListCollectionViewLayout layoutAttributesForItemAtIndexPath:]
+__ZL25adjustZIndexForAttributesP32UICollectionViewLayoutAttributes
+-[IGListCollectionViewLayout layoutAttributesForSupplementaryViewOfKind:atIndexPath:]
+__ZL23CGRectGetMinInDirection6CGRect31UICollectionViewScrollDirection
+-[IGListCollectionViewLayout collectionViewContentSize]
+-[IGListCollectionViewLayout invalidateLayoutWithContext:]
++[IGListCollectionViewLayout invalidationContextClass]
+-[IGListCollectionViewLayout invalidationContextForBoundsChange:]
+-[IGListCollectionViewLayout shouldInvalidateLayoutForBoundsChange:]
+-[IGListCollectionViewLayout prepareLayout]
+-[IGListCollectionViewLayout setStickyHeaderYOffset:]
+-[IGListCollectionViewLayout _calculateLayoutIfNeeded]
+__ZL23CGRectGetMaxInDirection6CGRect31UICollectionViewScrollDirection
+-[IGListCollectionViewLayout _rangeOfSectionsInRect:]
+-[IGListCollectionViewLayout _resetSupplementaryAttributesCache]
+___64-[IGListCollectionViewLayout _resetSupplementaryAttributesCache]_block_invoke
+-[IGListCollectionViewLayout didModifySection:]
+-[IGListCollectionViewLayout scrollDirection]
+-[IGListCollectionViewLayout stickyHeaderYOffset]
+-[IGListCollectionViewLayout showHeaderWhenEmpty]
+-[IGListCollectionViewLayout setShowHeaderWhenEmpty:]
+-[IGListCollectionViewLayout stickyHeaders]
+-[IGListCollectionViewLayout topContentInset]
+-[IGListCollectionViewLayout stretchToEdge]
+-[IGListCollectionViewLayout .cxx_destruct]
+-[IGListCollectionViewLayout .cxx_construct]
+_OBJC_IVAR_$_IGListCollectionViewLayoutInvalidationContext._ig_invalidateSupplementaryAttributes
+_OBJC_IVAR_$_IGListCollectionViewLayoutInvalidationContext._ig_invalidateAllAttributes
+_OBJC_IVAR_$_IGListCollectionViewLayout._scrollDirection
+_OBJC_IVAR_$_IGListCollectionViewLayout._stickyHeaders
+_OBJC_IVAR_$_IGListCollectionViewLayout._topContentInset
+_OBJC_IVAR_$_IGListCollectionViewLayout._stretchToEdge
+_OBJC_IVAR_$_IGListCollectionViewLayout._attributesCache
+_OBJC_IVAR_$_IGListCollectionViewLayout._supplementaryAttributesCache
+_OBJC_IVAR_$_IGListCollectionViewLayout._minimumInvalidatedSection
+_OBJC_IVAR_$_IGListCollectionViewLayout._sectionData
+_OBJC_IVAR_$_IGListCollectionViewLayout._stickyHeaderYOffset
+_OBJC_IVAR_$_IGListCollectionViewLayout._showHeaderWhenEmpty
+/Users/susieyy/.ghq/github.com/susieyy/ReduxExample/Carthage/Checkouts/IGListKit/Source/IGListCollectionViewLayout.mm
+construct<CGRect>
+__construct<CGRect>
+destroy<IGListSectionEntry>
+__destroy<IGListSectionEntry>
+~IGListSectionEntry
+__compressed_pair<nullptr_t, std::__1::allocator<IGListSectionEntry> &>
+__compressed_pair_elem<std::__1::allocator<IGListSectionEntry> &, void>
+__swap_out_circular_buffer
+swap<IGListSectionEntry *>
+__construct_backward<IGListSectionEntry *>
+construct<IGListSectionEntry, IGListSectionEntry>
+__construct<IGListSectionEntry, IGListSectionEntry>
+IGListSectionEntry
+__append
+construct<IGListSectionEntry>
+__construct<IGListSectionEntry>
+__recommend
+__construct_at_end<CGRect *>
+__construct_range_forward<CGRect>
+/Users/susieyy/.ghq/github.com/susieyy/ReduxExample/Carthage/Checkouts/IGListKit/Source/IGListCollectionViewLayout.h
+IGListMergeMinimumInvalidatedSection
+__64-[IGListCollectionViewLayout _resetSupplementaryAttributesCache]_block_invoke
+isValid
+__CGSizeEqualToSize
+/Applications/Xcode-beta.app/Contents/Developer/Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS12.0.sdk/System/Library/Frameworks/CoreGraphics.framework/Headers/CGGeometry.h
+CGRectGetMaxInDirection
+resize
+UIEdgeInsetsTrailingInsetInDirection
+UIEdgeInsetsLeadingInsetInDirection
+IGListRectIntegralScaled
+/Users/susieyy/.ghq/github.com/susieyy/ReduxExample/Carthage/Checkouts/IGListKit/Source/Internal/IGListCollectionViewLayoutInternal.h
+CGSizeGetLengthInDirection
+UIEdgeInsetsInsetRect
+/Applications/Xcode-beta.app/Contents/Developer/Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS12.0.sdk/System/Library/Frameworks/UIKit.framework/Headers/UIGeometry.h
+__move_assign
+CGRectGetMinInDirection
+CGRectGetLengthInDirection
+CGPointGetCoordinateInDirection
+adjustZIndexForAttributes
+indexPathForSection
+NSMaxRange
+-[UIScrollView(IGListKit) ig_contentInset]
+___clang_at_available_requires_core_foundation_framework
+/Users/susieyy/.ghq/github.com/susieyy/ReduxExample/Carthage/Checkouts/IGListKit/Source/Internal/UIScrollView+IGListKit.m
+-[IGListAdapterProxy initWithCollectionViewTarget:scrollViewTarget:interceptor:]
+-[IGListAdapterProxy respondsToSelector:]
+_isInterceptedSelector
+-[IGListAdapterProxy forwardingTargetForSelector:]
+-[IGListAdapterProxy forwardInvocation:]
+-[IGListAdapterProxy methodSignatureForSelector:]
+-[IGListAdapterProxy .cxx_destruct]
+_OBJC_IVAR_$_IGListAdapterProxy._collectionViewTarget
+_OBJC_IVAR_$_IGListAdapterProxy._scrollViewTarget
+_OBJC_IVAR_$_IGListAdapterProxy._interceptor
+/Users/susieyy/.ghq/github.com/susieyy/ReduxExample/Carthage/Checkouts/IGListKit/Source/Internal/IGListAdapterProxy.m
+isInterceptedSelector
+-[IGListBindingSectionController(DebugDescription) debugDescription]
+-[IGListBindingSectionController(DebugDescription) debugDescriptionLines]
+/Users/susieyy/.ghq/github.com/susieyy/ReduxExample/Carthage/Checkouts/IGListKit/Source/Internal/IGListBindingSectionController+DebugDescription.m
+-[IGListAdapterUpdater(DebugDescription) debugDescriptionLines]
+/Users/susieyy/.ghq/github.com/susieyy/ReduxExample/Carthage/Checkouts/IGListKit/Source/Internal/IGListAdapterUpdater+DebugDescription.m
+-[NSNumber(IGListDiffable) diffIdentifier]
+-[NSNumber(IGListDiffable) isEqualToDiffableObject:]
+l_OBJC_PROTOCOL_$_IGListDiffable
+l_OBJC_LABEL_PROTOCOL_$_IGListDiffable
+/Users/susieyy/.ghq/github.com/susieyy/ReduxExample/Carthage/Checkouts/IGListKit/Source/Common/NSNumber+IGListDiffable.m
+-[IGListBatchUpdates init]
+-[IGListBatchUpdates hasChanges]
+-[IGListBatchUpdates sectionReloads]
+-[IGListBatchUpdates itemInserts]
+-[IGListBatchUpdates itemDeletes]
+-[IGListBatchUpdates itemReloads]
+-[IGListBatchUpdates itemMoves]
+-[IGListBatchUpdates itemUpdateBlocks]
+-[IGListBatchUpdates itemCompletionBlocks]
+-[IGListBatchUpdates .cxx_destruct]
+_OBJC_IVAR_$_IGListBatchUpdates._sectionReloads
+_OBJC_IVAR_$_IGListBatchUpdates._itemInserts
+_OBJC_IVAR_$_IGListBatchUpdates._itemMoves
+_OBJC_IVAR_$_IGListBatchUpdates._itemDeletes
+_OBJC_IVAR_$_IGListBatchUpdates._itemReloads
+_OBJC_IVAR_$_IGListBatchUpdates._itemUpdateBlocks
+_OBJC_IVAR_$_IGListBatchUpdates._itemCompletionBlocks
+/Users/susieyy/.ghq/github.com/susieyy/ReduxExample/Carthage/Checkouts/IGListKit/Source/Internal/IGListBatchUpdates.m
+/Users/susieyy/.ghq/github.com/susieyy/ReduxExample/Carthage/Checkouts/IGListKit/Source/Internal/IGListBatchUpdates.h
+/Users/susieyy/.ghq/github.com/susieyy/ReduxExample/Carthage/Checkouts/IGListKit/Source/Internal/IGListDebuggingUtilities.m
+IGListDebugIndentedLines
+IGListDebugBOOL
+-[IGListSingleSectionController initWithCellClass:configureBlock:sizeBlock:]
+-[IGListSingleSectionController initWithNibName:bundle:configureBlock:sizeBlock:]
+-[IGListSingleSectionController initWithStoryboardCellIdentifier:configureBlock:sizeBlock:]
+-[IGListSingleSectionController numberOfItems]
+-[IGListSingleSectionController sizeForItemAtIndex:]
+-[IGListSingleSectionController cellForItemAtIndex:]
+-[IGListSingleSectionController didUpdateToObject:]
+-[IGListSingleSectionController didSelectItemAtIndex:]
+-[IGListSingleSectionController didDeselectItemAtIndex:]
+-[IGListSingleSectionController selectionDelegate]
+-[IGListSingleSectionController setSelectionDelegate:]
+-[IGListSingleSectionController nibName]
+-[IGListSingleSectionController bundle]
+-[IGListSingleSectionController identifier]
+-[IGListSingleSectionController cellClass]
+-[IGListSingleSectionController configureBlock]
+-[IGListSingleSectionController sizeBlock]
+-[IGListSingleSectionController item]
+-[IGListSingleSectionController setItem:]
+-[IGListSingleSectionController .cxx_destruct]
+_OBJC_IVAR_$_IGListSingleSectionController._cellClass
+_OBJC_IVAR_$_IGListSingleSectionController._configureBlock
+_OBJC_IVAR_$_IGListSingleSectionController._sizeBlock
+_OBJC_IVAR_$_IGListSingleSectionController._nibName
+_OBJC_IVAR_$_IGListSingleSectionController._bundle
+_OBJC_IVAR_$_IGListSingleSectionController._identifier
+_OBJC_IVAR_$_IGListSingleSectionController._selectionDelegate
+_OBJC_IVAR_$_IGListSingleSectionController._item
+/Users/susieyy/.ghq/github.com/susieyy/ReduxExample/Carthage/Checkouts/IGListKit/Source/IGListSingleSectionController.m
+/Users/susieyy/.ghq/github.com/susieyy/ReduxExample/Carthage/Checkouts/IGListKit/Source/IGListSingleSectionController.h
+-[IGListReloadIndexPath initWithFromIndexPath:toIndexPath:]
+-[IGListReloadIndexPath fromIndexPath]
+-[IGListReloadIndexPath toIndexPath]
+-[IGListReloadIndexPath .cxx_destruct]
+_OBJC_IVAR_$_IGListReloadIndexPath._fromIndexPath
+_OBJC_IVAR_$_IGListReloadIndexPath._toIndexPath
+/Users/susieyy/.ghq/github.com/susieyy/ReduxExample/Carthage/Checkouts/IGListKit/Source/Internal/IGListReloadIndexPath.m
+/Users/susieyy/.ghq/github.com/susieyy/ReduxExample/Carthage/Checkouts/IGListKit/Source/Internal/IGListReloadIndexPath.h
+-[IGListDisplayHandler init]
+-[IGListDisplayHandler _pluckObjectForView:]
+-[IGListDisplayHandler _willDisplayReusableView:forListAdapter:sectionController:object:indexPath:]
+-[IGListDisplayHandler _didEndDisplayingReusableView:forListAdapter:sectionController:object:indexPath:]
+-[IGListDisplayHandler willDisplaySupplementaryView:forListAdapter:sectionController:object:indexPath:]
+-[IGListDisplayHandler didEndDisplayingSupplementaryView:forListAdapter:sectionController:indexPath:]
+-[IGListDisplayHandler willDisplayCell:forListAdapter:sectionController:object:indexPath:]
+-[IGListDisplayHandler didEndDisplayingCell:forListAdapter:sectionController:indexPath:]
+-[IGListDisplayHandler visibleListSections]
+-[IGListDisplayHandler visibleViewObjectMap]
+-[IGListDisplayHandler setVisibleViewObjectMap:]
+-[IGListDisplayHandler .cxx_destruct]
+_OBJC_IVAR_$_IGListDisplayHandler._visibleListSections
+_OBJC_IVAR_$_IGListDisplayHandler._visibleViewObjectMap
+/Users/susieyy/.ghq/github.com/susieyy/ReduxExample/Carthage/Checkouts/IGListKit/Source/Internal/IGListDisplayHandler.m
+/Users/susieyy/.ghq/github.com/susieyy/ReduxExample/Carthage/Checkouts/IGListKit/Source/Internal/IGListDisplayHandler.h
+-[UICollectionView(IGListBatchUpdateData) ig_applyBatchUpdateData:]
+/Users/susieyy/.ghq/github.com/susieyy/ReduxExample/Carthage/Checkouts/IGListKit/Source/Internal/UICollectionView+IGListBatchUpdateData.m
++[IGListDebugger trackAdapter:]
++[IGListDebugger adapterDescriptions]
++[IGListDebugger clear]
++[IGListDebugger dump]
+/Users/susieyy/.ghq/github.com/susieyy/ReduxExample/Carthage/Checkouts/IGListKit/Source/Internal/IGListDebugger.m
+-[NSString(IGListDiffable) diffIdentifier]
+-[NSString(IGListDiffable) isEqualToDiffableObject:]
+/Users/susieyy/.ghq/github.com/susieyy/ReduxExample/Carthage/Checkouts/IGListKit/Source/Common/NSString+IGListDiffable.m
+-[IGListAdapter(UICollectionView) numberOfSectionsInCollectionView:]
+-[IGListAdapter(UICollectionView) collectionView:numberOfItemsInSection:]
+-[IGListAdapter(UICollectionView) collectionView:cellForItemAtIndexPath:]
+-[IGListAdapter(UICollectionView) collectionView:viewForSupplementaryElementOfKind:atIndexPath:]
+-[IGListAdapter(UICollectionView) collectionView:canMoveItemAtIndexPath:]
+-[IGListAdapter(UICollectionView) collectionView:moveItemAtIndexPath:toIndexPath:]
+-[IGListAdapter(UICollectionView) collectionView:didSelectItemAtIndexPath:]
+-[IGListAdapter(UICollectionView) collectionView:didDeselectItemAtIndexPath:]
+-[IGListAdapter(UICollectionView) collectionView:willDisplayCell:forItemAtIndexPath:]
+-[IGListAdapter(UICollectionView) collectionView:didEndDisplayingCell:forItemAtIndexPath:]
+-[IGListAdapter(UICollectionView) collectionView:willDisplaySupplementaryView:forElementKind:atIndexPath:]
+-[IGListAdapter(UICollectionView) collectionView:didEndDisplayingSupplementaryView:forElementOfKind:atIndexPath:]
+-[IGListAdapter(UICollectionView) collectionView:didHighlightItemAtIndexPath:]
+-[IGListAdapter(UICollectionView) collectionView:didUnhighlightItemAtIndexPath:]
+-[IGListAdapter(UICollectionView) collectionView:layout:sizeForItemAtIndexPath:]
+-[IGListAdapter(UICollectionView) collectionView:layout:insetForSectionAtIndex:]
+-[IGListAdapter(UICollectionView) collectionView:layout:minimumLineSpacingForSectionAtIndex:]
+-[IGListAdapter(UICollectionView) collectionView:layout:minimumInteritemSpacingForSectionAtIndex:]
+-[IGListAdapter(UICollectionView) collectionView:layout:referenceSizeForHeaderInSection:]
+-[IGListAdapter(UICollectionView) collectionView:layout:referenceSizeForFooterInSection:]
+-[IGListAdapter(UICollectionView) collectionView:layout:customizedInitialLayoutAttributes:atIndexPath:]
+-[IGListAdapter(UICollectionView) collectionView:layout:customizedFinalLayoutAttributes:atIndexPath:]
+_OBJC_IVAR_$_IGListAdapter._isDequeuingCell
+_OBJC_IVAR_$_IGListAdapter._isSendingWorkingRangeDisplayUpdates
+l_OBJC_PROTOCOL_$_UICollectionViewDataSource
+l_OBJC_LABEL_PROTOCOL_$_UICollectionViewDataSource
+l_OBJC_PROTOCOL_$_UIScrollViewDelegate
+l_OBJC_LABEL_PROTOCOL_$_UIScrollViewDelegate
+l_OBJC_PROTOCOL_$_UICollectionViewDelegate
+l_OBJC_LABEL_PROTOCOL_$_UICollectionViewDelegate
+l_OBJC_PROTOCOL_$_UICollectionViewDelegateFlowLayout
+l_OBJC_LABEL_PROTOCOL_$_UICollectionViewDelegateFlowLayout
+l_OBJC_PROTOCOL_$_IGListCollectionViewDelegateLayout
+l_OBJC_LABEL_PROTOCOL_$_IGListCollectionViewDelegateLayout
+/Users/susieyy/.ghq/github.com/susieyy/ReduxExample/Carthage/Checkouts/IGListKit/Source/Internal/IGListAdapter+UICollectionView.m
+-[IGListSectionMap initWithMapTable:]
+-[IGListSectionMap objects]
+-[IGListSectionMap sectionForSectionController:]
+-[IGListSectionMap sectionControllerForSection:]
+-[IGListSectionMap updateWithObjects:sectionControllers:]
+___57-[IGListSectionMap updateWithObjects:sectionControllers:]_block_invoke
+-[IGListSectionMap sectionControllerForObject:]
+-[IGListSectionMap objectForSection:]
+-[IGListSectionMap sectionForObject:]
+-[IGListSectionMap reset]
+___25-[IGListSectionMap reset]_block_invoke
+-[IGListSectionMap updateObject:]
+-[IGListSectionMap enumerateUsingBlock:]
+-[IGListSectionMap copyWithZone:]
+-[IGListSectionMap objectToSectionControllerMap]
+-[IGListSectionMap sectionControllerToSectionMap]
+-[IGListSectionMap mObjects]
+-[IGListSectionMap setMObjects:]
+-[IGListSectionMap .cxx_destruct]
+_OBJC_IVAR_$_IGListSectionMap._objectToSectionControllerMap
+_OBJC_IVAR_$_IGListSectionMap._sectionControllerToSectionMap
+_OBJC_IVAR_$_IGListSectionMap._mObjects
+___block_descriptor_tmp.54
+l_OBJC_PROTOCOL_$_NSCopying
+l_OBJC_LABEL_PROTOCOL_$_NSCopying
+/Users/susieyy/.ghq/github.com/susieyy/ReduxExample/Carthage/Checkouts/IGListKit/Source/Internal/IGListSectionMap.m
+__25-[IGListSectionMap reset]_block_invoke
+__57-[IGListSectionMap updateWithObjects:sectionControllers:]_block_invoke
+-[IGListAdapter dealloc]
+-[IGListAdapter initWithUpdater:viewController:workingRangeSize:]
+-[IGListAdapter initWithUpdater:viewController:]
+-[IGListAdapter collectionView]
+-[IGListAdapter setCollectionView:]
+-[IGListAdapter setDataSource:]
+-[IGListAdapter setCollectionViewDelegate:]
+-[IGListAdapter setScrollViewDelegate:]
+-[IGListAdapter _updateAfterPublicSettingsChange]
+_objectsWithDuplicateIdentifiersRemoved
+-[IGListAdapter _createProxyAndUpdateCollectionViewDelegate]
+-[IGListAdapter _updateCollectionViewDelegate]
+-[IGListAdapter scrollToObject:supplementaryKinds:scrollDirection:scrollPosition:animated:]
+-[IGListAdapter performUpdatesAnimated:completion:]
+___51-[IGListAdapter performUpdatesAnimated:completion:]_block_invoke
+___51-[IGListAdapter performUpdatesAnimated:completion:]_block_invoke.126
+___copy_helper_block_.127
+___destroy_helper_block_.128
+___51-[IGListAdapter performUpdatesAnimated:completion:]_block_invoke.134
+___copy_helper_block_.139
+___destroy_helper_block_.140
+___51-[IGListAdapter performUpdatesAnimated:completion:]_block_invoke.143
+___copy_helper_block_.148
+___destroy_helper_block_.149
+-[IGListAdapter reloadDataWithCompletion:]
+___42-[IGListAdapter reloadDataWithCompletion:]_block_invoke
+___copy_helper_block_.154
+___destroy_helper_block_.155
+___42-[IGListAdapter reloadDataWithCompletion:]_block_invoke.158
+___copy_helper_block_.159
+___destroy_helper_block_.160
+-[IGListAdapter reloadObjects:]
+-[IGListAdapter addUpdateListener:]
+-[IGListAdapter removeUpdateListener:]
+-[IGListAdapter _notifyDidUpdate:animated:]
+-[IGListAdapter sectionControllerForSection:]
+-[IGListAdapter sectionForSectionController:]
+-[IGListAdapter sectionControllerForObject:]
+-[IGListAdapter objectForSectionController:]
+-[IGListAdapter objectAtSection:]
+-[IGListAdapter sectionForObject:]
+-[IGListAdapter objects]
+-[IGListAdapter _supplementaryViewSourceAtIndexPath:]
+-[IGListAdapter visibleSectionControllers]
+-[IGListAdapter _visibleSectionControllersFromLayoutAttributes]
+-[IGListAdapter _visibleSectionControllersFromDisplayHandler]
+-[IGListAdapter visibleObjects]
+-[IGListAdapter visibleCellsForObject:]
+___39-[IGListAdapter visibleCellsForObject:]_block_invoke
+___copy_helper_block_.215
+___destroy_helper_block_.216
+-[IGListAdapter sizeForItemAtIndexPath:]
+-[IGListAdapter sizeForSupplementaryViewOfKind:atIndexPath:]
+-[IGListAdapter _updateObjects:dataSource:]
+-[IGListAdapter _updateBackgroundViewShouldHide:]
+-[IGListAdapter _itemCountIsZero]
+___33-[IGListAdapter _itemCountIsZero]_block_invoke
+___copy_helper_block_.261
+___destroy_helper_block_.262
+-[IGListAdapter _sectionMapUsingPreviousIfInUpdateBlock:]
+-[IGListAdapter indexPathsFromSectionController:indexes:usePreviousIfInUpdateBlock:]
+___84-[IGListAdapter indexPathsFromSectionController:indexes:usePreviousIfInUpdateBlock:]_block_invoke
+___copy_helper_block_.269
+___destroy_helper_block_.270
+-[IGListAdapter indexPathForSectionController:index:usePreviousIfInUpdateBlock:]
+-[IGListAdapter _layoutAttributesForIndexPath:supplementaryKinds:]
+-[IGListAdapter mapView:toSectionController:]
+-[IGListAdapter sectionControllerForView:]
+-[IGListAdapter removeMapForView:]
+-[IGListAdapter _deferBlockBetweenBatchUpdates:]
+-[IGListAdapter _enterBatchUpdates]
+-[IGListAdapter _exitBatchUpdates]
+-[IGListAdapter scrollViewDidScroll:]
+-[IGListAdapter scrollViewWillBeginDragging:]
+-[IGListAdapter scrollViewDidEndDragging:willDecelerate:]
+-[IGListAdapter scrollViewDidEndDecelerating:]
+-[IGListAdapter containerSize]
+-[IGListAdapter containerInset]
+-[IGListAdapter adjustedContainerInset]
+-[IGListAdapter insetContainerSize]
+-[IGListAdapter containerSizeForSectionController:]
+-[IGListAdapter indexForCell:sectionController:]
+-[IGListAdapter cellForItemAtIndex:sectionController:]
+-[IGListAdapter visibleCellsForSectionController:]
+-[IGListAdapter visibleIndexPathsForSectionController:]
+-[IGListAdapter deselectItemAtIndex:sectionController:animated:]
+-[IGListAdapter selectItemAtIndex:sectionController:animated:scrollPosition:]
+-[IGListAdapter dequeueReusableCellOfClass:withReuseIdentifier:forSectionController:atIndex:]
+-[IGListAdapter dequeueReusableCellOfClass:forSectionController:atIndex:]
+-[IGListAdapter dequeueReusableCellFromStoryboardWithIdentifier:forSectionController:atIndex:]
+-[IGListAdapter dequeueReusableCellWithNibName:bundle:forSectionController:atIndex:]
+-[IGListAdapter dequeueReusableSupplementaryViewOfKind:forSectionController:class:atIndex:]
+-[IGListAdapter dequeueReusableSupplementaryViewFromStoryboardOfKind:withIdentifier:forSectionController:atIndex:]
+-[IGListAdapter dequeueReusableSupplementaryViewOfKind:forSectionController:nibName:bundle:atIndex:]
+-[IGListAdapter performBatchAnimated:updates:completion:]
+___57-[IGListAdapter performBatchAnimated:updates:completion:]_block_invoke
+___copy_helper_block_.346
+___destroy_helper_block_.347
+___57-[IGListAdapter performBatchAnimated:updates:completion:]_block_invoke.349
+___copy_helper_block_.352
+___destroy_helper_block_.353
+-[IGListAdapter scrollToSectionController:atIndex:scrollPosition:animated:]
+-[IGListAdapter invalidateLayoutForSectionController:completion:]
+___65-[IGListAdapter invalidateLayoutForSectionController:completion:]_block_invoke
+___65-[IGListAdapter invalidateLayoutForSectionController:completion:]_block_invoke_2
+___copy_helper_block_.367
+___destroy_helper_block_.368
+___copy_helper_block_.372
+___destroy_helper_block_.373
+-[IGListAdapter reloadInSectionController:atIndexes:]
+___53-[IGListAdapter reloadInSectionController:atIndexes:]_block_invoke
+___copy_helper_block_.381
+___destroy_helper_block_.382
+-[IGListAdapter insertInSectionController:atIndexes:]
+-[IGListAdapter deleteInSectionController:atIndexes:]
+-[IGListAdapter moveInSectionController:fromIndex:toIndex:]
+-[IGListAdapter reloadSectionController:]
+-[IGListAdapter moveSectionControllerInteractive:fromIndex:toIndex:]
+-[IGListAdapter moveInSectionControllerInteractive:fromIndex:toIndex:]
+-[IGListAdapter revertInvalidInteractiveMoveFromIndexPath:toIndexPath:]
+-[IGListAdapter viewController]
+-[IGListAdapter setViewController:]
+-[IGListAdapter dataSource]
+-[IGListAdapter delegate]
+-[IGListAdapter setDelegate:]
+-[IGListAdapter collectionViewDelegate]
+-[IGListAdapter scrollViewDelegate]
+-[IGListAdapter moveDelegate]
+-[IGListAdapter setMoveDelegate:]
+-[IGListAdapter updater]
+-[IGListAdapter setUpdater:]
+-[IGListAdapter experiments]
+-[IGListAdapter setExperiments:]
+-[IGListAdapter sectionMap]
+-[IGListAdapter displayHandler]
+-[IGListAdapter workingRangeHandler]
+-[IGListAdapter delegateProxy]
+-[IGListAdapter setDelegateProxy:]
+-[IGListAdapter emptyBackgroundView]
+-[IGListAdapter setEmptyBackgroundView:]
+-[IGListAdapter isLastInteractiveMoveToLastSectionIndex]
+-[IGListAdapter setIsLastInteractiveMoveToLastSectionIndex:]
+-[IGListAdapter isInUpdateBlock]
+-[IGListAdapter setIsInUpdateBlock:]
+-[IGListAdapter previousSectionMap]
+-[IGListAdapter setPreviousSectionMap:]
+-[IGListAdapter registeredCellClasses]
+-[IGListAdapter setRegisteredCellClasses:]
+-[IGListAdapter registeredNibNames]
+-[IGListAdapter setRegisteredNibNames:]
+-[IGListAdapter registeredSupplementaryViewIdentifiers]
+-[IGListAdapter setRegisteredSupplementaryViewIdentifiers:]
+-[IGListAdapter registeredSupplementaryViewNibNames]
+-[IGListAdapter setRegisteredSupplementaryViewNibNames:]
+-[IGListAdapter .cxx_destruct]
+_OBJC_IVAR_$_IGListAdapter._collectionView
+_OBJC_IVAR_$_IGListAdapter._sectionMap
+_OBJC_IVAR_$_IGListAdapter._displayHandler
+_OBJC_IVAR_$_IGListAdapter._workingRangeHandler
+_OBJC_IVAR_$_IGListAdapter._updateListeners
+_OBJC_IVAR_$_IGListAdapter._viewSectionControllerMap
+_OBJC_IVAR_$_IGListAdapter._updater
+_OBJC_IVAR_$_IGListAdapter._viewController
+_setCollectionView:.globalCollectionViewAdapterMap
+_OBJC_IVAR_$_IGListAdapter._registeredCellClasses
+_OBJC_IVAR_$_IGListAdapter._registeredNibNames
+_OBJC_IVAR_$_IGListAdapter._registeredSupplementaryViewIdentifiers
+_OBJC_IVAR_$_IGListAdapter._registeredSupplementaryViewNibNames
+_OBJC_IVAR_$_IGListAdapter._dataSource
+_OBJC_IVAR_$_IGListAdapter._collectionViewDelegate
+_OBJC_IVAR_$_IGListAdapter._scrollViewDelegate
+___block_descriptor_tmp.129
+___block_descriptor_tmp.142
+___block_descriptor_tmp.151
+___block_descriptor_tmp.157
+___block_descriptor_tmp.161
+___block_descriptor_tmp.218
+___block_descriptor_tmp.264
+___block_descriptor_tmp.272
+_OBJC_IVAR_$_IGListAdapter._queuedCompletionBlocks
+___block_descriptor_tmp.348
+___block_descriptor_tmp.354
+___block_descriptor_tmp.369
+___block_descriptor_tmp.374
+___block_descriptor_tmp.383
+_OBJC_IVAR_$_IGListAdapter._delegate
+_OBJC_IVAR_$_IGListAdapter._moveDelegate
+_OBJC_IVAR_$_IGListAdapter._experiments
+_OBJC_IVAR_$_IGListAdapter._delegateProxy
+_OBJC_IVAR_$_IGListAdapter._emptyBackgroundView
+_OBJC_IVAR_$_IGListAdapter._isLastInteractiveMoveToLastSectionIndex
+_OBJC_IVAR_$_IGListAdapter._isInUpdateBlock
+_OBJC_IVAR_$_IGListAdapter._previousSectionMap
+l_OBJC_PROTOCOL_$_IGListCollectionContext
+l_OBJC_LABEL_PROTOCOL_$_IGListCollectionContext
+l_OBJC_PROTOCOL_$_IGListBatchContext
+l_OBJC_LABEL_PROTOCOL_$_IGListBatchContext
+/Users/susieyy/.ghq/github.com/susieyy/ReduxExample/Carthage/Checkouts/IGListKit/Source/IGListAdapter.m
+/Users/susieyy/.ghq/github.com/susieyy/ReduxExample/Carthage/Checkouts/IGListKit/Source/Internal/IGListAdapterInternal.h
+/Users/susieyy/.ghq/github.com/susieyy/ReduxExample/Carthage/Checkouts/IGListKit/Source/IGListAdapter.h
+__53-[IGListAdapter reloadInSectionController:atIndexes:]_block_invoke
+__65-[IGListAdapter invalidateLayoutForSectionController:completion:]_block_invoke_2
+__65-[IGListAdapter invalidateLayoutForSectionController:completion:]_block_invoke
+__57-[IGListAdapter performBatchAnimated:updates:completion:]_block_invoke.349
+__57-[IGListAdapter performBatchAnimated:updates:completion:]_block_invoke
+IGListReusableViewIdentifier
+__84-[IGListAdapter indexPathsFromSectionController:indexes:usePreviousIfInUpdateBlock:]_block_invoke
+__33-[IGListAdapter _itemCountIsZero]_block_invoke
+__39-[IGListAdapter visibleCellsForObject:]_block_invoke
+__42-[IGListAdapter reloadDataWithCompletion:]_block_invoke.158
+__42-[IGListAdapter reloadDataWithCompletion:]_block_invoke
+__51-[IGListAdapter performUpdatesAnimated:completion:]_block_invoke.143
+__51-[IGListAdapter performUpdatesAnimated:completion:]_block_invoke.134
+__51-[IGListAdapter performUpdatesAnimated:completion:]_block_invoke.126
+__51-[IGListAdapter performUpdatesAnimated:completion:]_block_invoke
+-[IGListSectionControllerThreadContext viewController]
+-[IGListSectionControllerThreadContext setViewController:]
+-[IGListSectionControllerThreadContext collectionContext]
+-[IGListSectionControllerThreadContext setCollectionContext:]
+-[IGListSectionControllerThreadContext .cxx_destruct]
+_threadContextStack
+-[IGListSectionController init]
+-[IGListSectionController numberOfItems]
+-[IGListSectionController sizeForItemAtIndex:]
+-[IGListSectionController cellForItemAtIndex:]
+-[IGListSectionController didUpdateToObject:]
+-[IGListSectionController didSelectItemAtIndex:]
+-[IGListSectionController didDeselectItemAtIndex:]
+-[IGListSectionController didHighlightItemAtIndex:]
+-[IGListSectionController didUnhighlightItemAtIndex:]
+-[IGListSectionController canMoveItemAtIndex:]
+-[IGListSectionController canMoveItemAtIndex:toIndex:]
+-[IGListSectionController moveObjectFromIndex:toIndex:]
+-[IGListSectionController viewController]
+-[IGListSectionController setViewController:]
+-[IGListSectionController collectionContext]
+-[IGListSectionController setCollectionContext:]
+-[IGListSectionController section]
+-[IGListSectionController setSection:]
+-[IGListSectionController isFirstSection]
+-[IGListSectionController setIsFirstSection:]
+-[IGListSectionController isLastSection]
+-[IGListSectionController setIsLastSection:]
+-[IGListSectionController inset]
+-[IGListSectionController setInset:]
+-[IGListSectionController minimumLineSpacing]
+-[IGListSectionController setMinimumLineSpacing:]
+-[IGListSectionController minimumInteritemSpacing]
+-[IGListSectionController setMinimumInteritemSpacing:]
+-[IGListSectionController supplementaryViewSource]
+-[IGListSectionController setSupplementaryViewSource:]
+-[IGListSectionController displayDelegate]
+-[IGListSectionController setDisplayDelegate:]
+-[IGListSectionController workingRangeDelegate]
+-[IGListSectionController setWorkingRangeDelegate:]
+-[IGListSectionController scrollDelegate]
+-[IGListSectionController setScrollDelegate:]
+-[IGListSectionController transitionDelegate]
+-[IGListSectionController setTransitionDelegate:]
+-[IGListSectionController .cxx_destruct]
+_OBJC_IVAR_$_IGListSectionControllerThreadContext._viewController
+_OBJC_IVAR_$_IGListSectionControllerThreadContext._collectionContext
+_OBJC_IVAR_$_IGListSectionController._viewController
+_OBJC_IVAR_$_IGListSectionController._collectionContext
+_OBJC_IVAR_$_IGListSectionController._minimumInteritemSpacing
+_OBJC_IVAR_$_IGListSectionController._minimumLineSpacing
+_OBJC_IVAR_$_IGListSectionController._inset
+_OBJC_IVAR_$_IGListSectionController._section
+_OBJC_IVAR_$_IGListSectionController._isFirstSection
+_OBJC_IVAR_$_IGListSectionController._isLastSection
+_OBJC_IVAR_$_IGListSectionController._supplementaryViewSource
+_OBJC_IVAR_$_IGListSectionController._displayDelegate
+_OBJC_IVAR_$_IGListSectionController._workingRangeDelegate
+_OBJC_IVAR_$_IGListSectionController._scrollDelegate
+_OBJC_IVAR_$_IGListSectionController._transitionDelegate
+/Users/susieyy/.ghq/github.com/susieyy/ReduxExample/Carthage/Checkouts/IGListKit/Source/IGListSectionController.m
+/Users/susieyy/.ghq/github.com/susieyy/ReduxExample/Carthage/Checkouts/IGListKit/Source/IGListSectionController.h
+/Users/susieyy/.ghq/github.com/susieyy/ReduxExample/Carthage/Checkouts/IGListKit/Source/Internal/IGListSectionControllerInternal.h
+IGListSectionControllerPopThread
+threadContextStack
+IGListSectionControllerPushThread
++[UICollectionViewLayout(InteractiveReordering) load]
+___53+[UICollectionViewLayout(InteractiveReordering) load]_block_invoke
+-[UICollectionViewLayout(InteractiveReordering) ig_hijackLayoutInteractiveReorderingMethodForAdapter:]
+-[UICollectionViewLayout(InteractiveReordering) ig_targetIndexPathForInteractivelyMovingItem:withPosition:]
+-[UICollectionViewLayout(InteractiveReordering) updatedTargetForInteractivelyMovingItem:toIndexPath:adapter:]
+-[UICollectionViewLayout(InteractiveReordering) ig_invalidationContextForInteractivelyMovingItems:withTargetPosition:previousIndexPaths:previousPosition:]
+-[UICollectionViewLayout(InteractiveReordering) ig_invalidationContextForEndingInteractiveMovementOfItemsToFinalIndexPaths:previousIndexPaths:movementCancelled:]
+-[UICollectionViewLayout(InteractiveReordering) ig_cleanupInvalidationContext:]
+___79-[UICollectionViewLayout(InteractiveReordering) ig_cleanupInvalidationContext:]_block_invoke
+___copy_helper_block_.46
+___destroy_helper_block_.47
+___79-[UICollectionViewLayout(InteractiveReordering) ig_cleanupInvalidationContext:]_block_invoke.75
+___copy_helper_block_.78
+___destroy_helper_block_.79
+___79-[UICollectionViewLayout(InteractiveReordering) ig_cleanupInvalidationContext:]_block_invoke.86
+___copy_helper_block_.89
+___destroy_helper_block_.90
+_load.onceToken
+_kIGListAdapterKey
+___block_descriptor_tmp.49
+___block_descriptor_tmp.81
+___block_descriptor_tmp.91
+/Users/susieyy/.ghq/github.com/susieyy/ReduxExample/Carthage/Checkouts/IGListKit/Source/Internal/UICollectionViewLayout+InteractiveReordering.m
+__79-[UICollectionViewLayout(InteractiveReordering) ig_cleanupInvalidationContext:]_block_invoke.86
+__79-[UICollectionViewLayout(InteractiveReordering) ig_cleanupInvalidationContext:]_block_invoke.75
+__79-[UICollectionViewLayout(InteractiveReordering) ig_cleanupInvalidationContext:]_block_invoke
+__53+[UICollectionViewLayout(InteractiveReordering) load]_block_invoke
+/Applications/Xcode-beta.app/Contents/Developer/Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS12.0.sdk/usr/include/dispatch/once.h
+-[IGListBatchUpdateData(DebugDescription) debugDescriptionLines]
+/Users/susieyy/.ghq/github.com/susieyy/ReduxExample/Carthage/Checkouts/IGListKit/Source/Internal/IGListBatchUpdateData+DebugDescription.m
+-[IGListReloadDataUpdater objectLookupPointerFunctions]
+-[IGListReloadDataUpdater performUpdateWithCollectionView:fromObjects:toObjectsBlock:animated:objectTransitionBlock:completion:]
+-[IGListReloadDataUpdater performUpdateWithCollectionView:animated:itemUpdates:completion:]
+-[IGListReloadDataUpdater insertItemsIntoCollectionView:indexPaths:]
+-[IGListReloadDataUpdater deleteItemsFromCollectionView:indexPaths:]
+-[IGListReloadDataUpdater moveItemInCollectionView:fromIndexPath:toIndexPath:]
+-[IGListReloadDataUpdater reloadItemInCollectionView:fromIndexPath:toIndexPath:]
+-[IGListReloadDataUpdater _reloadItemsInCollectionView:indexPaths:]
+-[IGListReloadDataUpdater moveSectionInCollectionView:fromIndex:toIndex:]
+-[IGListReloadDataUpdater reloadDataWithCollectionView:reloadUpdateBlock:completion:]
+-[IGListReloadDataUpdater reloadCollectionView:sections:]
+-[IGListReloadDataUpdater _synchronousReloadDataWithCollectionView:]
+/Users/susieyy/.ghq/github.com/susieyy/ReduxExample/Carthage/Checkouts/IGListKit/Source/IGListReloadDataUpdater.m
++[IGListBatchUpdateData _cleanIndexPathsWithMap:moves:indexPaths:deletes:inserts:]
+-[IGListBatchUpdateData initWithInsertSections:deleteSections:moveSections:insertIndexPaths:deleteIndexPaths:moveIndexPaths:]
+-[IGListBatchUpdateData description]
+-[IGListBatchUpdateData insertSections]
+-[IGListBatchUpdateData deleteSections]
+-[IGListBatchUpdateData moveSections]
+-[IGListBatchUpdateData insertIndexPaths]
+-[IGListBatchUpdateData deleteIndexPaths]
+-[IGListBatchUpdateData moveIndexPaths]
+-[IGListBatchUpdateData .cxx_destruct]
+_OBJC_IVAR_$_IGListBatchUpdateData._deleteSections
+_OBJC_IVAR_$_IGListBatchUpdateData._insertSections
+_OBJC_IVAR_$_IGListBatchUpdateData._moveSections
+_OBJC_IVAR_$_IGListBatchUpdateData._deleteIndexPaths
+_OBJC_IVAR_$_IGListBatchUpdateData._insertIndexPaths
+_OBJC_IVAR_$_IGListBatchUpdateData._moveIndexPaths
+/Users/susieyy/.ghq/github.com/susieyy/ReduxExample/Carthage/Checkouts/IGListKit/Source/Common/IGListBatchUpdateData.mm
+find<long>
+reset<std::__1::__hash_node_base<std::__1::__hash_node<std::__1::__hash_value_type<long, IGListMoveIndex *>, void *> *> **>
+__hash_const_iterator
+destroy<std::__1::pair<const long, IGListMoveIndex *> >
+__destroy<std::__1::pair<const long, IGListMoveIndex *> >
+/Users/susieyy/.ghq/github.com/susieyy/ReduxExample/Carthage/Checkouts/IGListKit/Source/Common/IGListBatchUpdateData.h
+__emplace_unique_key_args<long, const std::__1::piecewise_construct_t &, std::__1::tuple<const long &>, std::__1::tuple<> >
+__construct_node_hash<const std::__1::piecewise_construct_t &, std::__1::tuple<const long &>, std::__1::tuple<> >
+construct<std::__1::pair<const long, IGListMoveIndex *>, const std::__1::piecewise_construct_t &, std::__1::tuple<const long &>, std::__1::tuple<> >
+__construct<std::__1::pair<const long, IGListMoveIndex *>, const std::__1::piecewise_construct_t &, std::__1::tuple<const long &>, std::__1::tuple<> >
+pair<const long &>
+pair<const long &, 0>
+__compressed_pair<float, const std::__1::__unordered_map_equal<long, std::__1::__hash_value_type<long, IGListMoveIndex *>, std::__1::equal_to<long>, true> &>
+__compressed_pair<nullptr_t, std::__1::__bucket_list_deallocator<std::__1::allocator<std::__1::__hash_node_base<std::__1::__hash_node<std::__1::__hash_value_type<long, IGListMoveIndex *>, void *> *> *> > >
+__compressed_pair_elem<std::__1::__bucket_list_deallocator<std::__1::allocator<std::__1::__hash_node_base<std::__1::__hash_node<std::__1::__hash_value_type<long, IGListMoveIndex *>, void *> *> *> >, void>
+convertMoveToDeleteAndInsert
+-[UICollectionViewCell(IGListStackedSectionController) ig_setStackedSectionController:]
+-[UICollectionViewCell(IGListStackedSectionController) ig_stackedSectionController]
+-[UICollectionViewCell(IGListStackedSectionController) ig_setStackedSectionControllerIndex:]
+-[UICollectionViewCell(IGListStackedSectionController) ig_stackedSectionControllerIndex]
+-[IGListStackedSectionController initWithSectionControllers:]
+-[IGListStackedSectionController reloadData]
+-[IGListStackedSectionController sectionControllerForObjectIndex:]
+-[IGListStackedSectionController offsetForSectionController:]
+-[IGListStackedSectionController _localIndexForSectionController:index:]
+-[IGListStackedSectionController _relativeIndexForSectionController:fromLocalIndex:]
+-[IGListStackedSectionController _itemIndexesForSectionController:indexes:]
+___75-[IGListStackedSectionController _itemIndexesForSectionController:indexes:]_block_invoke
+-[IGListStackedSectionController supplementaryViewSource]
+-[IGListStackedSectionController numberOfItems]
+-[IGListStackedSectionController sizeForItemAtIndex:]
+-[IGListStackedSectionController cellForItemAtIndex:]
+-[IGListStackedSectionController didUpdateToObject:]
+-[IGListStackedSectionController didSelectItemAtIndex:]
+-[IGListStackedSectionController didDeselectItemAtIndex:]
+-[IGListStackedSectionController didHighlightItemAtIndex:]
+-[IGListStackedSectionController didUnhighlightItemAtIndex:]
+-[IGListStackedSectionController canMoveItemAtIndex:]
+-[IGListStackedSectionController canMoveItemAtIndex:toIndex:]
+-[IGListStackedSectionController moveObjectFromIndex:toIndex:]
+___62-[IGListStackedSectionController moveObjectFromIndex:toIndex:]_block_invoke
+-[IGListStackedSectionController containerSize]
+-[IGListStackedSectionController containerInset]
+-[IGListStackedSectionController adjustedContainerInset]
+-[IGListStackedSectionController insetContainerSize]
+-[IGListStackedSectionController containerSizeForSectionController:]
+-[IGListStackedSectionController indexForCell:sectionController:]
+-[IGListStackedSectionController cellForItemAtIndex:sectionController:]
+-[IGListStackedSectionController visibleCellsForSectionController:]
+-[IGListStackedSectionController visibleIndexPathsForSectionController:]
+-[IGListStackedSectionController deselectItemAtIndex:sectionController:animated:]
+-[IGListStackedSectionController selectItemAtIndex:sectionController:animated:scrollPosition:]
+-[IGListStackedSectionController dequeueReusableCellOfClass:withReuseIdentifier:forSectionController:atIndex:]
+-[IGListStackedSectionController dequeueReusableCellOfClass:forSectionController:atIndex:]
+-[IGListStackedSectionController dequeueReusableCellWithNibName:bundle:forSectionController:atIndex:]
+-[IGListStackedSectionController dequeueReusableCellFromStoryboardWithIdentifier:forSectionController:atIndex:]
+-[IGListStackedSectionController dequeueReusableSupplementaryViewOfKind:forSectionController:class:atIndex:]
+-[IGListStackedSectionController dequeueReusableSupplementaryViewFromStoryboardOfKind:withIdentifier:forSectionController:atIndex:]
+-[IGListStackedSectionController dequeueReusableSupplementaryViewOfKind:forSectionController:nibName:bundle:atIndex:]
+-[IGListStackedSectionController performBatchAnimated:updates:completion:]
+___74-[IGListStackedSectionController performBatchAnimated:updates:completion:]_block_invoke
+___copy_helper_block_.142
+___destroy_helper_block_.143
+___74-[IGListStackedSectionController performBatchAnimated:updates:completion:]_block_invoke.145
+___copy_helper_block_.146
+___destroy_helper_block_.147
+-[IGListStackedSectionController scrollToSectionController:atIndex:scrollPosition:animated:]
+-[IGListStackedSectionController invalidateLayoutForSectionController:completion:]
+-[IGListStackedSectionController reloadInSectionController:atIndexes:]
+-[IGListStackedSectionController insertInSectionController:atIndexes:]
+-[IGListStackedSectionController deleteInSectionController:atIndexes:]
+-[IGListStackedSectionController moveInSectionController:fromIndex:toIndex:]
+-[IGListStackedSectionController reloadSectionController:]
+-[IGListStackedSectionController moveSectionControllerInteractive:fromIndex:toIndex:]
+-[IGListStackedSectionController moveInSectionControllerInteractive:fromIndex:toIndex:]
+-[IGListStackedSectionController revertInvalidInteractiveMoveFromIndexPath:toIndexPath:]
+-[IGListStackedSectionController listAdapter:willDisplaySectionController:cell:atIndex:]
+-[IGListStackedSectionController listAdapter:didEndDisplayingSectionController:cell:atIndex:]
+-[IGListStackedSectionController listAdapter:willDisplaySectionController:]
+-[IGListStackedSectionController listAdapter:didEndDisplayingSectionController:]
+-[IGListStackedSectionController listAdapter:didScrollSectionController:]
+-[IGListStackedSectionController listAdapter:willBeginDraggingSectionController:]
+-[IGListStackedSectionController listAdapter:didEndDraggingSectionController:willDecelerate:]
+-[IGListStackedSectionController listAdapter:didEndDeceleratingSectionController:]
+-[IGListStackedSectionController listAdapter:sectionControllerWillEnterWorkingRange:]
+-[IGListStackedSectionController listAdapter:sectionControllerDidExitWorkingRange:]
+-[IGListStackedSectionController sectionControllers]
+-[IGListStackedSectionController sectionControllersForItems]
+-[IGListStackedSectionController setSectionControllersForItems:]
+-[IGListStackedSectionController sectionControllerOffsets]
+-[IGListStackedSectionController setSectionControllerOffsets:]
+-[IGListStackedSectionController flattenedNumberOfItems]
+-[IGListStackedSectionController setFlattenedNumberOfItems:]
+-[IGListStackedSectionController visibleSectionControllers]
+-[IGListStackedSectionController forwardingBatchContext]
+-[IGListStackedSectionController setForwardingBatchContext:]
+-[IGListStackedSectionController .cxx_destruct]
+_kStackedSectionControllerKey
+_kStackedSectionControllerIndexKey
+_OBJC_IVAR_$_IGListStackedSectionController._visibleSectionControllers
+_OBJC_IVAR_$_IGListStackedSectionController._sectionControllers
+___block_descriptor_tmp.97
+___block_descriptor_tmp.144
+___block_descriptor_tmp.149
+_OBJC_IVAR_$_IGListStackedSectionController._sectionControllersForItems
+_OBJC_IVAR_$_IGListStackedSectionController._sectionControllerOffsets
+_OBJC_IVAR_$_IGListStackedSectionController._flattenedNumberOfItems
+_OBJC_IVAR_$_IGListStackedSectionController._forwardingBatchContext
+l_OBJC_PROTOCOL_$_IGListDisplayDelegate
+l_OBJC_LABEL_PROTOCOL_$_IGListDisplayDelegate
+l_OBJC_PROTOCOL_$_IGListScrollDelegate
+l_OBJC_LABEL_PROTOCOL_$_IGListScrollDelegate
+l_OBJC_PROTOCOL_$_IGListWorkingRangeDelegate
+l_OBJC_LABEL_PROTOCOL_$_IGListWorkingRangeDelegate
+/Users/susieyy/.ghq/github.com/susieyy/ReduxExample/Carthage/Checkouts/IGListKit/Source/IGListStackedSectionController.m
+/Users/susieyy/.ghq/github.com/susieyy/ReduxExample/Carthage/Checkouts/IGListKit/Source/Internal/IGListStackedSectionControllerInternal.h
+__74-[IGListStackedSectionController performBatchAnimated:updates:completion:]_block_invoke.145
+__74-[IGListStackedSectionController performBatchAnimated:updates:completion:]_block_invoke
+__62-[IGListStackedSectionController moveObjectFromIndex:toIndex:]_block_invoke
+__75-[IGListStackedSectionController _itemIndexesForSectionController:indexes:]_block_invoke
+-[IGListBindingSectionController updateAnimated:completion:]
+___Block_byref_object_copy_
+___Block_byref_object_dispose_
+___60-[IGListBindingSectionController updateAnimated:completion:]_block_invoke
+___60-[IGListBindingSectionController updateAnimated:completion:]_block_invoke_2
+___copy_helper_block_.47
+___destroy_helper_block_.48
+___60-[IGListBindingSectionController updateAnimated:completion:]_block_invoke.51
+___copy_helper_block_.52
+___destroy_helper_block_.53
+-[IGListBindingSectionController numberOfItems]
+-[IGListBindingSectionController sizeForItemAtIndex:]
+-[IGListBindingSectionController cellForItemAtIndex:]
+-[IGListBindingSectionController didUpdateToObject:]
+-[IGListBindingSectionController didSelectItemAtIndex:]
+-[IGListBindingSectionController didDeselectItemAtIndex:]
+-[IGListBindingSectionController didHighlightItemAtIndex:]
+-[IGListBindingSectionController didUnhighlightItemAtIndex:]
+-[IGListBindingSectionController dataSource]
+-[IGListBindingSectionController setDataSource:]
+-[IGListBindingSectionController selectionDelegate]
+-[IGListBindingSectionController setSelectionDelegate:]
+-[IGListBindingSectionController object]
+-[IGListBindingSectionController setObject:]
+-[IGListBindingSectionController viewModels]
+-[IGListBindingSectionController setViewModels:]
+-[IGListBindingSectionController state]
+-[IGListBindingSectionController setState:]
+-[IGListBindingSectionController .cxx_destruct]
+___block_descriptor_tmp.50
+___block_descriptor_tmp.55
+_OBJC_IVAR_$_IGListBindingSectionController._dataSource
+_OBJC_IVAR_$_IGListBindingSectionController._selectionDelegate
+_OBJC_IVAR_$_IGListBindingSectionController._object
+_OBJC_IVAR_$_IGListBindingSectionController._viewModels
+_OBJC_IVAR_$_IGListBindingSectionController._state
+/Users/susieyy/.ghq/github.com/susieyy/ReduxExample/Carthage/Checkouts/IGListKit/Source/IGListBindingSectionController.m
+/Users/susieyy/.ghq/github.com/susieyy/ReduxExample/Carthage/Checkouts/IGListKit/Source/IGListBindingSectionController.h
+__60-[IGListBindingSectionController updateAnimated:completion:]_block_invoke.51
+__60-[IGListBindingSectionController updateAnimated:completion:]_block_invoke_2
+__60-[IGListBindingSectionController updateAnimated:completion:]_block_invoke
+__Block_byref_object_dispose_
+__Block_byref_object_copy_
+/Users/susieyy/Library/Caches/org.carthage.CarthageKit/DerivedData/10.0_10L176w/IGListKit/3.4.0/Build/Intermediates.noindex/ArchiveIntermediates/IGListKit/IntermediateBuildFilesPath/IGListKit.build/Release-iphoneos/IGListKit.build/DerivedSources/IGListKit_vers.c
+__ZL15__ARCLite__loadv
+__ZL58__arclite_NSMutableDictionary__setObject_forKeyedSubscriptP19NSMutableDictionaryP13objc_selectorP11objc_objectS4_
+__ZL22add_image_hook_swiftV1PK11mach_headerl
+__ZL42__arclite_NSUndoManagerProxy_isKindOfClassP11objc_objectP13objc_selectorP10objc_class
+__ZL30__arclite_NSManagedObject_initP11objc_objectP13objc_selector
+__ZL41__arclite_NSManagedObject_allocWithEntityP11objc_objectP13objc_selectorS0_
+__ZL36__arclite_NSManagedObject_allocBatchP11objc_objectP13objc_selectorPS0_S0_j
+__ZL37__arclite_NSKKMS_fastIndexForKnownKeyP11objc_objectP13objc_selectorS0_
+__ZL28__arclite_NSKKMS_indexForKeyP11objc_objectP13objc_selectorS0_
+__ZL29__arclite_NSKKsD_objectForKeyP11objc_objectP13objc_selectorS0_
+__ZL35__arclite_NSKKsD_removeObjectForKeyP11objc_objectP13objc_selectorS0_
+__ZL33__arclite_NSKKsD_setObject_forKeyP11objc_objectP13objc_selectorS0_S0_
+__ZL41__arclite_NSKKsD_addEntriesFromDictionaryP11objc_objectP13objc_selectorP12NSDictionary
+__ZL28__arclite_objc_readClassPairP10objc_classPK15objc_image_info
+__ZL32__arclite_objc_allocateClassPairP10objc_classPKcm
+__ZL32__arclite_object_getIndexedIvarsP11objc_object
+__ZL23__arclite_objc_getClassPKc
+__ZL27__arclite_objc_getMetaClassPKc
+__ZL31__arclite_objc_getRequiredClassPKc
+__ZL26__arclite_objc_lookUpClassPKc
+__ZL26__arclite_objc_getProtocolPKc
+__ZL23__arclite_class_getNameP10objc_class
+__ZL26__arclite_protocol_getNameP8Protocol
+__ZL37__arclite_objc_copyClassNamesForImagePKcPj
+__ZL17transcribeMethodsP10objc_classP15glue_class_ro_t
+__ZL19transcribeProtocolsP10objc_classP15glue_class_ro_t
+__ZL20transcribePropertiesP10objc_classP15glue_class_ro_t
+__ZL14initialize_impP11objc_objectP13objc_selector
+__ZL18allocateMaybeSwiftP18glue_swift_class_tm
+__ZL22copySwiftV1MangledNamePKcb
+__ZL13demangledNamePKcb
+__ZL16scanMangledFieldRPKcS0_S1_Ri
+__ZL30arclite_uninitialized_functionv
+__ZL12cxxConstructP11objc_object
+__ZL20fixStringForCoreDataP11objc_object
+_OBJC_METACLASS_$___ARCLite__
+__ZL24OBJC_CLASS_$___ARCLite__
+__ZL31OBJC_METACLASS_RO_$___ARCLite__
+__non_lazy_classes
+__ZL27OBJC_CLASS_RO_$___ARCLite__
+__ZL11_class_name
+__ZL32OBJC_$_CLASS_METHODS___ARCLite__
+__ZL17_load_method_name
+__ZL17_load_method_type
+l_OBJC_PROTOCOL_$___ARCLiteKeyedSubscripting__
+l_OBJC_LABEL_PROTOCOL_$___ARCLiteKeyedSubscripting__
+l_OBJC_PROTOCOL_REFERENCE_$___ARCLiteKeyedSubscripting__
+__ZL30NSUndoManagerProxy_targetClass
+__ZL29original_NSManagedObject_init
+__ZL40original_NSManagedObject_allocWithEntity
+__ZL35original_NSManagedObject_allocBatch
+__ZL25NSMutableDictionary_class
+__ZL22NSConstantString_class
+__ZL14NSString_class
+__ZL36original_NSKKMS_fastIndexForKnownKey
+__ZL27original_NSKKMS_indexForKey
+__ZL28original_NSKKsD_objectForKey
+__ZL34original_NSKKsD_removeObjectForKey
+__ZL32original_NSKKsD_setObject_forKey
+__ZL40original_NSKKsD_addEntriesFromDictionary
+__ZZL22add_image_hook_swiftV1PK11mach_headerlE7patches
+__ZGVZL22add_image_hook_swiftV1PK11mach_headerlE7patches
+__ZL31original_objc_allocateClassPair
+__ZL31original_object_getIndexedIvars
+__ZL22original_objc_getClass
+__ZL26original_objc_getMetaClass
+__ZL30original_objc_getRequiredClass
+__ZL25original_objc_lookUpClass
+__ZL25original_objc_getProtocol
+__ZL22original_class_getName
+__ZL25original_protocol_getName
+__ZL36original_objc_copyClassNamesForImage
+__ZL12demangleLock
+__ZL9Demangled
+Apple LLVM version 10.0.0 (clang-1000.12.25.5)
+/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/clang -x objective-c++ -arch arm64 -fmessage-length=0 -fdiagnostics-show-note-include-stack -fmacro-backtrace-limit=0 -std=c++11 -Wno-trigraphs -fno-exceptions -fno-rtti -fno-sanitize=vptr -mpascal-strings -Os -Wno-missing-field-initializers -Wmissing-prototypes -Wno-implicit-atomic-properties -Wno-objc-interface-ivars -Wno-arc-repeated-use-of-weak -Wno-non-virtual-dtor -Wno-overloaded-virtual -Wno-exit-time-destructors -Wno-missing-braces -Wparentheses -Wswitch -Wno-unused-function -Wno-unused-label -Wno-unused-parameter -Wunused-variable -Wunused-value -Wno-empty-body -Wno-uninitialized -Wno-unknown-pragmas -Wno-shadow -Wno-four-char-constants -Wno-conversion -Wno-constant-conversion -Wno-int-conversion -Wno-bool-conversion -Wno-enum-conversion -Wno-float-conversion -Wno-non-literal-null-conversion -Wno-objc-literal-conversion -Wshorten-64-to-32 -Wno-newline-eof -Wno-selector -Wno-strict-selector-match -Wno-undeclared-selector -Wno-deprecated-implementations -Wno-c++11-extensions -D NDEBUG=1 -D RC_SEED_BUILD=1 -D OBJC_OLD_DISPATCH_PROTOTYPES=1 -isysroot /Applications/Xcode.app/Contents/Developer/Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS12.0.Internal.sdk -fstrict-aliasing -Wprotocol -Wdeprecated-declarations -Winvalid-offsetof -miphoneos-version-min=4.3 -g -fno-threadsafe-statics -Wno-sign-conversion -Wno-infinite-recursion -Wno-move -Wno-comma -Wno-block-capture-autoreleasing -Wno-strict-prototypes -Wno-range-loop-analysis -Wno-semicolon-before-method-body -fembed-bitcode=all -iquote /Library/Caches/com.apple.xbs/Binaries/arclite_iOS/install/TempContent/Objects/arclite.build/arclite_iOS.build/arclite_iphoneos-generated-files.hmap -I /Library/Caches/com.apple.xbs/Binaries/arclite_iOS/install/TempContent/Objects/arclite.build/arclite_iOS.build/arclite_iphoneos-own-target-headers.hmap -I /Library/Caches/com.apple.xbs/Binaries/arclite_iOS/install/TempContent/Objects/arclite.build/arclite_iOS.build/arclite_iphoneos-all-target-headers.hmap -iquote /Library/Caches/com.apple.xbs/Binaries/arclite_iOS/install/TempContent/Objects/arclite.build/arclite_iOS.build/arclite_iphoneos-project-headers.hmap -I /Library/Caches/com.apple.xbs/Binaries/arclite_iOS/install/Symbols/BuiltProducts/include -I /Library/Caches/com.apple.xbs/Binaries/arclite_iOS/install/TempContent/Objects/arclite.build/arclite_iOS.build/DerivedSources/arm64 -I /Library/Caches/com.apple.xbs/Binaries/arclite_iOS/install/TempContent/Objects/arclite.build/arclite_iOS.build/DerivedSources -F/Library/Caches/com.apple.xbs/Binaries/arclite_iOS/install/Symbols/BuiltProducts -iframework /Applications/Xcode.app/Contents/Developer/Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS12.0.Internal.sdk/System/Library/PrivateFrameworks -Wall -Wextra -Wno-gcc-compat -Wno-error=incomplete-umbrella -Wno-error=invalid-ios-deployment-target -Wno-error=incomplete-umbrella -Wno-error=invalid-ios-deployment-target -MMD -MT dependencies -MF /Library/Caches/com.apple.xbs/Binaries/arclite_iOS/install/TempContent/Objects/arclite.build/arclite_iOS.build/Objects-normal/arm64/arclite.d --serialize-diagnostics /Library/Caches/com.apple.xbs/Binaries/arclite_iOS/install/TempContent/Objects/arclite.build/arclite_iOS.build/Objects-normal/arm64/arclite.dia -c /Library/Caches/com.apple.xbs/Sources/arclite_iOS/arclite-69/source/arclite.mm -o /Library/Caches/com.apple.xbs/Binaries/arclite_iOS/install/TempContent/Objects/arclite.build/arclite_iOS.build/Objects-normal/arm64/arclite.o -mlinker-version=408.1.1
+/Library/Caches/com.apple.xbs/Sources/arclite_iOS/arclite-69/source/arclite.mm
+/Library/Caches/com.apple.xbs/Sources/arclite_iOS/arclite-69
+fixStringForCoreData
+cxxConstruct
+arclite_uninitialized_function
+scanMangledField
+/Applications/Xcode.app/Contents/Developer/Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS12.0.Internal.sdk/usr/include/_ctype.h
+__isctype
+demangledName
+copySwiftV1DemangledName
+copySwiftV1MangledName
+allocateMaybeSwift
+word_align
+isSwift
+initialize_imp
+transcribeProperties
+property_list_nth
+transcribeProtocols
+transcribeMethods
+data
+method_list_nth
+__arclite_objc_copyClassNamesForImage
+__arclite_protocol_getName
+__arclite_class_getName
+__arclite_objc_getProtocol
+__arclite_objc_lookUpClass
+__arclite_objc_getRequiredClass
+__arclite_objc_getMetaClass
+__arclite_objc_getClass
+__arclite_object_getIndexedIvars
+__arclite_objc_allocateClassPair
+metaclass
+__arclite_objc_readClassPair
+transcribeIvars
+ivar_list_nth
+max
+alignment
+ro
+fastFlags
+__arclite_NSKKsD_addEntriesFromDictionary
+__arclite_NSKKsD_setObject_forKey
+__arclite_NSKKsD_removeObjectForKey
+__arclite_NSKKsD_objectForKey
+__arclite_NSKKMS_indexForKey
+__arclite_NSKKMS_fastIndexForKnownKey
+__arclite_NSManagedObject_allocBatch
+__arclite_NSManagedObject_allocWithEntity
+__arclite_NSManagedObject_init
+__arclite_NSUndoManagerProxy_isKindOfClass
+add_image_hook_swiftV1
+patch_lazy_pointers
+patch_t<const char **(const char *, unsigned int *)>
+patch_t<const char *(Protocol *)>
+patch_t<const char *(Class)>
+patch_t<Protocol *(const char *)>
+patch_t<Class (const char *)>
+patch_t<void *(id)>
+patch_t<Class (Class, const char *, unsigned long)>
+patch_t<Class (Class, const objc_image_info *)>
+__arclite_NSMutableDictionary__setObject_forKeyedSubscript
+__ARCLite__load
+install_swiftV1
+replaceMethod
+install_dict_nil_value
+addOrReplaceMethod
+keyedGetter
