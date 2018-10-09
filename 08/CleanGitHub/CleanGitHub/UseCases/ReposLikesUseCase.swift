@@ -27,7 +27,9 @@ protocol ReposLikesUseCaseOutput {
 }
 
 protocol ReposProtocol {
+    // 指定したキーワードの配列にマッチするレポジトリを読み出す
     func fetch(using keywords: [String], completion: (Result<[GitHubRepo]>) -> Void)
+    // 指定したお気に入りの配列にマッチするレポジトリを読み出す
     func fetch(using likes: [Like], completion: (Result<[GitHubRepo]>) -> Void)
 }
 
@@ -82,17 +84,17 @@ class ReposLikesUseCase: ReposLikesUseCaseInput {
             case .failure(let e):
                 self?.output?.useCaseDidReceiveError(FetchingError.failedToFetchLikes(e))
             case .success(let likes):
+                var repoStatusList = RepoStatusList()
+                repoStatusList.register(likes: likes)
+
                 self?.reposGateway?.fetch(using: likes) { repoResult in
                     switch repoResult {
                     case .failure(let e):
                         self?.output?.useCaseDidReceiveError(FetchingError.failedToFetchRepos(e))
                     case .success(let repos):
-                        let reposAndLikes: [(GitHubRepo, Like?)] = repos.map { repo in
-                            (repo,
-                             likes.first(where: { $0.id == repo.id })
-                            )
-                        }
-                        self?.output?.useCaseDidReceive(reposAndLikes)
+                        var repoStatusList = RepoStatusList()
+                        repoStatusList.register(repos: repos)
+                        self?.output?.useCaseDidReceive(repoStatusList.allStatus)
                     }
                 }
             }

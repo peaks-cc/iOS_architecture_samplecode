@@ -16,6 +16,6 @@ struct GitHubRepo: Equatable, Encodable {
     let stargazersCount: Int
 
     public static func == (lhs: GitHubRepo, rhs: GitHubRepo) -> Bool {
-        return lhs.fullName == rhs.fullName
+        return lhs.id == rhs.id
     }
 }

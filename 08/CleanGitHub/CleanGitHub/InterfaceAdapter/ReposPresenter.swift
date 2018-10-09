@@ -8,15 +8,6 @@
 
 import Foundation
 
-struct GitHubRepoViewModel {
-    let id: String
-    let fullName: String
-    let description: String
-    let language: String
-    let stargazersCount: Int
-    let isLiked: Bool
-}
-
 protocol ReposPresenterInput {
     // キーワードを使ったサーチ
     func startFetch(using keywords: [String])
@@ -27,7 +18,8 @@ protocol ReposPresenterInput {
 }
 
 protocol ReposPresenterOutput {
-    func didUpdate(_ viewModels: [GitHubRepoViewModel])
+    // 表示用のモデルが変化したことを通知
+    func didUpdate(_ viewModels: [RepoStatus])
 }
 
 class ReposPresenter: ReposLikesUseCaseOutput, ReposPresenterInput {
@@ -52,8 +44,8 @@ class ReposPresenter: ReposLikesUseCaseOutput, ReposPresenterInput {
     }
     
     func useCaseDidReceive(_ repoStatus: [RepoStatus]) {
-        // 届いたペアをView用のモデルに変換
-//        <#code#>
+        // 届いたペアを出力ポートへ流す
+        presenterOutput?.didUpdate(repoStatus)
     }
     
     func useCaseDidUpdate(_ likes: [Like]) {
