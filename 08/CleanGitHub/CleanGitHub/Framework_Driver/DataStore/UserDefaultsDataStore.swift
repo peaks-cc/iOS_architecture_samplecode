@@ -14,7 +14,7 @@ protocol UserDefaultsProtocol {
 }
 extension UserDefaults: UserDefaultsProtocol {}
 
-final class UserDefaultsDataStore: LikesGatewayProtocol {
+final class UserDefaultsDataStore: DataStoreProtocol {
     let userDefaults: UserDefaultsProtocol
     init(userDefaults: UserDefaultsProtocol) {
         self.userDefaults = userDefaults

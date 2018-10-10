@@ -8,3 +8,21 @@
 
 import Foundation
 
+protocol WebClientProtocol: AnyObject {
+    func fetch(using keywords: [String], completion: (Result<[GitHubRepo]>) -> Void)
+}
+
+class ReposGateway: ReposGatewayProtocol {
+
+    private var useCase: ReposLikesUseCaseProtocol
+    weak var webClient: WebClientProtocol!
+
+    init(useCase: ReposLikesUseCaseProtocol) {
+        self.useCase = useCase
+    }
+
+    func fetch(using keywords: [String], completion: (Result<[GitHubRepo]>) -> Void) {
+        // 外側へ処理を伝える
+        webClient.fetch(using: keywords, completion: completion)
+    }
+}

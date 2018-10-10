@@ -16,7 +16,10 @@ protocol ReposLikesUseCaseProtocol {
     // お気に入りの追加・削除
     func set(liked: Bool, for Repo: GitHubRepo)
 
-    var output: ReposLikesUseCaseOutput? { get set }
+    // 外側のオブジェクトはプロパティとしてあとからセットする
+    var output: ReposLikesUseCaseOutput! { get set }
+    var reposGateway: ReposGatewayProtocol! { get set }
+    var likesGateway: LikesGatewayProtocol! { get set }
 }
 
 protocol ReposLikesUseCaseOutput: AnyObject {
@@ -26,50 +29,58 @@ protocol ReposLikesUseCaseOutput: AnyObject {
     func useCaseDidReceiveError(_ error: Error)
 }
 
-protocol ReposGatewayProtocol {
-    func fetch(using keywords: [String], completion: (Result<[GitHubRepo]>) -> Void)
+protocol ReposGatewayProtocol: AnyObject {
+    // キーワードで検索した結果を完了ハンドラで返す
+    func fetch(using keywords: [String],
+               completion: (Result<[GitHubRepo]>) -> Void)
 }
 
-protocol LikesGatewayProtocol {
-    func fetch(ids: [GitHubRepo.ID], completion: (Result<[GitHubRepo.ID: Bool]>) -> Void)
-    func save(liked: Bool, for id: GitHubRepo.ID, completion: (Result<Bool>) -> Void)
+protocol LikesGatewayProtocol: AnyObject {
+    // IDで検索したお気に入りの結果を完了ハンドラで返す
+    func fetch(ids: [GitHubRepo.ID],
+               completion: (Result<[GitHubRepo.ID: Bool]>) -> Void)
+    // IDについてのお気に入り状態を保存する
+    func save(liked: Bool,
+              for id: GitHubRepo.ID,
+              completion: (Result<Bool>) -> Void)
 }
 
 final class ReposLikesUseCase: ReposLikesUseCaseProtocol {
-    weak var output: ReposLikesUseCaseOutput?
+    weak var output: ReposLikesUseCaseOutput!
 
-    private let reposGateway: ReposGatewayProtocol
-    private let likesGateway: LikesGatewayProtocol
+    weak var reposGateway: ReposGatewayProtocol!
+    weak var likesGateway: LikesGatewayProtocol!
 
     private var statusList = GitHubRepoStatusList(repos: [], likes: [:])
 
-    init(reposGateway: ReposGatewayProtocol,
-         likesGateway: LikesGatewayProtocol) {
-
-        self.reposGateway = reposGateway
-        self.likesGateway = likesGateway
-    }
-
-    // キーワードでリポジトリを検索し、その結果とお気に入りの状態を組み合わせた結果を返す
+    // キーワードでリポジトリを検索し、結果とお気に入り状態を組み合わせた結果をOutputに通知する
     func startFetch(using keywords: [String]) {
+
         reposGateway.fetch(using: keywords) { [weak self] reposResult in
+            guard let strongSelf = self else { return }
+
             switch reposResult {
             case .failure(let e):
-                self?.output?.useCaseDidReceiveError(FetchingError.failedToFetchRepos(e))
+                strongSelf.output
+                    .useCaseDidReceiveError(FetchingError.failedToFetchRepos(e))
             case .success(let repos):
                 let ids = repos.map { $0.id }
-                self?.likesGateway.fetch(ids: ids) { [weak self] likesResult in
-                    switch likesResult {
-                    case .failure(let e):
-                        self?.output?.useCaseDidReceiveError(FetchingError.failedToFetchLikes(e))
-                    case .success(let likes):
-                        let statusList = GitHubRepoStatusList(
-                            repos: repos,
-                            likes: likes
-                        )
-                        self?.statusList = statusList
-                        self?.output?.useCaseDidUpdateStatuses(statusList.statuses)
-                    }
+                strongSelf.likesGateway
+                    .fetch(ids: ids) { [weak self] likesResult in
+                        switch likesResult {
+                        case .failure(let e):
+                            strongSelf.output
+                                .useCaseDidReceiveError(
+                                    FetchingError.failedToFetchLikes(e))
+                        case .success(let likes):
+                            // 結果を保持
+                            let statusList = GitHubRepoStatusList(
+                                repos: repos,
+                                likes: likes
+                            )
+                            self?.statusList = statusList
+                            self?.output.useCaseDidUpdateStatuses(statusList.statuses)
+                        }
                 }
             }
         }
@@ -81,17 +92,23 @@ final class ReposLikesUseCase: ReposLikesUseCaseProtocol {
 
     func set(liked: Bool, for repo: GitHubRepo) {
         // お気に入りの状態を保存し、更新の結果を伝える
-        likesGateway.save(liked: liked, for: repo.id) { [weak self] likesResult in
+        likesGateway.save(liked: liked, for: repo.id)
+        { [weak self] likesResult in
             guard let strongSelf = self else { return }
+
             switch likesResult {
             case .failure:
-                self?.output?.useCaseDidReceiveError(SavingError.failedToSaveLike)
+                strongSelf.output
+                    .useCaseDidReceiveError(SavingError.failedToSaveLike)
             case .success(let isLiked):
                 do {
-                    try strongSelf.statusList.set(isLiked: isLiked, for: repo.id)
-                    self?.output?.useCaseDidUpdateStatuses(statusList.statuses)
+                    try strongSelf.statusList.set(isLiked: isLiked,
+                                                  for: repo.id)
+                    strongSelf.output
+                        .useCaseDidUpdateStatuses(statusList.statuses)
                 } catch {
-                    self?.output?.useCaseDidReceiveError(SavingError.failedToSaveLike)
+                    strongSelf.output
+                        .useCaseDidReceiveError(SavingError.failedToSaveLike)
                 }
             }
         }

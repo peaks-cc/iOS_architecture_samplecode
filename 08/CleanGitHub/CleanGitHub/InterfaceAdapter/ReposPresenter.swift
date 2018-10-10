@@ -8,6 +8,7 @@
 
 import Foundation
 
+// 画面表示用のデータ
 struct GitHubRepoViewData {
     let id: String
     let fullName: String
@@ -30,6 +31,7 @@ protocol ReposPresenterProtocol {
 }
 
 protocol ReposPresenterOutput: AnyObject {
+    // 表示用のデータが変化したことを外側に通知
     func update(by viewDataArray: [GitHubRepoViewData])
 }
 
@@ -53,14 +55,19 @@ class ReposPresenter: ReposPresenterProtocol, ReposLikesUseCaseOutput {
     }
     
     func useCaseDidUpdateStatuses(_ repoStatus: [GitHubRepoStatus]) {
-        // 届いたペアをView用のモデルに変換
-//        <#code#>
+        // 届いたデータを外側で使うデータに変換してから伝える
+        let viewDataArray = repoStatus.map {
+            return GitHubRepoViewData(
+                id: $0.repo.id.rawValue,
+                fullName: $0.repo.fullName,
+                description: $0.repo.description,
+                language: $0.repo.language,
+                stargazersCount: $0.repo.stargazersCount,
+                isLiked: $0.isLiked)
+        }
+        output?.update(by: viewDataArray)
     }
     
-//    func useCaseDidUpdate(_ likes: [Like]) {
-////        <#code#>
-//    }
-
     func useCaseDidReceiveError(_ error: Error) {
 //        <#code#>
     }

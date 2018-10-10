@@ -8,33 +8,36 @@
 
 import Foundation
 
-//class Layer {
-//
-//    /// Shared instance
-//    static let shared = Layer()
-//
-//    // Can't initialize from outside
-//    private init() {
-//    }
-//
-//    func build() {
-//
-//        // Use Case
-//        let usecase = ReposLikesUseCase(output: nil,
-//                                        reposGateway: nil,
-//                                        likesGateway: nil)
-//
-//        // Interface Adapters
-//        let usecaseOutput = ReposPresenter(useCase: usecase,
-//                                           presenterOutput: nil)
-//        let reposGateway = ReposGateway(repository: nil)
-//        let likesGateway = LikesGateway(repository: nil)
-//
-//        usecase.output = usecaseOutput
-//        usecase.reposGateway = reposGateway
-//        usecase.likesGateway = likesGateway
-//
-//        // Framework & Drivers
-//
-//    }
-//}
+class LayerBuilder {
+
+    /// Shared instance
+    static let shared = LayerBuilder()
+    private init() {}
+
+    // 最外周を公開プロパティとして保持
+    var webClient: WebClientProtocol!
+    var likesDataStore: DataStoreProtocol!
+
+    func build() {
+        // -- Use Case
+        let usecase = ReposLikesUseCase()
+
+        // -- Interface Adapters
+        let usecaseOutput = ReposPresenter(useCase: usecase)
+        let reposGateway = ReposGateway(useCase: usecase)
+        let likesGateway = LikesGateway(useCase: usecase)
+
+        // Use Caseとのバインド
+        usecase.output = usecaseOutput
+        usecase.reposGateway = reposGateway
+        usecase.likesGateway = likesGateway
+
+        // -- Framework & Drivers
+        webClient = GitHubReposStub()
+        likesDataStore = UserDefaultsDataStore(userDefaults: UserDefaults.standard)
+
+        // Interface Adaptersとのバインド
+        reposGateway.webClient = webClient
+        likesGateway.dataStore = likesDataStore
+    }
+}

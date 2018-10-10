@@ -14,7 +14,7 @@ class UserDefaultsDataStoreTest: XCTestCase {
     var dataStore: UserDefaultsDataStore!
 
     override func setUp() {
-        dataStore = UserDefaultsDataStore()
+        dataStore = UserDefaultsDataStore(userDefaults: UserDefaults.standard)
     }
 
     override func tearDown() {
@@ -22,15 +22,14 @@ class UserDefaultsDataStoreTest: XCTestCase {
     }
 
     func testSave() {
-        let repo: GitHubRepo = .init(id: "foobar",
+        let repo: GitHubRepo = .init(id: GitHubRepo.ID(rawValue: "foobar"),
                                      fullName: "barbaz",
                                      description: "desc",
                                      language: "Swift",
                                      stargazersCount: 0)
-        dataStore.save(liked: true, for: repo) { result in
-            if case .success(let like) = result {
-                XCTAssertTrue(like.isLiked == true)
-                XCTAssertEqual(like.id, "foobar")
+        dataStore.save(liked: true, for: repo.id) { result in
+            if case .success(let isLiked) = result {
+                XCTAssertTrue(isLiked == true)
             } else {
                 XCTAssertTrue(false, "result must be a success.")
             }
