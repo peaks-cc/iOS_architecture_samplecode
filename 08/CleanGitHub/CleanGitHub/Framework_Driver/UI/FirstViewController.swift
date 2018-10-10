@@ -20,6 +20,9 @@ class FirstViewController: UIViewController, ReposPresenterOutput {
         // Dispose of any resources that can be recreated.
     }
 
+    func didUpdate(_ viewModels: [RepoStatus]) {
+        // TODO
+    }
 
 }
 

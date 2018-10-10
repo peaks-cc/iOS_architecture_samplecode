@@ -8,55 +8,49 @@
 
 import UIKit
 import RxSwift
-import RxCocoa
-
-protocol ViewModelProtocol {
-    var validationText: Observable<String> { get }
-}
 
 class ViewModel {
     let validationText: Observable<String>
     let loadLabelColor: Observable<UIColor>
 
-    private let _validationText = BehaviorRelay<String>(value: "IDとパスワードを入力してください。")
-    private let disposeBag = DisposeBag()
+    init(idTextObservable: Observable<String?>,
+         passwordTextObservable: Observable<String?>,
+         model: ModelProtocol) {
+        let event = Observable
+            .combineLatest(idTextObservable, passwordTextObservable)
+            .skip(1)
+            .flatMap { idText, passwordText -> Observable<Event<Void>> in
+                return model
+                    .validate(idText: idText, passwordText: passwordText)
+                    .materialize()
+            }
+            .share()
 
-    init(idTextObservable: Observable<String?>, passwordTextObservable: Observable<String?>, model: ModelProtocol) {
-        self.validationText = _validationText.map { $0 }
+        self.validationText = event
+            .flatMap { event -> Observable<String> in
+                switch event {
+                case .next:
+                    return .just("OK!!!")
+                case let .error(error as ModelError):
+                    return .just(error.errorText)
+                case .error, .completed:
+                    return .empty()
+                }
+            }
+            .startWith("IDとPasswordを入力してください。")
 
-        let textUpdated = Observable.combineLatest(idTextObservable, passwordTextObservable)
-            .map { idText, passwordText -> Observable<Void> in
-                return model.validate(idText: idText, passwordText: passwordText)
+
+        self.loadLabelColor = event
+            .flatMap { event -> Observable<UIColor> in
+                switch event {
+                case .next:
+                    return .just(.green)
+                case .error:
+                    return .just(.red)
+                case .completed:
+                    return .empty()
+                }
         }
-
-        // nextが流れてきたら"OK!!!"を返却するストリーム
-        // errorが流れてきたらModelError.errorTextを返却するストリーム
-
-//        Observable.combineLatest(idTextObservable, passwordTextObservable)
-//            .map { idText, passwordText -> String in
-//                do {
-//                    try model.validate(idText: idText, passwordText: passwordText)
-//                } catch {
-//                    guard let error = error as? ModelError else { fatalError("Unexpected Error.") }
-//                    return error.errorText
-//                }
-//
-//                return "OK!!!"
-//            }
-//            .bind(to: _validationText)
-//            .disposed(by: disposeBag)
-//
-//        // FIXME: _validationTextの方のロジックと統一したい
-//        self.loadLabelColor = Observable.combineLatest(idTextObservable, passwordTextObservable)
-//            .map { idText, passwordText -> UIColor in
-//                do {
-//                    try model.validate(idText: idText, passwordText: passwordText)
-//                } catch {
-//                    return UIColor.red
-//                }
-//
-//                return UIColor.green
-//        }
     }
 }
 

@@ -10,6 +10,10 @@
 		36108A6621568B680031C75D /* RepoStatusList.swift in Sources */ = {isa = PBXBuildFile; fileRef = 36108A6521568B680031C75D /* RepoStatusList.swift */; };
 		36108A6821573EF30031C75D /* RepoStatusListTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 36108A6721573EF30031C75D /* RepoStatusListTest.swift */; };
 		36108A6921573EF90031C75D /* RepoStatusList.swift in Sources */ = {isa = PBXBuildFile; fileRef = 36108A6521568B680031C75D /* RepoStatusList.swift */; };
+		3617AA78215B175D0045EFE8 /* GitHubReposStub.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3617AA77215B175D0045EFE8 /* GitHubReposStub.swift */; };
+		3617AA79215B1A300045EFE8 /* GitHubReposStub.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3617AA77215B175D0045EFE8 /* GitHubReposStub.swift */; };
+		3617AA7A215B1A370045EFE8 /* ReposGateway.swift in Sources */ = {isa = PBXBuildFile; fileRef = 361B2E18215233FF008BBCE0 /* ReposGateway.swift */; };
+		3617AA7C215B1A5B0045EFE8 /* GitHubReposStubTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3617AA7B215B1A5B0045EFE8 /* GitHubReposStubTest.swift */; };
 		361B2E152152330A008BBCE0 /* ReposLikesUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 361B2E142152330A008BBCE0 /* ReposLikesUseCase.swift */; };
 		361B2E17215233A3008BBCE0 /* ReposPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 361B2E16215233A3008BBCE0 /* ReposPresenter.swift */; };
 		361B2E19215233FF008BBCE0 /* ReposGateway.swift in Sources */ = {isa = PBXBuildFile; fileRef = 361B2E18215233FF008BBCE0 /* ReposGateway.swift */; };
@@ -50,6 +54,8 @@
 /* Begin PBXFileReference section */
 		36108A6521568B680031C75D /* RepoStatusList.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RepoStatusList.swift; sourceTree = "<group>"; };
 		36108A6721573EF30031C75D /* RepoStatusListTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RepoStatusListTest.swift; sourceTree = "<group>"; };
+		3617AA77215B175D0045EFE8 /* GitHubReposStub.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GitHubReposStub.swift; sourceTree = "<group>"; };
+		3617AA7B215B1A5B0045EFE8 /* GitHubReposStubTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GitHubReposStubTest.swift; sourceTree = "<group>"; };
 		361B2E142152330A008BBCE0 /* ReposLikesUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReposLikesUseCase.swift; sourceTree = "<group>"; };
 		361B2E16215233A3008BBCE0 /* ReposPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReposPresenter.swift; sourceTree = "<group>"; };
 		361B2E18215233FF008BBCE0 /* ReposGateway.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReposGateway.swift; sourceTree = "<group>"; };
@@ -105,6 +111,7 @@
 		361B2E252153A839008BBCE0 /* WebClient */ = {
 			isa = PBXGroup;
 			children = (
+				3617AA77215B175D0045EFE8 /* GitHubReposStub.swift */,
 			);
 			path = WebClient;
 			sourceTree = "<group>";
@@ -166,6 +173,7 @@
 				366196C0214F92C80003C850 /* CleanGitHubTests.swift */,
 				361B2E2C21553219008BBCE0 /* UserDefaultsDataStoreTest.swift */,
 				36108A6721573EF30031C75D /* RepoStatusListTest.swift */,
+				3617AA7B215B1A5B0045EFE8 /* GitHubReposStubTest.swift */,
 			);
 			path = CleanGitHubTests;
 			sourceTree = "<group>";
@@ -319,6 +327,7 @@
 				361B2E2B21552BA2008BBCE0 /* LayerBuilder.swift in Sources */,
 				366196AA214F92C60003C850 /* AppDelegate.swift in Sources */,
 				361B2E2321524AE6008BBCE0 /* Error.swift in Sources */,
+				3617AA78215B175D0045EFE8 /* GitHubReposStub.swift in Sources */,
 				361B2E1F21523D87008BBCE0 /* GitHubRepo.swift in Sources */,
 				361B2E2121523DA1008BBCE0 /* Like.swift in Sources */,
 				361B2E152152330A008BBCE0 /* ReposLikesUseCase.swift in Sources */,
@@ -339,7 +348,10 @@
 				361B2E2D21553219008BBCE0 /* UserDefaultsDataStoreTest.swift in Sources */,
 				366196C1214F92C80003C850 /* CleanGitHubTests.swift in Sources */,
 				36108A6821573EF30031C75D /* RepoStatusListTest.swift in Sources */,
+				3617AA7A215B1A370045EFE8 /* ReposGateway.swift in Sources */,
+				3617AA7C215B1A5B0045EFE8 /* GitHubReposStubTest.swift in Sources */,
 				361B2E2F215532F4008BBCE0 /* UserDefaultsDataStore.swift in Sources */,
+				3617AA79215B1A300045EFE8 /* GitHubReposStub.swift in Sources */,
 				361B2E34215534FD008BBCE0 /* ReposLikesUseCase.swift in Sources */,
 				361B2E33215534DE008BBCE0 /* Result.swift in Sources */,
 				361B2E3121553399008BBCE0 /* GitHubRepo.swift in Sources */,
