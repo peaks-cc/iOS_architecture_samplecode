@@ -8,10 +8,10 @@
 
 import Foundation
 
-class Layer {
+class LayerBuilder {
 
     /// Shared instance
-    static let shared = Layer()
+    static let shared = LayerBuilder()
 
     // Can't initialize from outside
     private init() {
