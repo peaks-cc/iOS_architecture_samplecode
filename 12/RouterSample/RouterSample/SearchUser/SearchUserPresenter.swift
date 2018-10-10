@@ -20,8 +20,8 @@ class SearchUserPresenter: SearchUserPresenterProtocol {
     private(set) var users: [User] = []
 
     private weak var view: SearchUserViewProtocol!
-    private var model: SearchUserModelProtocol!
-    private var router: SearchUserRouterProtocol!
+    private let model: SearchUserModelProtocol
+    private let router: SearchUserRouterProtocol
 
     init(view: SearchUserViewProtocol, model: SearchUserModelProtocol, router: SearchUserRouterProtocol) {
         self.view = view
