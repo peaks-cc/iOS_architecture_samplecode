@@ -57,8 +57,9 @@ extension RepositorySearchDataSource: UITableViewDelegate {
     func scrollViewDidScroll(_ scrollView: UIScrollView) {
         if let query = searchStore.query, let next = searchStore.pagination?.next,
             searchStore.pagination?.last != nil &&
-                (scrollView.contentSize.height - scrollView.bounds.size.height) <= scrollView.contentOffset.y &&
-                !searchStore.isFetching {
+            scrollView.contentSize.height > 0 &&
+            (scrollView.contentSize.height - scrollView.bounds.size.height) <= scrollView.contentOffset.y &&
+            !searchStore.isFetching {
             actionCreator.searchRepositories(query: query, page: next)
         }
     }
