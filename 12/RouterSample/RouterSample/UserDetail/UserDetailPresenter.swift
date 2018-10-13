@@ -18,8 +18,8 @@ class UserDetailPresenter: UserDetailPresenterProtocol {
     private(set) var repositories: [Repository] = []
 
     private weak var view: UserDetailViewProtocol!
-    private var model: UserDetailModelProtocol!
-    private var router: UserDetailRouterProtocol!
+    private let model: UserDetailModelProtocol
+    private let router: UserDetailRouterProtocol
 
     init(userName: String, view: UserDetailViewProtocol, model: UserDetailModelProtocol, router: UserDetailRouterProtocol) {
         self.userName = userName
@@ -42,7 +42,7 @@ class UserDetailPresenter: UserDetailPresenterProtocol {
                 DispatchQueue.main.async {
                     self?.view.reloadTableView()
                 }
-            case .failure(let error):
+            case .failure:
                 // TODO: Error Handling
                 ()
             }

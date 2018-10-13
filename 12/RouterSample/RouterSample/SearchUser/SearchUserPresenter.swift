@@ -55,7 +55,7 @@ class SearchUserPresenter: SearchUserPresenterProtocol {
                 DispatchQueue.main.async {
                     self?.view.reloadTableView()
                 }
-            case .failure(let error):
+            case .failure:
                 // TODO: Error Handling
                 ()
             }

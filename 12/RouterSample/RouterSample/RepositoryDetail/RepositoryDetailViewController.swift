@@ -18,7 +18,7 @@ import UIKit
 //     - transitionToUserDetail
 //     - transitionToRepositoryDetail
 
-protocol RepositoryDetailViewProtocol: class where Self: UIViewController {
+protocol RepositoryDetailViewProtocol where Self: UIViewController {
 
 }
 
