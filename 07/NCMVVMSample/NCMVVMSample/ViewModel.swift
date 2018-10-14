@@ -6,16 +6,18 @@
 //  Copyright © 2018年 Kenji Tanaka. All rights reserved.
 //
 
+import Foundation
 import UIKit
 
-extension Notification.Name {
+class ViewModel {
     static let changeText = Notification.Name("changeText")
     static let changeColor = Notification.Name("changeColor")
-}
 
-class ViewModel {
+    private weak var notificationCenter: NotificationCenter!
     private let model: ModelProtocol
-    init(model: ModelProtocol = Model()) {
+
+    init(notificationCenter: NotificationCenter, model: ModelProtocol = Model()) {
+        self.notificationCenter = notificationCenter
         self.model = model
     }
 
@@ -24,11 +26,11 @@ class ViewModel {
         
         switch result {
         case .success:
-            NotificationCenter.default.post(name: .changeText, object: "OK!!!")
-            NotificationCenter.default.post(name: .changeColor, object: UIColor.green)
+            notificationCenter.post(name: ViewModel.changeText, object: "OK!!!")
+            notificationCenter.post(name: ViewModel.changeColor, object: UIColor.green)
         case .failure(let error as ModelError):
-            NotificationCenter.default.post(name: .changeText, object: error.errorText)
-            NotificationCenter.default.post(name: .changeColor, object: UIColor.red)
+            notificationCenter.post(name: ViewModel.changeText, object: error.errorText)
+            notificationCenter.post(name: ViewModel.changeColor, object: UIColor.red)
         case _:
             fatalError("Unexpected pattern.")
         }

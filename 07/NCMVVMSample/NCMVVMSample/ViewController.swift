@@ -18,7 +18,8 @@ class ViewController: UIViewController {
     @IBOutlet weak var passwordTextField: UITextField!
     @IBOutlet weak var validationLabel: UILabel!
 
-    private let viewModel = ViewModel()
+    private let notificationCenter = NotificationCenter()
+    private lazy var viewModel = ViewModel(notificationCenter: notificationCenter)
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -27,8 +28,17 @@ class ViewController: UIViewController {
         passwordTextField.addTarget(self, action: #selector(textFieldEditingChanged), for: .editingChanged)
 
         // Data Binding
-        NotificationCenter.default.addObserver(self, selector: #selector(updateValidationText), name: .changeText, object: nil)
-        NotificationCenter.default.addObserver(self, selector: #selector(updateValidationColor), name: .changeColor, object: nil)
+        notificationCenter.addObserver(
+            self,
+            selector: #selector(updateValidationText),
+            name: ViewModel.changeText,
+            object: nil)
+        
+        notificationCenter.addObserver(
+            self,
+            selector: #selector(updateValidationColor),
+            name: ViewModel.changeColor,
+            object: nil)
     }
 }
 
