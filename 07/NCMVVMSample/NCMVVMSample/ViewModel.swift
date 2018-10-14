@@ -6,7 +6,6 @@
 //  Copyright © 2018年 Kenji Tanaka. All rights reserved.
 //
 
-import Foundation
 import UIKit
 
 class ViewModel {
