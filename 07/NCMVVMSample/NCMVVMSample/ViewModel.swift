@@ -10,8 +10,8 @@ import Foundation
 import UIKit
 
 class ViewModel {
-    static let changeText = Notification.Name("changeText")
-    static let changeColor = Notification.Name("changeColor")
+    let changeText = Notification.Name("changeText")
+    let changeColor = Notification.Name("changeColor")
 
     private let notificationCenter: NotificationCenter
     private let model: ModelProtocol
@@ -26,11 +26,11 @@ class ViewModel {
         
         switch result {
         case .success:
-            notificationCenter.post(name: ViewModel.changeText, object: "OK!!!")
-            notificationCenter.post(name: ViewModel.changeColor, object: UIColor.green)
+            notificationCenter.post(name: changeText, object: "OK!!!")
+            notificationCenter.post(name: changeColor, object: UIColor.green)
         case .failure(let error as ModelError):
-            notificationCenter.post(name: ViewModel.changeText, object: error.errorText)
-            notificationCenter.post(name: ViewModel.changeColor, object: UIColor.red)
+            notificationCenter.post(name: changeText, object: error.errorText)
+            notificationCenter.post(name: changeColor, object: UIColor.red)
         case _:
             fatalError("Unexpected pattern.")
         }
