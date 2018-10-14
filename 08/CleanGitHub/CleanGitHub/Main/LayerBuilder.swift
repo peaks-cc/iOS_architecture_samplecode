@@ -12,29 +12,32 @@ class LayerBuilder {
 
     /// Shared instance
     static let shared = LayerBuilder()
+    private init() {}
 
-    // Can't initialize from outside
-    private init() {
-    }
+    // 最外周を公開プロパティとして保持
+    var webClient: WebClientProtocol!
+    var likesDataStore: DataStoreProtocol!
 
     func build() {
+        // -- Use Case
+        let usecase = ReposLikesUseCase()
 
-        // Use Case
-        let usecase = ReposLikesUseCase(output: nil,
-                                        reposGateway: nil,
-                                        likesGateway: nil)
+        // -- Interface Adapters
+        let usecaseOutput = ReposPresenter(useCase: usecase)
+        let reposGateway = ReposGateway(useCase: usecase)
+        let likesGateway = LikesGateway(useCase: usecase)
 
-        // Interface Adapters
-        let usecaseOutput = ReposPresenter(usecaseInput: usecase,
-                                           presenterOutput: nil)
-        let reposGateway = ReposGateway(repository: nil)
-        let likesGateway = LikesGateway(repository: nil)
-
+        // Use Caseとのバインド
         usecase.output = usecaseOutput
         usecase.reposGateway = reposGateway
         usecase.likesGateway = likesGateway
 
-        // Framework & Drivers
+        // -- Framework & Drivers
+        webClient = GitHubReposStub()
+        likesDataStore = UserDefaultsDataStore(userDefaults: UserDefaults.standard)
 
+        // Interface Adaptersとのバインド
+        reposGateway.webClient = webClient
+        likesGateway.dataStore = likesDataStore
     }
 }

@@ -14,5 +14,5 @@ enum FetchingError: Error {
 }
 
 enum SavingError: Error {
-    case failedToSaveLike(Error)
+    case failedToSaveLike
 }
