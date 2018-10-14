@@ -31,13 +31,13 @@ class ViewController: UIViewController {
         notificationCenter.addObserver(
             self,
             selector: #selector(updateValidationText),
-            name: ViewModel.NotificationName.changeText,
+            name: ViewModel.changeText,
             object: nil)
 
         notificationCenter.addObserver(
             self,
             selector: #selector(updateValidationColor),
-            name: ViewModel.NotificationName.changeColor,
+            name: ViewModel.changeColor,
             object: nil)
     }
 }
