@@ -57,19 +57,21 @@ final class ReposLikesUseCase: ReposLikesUseCaseProtocol {
     func startFetch(using keywords: [String]) {
 
         reposGateway.fetch(using: keywords) { [weak self] reposResult in
-            guard let strongSelf = self else { return }
+            guard let self = self else { return }
 
             switch reposResult {
             case .failure(let e):
-                strongSelf.output
+                self.output
                     .useCaseDidReceiveError(FetchingError.failedToFetchRepos(e))
             case .success(let repos):
                 let ids = repos.map { $0.id }
-                strongSelf.likesGateway
+                self.likesGateway
                     .fetch(ids: ids) { [weak self] likesResult in
+                        guard let self = self else { return }
+
                         switch likesResult {
                         case .failure(let e):
-                            strongSelf.output
+                            self.output
                                 .useCaseDidReceiveError(
                                     FetchingError.failedToFetchLikes(e))
                         case .success(let likes):
@@ -78,8 +80,8 @@ final class ReposLikesUseCase: ReposLikesUseCaseProtocol {
                                 repos: repos,
                                 likes: likes
                             )
-                            self?.statusList = statusList
-                            self?.output.useCaseDidUpdateStatuses(statusList.statuses)
+                            self.statusList = statusList
+                            self.output.useCaseDidUpdateStatuses(statusList.statuses)
                         }
                 }
             }
@@ -94,20 +96,20 @@ final class ReposLikesUseCase: ReposLikesUseCaseProtocol {
         // お気に入りの状態を保存し、更新の結果を伝える
         likesGateway.save(liked: liked, for: repo.id)
         { [weak self] likesResult in
-            guard let strongSelf = self else { return }
+            guard let self = self else { return }
 
             switch likesResult {
             case .failure:
-                strongSelf.output
+                self.output
                     .useCaseDidReceiveError(SavingError.failedToSaveLike)
             case .success(let isLiked):
                 do {
-                    try strongSelf.statusList.set(isLiked: isLiked,
+                    try self.statusList.set(isLiked: isLiked,
                                                   for: repo.id)
-                    strongSelf.output
+                    self.output
                         .useCaseDidUpdateStatuses(statusList.statuses)
                 } catch {
-                    strongSelf.output
+                    self.output
                         .useCaseDidReceiveError(SavingError.failedToSaveLike)
                 }
             }
