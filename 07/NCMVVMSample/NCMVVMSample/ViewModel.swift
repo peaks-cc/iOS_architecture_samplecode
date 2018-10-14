@@ -13,7 +13,7 @@ class ViewModel {
     static let changeText = Notification.Name("changeText")
     static let changeColor = Notification.Name("changeColor")
 
-    private weak var notificationCenter: NotificationCenter!
+    private let notificationCenter: NotificationCenter
     private let model: ModelProtocol
 
     init(notificationCenter: NotificationCenter, model: ModelProtocol = Model()) {
