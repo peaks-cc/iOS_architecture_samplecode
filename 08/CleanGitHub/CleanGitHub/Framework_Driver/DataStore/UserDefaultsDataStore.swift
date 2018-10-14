@@ -15,10 +15,13 @@ protocol UserDefaultsProtocol {
 extension UserDefaults: UserDefaultsProtocol {}
 
 final class UserDefaultsDataStore: DataStoreProtocol {
+
     let userDefaults: UserDefaultsProtocol
+
     init(userDefaults: UserDefaultsProtocol) {
         self.userDefaults = userDefaults
     }
+
     func fetch(ids: [GitHubRepo.ID], completion: (Result<[GitHubRepo.ID: Bool]>) -> Void) {
         let idsAndLikes: [(GitHubRepo.ID, Bool)] = ids.map { id in
             (id, userDefaults.bool(forKey: id.rawValue))
@@ -26,6 +29,7 @@ final class UserDefaultsDataStore: DataStoreProtocol {
         let result = Dictionary(uniqueKeysWithValues: idsAndLikes)
         completion(.success(result))
     }
+
     func save(liked: Bool, for id: GitHubRepo.ID, completion: (Result<Bool>) -> Void) {
         userDefaults.set(liked, forKey: id.rawValue)
         completion(.success(liked))

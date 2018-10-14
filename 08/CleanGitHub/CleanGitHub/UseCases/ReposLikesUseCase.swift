@@ -8,7 +8,7 @@
 
 import Foundation
 
-protocol ReposLikesUseCaseProtocol {
+protocol ReposLikesUseCaseProtocol: AnyObject {
     // キーワードを使ったサーチ
     func startFetch(using keywords: [String])
     // お気に入り済みリポジトリ一覧の取得
@@ -22,20 +22,20 @@ protocol ReposLikesUseCaseProtocol {
     var likesGateway: LikesGatewayProtocol! { get set }
 }
 
-protocol ReposLikesUseCaseOutput: AnyObject {
+protocol ReposLikesUseCaseOutput {
     // リポジトリとお気に入りとをペアにした情報が更新されたときに呼ばれる
     func useCaseDidUpdateStatuses(_ repoStatuses: [GitHubRepoStatus])
     // Use Caseの関係する処理でエラーがあったときに呼ばれる
     func useCaseDidReceiveError(_ error: Error)
 }
 
-protocol ReposGatewayProtocol: AnyObject {
+protocol ReposGatewayProtocol {
     // キーワードで検索した結果を完了ハンドラで返す
     func fetch(using keywords: [String],
                completion: (Result<[GitHubRepo]>) -> Void)
 }
 
-protocol LikesGatewayProtocol: AnyObject {
+protocol LikesGatewayProtocol {
     // IDで検索したお気に入りの結果を完了ハンドラで返す
     func fetch(ids: [GitHubRepo.ID],
                completion: (Result<[GitHubRepo.ID: Bool]>) -> Void)
@@ -46,10 +46,11 @@ protocol LikesGatewayProtocol: AnyObject {
 }
 
 final class ReposLikesUseCase: ReposLikesUseCaseProtocol {
-    weak var output: ReposLikesUseCaseOutput!
 
-    weak var reposGateway: ReposGatewayProtocol!
-    weak var likesGateway: LikesGatewayProtocol!
+    var output: ReposLikesUseCaseOutput!
+
+    var reposGateway: ReposGatewayProtocol!
+    var likesGateway: LikesGatewayProtocol!
 
     private var statusList = GitHubRepoStatusList(repos: [], likes: [:])
 

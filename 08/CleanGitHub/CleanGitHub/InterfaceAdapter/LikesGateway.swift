@@ -18,8 +18,8 @@ protocol DataStoreProtocol: AnyObject {
 
 class LikesGateway: LikesGatewayProtocol {
 
-    private var useCase: ReposLikesUseCaseProtocol
-    weak var dataStore: DataStoreProtocol!
+    private weak var useCase: ReposLikesUseCaseProtocol!
+    var dataStore: DataStoreProtocol!
 
     init(useCase: ReposLikesUseCaseProtocol) {
         self.useCase = useCase

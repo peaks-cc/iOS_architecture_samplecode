@@ -9,7 +9,7 @@
 import UIKit
 
 class SecondViewController: UIViewController, ReposPresenterOutput {
-    private var presenter: ReposPresenterProtocol!
+    private weak var presenter: ReposPresenterProtocol!
 
     func update(by viewDataArray: [GitHubRepoViewData]) {
 //        <#code#>
@@ -28,7 +28,7 @@ class SecondViewController: UIViewController, ReposPresenterOutput {
         // Dispose of any resources that can be recreated.
     }
 
-    func didUpdate(_ viewModels: [RepoStatus]) {
+    func didUpdate(_ viewModels: [GitHubRepoStatus]) {
         // TODO
     }
 }

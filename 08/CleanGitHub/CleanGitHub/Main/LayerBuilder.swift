@@ -14,27 +14,26 @@ class LayerBuilder {
     static let shared = LayerBuilder()
     private init() {}
 
-    // 最外周を公開プロパティとして保持
-    var webClient: WebClientProtocol!
-    var likesDataStore: DataStoreProtocol!
+    // ユースケースを公開プロパティとして保持
+    var useCase: ReposLikesUseCase!
 
     func build() {
         // -- Use Case
-        let usecase = ReposLikesUseCase()
+        useCase = ReposLikesUseCase()
 
         // -- Interface Adapters
-        let usecaseOutput = ReposPresenter(useCase: usecase)
-        let reposGateway = ReposGateway(useCase: usecase)
-        let likesGateway = LikesGateway(useCase: usecase)
+        let usecaseOutput = ReposPresenter(useCase: useCase)
+        let reposGateway = ReposGateway(useCase: useCase)
+        let likesGateway = LikesGateway(useCase: useCase)
 
         // Use Caseとのバインド
-        usecase.output = usecaseOutput
-        usecase.reposGateway = reposGateway
-        usecase.likesGateway = likesGateway
+        useCase.output = usecaseOutput
+        useCase.reposGateway = reposGateway
+        useCase.likesGateway = likesGateway
 
         // -- Framework & Drivers
-        webClient = GitHubReposStub()
-        likesDataStore = UserDefaultsDataStore(userDefaults: UserDefaults.standard)
+        let webClient = GitHubReposStub()
+        let likesDataStore = UserDefaultsDataStore(userDefaults: UserDefaults.standard)
 
         // Interface Adaptersとのバインド
         reposGateway.webClient = webClient

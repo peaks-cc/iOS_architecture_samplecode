@@ -18,7 +18,7 @@ struct GitHubRepoViewData {
     let isLiked: Bool
 }
 
-protocol ReposPresenterProtocol {
+protocol ReposPresenterProtocol: AnyObject {
     // キーワードを使ったサーチ
     func startFetch(using keywords: [String])
     // お気に入り済みリポジトリ一覧の取得
@@ -30,15 +30,15 @@ protocol ReposPresenterProtocol {
     var output: ReposPresenterOutput? { get set }
 }
 
-protocol ReposPresenterOutput: AnyObject {
+protocol ReposPresenterOutput {
     // 表示用のデータが変化したことを外側に通知
     func update(by viewDataArray: [GitHubRepoViewData])
 }
 
 class ReposPresenter: ReposPresenterProtocol, ReposLikesUseCaseOutput {
 
-    private var useCase: ReposLikesUseCaseProtocol
-    weak var output: ReposPresenterOutput?
+    private weak var useCase: ReposLikesUseCaseProtocol!
+    var output: ReposPresenterOutput?
 
     init(useCase: ReposLikesUseCaseProtocol) {
         self.useCase = useCase

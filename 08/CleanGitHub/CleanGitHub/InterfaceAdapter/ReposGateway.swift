@@ -8,14 +8,14 @@
 
 import Foundation
 
-protocol WebClientProtocol: AnyObject {
+protocol WebClientProtocol {
     func fetch(using keywords: [String], completion: (Result<[GitHubRepo]>) -> Void)
 }
 
 class ReposGateway: ReposGatewayProtocol {
 
-    private var useCase: ReposLikesUseCaseProtocol
-    weak var webClient: WebClientProtocol!
+    private weak var useCase: ReposLikesUseCaseProtocol!
+    var webClient: WebClientProtocol!
 
     init(useCase: ReposLikesUseCaseProtocol) {
         self.useCase = useCase
