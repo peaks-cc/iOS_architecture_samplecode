@@ -8,11 +8,6 @@
 
 import UIKit
 
-enum InputType {
-    case id
-    case password
-}
-
 class ViewController: UIViewController {
     @IBOutlet weak var idTextField: UITextField!
     @IBOutlet weak var passwordTextField: UITextField!
