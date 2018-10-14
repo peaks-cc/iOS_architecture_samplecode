@@ -14,7 +14,7 @@ protocol ReposLikesUseCaseProtocol {
     // お気に入り済みリポジトリ一覧の取得
     func requestLikedRepos()
     // お気に入りの追加・削除
-    func set(liked: Bool, for Repo: GitHubRepo)
+    func set(liked: Bool, for repo: GitHubRepo)
 
     // 外側のオブジェクトはプロパティとしてあとからセットする
     var output: ReposLikesUseCaseOutput! { get set }
