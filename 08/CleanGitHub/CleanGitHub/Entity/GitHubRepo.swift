@@ -8,8 +8,11 @@
 
 import Foundation
 
-struct GitHubRepo: Equatable, Encodable {
-    let id: String
+struct GitHubRepo: Equatable {
+    struct ID: RawRepresentable, Hashable {
+        let rawValue: String
+    }
+    let id: ID
     let fullName: String
     let description: String
     let language: String

@@ -7,10 +7,11 @@
 //
 
 import XCTest
+@testable import CleanGitHub
 
 class GitHubReposStubTest: XCTestCase {
 
-    var repos: ReposGatewayProtocol!
+    var repos: WebClientProtocol!
 
     override func setUp() {
         repos = GitHubReposStub()

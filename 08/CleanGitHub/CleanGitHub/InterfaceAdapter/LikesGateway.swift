@@ -8,25 +8,31 @@
 
 import Foundation
 
-protocol LikesGatewayProtocol {
-    func fetch(byNames names: [String], completion: (Result<[Like]>) -> Void)
-    func save(liked: Bool, for repo: GitHubRepo, completion: (Result<Like>) -> Void)
+protocol DataStoreProtocol: AnyObject {
+    func fetch(ids: [GitHubRepo.ID],
+               completion: (Result<[GitHubRepo.ID: Bool]>) -> Void)
+    func save(liked: Bool,
+              for id: GitHubRepo.ID,
+              completion: (Result<Bool>) -> Void)
 }
 
-class LikesGateway: LikesProtocol {
-    
-    var repository: LikesGatewayProtocol?
+class LikesGateway: LikesGatewayProtocol {
 
-    init(repository: LikesGatewayProtocol?) {
-        self.repository = repository
+    private weak var useCase: ReposLikesUseCaseProtocol!
+    var dataStore: DataStoreProtocol!
+
+    init(useCase: ReposLikesUseCaseProtocol) {
+        self.useCase = useCase
     }
 
-    func fetch(byNames names: [String], completion: (Result<[Like]>) -> Void) {
-        repository?.fetch(byNames: names, completion: completion)
+    func fetch(ids: [GitHubRepo.ID],
+               completion: (Result<[GitHubRepo.ID: Bool]>) -> Void) {
+        dataStore.fetch(ids: ids, completion: completion)
     }
-    
-    func save(liked: Bool, for repo: GitHubRepo, completion: (Result<Like>) -> Void) {
-        repository?.save(liked: liked, for: repo, completion: completion)
+
+    func save(liked: Bool,
+              for id: GitHubRepo.ID,
+              completion: (Result<Bool>) -> Void) {
+        dataStore.save(liked: liked, for: id, completion: completion)
     }
-    
 }

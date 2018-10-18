@@ -8,20 +8,17 @@
 
 import Foundation
 
-class GitHubReposStub: ReposGatewayProtocol {
+class GitHubReposStub: WebClientProtocol {
+
     func fetch(using keywords: [String], completion: (Result<[GitHubRepo]>) -> Void) {
         // ダミーデータを作成して返す
         let repos = (0..<5).map{
-            GitHubRepo(id: "repos/\($0)",
+            GitHubRepo(id: GitHubRepo.ID(rawValue: "repos/\($0)"),
                 fullName: "repos/\($0)",
                 description: "my awesome project",
                 language: "swift",
                 stargazersCount: $0)
         }
         completion(.success(repos))
-    }
-
-    func fetch(using likes: [Like], completion: (Result<[GitHubRepo]>) -> Void) {
-        //
     }
 }

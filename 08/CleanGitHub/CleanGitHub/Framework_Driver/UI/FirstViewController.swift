@@ -9,10 +9,17 @@
 import UIKit
 
 class FirstViewController: UIViewController, ReposPresenterOutput {
+    private weak var presenter: ReposPresenterProtocol!
+
+    func update(by viewDataArray: [GitHubRepoViewData]) {
+//        <#code#>
+    }
+
 
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view, typically from a nib.
+        //presenter.output = self
     }
 
     override func didReceiveMemoryWarning() {
@@ -20,7 +27,7 @@ class FirstViewController: UIViewController, ReposPresenterOutput {
         // Dispose of any resources that can be recreated.
     }
 
-    func didUpdate(_ viewModels: [RepoStatus]) {
+    func didUpdate(_ viewModels: [GitHubRepoStatus]) {
         // TODO
     }
 
