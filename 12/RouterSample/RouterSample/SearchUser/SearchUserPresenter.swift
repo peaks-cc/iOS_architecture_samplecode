@@ -23,7 +23,9 @@ class SearchUserPresenter: SearchUserPresenterProtocol {
     private let model: SearchUserModelProtocol
     private let router: SearchUserRouterProtocol
 
-    init(view: SearchUserViewProtocol, model: SearchUserModelProtocol, router: SearchUserRouterProtocol) {
+    init(view: SearchUserViewProtocol,
+         model: SearchUserModelProtocol,
+         router: SearchUserRouterProtocol) {
         self.view = view
         self.model = model
         self.router = router

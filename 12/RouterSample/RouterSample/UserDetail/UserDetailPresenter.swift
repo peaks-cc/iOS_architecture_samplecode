@@ -10,7 +10,6 @@ protocol UserDetailPresenterProtocol {
     var repositories: [Repository] { get }
     func repository(forRow row: Int) -> Repository?
     func viewDidLoad()
-    func didSelectRowAt(indexPath: IndexPath)
 }
 
 class UserDetailPresenter: UserDetailPresenterProtocol {
@@ -19,13 +18,11 @@ class UserDetailPresenter: UserDetailPresenterProtocol {
 
     private weak var view: UserDetailViewProtocol!
     private let model: UserDetailModelProtocol
-    private let router: UserDetailRouterProtocol
 
-    init(userName: String, view: UserDetailViewProtocol, model: UserDetailModelProtocol, router: UserDetailRouterProtocol) {
+    init(userName: String, view: UserDetailViewProtocol, model: UserDetailModelProtocol) {
         self.userName = userName
         self.view = view
         self.model = model
-        self.router = router
     }
 
     func repository(forRow row: Int) -> Repository? {
@@ -47,10 +44,5 @@ class UserDetailPresenter: UserDetailPresenterProtocol {
                 ()
             }
         }
-    }
-
-    func didSelectRowAt(indexPath: IndexPath) {
-        guard let repository = repository(forRow: indexPath.row) else { return }
-        router.transitionToRepositoryDetail(userName: userName, repositoryName: repository.name)
     }
 }

@@ -32,13 +32,6 @@ final class UserDetailViewController: UIViewController {
     }
 }
 
-extension UserDetailViewController: UITableViewDelegate {
-    public func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        tableView.deselectRow(at: indexPath, animated: true)
-        presenter.didSelectRowAt(indexPath: indexPath)
-    }
-}
-
 extension UserDetailViewController: UITableViewDataSource {
     public func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return presenter.repositories.count
