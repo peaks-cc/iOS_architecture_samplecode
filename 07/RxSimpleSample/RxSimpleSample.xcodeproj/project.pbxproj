@@ -12,9 +12,9 @@
 		B50F97E7216AE95F0000156F /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = B50F97E5216AE95F0000156F /* Main.storyboard */; };
 		B50F97E9216AE9600000156F /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = B50F97E8216AE9600000156F /* Assets.xcassets */; };
 		B50F97EC216AE9600000156F /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = B50F97EA216AE9600000156F /* LaunchScreen.storyboard */; };
-		B50F97F7216AE9600000156F /* RxSimpleSampleTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = B50F97F6216AE9600000156F /* RxSimpleSampleTests.swift */; };
 		B50F9802216B1E470000156F /* ViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = B50F9801216B1E470000156F /* ViewModel.swift */; };
 		B50F9804216B1E510000156F /* Model.swift in Sources */ = {isa = PBXBuildFile; fileRef = B50F9803216B1E510000156F /* Model.swift */; };
+		D31F7B9FC213D9D22799EC09 /* ViewModelTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = D31F73FF49D8587362A1E27D /* ViewModelTests.swift */; };
 		F6EAB9436350C0A7B9CFE039 /* Pods_RxSimpleSample.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E581F6934D25A4C7537D00EA /* Pods_RxSimpleSample.framework */; };
 		FCF69A87DD0379A37765610F /* Pods_RxSimpleSampleTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = EADBBB6E69A76AC55C36A964 /* Pods_RxSimpleSampleTests.framework */; };
 /* End PBXBuildFile section */
@@ -41,11 +41,11 @@
 		B50F97EB216AE9600000156F /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		B50F97ED216AE9600000156F /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		B50F97F2216AE9600000156F /* RxSimpleSampleTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = RxSimpleSampleTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
-		B50F97F6216AE9600000156F /* RxSimpleSampleTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RxSimpleSampleTests.swift; sourceTree = "<group>"; };
 		B50F97F8216AE9600000156F /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		B50F9801216B1E470000156F /* ViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewModel.swift; sourceTree = "<group>"; };
 		B50F9803216B1E510000156F /* Model.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Model.swift; sourceTree = "<group>"; };
 		C8F018546AFB0B22D78FC909 /* Pods-RxSimpleSample.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-RxSimpleSample.debug.xcconfig"; path = "Pods/Target Support Files/Pods-RxSimpleSample/Pods-RxSimpleSample.debug.xcconfig"; sourceTree = "<group>"; };
+		D31F73FF49D8587362A1E27D /* ViewModelTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ViewModelTests.swift; sourceTree = "<group>"; };
 		E581F6934D25A4C7537D00EA /* Pods_RxSimpleSample.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_RxSimpleSample.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		EADBBB6E69A76AC55C36A964 /* Pods_RxSimpleSampleTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_RxSimpleSampleTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
@@ -119,8 +119,8 @@
 		B50F97F5216AE9600000156F /* RxSimpleSampleTests */ = {
 			isa = PBXGroup;
 			children = (
-				B50F97F6216AE9600000156F /* RxSimpleSampleTests.swift */,
 				B50F97F8216AE9600000156F /* Info.plist */,
+				D31F73FF49D8587362A1E27D /* ViewModelTests.swift */,
 			);
 			path = RxSimpleSampleTests;
 			sourceTree = "<group>";
@@ -308,7 +308,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				B50F97F7216AE9600000156F /* RxSimpleSampleTests.swift in Sources */,
+				D31F7B9FC213D9D22799EC09 /* ViewModelTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
