@@ -17,7 +17,7 @@ class UserDetailPresenter: UserDetailPresenterProtocol {
     private(set) var repositories: [Repository] = []
 
     private weak var view: UserDetailViewProtocol!
-    private var model: UserDetailModelProtocol!
+    private var model: UserDetailModelProtocol
 
     init(userName: String, view: UserDetailViewProtocol, model: UserDetailModelProtocol) {
         self.userName = userName
