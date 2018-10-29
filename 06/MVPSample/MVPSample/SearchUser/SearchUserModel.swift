@@ -7,13 +7,24 @@ import Foundation
 import GitHub
 
 protocol SearchUserModelProtocol {
-    func fetchUser(query: String, completion: @escaping (Result<[User]>) -> ())
+    func fetchUser(
+        query: String,
+        completion: @escaping (Result<[User]>) -> ())
 }
 
 class SearchUserModel: SearchUserModelProtocol {
-    func fetchUser(query: String, completion: @escaping (Result<[User]>) -> ()) {
+    func fetchUser(
+        query: String,
+        completion: @escaping (Result<[User]>) -> ()) {
+
         let session = GitHub.Session()
-        let request = SearchUsersRequest(query: query, sort: nil, order: nil, page: nil, perPage: nil)
+        let request = SearchUsersRequest(
+            query: query,
+            sort: nil,
+            order: nil,
+            page: nil,
+            perPage: nil)
+        
         session.send(request) { result in
             switch result {
             case .success(let response):

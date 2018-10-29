@@ -70,9 +70,15 @@ extension SearchUserViewController: SearchUserViewProtocol {
     }
 
     func transitionToUserDetail(userName: String) {
-        let userDetailVC = UIStoryboard(name: "UserDetail", bundle: nil).instantiateInitialViewController() as! UserDetailViewController
+        let userDetailVC = UIStoryboard(
+            name: "UserDetail",
+            bundle: nil)
+            .instantiateInitialViewController() as! UserDetailViewController
         let model = UserDetailModel(userName: userName)
-        let presenter = UserDetailPresenter(userName: userName, view: userDetailVC, model: model)
+        let presenter = UserDetailPresenter(
+            userName: userName,
+            view: userDetailVC,
+            model: model)
         userDetailVC.inject(presenter: presenter)
 
         navigationController?.pushViewController(userDetailVC, animated: true)
