@@ -5,7 +5,7 @@
 
 import UIKit
 
-protocol UserDetailViewProtocol: class, Transitioner where Self: UIViewController {
+protocol UserDetailViewProtocol: class, Transitioner {
     func reloadTableView()
 }
 
@@ -29,13 +29,6 @@ final class UserDetailViewController: UIViewController {
         tableView.estimatedRowHeight = 64
         tableView.rowHeight = UITableView.automaticDimension
         tableView.register(UINib(nibName: "RepositoryCell", bundle: nil), forCellReuseIdentifier: "RepositoryCell")
-    }
-}
-
-extension UserDetailViewController: UITableViewDelegate {
-    public func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        tableView.deselectRow(at: indexPath, animated: true)
-        presenter.didSelectRowAt(indexPath: indexPath)
     }
 }
 

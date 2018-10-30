@@ -8,14 +8,17 @@
 
 import Foundation
 
-struct GitHubRepo: Equatable, Encodable {
-    let id: String
+struct GitHubRepo: Equatable {
+    struct ID: RawRepresentable, Hashable {
+        let rawValue: String
+    }
+    let id: ID
     let fullName: String
     let description: String
     let language: String
     let stargazersCount: Int
 
     public static func == (lhs: GitHubRepo, rhs: GitHubRepo) -> Bool {
-        return lhs.fullName == rhs.fullName
+        return lhs.id == rhs.id
     }
 }

@@ -8,7 +8,8 @@
 
 import Foundation
 
-struct GitHubRepoViewModel {
+// 画面表示用のデータ
+struct GitHubRepoViewData {
     let id: String
     let fullName: String
     let description: String
@@ -17,49 +18,56 @@ struct GitHubRepoViewModel {
     let isLiked: Bool
 }
 
-protocol ReposPresenterInput {
+protocol ReposPresenterProtocol: AnyObject {
     // キーワードを使ったサーチ
     func startFetch(using keywords: [String])
     // お気に入り済みリポジトリ一覧の取得
     func requestLikedRepos()
 
     // お気に入りの追加・削除
+
+
+    var output: ReposPresenterOutput? { get set }
 }
 
 protocol ReposPresenterOutput {
-    func didUpdate(_ viewModels: [GitHubRepoViewModel])
+    // 表示用のデータが変化したことを外側に通知
+    func update(by viewDataArray: [GitHubRepoViewData])
 }
 
-class ReposPresenter: ReposLikesUseCaseOutput, ReposPresenterInput {
+class ReposPresenter: ReposPresenterProtocol, ReposLikesUseCaseOutput {
 
-    let usecaseInput: ReposLikesUseCaseInput
-    var presenterOutput: ReposPresenterOutput?
+    private weak var useCase: ReposLikesUseCaseProtocol!
+    var output: ReposPresenterOutput?
 
-    init(usecaseInput: ReposLikesUseCaseInput,
-         presenterOutput: ReposPresenterOutput?) {
-
-        self.usecaseInput = usecaseInput
-        self.presenterOutput = presenterOutput
+    init(useCase: ReposLikesUseCaseProtocol) {
+        self.useCase = useCase
+        self.useCase.output = self
     }
 
     func startFetch(using keywords: [String]) {
         // Use Caseに検索を依頼
-        usecaseInput.startFetch(using: keywords)
+        useCase.startFetch(using: keywords)
     }
 
     func requestLikedRepos() {
-        usecaseInput.requestLikedRepos()
+        useCase.requestLikedRepos()
     }
     
-    func useCaseDidReceive(_ repoStatus: [RepoStatus]) {
-        // 届いたペアをView用のモデルに変換
-//        <#code#>
+    func useCaseDidUpdateStatuses(_ repoStatus: [GitHubRepoStatus]) {
+        // 届いたデータを外側で使うデータに変換してから伝える
+        let viewDataArray = repoStatus.map {
+            return GitHubRepoViewData(
+                id: $0.repo.id.rawValue,
+                fullName: $0.repo.fullName,
+                description: $0.repo.description,
+                language: $0.repo.language,
+                stargazersCount: $0.repo.stargazersCount,
+                isLiked: $0.isLiked)
+        }
+        output?.update(by: viewDataArray)
     }
     
-    func useCaseDidUpdate(_ likes: [Like]) {
-//        <#code#>
-    }
-
     func useCaseDidReceiveError(_ error: Error) {
 //        <#code#>
     }

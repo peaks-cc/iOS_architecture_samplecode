@@ -37,7 +37,7 @@ class UserCell: UITableViewCell {
                     }
 
                     DispatchQueue.main.async {
-                        self?.imageView?.image = image
+                        self?.iconImageView?.image = image
                         self?.setNeedsLayout()
                     }
                 }

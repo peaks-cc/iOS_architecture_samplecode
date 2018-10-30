@@ -7,7 +7,6 @@ import UIKit
 
 protocol UserDetailViewProtocol: class {
     func reloadTableView()
-    func transitionToRepositoryDetail(userName: String, repositoryName: String)
 }
 
 final class UserDetailViewController: UIViewController {
@@ -33,13 +32,6 @@ final class UserDetailViewController: UIViewController {
     }
 }
 
-extension UserDetailViewController: UITableViewDelegate {
-    public func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        tableView.deselectRow(at: indexPath, animated: true)
-        presenter.didSelectRowAt(indexPath: indexPath)
-    }
-}
-
 extension UserDetailViewController: UITableViewDataSource {
     public func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return presenter.repositories.count
@@ -57,14 +49,5 @@ extension UserDetailViewController: UITableViewDataSource {
 extension UserDetailViewController: UserDetailViewProtocol {
     func reloadTableView() {
         tableView.reloadData()
-    }
-
-    func transitionToRepositoryDetail(userName: String, repositoryName: String) {
-        let model = RepositoryDetailModel(userName: userName, repositoryName: repositoryName)
-        let presenter = RepositoryDetailPresenter(userName: userName, repositoryName: repositoryName, model: model)
-        let repositoryDetailVC = UIStoryboard(name: "RepositoryDetail", bundle: nil).instantiateInitialViewController() as! RepositoryDetailViewController
-        repositoryDetailVC.inject(presenter: presenter)
-
-        navigationController?.pushViewController(repositoryDetailVC, animated: true)
     }
 }

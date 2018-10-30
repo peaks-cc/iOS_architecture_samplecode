@@ -20,7 +20,7 @@ class SearchUserPresenter: SearchUserPresenterProtocol {
     private(set) var users: [User] = []
 
     private weak var view: SearchUserViewProtocol!
-    private var model: SearchUserModelProtocol!
+    private var model: SearchUserModelProtocol
 
     init(view: SearchUserViewProtocol, model: SearchUserModelProtocol) {
         self.view = view

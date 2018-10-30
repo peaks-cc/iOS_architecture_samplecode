@@ -18,12 +18,15 @@ class SearchUserRouter: SearchUserRouterProtocol {
     }
 
     func transitionToUserDetail(userName: String) {
-        let userDetailVC = UIStoryboard(name: "UserDetail", bundle: nil).instantiateInitialViewController() as! UserDetailViewController
+        let userDetailVC = UIStoryboard(name: "UserDetail", bundle: nil)
+            .instantiateInitialViewController() as! UserDetailViewController
         let model = UserDetailModel(userName: userName)
-        let router = UserDetailRouter(view: userDetailVC)
-        let presenter = UserDetailPresenter(userName: userName, view: userDetailVC, model: model, router: router)
+        let presenter = UserDetailPresenter(
+            userName: userName,
+            view: userDetailVC,
+            model: model)
         userDetailVC.inject(presenter: presenter)
-
+        
         view.pushViewController(userDetailVC, animated: true)
     }
 }
