@@ -1,0 +1,3 @@
+protocol Coordinator {
+    func start()
+}
