@@ -32,7 +32,7 @@ protocol ReposLikesUseCaseOutput {
 protocol ReposGatewayProtocol {
     // キーワードで検索した結果を完了ハンドラで返す
     func fetch(using keywords: [String],
-               completion: (Result<[GitHubRepo]>) -> Void)
+               completion: @escaping (Result<[GitHubRepo]>) -> Void)
 }
 
 protocol LikesGatewayProtocol {

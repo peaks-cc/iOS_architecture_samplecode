@@ -9,7 +9,7 @@
 import Foundation
 
 protocol WebClientProtocol {
-    func fetch(using keywords: [String], completion: (Result<[GitHubRepo]>) -> Void)
+    func fetch(using keywords: [String], completion: @escaping (Result<[GitHubRepo]>) -> Void)
 }
 
 class ReposGateway: ReposGatewayProtocol {
@@ -21,7 +21,7 @@ class ReposGateway: ReposGatewayProtocol {
         self.useCase = useCase
     }
 
-    func fetch(using keywords: [String], completion: (Result<[GitHubRepo]>) -> Void) {
+    func fetch(using keywords: [String], completion: @escaping (Result<[GitHubRepo]>) -> Void) {
         // 外側へ処理を伝える
         webClient.fetch(using: keywords, completion: completion)
     }

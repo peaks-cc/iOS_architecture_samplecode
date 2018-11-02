@@ -69,7 +69,9 @@ class ReposPresenter: ReposPresenterProtocol, ReposLikesUseCaseOutput {
                 stargazersCount: $0.repo.stargazersCount,
                 isLiked: $0.isLiked)
         }
-        output?.update(by: viewDataArray)
+        DispatchQueue.main.async { [weak self] in
+            self?.output?.update(by: viewDataArray)
+        }
     }
     
     func useCaseDidReceiveError(_ error: Error) {

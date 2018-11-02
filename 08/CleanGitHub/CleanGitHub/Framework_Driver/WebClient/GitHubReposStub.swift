@@ -10,7 +10,7 @@ import Foundation
 
 class GitHubReposStub: WebClientProtocol {
 
-    func fetch(using keywords: [String], completion: (Result<[GitHubRepo]>) -> Void) {
+    func fetch(using keywords: [String], completion: @escaping (Result<[GitHubRepo]>) -> Void) {
         // ダミーデータを作成して返す
         let repos = (0..<5).map{
             GitHubRepo(id: GitHubRepo.ID(rawValue: "repos/\($0)"),

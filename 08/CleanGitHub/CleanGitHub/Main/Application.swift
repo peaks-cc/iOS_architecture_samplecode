@@ -33,7 +33,7 @@ class Application {
         useCase.likesGateway = likesGateway
 
         // -- Framework & Drivers
-        let webClient = GitHubReposStub()
+        let webClient = GitHubRepos()
         let likesDataStore = UserDefaultsDataStore(userDefaults: UserDefaults.standard)
 
         // Interface Adaptersとのバインド
