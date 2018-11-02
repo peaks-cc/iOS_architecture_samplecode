@@ -1,33 +1,36 @@
 //
-//  LayerBuilder.swift
+//  Application.swift
 //  CleanGitHub
 //
 //  Created by 加藤寛人 on 2018/09/21.
 //  Copyright © 2018年 Peaks. All rights reserved.
 //
 
-import Foundation
+import UIKit
 
-class LayerBuilder {
+class Application {
 
     /// Shared instance
-    static let shared = LayerBuilder()
+    static let shared = Application()
     private init() {}
 
     // ユースケースを公開プロパティとして保持
-    var useCase: ReposLikesUseCase!
+    private(set) var useCase: ReposLikesUseCase!
+    private(set) var reposPresenter: ReposPresenterProtocol!
 
-    func build() {
+    func buildLayer() {
         // -- Use Case
         useCase = ReposLikesUseCase()
 
         // -- Interface Adapters
-        let usecaseOutput = ReposPresenter(useCase: useCase)
+        reposPresenter = ReposPresenter(useCase: useCase)
         let reposGateway = ReposGateway(useCase: useCase)
         let likesGateway = LikesGateway(useCase: useCase)
 
         // Use Caseとのバインド
-        useCase.output = usecaseOutput
+        if let presenter = reposPresenter as? ReposLikesUseCaseOutput {
+            useCase.output = presenter
+        }
         useCase.reposGateway = reposGateway
         useCase.likesGateway = likesGateway
 
@@ -39,4 +42,8 @@ class LayerBuilder {
         reposGateway.webClient = webClient
         likesGateway.dataStore = likesDataStore
     }
+}
+
+protocol ReposPresenterInjectable {
+    func inject(reposPresenter: ReposPresenterProtocol)
 }

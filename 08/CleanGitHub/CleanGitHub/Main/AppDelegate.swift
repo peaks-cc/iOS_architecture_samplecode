@@ -13,11 +13,14 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
     var window: UIWindow?
 
-
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
-        // Override point for customization after application launch.
-        let builder = LayerBuilder.shared
-        builder.build()
+
+        // DIになにか使い物になる通知がないか探してみたけれど、特になかった
+        NotificationCenter.default.addObserver(forName: nil, object: nil, queue: OperationQueue.main) { notify in
+            print("🎈received: \(notify)")
+        }
+        // Clean Architectureのレイヤーを構築する
+        Application.shared.buildLayer()
 
         return true
     }

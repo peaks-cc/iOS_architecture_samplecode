@@ -1,5 +1,5 @@
 //
-//  FirstViewController.swift
+//  LikesViewController.swift
 //  CleanGitHub
 //
 //  Created by 加藤寛人 on 2018/09/17.
@@ -8,7 +8,7 @@
 
 import UIKit
 
-class FirstViewController: UIViewController, ReposPresenterOutput {
+class LikesViewController: UIViewController, ReposPresenterOutput {
     private weak var presenter: ReposPresenterProtocol!
 
     func update(by viewDataArray: [GitHubRepoViewData]) {
@@ -19,7 +19,8 @@ class FirstViewController: UIViewController, ReposPresenterOutput {
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view, typically from a nib.
-        //presenter.output = self
+
+//        presenter.output = self
     }
 
     override func didReceiveMemoryWarning() {
@@ -30,6 +31,5 @@ class FirstViewController: UIViewController, ReposPresenterOutput {
     func didUpdate(_ viewModels: [GitHubRepoStatus]) {
         // TODO
     }
-
 }
 

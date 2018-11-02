@@ -69,7 +69,7 @@ class ReposPresenter: ReposPresenterProtocol, ReposLikesUseCaseOutput {
     }
     
     func useCaseDidReceiveError(_ error: Error) {
-//        <#code#>
+        // <#code#>
     }
     
 }
