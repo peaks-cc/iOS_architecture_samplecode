@@ -14,7 +14,7 @@ protocol ReposLikesUseCaseProtocol: AnyObject {
     // お気に入り済みリポジトリ一覧の取得
     func requestLikedRepos()
     // お気に入りの追加・削除
-    func set(liked: Bool, for repo: GitHubRepo)
+    func set(liked: Bool, for repo: GitHubRepo.ID)
 
     // 外側のオブジェクトはプロパティとしてあとからセットする
     var output: ReposLikesUseCaseOutput! { get set }
@@ -93,9 +93,9 @@ final class ReposLikesUseCase: ReposLikesUseCaseProtocol {
         //        <#code#>
     }
 
-    func set(liked: Bool, for repo: GitHubRepo) {
+    func set(liked: Bool, for id: GitHubRepo.ID) {
         // お気に入りの状態を保存し、更新の結果を伝える
-        likesGateway.save(liked: liked, for: repo.id)
+        likesGateway.save(liked: liked, for: id)
         { [weak self] likesResult in
             guard let self = self else { return }
 
@@ -105,8 +105,7 @@ final class ReposLikesUseCase: ReposLikesUseCaseProtocol {
                     .useCaseDidReceiveError(SavingError.failedToSaveLike)
             case .success(let isLiked):
                 do {
-                    try self.statusList.set(isLiked: isLiked,
-                                                  for: repo.id)
+                    try self.statusList.set(isLiked: isLiked, for: id)
                     self.output
                         .useCaseDidUpdateStatuses(statusList.statuses)
                 } catch {

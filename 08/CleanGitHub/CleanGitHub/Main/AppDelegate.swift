@@ -15,12 +15,12 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
 
-        // DIになにか使い物になる通知がないか探してみたけれど、特になかった
-        NotificationCenter.default.addObserver(forName: nil, object: nil, queue: OperationQueue.main) { notify in
-            print("🎈received: \(notify)")
-        }
+         self.window = UIWindow(frame: UIScreen.main.bounds)
+
         // Clean Architectureのレイヤーを構築する
-        Application.shared.buildLayer()
+        Application.shared.buildLayer(with: self.window!)
+
+        self.window?.makeKeyAndVisible()
 
         return true
     }

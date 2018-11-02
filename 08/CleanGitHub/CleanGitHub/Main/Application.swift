@@ -16,21 +16,19 @@ class Application {
 
     // ユースケースを公開プロパティとして保持
     private(set) var useCase: ReposLikesUseCase!
-    private(set) var reposPresenter: ReposPresenterProtocol!
 
-    func buildLayer() {
+    func buildLayer(with window: UIWindow) {
+
         // -- Use Case
         useCase = ReposLikesUseCase()
 
         // -- Interface Adapters
-        reposPresenter = ReposPresenter(useCase: useCase)
+        let reposPresenter = ReposPresenter(useCase: useCase)
         let reposGateway = ReposGateway(useCase: useCase)
         let likesGateway = LikesGateway(useCase: useCase)
 
         // Use Caseとのバインド
-        if let presenter = reposPresenter as? ReposLikesUseCaseOutput {
-            useCase.output = presenter
-        }
+        useCase.output = reposPresenter
         useCase.reposGateway = reposGateway
         useCase.likesGateway = likesGateway
 
@@ -41,7 +39,21 @@ class Application {
         // Interface Adaptersとのバインド
         reposGateway.webClient = webClient
         likesGateway.dataStore = likesDataStore
+
+        let storyboard = UIStoryboard(name: "Main", bundle: nil)
+        let vc = storyboard.instantiateInitialViewController()
+
+        // PresenterをView Controllerに注入
+        if let target = vc as? PresentersInjectable {
+            target.inject(presenters: [reposPresenter])
+        }
+
+        window.rootViewController = vc
     }
+}
+
+protocol PresentersInjectable {
+    func inject(presenters: [ReposPresenterProtocol])
 }
 
 protocol ReposPresenterInjectable {

@@ -24,8 +24,8 @@ protocol ReposPresenterProtocol: AnyObject {
     // お気に入り済みリポジトリ一覧の取得
     func requestLikedRepos()
 
-    // お気に入りの追加・削除
-
+    // お気に入りの設定・解除
+    func set(liked: Bool, for id: String)
 
     var output: ReposPresenterOutput? { get set }
 }
@@ -53,9 +53,13 @@ class ReposPresenter: ReposPresenterProtocol, ReposLikesUseCaseOutput {
     func requestLikedRepos() {
         useCase.requestLikedRepos()
     }
-    
+
+    func set(liked: Bool, for id: String) {
+        useCase.set(liked: liked, for: GitHubRepo.ID(rawValue: id))
+    }
+
     func useCaseDidUpdateStatuses(_ repoStatus: [GitHubRepoStatus]) {
-        // 届いたデータを外側で使うデータに変換してから伝える
+        // Use Caseから届いたデータを外側で使うデータに変換してから伝える
         let viewDataArray = repoStatus.map {
             return GitHubRepoViewData(
                 id: $0.repo.id.rawValue,

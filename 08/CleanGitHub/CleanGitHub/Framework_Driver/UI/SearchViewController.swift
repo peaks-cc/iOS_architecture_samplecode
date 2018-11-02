@@ -7,51 +7,81 @@
 //
 
 import UIKit
-import GitHub
 
 class SearchViewController: UITableViewController {
-    private weak var presenter: ReposPresenterProtocol! {
-        didSet { viewDidInject() }
-    }
+
+    @IBOutlet weak var searchBar: UISearchBar!
+
+    private var viewDataArray = [GitHubRepoViewData]()
+    private weak var presenter: ReposPresenterProtocol!
 
     override func viewDidLoad() {
         super.viewDidLoad()
-    }
 
-    fileprivate func viewDidInject() {
-        presenter.output = self
+        searchBar.delegate = self
+
+        setup()
     }
 
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
     }
+
+    private func setup() {
+        tableView.estimatedRowHeight = 64
+        tableView.rowHeight = UITableView.automaticDimension
+        let nib = RepositoryCellWithLike.nib
+        tableView.register(nib, forCellReuseIdentifier: "RepositoryCell")
+    }
 }
 
 extension SearchViewController: ReposPresenterInjectable {
     func inject(reposPresenter: ReposPresenterProtocol) {
         presenter = reposPresenter
+        presenter.output = self
+        presenter.startFetch(using: [])
     }
 }
 
 extension SearchViewController: ReposPresenterOutput {
     func update(by viewDataArray: [GitHubRepoViewData]) {
-        //        <#code#>
+        self.viewDataArray = viewDataArray
+        self.tableView.reloadData()
     }
 }
 
 // MARK: UITableViewDataSource
 extension SearchViewController {
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return 0
+        return viewDataArray.count
     }
 
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        return UITableViewCell(frame: CGRect.zero)
+        // セルを表示
+        let cell = tableView.dequeueReusableCell(withIdentifier: "RepositoryCell",
+                                                 for: indexPath) as! RepositoryCellWithLike
+        cell.configure(with: viewDataArray[indexPath.row])
+        return cell
     }
 }
 
 // MARK: UITableViewDelegate
 extension SearchViewController {
+    override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        let viewData = viewDataArray[indexPath.row]
+        // お気に入り状態をトグル
+        presenter.set(liked: !viewData.isLiked, for: viewData.id)
+        tableView.deselectRow(at: indexPath, animated: false)
+    }
+}
 
+extension SearchViewController: UISearchBarDelegate {
+    func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
+        guard let text = searchBar.text else {
+            return
+        }
+        let keywords = text.split(separator: " ").map(String.init)
+        presenter.startFetch(using: keywords)
+    }
 }

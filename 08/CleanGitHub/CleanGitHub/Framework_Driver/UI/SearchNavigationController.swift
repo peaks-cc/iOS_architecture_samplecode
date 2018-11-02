@@ -16,20 +16,4 @@ class SearchNavigationController: UINavigationController, UINavigationController
 
         delegate = self
     }
-
-    private func injectPresenter(into viewController: UIViewController) {
-        if let vc = viewController as? ReposPresenterInjectable {
-            vc.inject(reposPresenter: Application.shared.reposPresenter)
-        }
-    }
-
-    func navigationController(_ navigationController: UINavigationController,
-                              willShow viewController: UIViewController,
-                              animated: Bool) {
-
-        // タブの選択後、ナビゲーションここでViewControllerに依存性を注入
-        // ※ このタイミングで注入する場合、VCにはviewWillAppear(_:)までPresenterが
-        //   injectされません。しかし本サンプルプログラムではそのままにしています。
-        injectPresenter(into: viewController)
-    }
 }

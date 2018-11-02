@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		360C8203218C9B240091BFA5 /* RepositoryCellWithLike.swift in Sources */ = {isa = PBXBuildFile; fileRef = 360C8201218C9B240091BFA5 /* RepositoryCellWithLike.swift */; };
+		360C8204218C9B240091BFA5 /* RepositoryCellWithLike.xib in Resources */ = {isa = PBXBuildFile; fileRef = 360C8202218C9B240091BFA5 /* RepositoryCellWithLike.xib */; };
 		360D950A217EB72900CB931C /* SearchNavigationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 360D9509217EB72900CB931C /* SearchNavigationController.swift */; };
 		360D950C217EF7DF00CB931C /* GitHub.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 360D950B217EF7DF00CB931C /* GitHub.framework */; };
 		360D950D217EF7DF00CB931C /* GitHub.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 360D950B217EF7DF00CB931C /* GitHub.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
@@ -32,6 +34,7 @@
 		36437AAF216D01E500F16CB4 /* GitHubReposStub.swift in Sources */ = {isa = PBXBuildFile; fileRef = 36437AAE216D01E500F16CB4 /* GitHubReposStub.swift */; };
 		36437AB1216D69BF00F16CB4 /* GitHubReposStubTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 36437AB0216D69BF00F16CB4 /* GitHubReposStubTest.swift */; };
 		36437AB3216D761000F16CB4 /* ArrayExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 36437AB2216D761000F16CB4 /* ArrayExtensions.swift */; };
+		365432F0218C1DE8003C7E16 /* TabBarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 365432EF218C1DE8003C7E16 /* TabBarController.swift */; };
 		366196AA214F92C60003C850 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 366196A9214F92C60003C850 /* AppDelegate.swift */; };
 		366196AC214F92C60003C850 /* SearchViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 366196AB214F92C60003C850 /* SearchViewController.swift */; };
 		366196AE214F92C60003C850 /* LikesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 366196AD214F92C60003C850 /* LikesViewController.swift */; };
@@ -66,6 +69,8 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		360C8201218C9B240091BFA5 /* RepositoryCellWithLike.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RepositoryCellWithLike.swift; sourceTree = "<group>"; };
+		360C8202218C9B240091BFA5 /* RepositoryCellWithLike.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = RepositoryCellWithLike.xib; sourceTree = "<group>"; };
 		360D9509217EB72900CB931C /* SearchNavigationController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchNavigationController.swift; sourceTree = "<group>"; };
 		360D950B217EF7DF00CB931C /* GitHub.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = GitHub.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		360D950E217EF7E600CB931C /* GitHub.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = GitHub.framework; path = "../../../../tmp/XcodeFiles/DerivedData/CleanGitHub-bluneizzmnkduufumdatexgqduob/Build/Products/Debug-iphoneos/GitHub.framework"; sourceTree = "<group>"; };
@@ -84,6 +89,7 @@
 		36437AAE216D01E500F16CB4 /* GitHubReposStub.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GitHubReposStub.swift; sourceTree = "<group>"; };
 		36437AB0216D69BF00F16CB4 /* GitHubReposStubTest.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GitHubReposStubTest.swift; sourceTree = "<group>"; };
 		36437AB2216D761000F16CB4 /* ArrayExtensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ArrayExtensions.swift; sourceTree = "<group>"; };
+		365432EF218C1DE8003C7E16 /* TabBarController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabBarController.swift; sourceTree = "<group>"; };
 		366196A6214F92C60003C850 /* CleanGitHub.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = CleanGitHub.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		366196A9214F92C60003C850 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		366196AB214F92C60003C850 /* SearchViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchViewController.swift; sourceTree = "<group>"; };
@@ -116,13 +122,24 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		360C8200218C9B240091BFA5 /* Cell */ = {
+			isa = PBXGroup;
+			children = (
+				360C8201218C9B240091BFA5 /* RepositoryCellWithLike.swift */,
+				360C8202218C9B240091BFA5 /* RepositoryCellWithLike.xib */,
+			);
+			path = Cell;
+			sourceTree = "<group>";
+		};
 		361B2E242153A820008BBCE0 /* UI */ = {
 			isa = PBXGroup;
 			children = (
 				366196AF214F92C60003C850 /* Main.storyboard */,
+				365432EF218C1DE8003C7E16 /* TabBarController.swift */,
 				360D9509217EB72900CB931C /* SearchNavigationController.swift */,
 				366196AB214F92C60003C850 /* SearchViewController.swift */,
 				366196AD214F92C60003C850 /* LikesViewController.swift */,
+				360C8200218C9B240091BFA5 /* Cell */,
 			);
 			path = UI;
 			sourceTree = "<group>";
@@ -339,6 +356,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				360C8204218C9B240091BFA5 /* RepositoryCellWithLike.xib in Resources */,
 				366196B6214F92C80003C850 /* LaunchScreen.storyboard in Resources */,
 				366196B3214F92C80003C850 /* Assets.xcassets in Resources */,
 				366196B1214F92C60003C850 /* Main.storyboard in Resources */,
@@ -361,10 +379,12 @@
 			files = (
 				361B2E19215233FF008BBCE0 /* ReposGateway.swift in Sources */,
 				36437AB3216D761000F16CB4 /* ArrayExtensions.swift in Sources */,
+				360C8203218C9B240091BFA5 /* RepositoryCellWithLike.swift in Sources */,
 				36108A6621568B680031C75D /* GitHubRepoStatusList.swift in Sources */,
 				366196AE214F92C60003C850 /* LikesViewController.swift in Sources */,
 				360D950A217EB72900CB931C /* SearchNavigationController.swift in Sources */,
 				361B2E2B21552BA2008BBCE0 /* Application.swift in Sources */,
+				365432F0218C1DE8003C7E16 /* TabBarController.swift in Sources */,
 				366196AA214F92C60003C850 /* AppDelegate.swift in Sources */,
 				361B2E2321524AE6008BBCE0 /* Error.swift in Sources */,
 				361B2E1F21523D87008BBCE0 /* GitHubRepo.swift in Sources */,
