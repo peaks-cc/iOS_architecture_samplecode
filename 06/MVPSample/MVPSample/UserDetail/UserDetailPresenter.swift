@@ -6,20 +6,24 @@
 import Foundation
 import GitHub
 
-protocol UserDetailPresenterProtocol {
+protocol UserDetailPresenterInput {
     var repositories: [Repository] { get }
     func repository(forRow row: Int) -> Repository?
     func viewDidLoad()
 }
 
-class UserDetailPresenter: UserDetailPresenterProtocol {
+protocol UserDetailPresenterOutput: class {
+    func reloadTableView()
+}
+
+class UserDetailPresenter: UserDetailPresenterInput {
     private var userName: String
     private(set) var repositories: [Repository] = []
 
-    private weak var view: UserDetailViewProtocol!
-    private var model: UserDetailModelProtocol
+    private weak var view: UserDetailPresenterOutput!
+    private var model: UserDetailModelInput
 
-    init(userName: String, view: UserDetailViewProtocol, model: UserDetailModelProtocol) {
+    init(userName: String, view: UserDetailPresenterOutput, model: UserDetailModelInput) {
         self.userName = userName
         self.view = view
         self.model = model

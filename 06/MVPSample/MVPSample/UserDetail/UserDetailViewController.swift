@@ -5,15 +5,11 @@
 
 import UIKit
 
-protocol UserDetailViewProtocol: class {
-    func reloadTableView()
-}
-
 final class UserDetailViewController: UIViewController {
     @IBOutlet weak var tableView: UITableView!
 
-    private var presenter: UserDetailPresenterProtocol!
-    func inject(presenter: UserDetailPresenterProtocol) {
+    private var presenter: UserDetailPresenterInput!
+    func inject(presenter: UserDetailPresenterInput) {
         self.presenter = presenter
     }
 
@@ -46,7 +42,7 @@ extension UserDetailViewController: UITableViewDataSource {
     }
 }
 
-extension UserDetailViewController: UserDetailViewProtocol {
+extension UserDetailViewController: UserDetailPresenterOutput {
     func reloadTableView() {
         tableView.reloadData()
     }

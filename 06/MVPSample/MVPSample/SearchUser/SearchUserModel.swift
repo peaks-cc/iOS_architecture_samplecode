@@ -6,13 +6,13 @@
 import Foundation
 import GitHub
 
-protocol SearchUserModelProtocol {
+protocol SearchUserModelInput {
     func fetchUser(
         query: String,
         completion: @escaping (Result<[User]>) -> ())
 }
 
-class SearchUserModel: SearchUserModelProtocol {
+class SearchUserModel: SearchUserModelInput {
     func fetchUser(
         query: String,
         completion: @escaping (Result<[User]>) -> ()) {

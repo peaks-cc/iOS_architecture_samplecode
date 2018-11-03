@@ -8,17 +8,12 @@
 
 import UIKit
 
-protocol SearchUserViewProtocol: class {
-    func reloadTableView()
-    func transitionToUserDetail(userName: String)
-}
-
 final class SearchUserViewController: UIViewController {
     @IBOutlet weak var searchBar: UISearchBar!
     @IBOutlet weak var tableView: UITableView!
 
-    private var presenter: SearchUserPresenterProtocol!
-    func inject(presenter: SearchUserPresenterProtocol) {
+    private var presenter: SearchUserPresenterInput!
+    func inject(presenter: SearchUserPresenterInput) {
         self.presenter = presenter
     }
 
@@ -64,7 +59,7 @@ extension SearchUserViewController: UITableViewDataSource {
     }
 }
 
-extension SearchUserViewController: SearchUserViewProtocol {
+extension SearchUserViewController: SearchUserPresenterOutput {
     func reloadTableView() {
         tableView.reloadData()
     }

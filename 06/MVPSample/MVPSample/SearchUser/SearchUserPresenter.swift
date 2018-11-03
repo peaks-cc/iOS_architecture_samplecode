@@ -9,20 +9,25 @@
 import Foundation
 import GitHub
 
-protocol SearchUserPresenterProtocol {
+protocol SearchUserPresenterInput {
     var numberOfUsers: Int { get }
     func user(forRow row: Int) -> User?
     func didSelectRow(at indexPath: IndexPath)
     func didTapSearchButton(text: String?)
 }
 
-class SearchUserPresenter: SearchUserPresenterProtocol {
+protocol SearchUserPresenterOutput: class {
+    func reloadTableView()
+    func transitionToUserDetail(userName: String)
+}
+
+class SearchUserPresenter: SearchUserPresenterInput {
     private(set) var users: [User] = []
 
-    private weak var view: SearchUserViewProtocol!
-    private var model: SearchUserModelProtocol
+    private weak var view: SearchUserPresenterOutput!
+    private var model: SearchUserModelInput
 
-    init(view: SearchUserViewProtocol, model: SearchUserModelProtocol) {
+    init(view: SearchUserPresenterOutput, model: SearchUserModelInput) {
         self.view = view
         self.model = model
     }
