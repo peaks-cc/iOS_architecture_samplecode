@@ -4,6 +4,7 @@
 //
 
 import UIKit
+import GitHub
 
 final class UserDetailViewController: UIViewController {
     @IBOutlet weak var tableView: UITableView!
