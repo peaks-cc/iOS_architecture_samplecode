@@ -43,7 +43,7 @@ extension UserDetailViewController: UITableViewDataSource {
 }
 
 extension UserDetailViewController: UserDetailPresenterOutput {
-    func reloadTableView() {
+    func updateRepositories(_ repositories: [Repository]) {
         tableView.reloadData()
     }
 }

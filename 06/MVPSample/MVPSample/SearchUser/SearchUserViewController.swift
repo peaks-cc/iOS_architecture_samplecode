@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import GitHub
 
 final class SearchUserViewController: UIViewController {
     @IBOutlet weak var searchBar: UISearchBar!
@@ -60,7 +61,7 @@ extension SearchUserViewController: UITableViewDataSource {
 }
 
 extension SearchUserViewController: SearchUserPresenterOutput {
-    func reloadTableView() {
+    func updateUsers(_ users: [User]) {
         tableView.reloadData()
     }
 

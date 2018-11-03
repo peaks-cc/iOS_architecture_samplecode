@@ -13,7 +13,7 @@ protocol UserDetailPresenterInput {
 }
 
 protocol UserDetailPresenterOutput: class {
-    func reloadTableView()
+    func updateRepositories(_ repositories: [Repository])
 }
 
 class UserDetailPresenter: UserDetailPresenterInput {
@@ -41,7 +41,7 @@ class UserDetailPresenter: UserDetailPresenterInput {
                 self?.repositories = repositories
 
                 DispatchQueue.main.async {
-                    self?.view.reloadTableView()
+                    self?.view.updateRepositories(repositories)
                 }
             case .failure(let error):
                 // TODO: Error Handling

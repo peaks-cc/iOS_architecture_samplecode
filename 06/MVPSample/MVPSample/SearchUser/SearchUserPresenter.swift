@@ -17,7 +17,7 @@ protocol SearchUserPresenterInput {
 }
 
 protocol SearchUserPresenterOutput: class {
-    func reloadTableView()
+    func updateUsers(_ users: [User])
     func transitionToUserDetail(userName: String)
 }
 
@@ -56,7 +56,7 @@ class SearchUserPresenter: SearchUserPresenterInput {
                 self?.users = users
                 
                 DispatchQueue.main.async {
-                    self?.view.reloadTableView()
+                    self?.view.updateUsers(users)
                 }
             case .failure(let error):
                 // TODO: Error Handling
