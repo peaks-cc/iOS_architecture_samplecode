@@ -11,8 +11,6 @@ import RxCocoa
 final class UserDetailViewController: UIViewController, UITableViewDelegate {
     @IBOutlet weak var tableView: UITableView!
 
-    // FIXME: ViewControllerで使わいScreenStateが入ってしまうのが気持ちわるい。本来ViewModelが持っていればよいもの。
-    // ただし外部からViewModelを注入する場合、tableViewがnilで落ちる...。
     var userName: GitHub.User.Name!
     private lazy var viewModel = UserDetailViewModel(
         userName: userName,
