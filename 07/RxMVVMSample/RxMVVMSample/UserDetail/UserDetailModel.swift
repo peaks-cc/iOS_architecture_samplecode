@@ -6,11 +6,11 @@
 import GitHub
 import RxSwift
 
-protocol UserDetailModelProtocol {
+protocol UserDetailModelInput {
     func fetchRepositories() -> Observable<[Repository]>
 }
 
-class UserDetailModel: UserDetailModelProtocol {
+class UserDetailModel: UserDetailModelInput {
     let session = Session()
 
     private let userName: GitHub.User.Name

@@ -16,14 +16,14 @@ class UserDetailViewModel {
 
     private let _repositories = BehaviorRelay<[Repository]>(value: [])
 
-    private let model: UserDetailModelProtocol
+    private let model: UserDetailModelInput
 
     private let disposeBag = DisposeBag()
 
     let deselectRow: Observable<IndexPath>
     let reloadData: Observable<Void>
 
-    init(userName: GitHub.User.Name, itemSelected: Observable<IndexPath>, model: UserDetailModelProtocol? = nil) {
+    init(userName: GitHub.User.Name, itemSelected: Observable<IndexPath>, model: UserDetailModelInput? = nil) {
         self.userName = userName
 
         self.model = model ?? UserDetailModel(userName: userName)
