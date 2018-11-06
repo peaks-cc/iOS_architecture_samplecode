@@ -8,11 +8,12 @@
 
 import Foundation
 
+// Use Caseが外側(Interface Adapters)に公開するインターフェイス
 protocol ReposLikesUseCaseProtocol: AnyObject {
     // キーワードを使ったサーチ
     func startFetch(using keywords: [String])
     // お気に入り済みリポジトリ一覧の取得
-    func requestLikedRepos()
+    func collectLikedRepos()
     // お気に入りの追加・削除
     func set(liked: Bool, for repo: GitHubRepo.ID)
 
@@ -23,8 +24,10 @@ protocol ReposLikesUseCaseProtocol: AnyObject {
 }
 
 protocol ReposLikesUseCaseOutput {
-    // リポジトリとお気に入りとをペアにした情報が更新されたときに呼ばれる
+    // GitHubリポジトリ（＋お気に入りON/OFF）の情報が更新されたときに呼ばれる
     func useCaseDidUpdateStatuses(_ repoStatuses: [GitHubRepoStatus])
+    // お気に入り一覧情報が更新されたときに呼ばれる
+    func useCaseDidUpdateLikesList(_ likesList: [GitHubRepoStatus])
     // Use Caseの関係する処理でエラーがあったときに呼ばれる
     func useCaseDidReceiveError(_ error: Error)
 }
@@ -33,18 +36,25 @@ protocol ReposGatewayProtocol {
     // キーワードで検索した結果を完了ハンドラで返す
     func fetch(using keywords: [String],
                completion: @escaping (Result<[GitHubRepo]>) -> Void)
+
+    // IDで検索した結果を完了ハンドラで返す
+    func fetch(using ids: [GitHubRepo.ID],
+               completion: @escaping (Result<[GitHubRepo]>) -> Void)
 }
 
 protocol LikesGatewayProtocol {
     // IDで検索したお気に入りの結果を完了ハンドラで返す
     func fetch(ids: [GitHubRepo.ID],
-               completion: (Result<[GitHubRepo.ID: Bool]>) -> Void)
+               completion: @escaping (Result<[GitHubRepo.ID: Bool]>) -> Void)
     // IDについてのお気に入り状態を保存する
     func save(liked: Bool,
               for id: GitHubRepo.ID,
-              completion: (Result<Bool>) -> Void)
+              completion: @escaping (Result<Bool>) -> Void)
+    // お気に入り情報の一覧を返す
+    func allLikes(completion: @escaping (Result<[GitHubRepo.ID: Bool]>) -> Void)
 }
 
+// Use Caseの実装
 final class ReposLikesUseCase: ReposLikesUseCaseProtocol {
 
     var output: ReposLikesUseCaseOutput!
@@ -53,6 +63,7 @@ final class ReposLikesUseCase: ReposLikesUseCaseProtocol {
     var likesGateway: LikesGatewayProtocol!
 
     private var statusList = GitHubRepoStatusList(repos: [], likes: [:])
+    private var likesList = GitHubRepoStatusList(repos: [], likes: [:])
 
     // キーワードでリポジトリを検索し、結果とお気に入り状態を組み合わせた結果をOutputに通知する
     func startFetch(using keywords: [String]) {
@@ -69,7 +80,7 @@ final class ReposLikesUseCase: ReposLikesUseCaseProtocol {
                 self.likesGateway
                     .fetch(ids: ids) { [weak self] likesResult in
                         guard let self = self else { return }
-
+                        
                         switch likesResult {
                         case .failure(let e):
                             self.output
@@ -78,8 +89,7 @@ final class ReposLikesUseCase: ReposLikesUseCaseProtocol {
                         case .success(let likes):
                             // 結果を保持
                             let statusList = GitHubRepoStatusList(
-                                repos: repos,
-                                likes: likes
+                                repos: repos, likes: likes
                             )
                             self.statusList = statusList
                             self.output.useCaseDidUpdateStatuses(statusList.statuses)
@@ -89,8 +99,38 @@ final class ReposLikesUseCase: ReposLikesUseCaseProtocol {
         }
     }
 
-    func requestLikedRepos() {
-        //        <#code#>
+    func collectLikedRepos() {
+        likesGateway.allLikes { [weak self] result in
+            guard let self = self else { return }
+            switch result {
+            case .failure(let e):
+                self.output
+                    .useCaseDidReceiveError(
+                        FetchingError.failedToFetchLikes(e))
+            case .success(let allLikes):
+                let ids = Array(allLikes.keys)
+                self.reposGateway.fetch(using: ids) { [weak self] reposResult in
+                    guard let self = self else { return }
+
+                    switch reposResult {
+                    case .failure(let e):
+                        self.output
+                            .useCaseDidReceiveError(
+                                FetchingError.failedToFetchLikes(e))
+                    case .success(let repos):
+                        // 結果を保持
+                        let likesList = GitHubRepoStatusList(
+                            repos: repos,
+                            likes: allLikes,
+                            trimmed: true
+                        )
+                        self.likesList = likesList
+                        self.output.useCaseDidUpdateLikesList(likesList.statuses)
+                    }
+                }
+            }
+
+        }
     }
 
     func set(liked: Bool, for id: GitHubRepo.ID) {
@@ -106,8 +146,11 @@ final class ReposLikesUseCase: ReposLikesUseCaseProtocol {
             case .success(let isLiked):
                 do {
                     try self.statusList.set(isLiked: isLiked, for: id)
+                    try self.likesList.set(isLiked: isLiked, for: id)
                     self.output
-                        .useCaseDidUpdateStatuses(statusList.statuses)
+                        .useCaseDidUpdateStatuses(self.statusList.statuses)
+                    self.output
+                        .useCaseDidUpdateLikesList(self.likesList.statuses)
                 } catch {
                     self.output
                         .useCaseDidReceiveError(SavingError.failedToSaveLike)

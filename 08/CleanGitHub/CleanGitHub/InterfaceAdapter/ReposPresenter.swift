@@ -18,27 +18,38 @@ struct GitHubRepoViewData {
     let isLiked: Bool
 }
 
+// 外側(Viewなど)にPresenterが公開するインターフェイス
 protocol ReposPresenterProtocol: AnyObject {
     // キーワードを使ったサーチ
     func startFetch(using keywords: [String])
     // お気に入り済みリポジトリ一覧の取得
-    func requestLikedRepos()
+    func collectLikedRepos()
 
     // お気に入りの設定・解除
     func set(liked: Bool, for id: String)
 
-    var output: ReposPresenterOutput? { get set }
+    var reposOutput: ReposPresenterOutput? { get set }
+    var likesOutput: LikesPresenterOutput? { get set }
 }
 
+// GitHubリポジトリの検索View向け出力インターフェイス
 protocol ReposPresenterOutput {
-    // 表示用のデータが変化したことを外側に通知
+    // 表示用のデータが変化したことをPresenterから外側に通知
     func update(by viewDataArray: [GitHubRepoViewData])
 }
 
+// GitHubリポジトリのお気に入り一覧View向け出力インターフェイス
+protocol LikesPresenterOutput {
+    // 表示用のデータが変化したことをPresenterから外側に通知
+    func update(by viewDataArray: [GitHubRepoViewData])
+}
+
+// Presenterの実装
 class ReposPresenter: ReposPresenterProtocol, ReposLikesUseCaseOutput {
 
     private weak var useCase: ReposLikesUseCaseProtocol!
-    var output: ReposPresenterOutput?
+    var reposOutput: ReposPresenterOutput?
+    var likesOutput: LikesPresenterOutput?
 
     init(useCase: ReposLikesUseCaseProtocol) {
         self.useCase = useCase
@@ -50,8 +61,8 @@ class ReposPresenter: ReposPresenterProtocol, ReposLikesUseCaseOutput {
         useCase.startFetch(using: keywords)
     }
 
-    func requestLikedRepos() {
-        useCase.requestLikedRepos()
+    func collectLikedRepos() {
+        useCase.collectLikedRepos()
     }
 
     func set(liked: Bool, for id: String) {
@@ -60,7 +71,30 @@ class ReposPresenter: ReposPresenterProtocol, ReposLikesUseCaseOutput {
 
     func useCaseDidUpdateStatuses(_ repoStatus: [GitHubRepoStatus]) {
         // Use Caseから届いたデータを外側で使うデータに変換してから伝える
-        let viewDataArray = repoStatus.map {
+        let viewDataArray = Array.init(repoStatus: repoStatus)
+
+        DispatchQueue.main.async { [weak self] in
+            self?.reposOutput?.update(by: viewDataArray)
+        }
+    }
+
+    func useCaseDidUpdateLikesList(_ likesList: [GitHubRepoStatus]) {
+        // Use Caseから届いたデータを外側で使うデータに変換してから伝える
+        let viewDataArray = Array.init(repoStatus: likesList)
+
+        DispatchQueue.main.async { [weak self] in
+            self?.likesOutput?.update(by: viewDataArray)
+        }
+    }
+
+    func useCaseDidReceiveError(_ error: Error) {
+        // <#code#>
+    }
+}
+
+extension Array where Element == GitHubRepoViewData {
+    init(repoStatus: [GitHubRepoStatus]) {
+        self = repoStatus.map {
             return GitHubRepoViewData(
                 id: $0.repo.id.rawValue,
                 fullName: $0.repo.fullName,
@@ -69,13 +103,5 @@ class ReposPresenter: ReposPresenterProtocol, ReposLikesUseCaseOutput {
                 stargazersCount: $0.repo.stargazersCount,
                 isLiked: $0.isLiked)
         }
-        DispatchQueue.main.async { [weak self] in
-            self?.output?.update(by: viewDataArray)
-        }
     }
-    
-    func useCaseDidReceiveError(_ error: Error) {
-        // <#code#>
-    }
-    
 }

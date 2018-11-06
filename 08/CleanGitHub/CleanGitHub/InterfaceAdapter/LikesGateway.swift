@@ -9,11 +9,19 @@
 import Foundation
 
 protocol DataStoreProtocol: AnyObject {
+    // お気に入り情報を検索・保存する
     func fetch(ids: [GitHubRepo.ID],
-               completion: (Result<[GitHubRepo.ID: Bool]>) -> Void)
+               completion: @escaping (Result<[GitHubRepo.ID: Bool]>) -> Void)
     func save(liked: Bool,
               for id: GitHubRepo.ID,
-              completion: (Result<Bool>) -> Void)
+              completion: @escaping (Result<Bool>) -> Void)
+    func allLikes(completion: @escaping (Result<[GitHubRepo.ID: Bool]>) -> Void)
+
+    // リポジトリ情報を保存・検索する
+    func save(repos: [GitHubRepo],
+              completion: @escaping (Result<[GitHubRepo]>) -> Void)
+    func fetch(using ids: [GitHubRepo.ID],
+               completion: @escaping (Result<[GitHubRepo]>) -> Void)
 }
 
 class LikesGateway: LikesGatewayProtocol {
@@ -26,13 +34,17 @@ class LikesGateway: LikesGatewayProtocol {
     }
 
     func fetch(ids: [GitHubRepo.ID],
-               completion: (Result<[GitHubRepo.ID: Bool]>) -> Void) {
+               completion: @escaping (Result<[GitHubRepo.ID: Bool]>) -> Void) {
         dataStore.fetch(ids: ids, completion: completion)
     }
 
     func save(liked: Bool,
               for id: GitHubRepo.ID,
-              completion: (Result<Bool>) -> Void) {
+              completion: @escaping (Result<Bool>) -> Void) {
         dataStore.save(liked: liked, for: id, completion: completion)
+    }
+
+    func allLikes(completion: @escaping (Result<[GitHubRepo.ID : Bool]>) -> Void) {
+        dataStore.allLikes(completion: completion)
     }
 }

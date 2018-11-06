@@ -34,9 +34,12 @@ struct GitHubRepoStatusList {
     }
     private(set) var statuses: [GitHubRepoStatus]
 
-    init(repos: [GitHubRepo], likes: [GitHubRepo.ID: Bool]) {
+    init(repos: [GitHubRepo], likes: [GitHubRepo.ID: Bool], trimmed: Bool = false) {
         statuses = Array(repos: repos, likes: likes)
             .unique(resolve: { _, _ in .ignoreNewOne })
+        if trimmed {
+            statuses = statuses.filter{ $0.isLiked }
+        }
     }
     mutating func append(repos: [GitHubRepo], likes: [GitHubRepo.ID: Bool]) {
         let newStatusesMayNotUnique = statuses + Array(repos: repos, likes: likes)
@@ -45,7 +48,7 @@ struct GitHubRepoStatusList {
     }
     mutating func set(isLiked: Bool, for id: GitHubRepo.ID) throws {
         guard let index = statuses.firstIndex(where: { $0.repo.id == id }) else {
-            throw Error.notFoundRepo(ofID: id)
+            return//throw Error.notFoundRepo(ofID: id)
         }
         let currentStatus = statuses[index]
         statuses[index] = GitHubRepoStatus(

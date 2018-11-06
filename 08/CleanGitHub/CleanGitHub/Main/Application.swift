@@ -17,18 +17,23 @@ class Application {
     // ユースケースを公開プロパティとして保持
     private(set) var useCase: ReposLikesUseCase!
 
-    func buildLayer(with window: UIWindow) {
+    func configure(with window: UIWindow) {
+        buildLayer()
+
+        let storyboard = UIStoryboard(name: "Main", bundle: nil)
+        window.rootViewController = storyboard.instantiateInitialViewController()
+    }
+
+    private func buildLayer() {
 
         // -- Use Case
         useCase = ReposLikesUseCase()
 
         // -- Interface Adapters
-        let reposPresenter = ReposPresenter(useCase: useCase)
         let reposGateway = ReposGateway(useCase: useCase)
         let likesGateway = LikesGateway(useCase: useCase)
 
         // Use Caseとのバインド
-        useCase.output = reposPresenter
         useCase.reposGateway = reposGateway
         useCase.likesGateway = likesGateway
 
@@ -38,22 +43,12 @@ class Application {
 
         // Interface Adaptersとのバインド
         reposGateway.webClient = webClient
+        reposGateway.dataStore = likesDataStore
         likesGateway.dataStore = likesDataStore
 
-        let storyboard = UIStoryboard(name: "Main", bundle: nil)
-        let vc = storyboard.instantiateInitialViewController()
-
-        // PresenterをView Controllerに注入
-        if let target = vc as? PresentersInjectable {
-            target.inject(presenters: [reposPresenter])
-        }
-
-        window.rootViewController = vc
+        // Presenterの作成・バインドは各ViewControllerを生成するクラスが実施
+        // (本プロジェクトではTabBarControllerのawakeFromNib())
     }
-}
-
-protocol PresentersInjectable {
-    func inject(presenters: [ReposPresenterProtocol])
 }
 
 protocol ReposPresenterInjectable {

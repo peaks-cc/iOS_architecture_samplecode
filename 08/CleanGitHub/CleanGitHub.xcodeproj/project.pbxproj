@@ -10,7 +10,6 @@
 		360C8203218C9B240091BFA5 /* RepositoryCellWithLike.swift in Sources */ = {isa = PBXBuildFile; fileRef = 360C8201218C9B240091BFA5 /* RepositoryCellWithLike.swift */; };
 		360C8204218C9B240091BFA5 /* RepositoryCellWithLike.xib in Resources */ = {isa = PBXBuildFile; fileRef = 360C8202218C9B240091BFA5 /* RepositoryCellWithLike.xib */; };
 		360C8206218CAD000091BFA5 /* GitHubRepos.swift in Sources */ = {isa = PBXBuildFile; fileRef = 360C8205218CAD000091BFA5 /* GitHubRepos.swift */; };
-		360D950A217EB72900CB931C /* SearchNavigationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 360D9509217EB72900CB931C /* SearchNavigationController.swift */; };
 		360D950C217EF7DF00CB931C /* GitHub.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 360D950B217EF7DF00CB931C /* GitHub.framework */; };
 		360D950D217EF7DF00CB931C /* GitHub.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 360D950B217EF7DF00CB931C /* GitHub.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		36108A6621568B680031C75D /* GitHubRepoStatusList.swift in Sources */ = {isa = PBXBuildFile; fileRef = 36108A6521568B680031C75D /* GitHubRepoStatusList.swift */; };
@@ -73,7 +72,6 @@
 		360C8201218C9B240091BFA5 /* RepositoryCellWithLike.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RepositoryCellWithLike.swift; sourceTree = "<group>"; };
 		360C8202218C9B240091BFA5 /* RepositoryCellWithLike.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = RepositoryCellWithLike.xib; sourceTree = "<group>"; };
 		360C8205218CAD000091BFA5 /* GitHubRepos.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GitHubRepos.swift; sourceTree = "<group>"; };
-		360D9509217EB72900CB931C /* SearchNavigationController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchNavigationController.swift; sourceTree = "<group>"; };
 		360D950B217EF7DF00CB931C /* GitHub.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = GitHub.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		360D950E217EF7E600CB931C /* GitHub.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = GitHub.framework; path = "../../../../tmp/XcodeFiles/DerivedData/CleanGitHub-bluneizzmnkduufumdatexgqduob/Build/Products/Debug-iphoneos/GitHub.framework"; sourceTree = "<group>"; };
 		36108A6521568B680031C75D /* GitHubRepoStatusList.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GitHubRepoStatusList.swift; sourceTree = "<group>"; };
@@ -138,7 +136,6 @@
 			children = (
 				366196AF214F92C60003C850 /* Main.storyboard */,
 				365432EF218C1DE8003C7E16 /* TabBarController.swift */,
-				360D9509217EB72900CB931C /* SearchNavigationController.swift */,
 				366196AB214F92C60003C850 /* SearchViewController.swift */,
 				366196AD214F92C60003C850 /* LikesViewController.swift */,
 				360C8200218C9B240091BFA5 /* Cell */,
@@ -282,6 +279,7 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 366196C5214F92C80003C850 /* Build configuration list for PBXNativeTarget "CleanGitHub" */;
 			buildPhases = (
+				36178E252191200400FC04EC /* Generate warnings for FIXME/TODO tags */,
 				366196A2214F92C60003C850 /* Sources */,
 				366196A3214F92C60003C850 /* Frameworks */,
 				366196A4214F92C60003C850 /* Resources */,
@@ -375,6 +373,27 @@
 		};
 /* End PBXResourcesBuildPhase section */
 
+/* Begin PBXShellScriptBuildPhase section */
+		36178E252191200400FC04EC /* Generate warnings for FIXME/TODO tags */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+			);
+			name = "Generate warnings for FIXME/TODO tags";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "TAGS=\"TODO:|FIXME:\"\necho \"searching ${SRCROOT} for ${TAGS}\"\nfind \"${SRCROOT}\" \\( -name \"*.swift\" \\) -print0 \\\n| xargs -0 egrep --with-filename --line-number --only-matching \"($TAGS).*\\$\" \\\n| perl -p -e \"s/($TAGS)/ warning: \\$1/\"\n";
+		};
+/* End PBXShellScriptBuildPhase section */
+
 /* Begin PBXSourcesBuildPhase section */
 		366196A2214F92C60003C850 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
@@ -386,7 +405,6 @@
 				360C8203218C9B240091BFA5 /* RepositoryCellWithLike.swift in Sources */,
 				36108A6621568B680031C75D /* GitHubRepoStatusList.swift in Sources */,
 				366196AE214F92C60003C850 /* LikesViewController.swift in Sources */,
-				360D950A217EB72900CB931C /* SearchNavigationController.swift in Sources */,
 				361B2E2B21552BA2008BBCE0 /* Application.swift in Sources */,
 				365432F0218C1DE8003C7E16 /* TabBarController.swift in Sources */,
 				366196AA214F92C60003C850 /* AppDelegate.swift in Sources */,

@@ -18,17 +18,12 @@ class SearchViewController: UITableViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        searchBar.delegate = self
-
         setup()
     }
 
-    override func didReceiveMemoryWarning() {
-        super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
-    }
-
     private func setup() {
+        searchBar.delegate = self
+
         tableView.estimatedRowHeight = 64
         tableView.rowHeight = UITableView.automaticDimension
         let nib = RepositoryCellWithLike.nib
@@ -39,7 +34,7 @@ class SearchViewController: UITableViewController {
 extension SearchViewController: ReposPresenterInjectable {
     func inject(reposPresenter: ReposPresenterProtocol) {
         presenter = reposPresenter
-        presenter.output = self
+        presenter.reposOutput = self
         presenter.startFetch(using: [])
     }
 }

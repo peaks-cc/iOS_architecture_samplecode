@@ -17,8 +17,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
          self.window = UIWindow(frame: UIScreen.main.bounds)
 
-        // Clean Architectureのレイヤーを構築する
-        Application.shared.buildLayer(with: self.window!)
+        // Clean Architectureのレイヤーを構築
+        Application.shared.configure(with: self.window!)
 
         self.window?.makeKeyAndVisible()
 

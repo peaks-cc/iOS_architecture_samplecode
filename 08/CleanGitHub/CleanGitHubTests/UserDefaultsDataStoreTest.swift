@@ -21,7 +21,7 @@ class UserDefaultsDataStoreTest: XCTestCase {
         // Put teardown code here. This method is called after the invocation of each test method in the class.
     }
 
-    func testSave() {
+    func testSaveLike() {
         let repo: GitHubRepo = .init(id: GitHubRepo.ID(rawValue: "foobar"),
                                      fullName: "barbaz",
                                      description: "desc",
@@ -35,7 +35,21 @@ class UserDefaultsDataStoreTest: XCTestCase {
             }
         }
     }
-//    func fetch(byNames names: [String], completion: (Result<[Like]>) -> Void)
+
+    func testSaveGitHubRepo() {
+        let repo: GitHubRepo = .init(id: GitHubRepo.ID(rawValue: "foobar"),
+                                     fullName: "barbaz",
+                                     description: "desc",
+                                     language: "Swift",
+                                     stargazersCount: 0)
+        dataStore.save(repo: repo) { result in
+            if case .success(let repo) = result {
+                XCTAssertTrue(repo.fullName == "barbaz")
+            } else {
+                XCTAssertTrue(false, "result must be a success.")
+            }
+        }
+    }
 
     func testPerformanceExample() {
         // This is an example of a performance test case.
