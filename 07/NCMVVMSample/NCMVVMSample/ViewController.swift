@@ -14,15 +14,21 @@ class ViewController: UIViewController {
     @IBOutlet weak var validationLabel: UILabel!
 
     private let notificationCenter = NotificationCenter()
-    private lazy var viewModel = ViewModel(notificationCenter: notificationCenter)
+    private lazy var viewModel = ViewModel(
+        notificationCenter: notificationCenter)
 
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        idTextField.addTarget(self, action: #selector(textFieldEditingChanged), for: .editingChanged)
-        passwordTextField.addTarget(self, action: #selector(textFieldEditingChanged), for: .editingChanged)
+        idTextField.addTarget(
+            self,
+            action: #selector(textFieldEditingChanged),
+            for: .editingChanged)
+        passwordTextField.addTarget(
+            self,
+            action: #selector(textFieldEditingChanged),
+            for: .editingChanged)
 
-        // Data Binding
         notificationCenter.addObserver(
             self,
             selector: #selector(updateValidationText),
@@ -38,12 +44,12 @@ class ViewController: UIViewController {
 }
 
 extension ViewController {
-    // MARK: Input
     @objc func textFieldEditingChanged(sender: UITextField) {
-        viewModel.idPasswordChanged(id: idTextField.text, password: passwordTextField.text)
+        viewModel.idPasswordChanged(
+            id: idTextField.text,
+            password: passwordTextField.text)
     }
 
-    // MARK: Output
     @objc func updateValidationText(notification: Notification) {
         guard let text = notification.object as? String else { return }
         validationLabel.text = text
