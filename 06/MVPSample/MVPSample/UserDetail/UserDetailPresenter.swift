@@ -12,7 +12,7 @@ protocol UserDetailPresenterInput {
     func viewDidLoad()
 }
 
-protocol UserDetailPresenterOutput: class {
+protocol UserDetailPresenterOutput: AnyObject {
     func updateRepositories(_ repositories: [Repository])
 }
 
