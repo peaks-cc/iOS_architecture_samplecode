@@ -8,7 +8,7 @@
 
 import UIKit
 
-class ViewModel {
+final class ViewModel {
     let changeText = Notification.Name("changeText")
     let changeColor = Notification.Name("changeColor")
 

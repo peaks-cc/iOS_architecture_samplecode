@@ -10,7 +10,7 @@ protocol UserDetailModelInput {
     func fetchRepositories(completion: @escaping (Result<[Repository]>) -> ())
 }
 
-class UserDetailModel: UserDetailModelInput {
+final class UserDetailModel: UserDetailModelInput {
     private let userName: String!
     init(userName: String) {
         self.userName = userName

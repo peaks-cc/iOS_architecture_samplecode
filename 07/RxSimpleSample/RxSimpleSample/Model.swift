@@ -18,7 +18,7 @@ protocol ModelProtocol {
     func validate(idText: String?, passwordText: String?) -> Observable<Void>
 }
 
-class Model: ModelProtocol {
+final class Model: ModelProtocol {
     func validate(idText: String?, passwordText: String?) -> Observable<Void> {
         switch (idText, passwordText) {
         case (.none, .none):

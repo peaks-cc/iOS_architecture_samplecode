@@ -9,7 +9,7 @@
 import UIKit
 import GitHub
 
-class UserCell: UITableViewCell {
+final class UserCell: UITableViewCell {
     @IBOutlet private weak var iconImageView: UIImageView!
     @IBOutlet private weak var nameLabel: UILabel!
 

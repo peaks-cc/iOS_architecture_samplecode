@@ -10,7 +10,7 @@ import RxSwift
 import RxCocoa
 import GitHub
 
-class SearchUserViewModel {
+final class SearchUserViewModel {
     private let searchUserModel: SearchUserModelProtocol
     private let disposeBag = DisposeBag()
 

@@ -9,7 +9,7 @@
 import UIKit
 import GitHub
 
-class RepositoryCell: UITableViewCell {
+final class RepositoryCell: UITableViewCell {
     @IBOutlet private weak var nameLabel: UILabel!
     @IBOutlet private weak var descriptionLabel: UILabel!
     @IBOutlet private weak var languageLabel: UILabel!

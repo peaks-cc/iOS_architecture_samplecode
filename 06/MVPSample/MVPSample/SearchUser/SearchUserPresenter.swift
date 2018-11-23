@@ -21,7 +21,7 @@ protocol SearchUserPresenterOutput: class {
     func transitionToUserDetail(userName: String)
 }
 
-class SearchUserPresenter: SearchUserPresenterInput {
+final class SearchUserPresenter: SearchUserPresenterInput {
     private(set) var users: [User] = []
 
     private weak var view: SearchUserPresenterOutput!

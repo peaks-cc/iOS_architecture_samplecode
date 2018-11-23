@@ -16,7 +16,7 @@ protocol UserDetailPresenterOutput: class {
     func updateRepositories(_ repositories: [Repository])
 }
 
-class UserDetailPresenter: UserDetailPresenterInput {
+final class UserDetailPresenter: UserDetailPresenterInput {
     private var userName: String
     private(set) var repositories: [Repository] = []
 

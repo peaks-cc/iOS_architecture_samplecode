@@ -12,7 +12,7 @@ protocol SearchUserModelInput {
         completion: @escaping (Result<[User]>) -> ())
 }
 
-class SearchUserModel: SearchUserModelInput {
+final class SearchUserModel: SearchUserModelInput {
     func fetchUser(
         query: String,
         completion: @escaping (Result<[User]>) -> ()) {

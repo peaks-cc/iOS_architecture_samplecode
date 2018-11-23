@@ -23,7 +23,7 @@ protocol ModelProtocol {
     func validate(idText: String?, passwordText: String?) -> Result<Void>
 }
 
-class Model: ModelProtocol {
+final class Model: ModelProtocol {
     func validate(idText: String?, passwordText: String?) -> Result<Void> {
         switch (idText, passwordText) {
         case (.none, .none):

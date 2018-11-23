@@ -10,7 +10,7 @@ protocol UserDetailModelInput {
     func fetchRepositories() -> Observable<[Repository]>
 }
 
-class UserDetailModel: UserDetailModelInput {
+final class UserDetailModel: UserDetailModelInput {
     let session = Session()
 
     private let userName: GitHub.User.Name

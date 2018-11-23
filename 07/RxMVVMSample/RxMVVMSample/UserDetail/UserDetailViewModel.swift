@@ -10,7 +10,7 @@ import GitHub
 import RxSwift
 import RxCocoa
 
-class UserDetailViewModel {
+final class UserDetailViewModel {
     let userName: GitHub.User.Name
     var repositories: [Repository] { return _repositories.value }
 
