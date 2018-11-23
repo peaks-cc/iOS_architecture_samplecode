@@ -9,7 +9,7 @@ import RxSwift
 import RxCocoa
 
 final class UserDetailViewController: UIViewController, UITableViewDelegate {
-    @IBOutlet weak var tableView: UITableView!
+    @IBOutlet private weak var tableView: UITableView!
 
     var userName: GitHub.User.Name!
     private lazy var viewModel = UserDetailViewModel(

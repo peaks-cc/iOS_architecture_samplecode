@@ -10,8 +10,8 @@ import UIKit
 import GitHub
 
 final class SearchUserViewController: UIViewController {
-    @IBOutlet weak var searchBar: UISearchBar!
-    @IBOutlet weak var tableView: UITableView!
+    @IBOutlet private weak var searchBar: UISearchBar!
+    @IBOutlet private weak var tableView: UITableView!
 
     private var presenter: SearchUserPresenterInput!
     func inject(presenter: SearchUserPresenterInput) {

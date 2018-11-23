@@ -10,8 +10,8 @@ import UIKit
 import GitHub
 
 class UserCell: UITableViewCell {
-    @IBOutlet weak var iconImageView: UIImageView!
-    @IBOutlet weak var nameLabel: UILabel!
+    @IBOutlet private weak var iconImageView: UIImageView!
+    @IBOutlet private weak var nameLabel: UILabel!
 
     private var task: URLSessionTask?
 

@@ -12,8 +12,8 @@ import RxSwift
 import RxCocoa
 
 final class SearchUserViewController: UIViewController, UISearchBarDelegate, UITableViewDelegate {
-    @IBOutlet weak var searchBar: UISearchBar!
-    @IBOutlet weak var tableView: UITableView!
+    @IBOutlet private weak var searchBar: UISearchBar!
+    @IBOutlet private weak var tableView: UITableView!
 
     private lazy var viewModel = SearchUserViewModel(
         searchBarText: searchBar.rx.text.asObservable(),

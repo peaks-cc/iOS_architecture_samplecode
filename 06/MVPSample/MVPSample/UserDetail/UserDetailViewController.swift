@@ -7,7 +7,7 @@ import UIKit
 import GitHub
 
 final class UserDetailViewController: UIViewController {
-    @IBOutlet weak var tableView: UITableView!
+    @IBOutlet private weak var tableView: UITableView!
 
     private var presenter: UserDetailPresenterInput!
     func inject(presenter: UserDetailPresenterInput) {
