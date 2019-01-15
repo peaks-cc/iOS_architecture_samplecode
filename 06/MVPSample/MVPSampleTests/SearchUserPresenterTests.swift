@@ -36,7 +36,10 @@ class SearchUserModelInputStub: SearchUserModelInput {
     }
 
     func fetchUser(query: String, completion: @escaping (Result<[User]>) -> ()) {
-        completion(fetchUserResponses[query]!)
+        guard let response = fetchUserResponses[query] else {
+            fatalError("fetchUserResponse not found when query is \(query)")
+        }
+        completion(response)
     }
 }
 
