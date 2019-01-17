@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		711251DE21E0E66100CA4AA1 /* SearchUserPresenterTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 711251DD21E0E66100CA4AA1 /* SearchUserPresenterTests.swift */; };
+		71E559BE21EA28B600525907 /* UserMock.swift in Sources */ = {isa = PBXBuildFile; fileRef = 71E559BD21EA28B600525907 /* UserMock.swift */; };
 		B5C043DC215FDEEF00E6F51E /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = B5C043DB215FDEEF00E6F51E /* Assets.xcassets */; };
 		B5C043DF215FDEEF00E6F51E /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = B5C043DD215FDEEF00E6F51E /* LaunchScreen.storyboard */; };
 		B5C043EA215FDEEF00E6F51E /* MVPSampleTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5C043E9215FDEEF00E6F51E /* MVPSampleTests.swift */; };
@@ -52,6 +54,8 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		711251DD21E0E66100CA4AA1 /* SearchUserPresenterTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchUserPresenterTests.swift; sourceTree = "<group>"; };
+		71E559BD21EA28B600525907 /* UserMock.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserMock.swift; sourceTree = "<group>"; };
 		B5C043D1215FDEEE00E6F51E /* MVPSample.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MVPSample.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		B5C043DB215FDEEF00E6F51E /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		B5C043DE215FDEEF00E6F51E /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
@@ -134,7 +138,9 @@
 			isa = PBXGroup;
 			children = (
 				B5C043E9215FDEEF00E6F51E /* MVPSampleTests.swift */,
+				711251DD21E0E66100CA4AA1 /* SearchUserPresenterTests.swift */,
 				B5C043EB215FDEEF00E6F51E /* Info.plist */,
+				71E559BD21EA28B600525907 /* UserMock.swift */,
 			);
 			path = MVPSampleTests;
 			sourceTree = "<group>";
@@ -290,7 +296,9 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				71E559BE21EA28B600525907 /* UserMock.swift in Sources */,
 				B5C043EA215FDEEF00E6F51E /* MVPSampleTests.swift in Sources */,
+				711251DE21E0E66100CA4AA1 /* SearchUserPresenterTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
