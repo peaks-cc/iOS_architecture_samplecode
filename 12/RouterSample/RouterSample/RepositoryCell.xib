@@ -38,7 +38,7 @@
                         <nil key="textColor"/>
                         <nil key="highlightedColor"/>
                     </label>
-                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="falk:" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="8dd-XA-Qrr">
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="fork:" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="8dd-XA-Qrr">
                         <rect key="frame" x="156" y="128" width="48" height="17"/>
                         <constraints>
                             <constraint firstAttribute="width" constant="48" id="ye4-TE-48p"/>
@@ -75,7 +75,7 @@
             </tableViewCellContentView>
             <connections>
                 <outlet property="descriptionLabel" destination="BVX-Zz-ZFT" id="TOq-EF-hTK"/>
-                <outlet property="falkLabel" destination="8dd-XA-Qrr" id="rb9-Jk-yGA"/>
+                <outlet property="forkLabel" destination="8dd-XA-Qrr" id="rb9-Jk-yGA"/>
                 <outlet property="languageLabel" destination="f8Y-lD-qMB" id="oXf-bD-e3Y"/>
                 <outlet property="nameLabel" destination="884-ne-jFT" id="yoE-YC-EyG"/>
                 <outlet property="starLabel" destination="cTs-Qo-wD8" id="nbF-6N-ptT"/>
