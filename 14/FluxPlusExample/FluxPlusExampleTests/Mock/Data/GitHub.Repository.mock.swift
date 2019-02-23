@@ -17,6 +17,7 @@ extension GitHub.Repository {
                                  owner: .mock(),
                                  isPrivate: false,
                                  htmlURL: URL(string: "https://github.com/marty-suzuki/URLEmbeddedView")!,
+                                 contributorsURL: URL(string: "https://github.com/marty-suzuki/URLEmbeddedView")!,
                                  description: "URLEmbeddedView automatically caches the object that is confirmed the Open Graph Protocol.",
                                  isFork: false,
                                  url: URL(string: "https://github.com/marty-suzuki/URLEmbeddedView")!,

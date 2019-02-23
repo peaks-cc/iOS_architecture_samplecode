@@ -24,9 +24,8 @@
 		37E3DBDE214E7603003B923B /* GitHub.User.mock.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37E3DBDD214E7603003B923B /* GitHub.User.mock.swift */; };
 		37E3DBE0214E767D003B923B /* GitHub.Pagination.mock.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37E3DBDF214E767D003B923B /* GitHub.Pagination.mock.swift */; };
 		37E3DBE2214E8447003B923B /* GitHub.Repository.mock.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37E3DBE1214E8447003B923B /* GitHub.Repository.mock.swift */; };
-		ED02EF8D211CA1B800A3E915 /* RxCocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = ED02EF8A211CA1B800A3E915 /* RxCocoa.framework */; };
-		ED02EF8E211CA1B800A3E915 /* GitHub.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = ED02EF8B211CA1B800A3E915 /* GitHub.framework */; };
-		ED02EF8F211CA1B800A3E915 /* RxSwift.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = ED02EF8C211CA1B800A3E915 /* RxSwift.framework */; };
+		385C0944FEDBFB4E39DEF6E4 /* Pods_FluxPlusExample.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 160AC818763D7D3C6E96630F /* Pods_FluxPlusExample.framework */; };
+		A6FBF4D53CAAC555FC7CE2C6 /* Pods_FluxPlusExampleTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9B65BB7116A32BDF62656434 /* Pods_FluxPlusExampleTests.framework */; };
 		ED02EFD7211CB28400A3E915 /* GitHubApiSession.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED02EFD6211CB28400A3E915 /* GitHubApiSession.swift */; };
 		ED71C1F521247D5400DF7952 /* RepositorySearchViewModelTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED71C1F421247D5400DF7952 /* RepositorySearchViewModelTests.swift */; };
 		EDE38F472124706100CA2480 /* Flux.mock.swift in Sources */ = {isa = PBXBuildFile; fileRef = EDE38F462124706100CA2480 /* Flux.mock.swift */; };
@@ -68,6 +67,8 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		160AC818763D7D3C6E96630F /* Pods_FluxPlusExample.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_FluxPlusExample.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		19B94EC2871E48EBAE89F37D /* Pods-FluxPlusExampleTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-FluxPlusExampleTests.release.xcconfig"; path = "Target Support Files/Pods-FluxPlusExampleTests/Pods-FluxPlusExampleTests.release.xcconfig"; sourceTree = "<group>"; };
 		37BA6877215950FB004EF4A6 /* RepositorySearchViewControllerTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RepositorySearchViewControllerTests.swift; sourceTree = "<group>"; };
 		37E3DBBA214E5119003B923B /* SearchRepositoryStore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchRepositoryStore.swift; sourceTree = "<group>"; };
 		37E3DBBC214E5124003B923B /* SearchRepositoryDispatcher.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchRepositoryDispatcher.swift; sourceTree = "<group>"; };
@@ -85,6 +86,9 @@
 		37E3DBDD214E7603003B923B /* GitHub.User.mock.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GitHub.User.mock.swift; sourceTree = "<group>"; };
 		37E3DBDF214E767D003B923B /* GitHub.Pagination.mock.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GitHub.Pagination.mock.swift; sourceTree = "<group>"; };
 		37E3DBE1214E8447003B923B /* GitHub.Repository.mock.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GitHub.Repository.mock.swift; sourceTree = "<group>"; };
+		5B2831B5B8D564911D666656 /* Pods-FluxPlusExample.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-FluxPlusExample.debug.xcconfig"; path = "Target Support Files/Pods-FluxPlusExample/Pods-FluxPlusExample.debug.xcconfig"; sourceTree = "<group>"; };
+		650C1EA8E87E5DEE91810C37 /* Pods-FluxPlusExampleTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-FluxPlusExampleTests.debug.xcconfig"; path = "Target Support Files/Pods-FluxPlusExampleTests/Pods-FluxPlusExampleTests.debug.xcconfig"; sourceTree = "<group>"; };
+		9B65BB7116A32BDF62656434 /* Pods_FluxPlusExampleTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_FluxPlusExampleTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		ED02EF8A211CA1B800A3E915 /* RxCocoa.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = RxCocoa.framework; path = Carthage/Build/iOS/RxCocoa.framework; sourceTree = "<group>"; };
 		ED02EF8B211CA1B800A3E915 /* GitHub.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = GitHub.framework; path = Carthage/Build/iOS/GitHub.framework; sourceTree = "<group>"; };
 		ED02EF8C211CA1B800A3E915 /* RxSwift.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = RxSwift.framework; path = Carthage/Build/iOS/RxSwift.framework; sourceTree = "<group>"; };
@@ -117,6 +121,7 @@
 		EDE9628F212171BA00F96CA2 /* FavoritesViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavoritesViewModel.swift; sourceTree = "<group>"; };
 		EDE96291212262C200F96CA2 /* Flux.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Flux.swift; sourceTree = "<group>"; };
 		EDE962992123C34E00F96CA2 /* RepositoryDetailViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RepositoryDetailViewModel.swift; sourceTree = "<group>"; };
+		F7AAF16E57C3333EDDD19A51 /* Pods-FluxPlusExample.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-FluxPlusExample.release.xcconfig"; path = "Target Support Files/Pods-FluxPlusExample/Pods-FluxPlusExample.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -124,9 +129,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				ED02EF8D211CA1B800A3E915 /* RxCocoa.framework in Frameworks */,
-				ED02EF8E211CA1B800A3E915 /* GitHub.framework in Frameworks */,
-				ED02EF8F211CA1B800A3E915 /* RxSwift.framework in Frameworks */,
+				385C0944FEDBFB4E39DEF6E4 /* Pods_FluxPlusExample.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -137,6 +140,7 @@
 				EDE38F4C212470CE00CA2480 /* GitHub.framework in Frameworks */,
 				EDE38F4D212470CE00CA2480 /* RxCocoa.framework in Frameworks */,
 				EDE38F4E212470CE00CA2480 /* RxSwift.framework in Frameworks */,
+				A6FBF4D53CAAC555FC7CE2C6 /* Pods_FluxPlusExampleTests.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -202,12 +206,25 @@
 			path = Data;
 			sourceTree = "<group>";
 		};
+		4DED19C91D4C9EA5DD13D68A /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				5B2831B5B8D564911D666656 /* Pods-FluxPlusExample.debug.xcconfig */,
+				F7AAF16E57C3333EDDD19A51 /* Pods-FluxPlusExample.release.xcconfig */,
+				650C1EA8E87E5DEE91810C37 /* Pods-FluxPlusExampleTests.debug.xcconfig */,
+				19B94EC2871E48EBAE89F37D /* Pods-FluxPlusExampleTests.release.xcconfig */,
+			);
+			path = Pods;
+			sourceTree = "<group>";
+		};
 		ED02EF89211CA1B800A3E915 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
 				ED02EF8B211CA1B800A3E915 /* GitHub.framework */,
 				ED02EF8A211CA1B800A3E915 /* RxCocoa.framework */,
 				ED02EF8C211CA1B800A3E915 /* RxSwift.framework */,
+				160AC818763D7D3C6E96630F /* Pods_FluxPlusExample.framework */,
+				9B65BB7116A32BDF62656434 /* Pods_FluxPlusExampleTests.framework */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -266,6 +283,7 @@
 				EDE5DFB52118187700F5DE2B /* FluxPlusExampleTests */,
 				EDE5DF9F2118187500F5DE2B /* Products */,
 				ED02EF89211CA1B800A3E915 /* Frameworks */,
+				4DED19C91D4C9EA5DD13D68A /* Pods */,
 			);
 			sourceTree = "<group>";
 		};
@@ -373,10 +391,11 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = EDE5DFBB2118187700F5DE2B /* Build configuration list for PBXNativeTarget "FluxPlusExample" */;
 			buildPhases = (
+				A9A1996D058DE7D5284DCCB2 /* [CP] Check Pods Manifest.lock */,
 				EDE5DF9A2118187500F5DE2B /* Sources */,
 				EDE5DF9B2118187500F5DE2B /* Frameworks */,
 				EDE5DF9C2118187500F5DE2B /* Resources */,
-				ED02EF88211C9E6400A3E915 /* ShellScript */,
+				549CDCF884C19B00F9AD8933 /* [CP] Embed Pods Frameworks */,
 			);
 			buildRules = (
 			);
@@ -391,6 +410,7 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = EDE5DFBE2118187700F5DE2B /* Build configuration list for PBXNativeTarget "FluxPlusExampleTests" */;
 			buildPhases = (
+				A206FE4B360B5523B29F9E93 /* [CP] Check Pods Manifest.lock */,
 				EDE5DFAE2118187700F5DE2B /* Sources */,
 				EDE5DFAF2118187700F5DE2B /* Frameworks */,
 				EDE5DFB02118187700F5DE2B /* Resources */,
@@ -469,21 +489,75 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
-		ED02EF88211C9E6400A3E915 /* ShellScript */ = {
+		549CDCF884C19B00F9AD8933 /* [CP] Embed Pods Frameworks */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
 			);
+			inputFileListPaths = (
+			);
 			inputPaths = (
-				"$(SRCROOT)/Carthage/Build/iOS/RxSwift.framework",
-				"$(SRCROOT)/Carthage/Build/iOS/RxCocoa.framework",
-				"$(SRCROOT)/Carthage/Build/iOS/GitHub.framework",
+				"${PODS_ROOT}/Target Support Files/Pods-FluxPlusExample/Pods-FluxPlusExample-frameworks.sh",
+				"${BUILT_PRODUCTS_DIR}/GitHub/GitHub.framework",
+				"${BUILT_PRODUCTS_DIR}/RxCocoa/RxCocoa.framework",
+				"${BUILT_PRODUCTS_DIR}/RxSwift/RxSwift.framework",
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputFileListPaths = (
 			);
 			outputPaths = (
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/GitHub.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/RxCocoa.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/RxSwift.framework",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "/usr/local/bin/carthage copy-frameworks";
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-FluxPlusExample/Pods-FluxPlusExample-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		A206FE4B360B5523B29F9E93 /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-FluxPlusExampleTests-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+		A9A1996D058DE7D5284DCCB2 /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-FluxPlusExample-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
 		};
 /* End PBXShellScriptBuildPhase section */
 
@@ -684,6 +758,7 @@
 		};
 		EDE5DFBC2118187700F5DE2B /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 5B2831B5B8D564911D666656 /* Pods-FluxPlusExample.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Manual;
@@ -708,6 +783,7 @@
 		};
 		EDE5DFBD2118187700F5DE2B /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = F7AAF16E57C3333EDDD19A51 /* Pods-FluxPlusExample.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Manual;
@@ -732,6 +808,7 @@
 		};
 		EDE5DFBF2118187700F5DE2B /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 650C1EA8E87E5DEE91810C37 /* Pods-FluxPlusExampleTests.debug.xcconfig */;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				BUNDLE_LOADER = "$(TEST_HOST)";
@@ -760,6 +837,7 @@
 		};
 		EDE5DFC02118187700F5DE2B /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 19B94EC2871E48EBAE89F37D /* Pods-FluxPlusExampleTests.release.xcconfig */;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				BUNDLE_LOADER = "$(TEST_HOST)";
