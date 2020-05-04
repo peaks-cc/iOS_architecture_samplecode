@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		15A8C7CA24600DCA00C82233 /* WebKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 15A8C7C82460087200C82233 /* WebKit.framework */; };
 		51DD532A218A0C1600D89039 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 51DD5329218A0C1600D89039 /* AppDelegate.swift */; };
 		51DD532C218A0C1600D89039 /* RepoListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 51DD532B218A0C1600D89039 /* RepoListViewController.swift */; };
 		51DD5331218A0C1800D89039 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 51DD5330218A0C1800D89039 /* Assets.xcassets */; };
@@ -44,6 +45,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		15A8C7C82460087200C82233 /* WebKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = WebKit.framework; path = System/Library/Frameworks/WebKit.framework; sourceTree = SDKROOT; };
 		51DD5326218A0C1600D89039 /* CoordinatorExample.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = CoordinatorExample.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		51DD5329218A0C1600D89039 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		51DD532B218A0C1600D89039 /* RepoListViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RepoListViewController.swift; sourceTree = "<group>"; };
@@ -74,6 +76,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				15A8C7CA24600DCA00C82233 /* WebKit.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -94,6 +97,14 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		15A8C7C72460087200C82233 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				15A8C7C82460087200C82233 /* WebKit.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
 		51DD531D218A0C1600D89039 = {
 			isa = PBXGroup;
 			children = (
@@ -101,6 +112,7 @@
 				51DD533D218A0C1800D89039 /* CoordinatorExampleTests */,
 				51DD5348218A0C1800D89039 /* CoordinatorExampleUITests */,
 				51DD5327218A0C1600D89039 /* Products */,
+				15A8C7C72460087200C82233 /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
