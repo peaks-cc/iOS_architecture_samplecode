@@ -10,8 +10,6 @@
 		360C8203218C9B240091BFA5 /* RepositoryCellWithLike.swift in Sources */ = {isa = PBXBuildFile; fileRef = 360C8201218C9B240091BFA5 /* RepositoryCellWithLike.swift */; };
 		360C8204218C9B240091BFA5 /* RepositoryCellWithLike.xib in Resources */ = {isa = PBXBuildFile; fileRef = 360C8202218C9B240091BFA5 /* RepositoryCellWithLike.xib */; };
 		360C8206218CAD000091BFA5 /* GitHubRepos.swift in Sources */ = {isa = PBXBuildFile; fileRef = 360C8205218CAD000091BFA5 /* GitHubRepos.swift */; };
-		360D950C217EF7DF00CB931C /* GitHub.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 360D950B217EF7DF00CB931C /* GitHub.framework */; };
-		360D950D217EF7DF00CB931C /* GitHub.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 360D950B217EF7DF00CB931C /* GitHub.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		36108A6621568B680031C75D /* GitHubRepoStatusList.swift in Sources */ = {isa = PBXBuildFile; fileRef = 36108A6521568B680031C75D /* GitHubRepoStatusList.swift */; };
 		36108A6821573EF30031C75D /* GitHubRepoStatusListTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 36108A6721573EF30031C75D /* GitHubRepoStatusListTest.swift */; };
 		36108A6921573EF90031C75D /* GitHubRepoStatusList.swift in Sources */ = {isa = PBXBuildFile; fileRef = 36108A6521568B680031C75D /* GitHubRepoStatusList.swift */; };
@@ -41,6 +39,8 @@
 		366196B1214F92C60003C850 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 366196AF214F92C60003C850 /* Main.storyboard */; };
 		366196B3214F92C80003C850 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 366196B2214F92C80003C850 /* Assets.xcassets */; };
 		366196B6214F92C80003C850 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 366196B4214F92C80003C850 /* LaunchScreen.storyboard */; };
+		902A341B25D53E9B00B7A218 /* GitHub.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 902A341A25D53E9B00B7A218 /* GitHub.framework */; };
+		902A341C25D53E9B00B7A218 /* GitHub.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 902A341A25D53E9B00B7A218 /* GitHub.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -60,7 +60,7 @@
 			dstPath = "";
 			dstSubfolderSpec = 10;
 			files = (
-				360D950D217EF7DF00CB931C /* GitHub.framework in Embed Frameworks */,
+				902A341C25D53E9B00B7A218 /* GitHub.framework in Embed Frameworks */,
 			);
 			name = "Embed Frameworks";
 			runOnlyForDeploymentPostprocessing = 0;
@@ -71,7 +71,6 @@
 		360C8201218C9B240091BFA5 /* RepositoryCellWithLike.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RepositoryCellWithLike.swift; sourceTree = "<group>"; };
 		360C8202218C9B240091BFA5 /* RepositoryCellWithLike.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = RepositoryCellWithLike.xib; sourceTree = "<group>"; };
 		360C8205218CAD000091BFA5 /* GitHubRepos.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GitHubRepos.swift; sourceTree = "<group>"; };
-		360D950B217EF7DF00CB931C /* GitHub.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = GitHub.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		360D950E217EF7E600CB931C /* GitHub.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = GitHub.framework; path = "../../../../tmp/XcodeFiles/DerivedData/CleanGitHub-bluneizzmnkduufumdatexgqduob/Build/Products/Debug-iphoneos/GitHub.framework"; sourceTree = "<group>"; };
 		36108A6521568B680031C75D /* GitHubRepoStatusList.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GitHubRepoStatusList.swift; sourceTree = "<group>"; };
 		36108A6721573EF30031C75D /* GitHubRepoStatusListTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GitHubRepoStatusListTest.swift; sourceTree = "<group>"; };
@@ -99,6 +98,7 @@
 		366196B7214F92C80003C850 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		366196BC214F92C80003C850 /* CleanGitHubTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = CleanGitHubTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		366196C2214F92C80003C850 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		902A341A25D53E9B00B7A218 /* GitHub.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = GitHub.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -106,7 +106,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				360D950C217EF7DF00CB931C /* GitHub.framework in Frameworks */,
+				902A341B25D53E9B00B7A218 /* GitHub.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -179,7 +179,6 @@
 		3661969D214F92C60003C850 = {
 			isa = PBXGroup;
 			children = (
-				360D950B217EF7DF00CB931C /* GitHub.framework */,
 				366196A8214F92C60003C850 /* CleanGitHub */,
 				366196BF214F92C80003C850 /* CleanGitHubTests */,
 				366196A7214F92C60003C850 /* Products */,
@@ -264,6 +263,7 @@
 		36D192AE217DAC96004BD98D /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				902A341A25D53E9B00B7A218 /* GitHub.framework */,
 				360D950E217EF7E600CB931C /* GitHub.framework */,
 			);
 			name = Frameworks;
