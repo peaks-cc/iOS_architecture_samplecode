@@ -12,7 +12,7 @@ public let thunkMiddleware: ReSwift.Middleware<AppState> = { dispatch, getState 
         return { action in
             if let action = action as? ThunkAction {
                 action.single
-                    .observeOn(MainScheduler.instance)
+                    .observe(on: MainScheduler.instance)
                     .subscribe(onSuccess: {
                         next($0)
                     })
@@ -29,7 +29,7 @@ public let thunkStateMapMiddleware: ReSwift.Middleware<AppState> = { dispatch, g
         return { action in
           if let s = action as? StateMapAction, let action = s.originalAction as? ThunkAction {
                 action.single
-                    .observeOn(MainScheduler.instance)
+                    .observe(on: MainScheduler.instance)
                     .subscribe(onSuccess: {
                         next(StateMapAction(s.stateIdentifier, action: $0))
                     })

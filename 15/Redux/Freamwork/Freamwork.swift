@@ -22,7 +22,7 @@ public class RxWrappedStore: ReSwift.StoreSubscriber, ReSwift.DispatchingStoreTy
     public var state: AppStateType { return self.store.state }
     public lazy var stateObservable: RxSwift.Observable<AppStateType> = {
         return self.stateBehaviorRelay
-            .observeOn(MainScheduler.instance)
+            .observe(on: MainScheduler.instance)
             .share(replay: 1)
     }()
     private lazy var stateBehaviorRelay: RxCocoa.BehaviorRelay<AppStateType> = {
@@ -165,7 +165,7 @@ public struct ErrorNotificationTrigger: Identifierable {
 extension PrimitiveSequence where Trait == SingleTrait, Element == ReSwift.Action {
     public typealias Handler = (APIDomainError) -> Element
     public func mapError(_ handler: @escaping Handler) -> PrimitiveSequence<Trait, Element> {
-        return catchError { (error: Error) -> PrimitiveSequence<Trait, Element> in
+        self.catch { (error: Error) -> PrimitiveSequence<Trait, Element> in
             let apiDomainError: APIDomainError
             if let error = error as? APIDomainError {
                 apiDomainError = error

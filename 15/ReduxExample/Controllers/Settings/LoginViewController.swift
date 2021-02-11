@@ -15,7 +15,7 @@ final class LoginWebViewController: UIViewController {
     private let webView = WKWebView(frame: .zero, configuration: WKWebViewConfiguration())
     private let progressView = UIProgressView(progressViewStyle: .default)
 
-    private let activityIndicatorView = UIActivityIndicatorView(style: .whiteLarge)
+    private let activityIndicatorView = UIActivityIndicatorView(style: .large)
     private lazy var alphaView: UIView = {
         let view = UIView(frame: .zero)
         view.backgroundColor = UIColor.black.withAlphaComponent(0.4)
@@ -76,7 +76,7 @@ final class LoginWebViewController: UIViewController {
         view.addSubview(webView)
         webView.translatesAutoresizingMaskIntoConstraints = false
         NSLayoutConstraint.activate([.top, .right, .bottom, .left].map {
-            NSLayoutConstraint(item: view, attribute: $0, relatedBy: .equal, toItem: webView, attribute: $0, multiplier: 1, constant: 0)
+            NSLayoutConstraint(item: view!, attribute: $0, relatedBy: .equal, toItem: webView, attribute: $0, multiplier: 1, constant: 0)
         })
 
         view.addSubview(progressView)
@@ -91,7 +91,7 @@ final class LoginWebViewController: UIViewController {
         view.addSubview(alphaView)
         alphaView.translatesAutoresizingMaskIntoConstraints = false
         NSLayoutConstraint.activate([.top, .right, .bottom, .left].map {
-            NSLayoutConstraint(item: view, attribute: $0, relatedBy: .equal, toItem: alphaView, attribute: $0, multiplier: 1, constant: 0)
+            NSLayoutConstraint(item: view!, attribute: $0, relatedBy: .equal, toItem: alphaView, attribute: $0, multiplier: 1, constant: 0)
         })
 
         webView.navigationDelegate = self
