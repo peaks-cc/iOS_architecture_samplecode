@@ -22,14 +22,6 @@ class GitHubRepoStatusListTest: XCTestCase {
         return GitHubRepo.ID(rawValue: id)
     }
 
-    override func setUp() {
-        // Put setup code here. This method is called before the invocation of each test method in the class.
-    }
-
-    override func tearDown() {
-        // Put teardown code here. This method is called after the invocation of each test method in the class.
-    }
-
     func testRegisterRepos() {
         do {
             let list = GitHubRepoStatusList(repos: [], likes: [:])

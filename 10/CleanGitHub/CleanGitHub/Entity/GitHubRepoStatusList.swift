@@ -48,7 +48,7 @@ struct GitHubRepoStatusList {
     }
     mutating func set(isLiked: Bool, for id: GitHubRepo.ID) throws {
         guard let index = statuses.firstIndex(where: { $0.repo.id == id }) else {
-            return//throw Error.notFoundRepo(ofID: id)
+            throw Error.notFoundRepo(ofID: id)
         }
         let currentStatus = statuses[index]
         statuses[index] = GitHubRepoStatus(

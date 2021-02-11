@@ -41,7 +41,6 @@
 		366196B1214F92C60003C850 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 366196AF214F92C60003C850 /* Main.storyboard */; };
 		366196B3214F92C80003C850 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 366196B2214F92C80003C850 /* Assets.xcassets */; };
 		366196B6214F92C80003C850 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 366196B4214F92C80003C850 /* LaunchScreen.storyboard */; };
-		366196C1214F92C80003C850 /* CleanGitHubTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 366196C0214F92C80003C850 /* CleanGitHubTests.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -99,7 +98,6 @@
 		366196B5214F92C80003C850 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		366196B7214F92C80003C850 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		366196BC214F92C80003C850 /* CleanGitHubTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = CleanGitHubTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
-		366196C0214F92C80003C850 /* CleanGitHubTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CleanGitHubTests.swift; sourceTree = "<group>"; };
 		366196C2214F92C80003C850 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -216,7 +214,6 @@
 			isa = PBXGroup;
 			children = (
 				366196C2214F92C80003C850 /* Info.plist */,
-				366196C0214F92C80003C850 /* CleanGitHubTests.swift */,
 				361B2E2C21553219008BBCE0 /* UserDefaultsDataStoreTest.swift */,
 				36108A6721573EF30031C75D /* GitHubRepoStatusListTest.swift */,
 				36437AB0216D69BF00F16CB4 /* GitHubReposStubTest.swift */,
@@ -426,7 +423,6 @@
 			files = (
 				36108A6921573EF90031C75D /* GitHubRepoStatusList.swift in Sources */,
 				361B2E2D21553219008BBCE0 /* UserDefaultsDataStoreTest.swift in Sources */,
-				366196C1214F92C80003C850 /* CleanGitHubTests.swift in Sources */,
 				36108A6821573EF30031C75D /* GitHubRepoStatusListTest.swift in Sources */,
 				361B2E2F215532F4008BBCE0 /* UserDefaultsDataStore.swift in Sources */,
 				361B2E34215534FD008BBCE0 /* ReposLikesUseCase.swift in Sources */,
