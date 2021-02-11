@@ -7,8 +7,8 @@ This is a sample App to learn redux architecture.
 
 ## Requirements
 
-- Xcode 10+
-- Swift 4.2
+- Xcode 12+
+- Swift 5.3
 - Ruby 2.3+
 - Carthage
 
