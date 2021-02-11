@@ -1,5 +1,5 @@
 /**
- * Copyright (c) 2016-present, Facebook, Inc.
+ * Copyright (c) Facebook, Inc. and its affiliates.
  * All rights reserved.
  *
  * This source code is licensed under the BSD-style license found in the
@@ -20,5 +20,6 @@
 @property (nonatomic, assign) BOOL wasDeselected;
 @property (nonatomic, assign) BOOL wasHighlighted;
 @property (nonatomic, assign) BOOL wasUnhighlighted;
+@property (nonatomic, assign) BOOL wasDisplayed;
 
 @end

@@ -3,10 +3,8 @@
 //  ReSwift
 //
 //  Created by Benjamin Encz on 11/28/15.
-//  Copyright © 2015 DigiTales. All rights reserved.
+//  Copyright © 2015 ReSwift Community. All rights reserved.
 //
-
-import Foundation
 
 /**
  Defines the interface of Stores in ReSwift. `Store` is the default implementation of this
@@ -17,10 +15,6 @@ import Foundation
 public protocol StoreType: DispatchingStoreType {
 
     associatedtype State: StateType
-
-    /// Initializes the store with a reducer, an initial state and a list of middleware.
-    /// Middleware is applied in the order in which it is passed into this constructor.
-    init(reducer: @escaping Reducer<State>, state: State?, middleware: [Middleware<State>])
 
     /// The current state stored in the store.
     var state: State! { get }
@@ -37,6 +31,7 @@ public protocol StoreType: DispatchingStoreType {
      state in this store changes.
 
      - parameter subscriber: Subscriber that will receive store updates
+     - note: Subscriptions are not ordered, so an order of state updates cannot be guaranteed.
      */
     func subscribe<S: StoreSubscriber>(_ subscriber: S) where S.StoreSubscriberStateType == State
 
@@ -50,6 +45,7 @@ public protocol StoreType: DispatchingStoreType {
      - parameter transform: A closure that receives a simple subscription and can return a
        transformed subscription. Subscriptions can be transformed to only select a subset of the
        state, or to skip certain state updates.
+     - note: Subscriptions are not ordered, so an order of state updates cannot be guaranteed.
      */
     func subscribe<SelectedState, S: StoreSubscriber>(
         _ subscriber: S, transform: ((Subscription<State>) -> Subscription<SelectedState>)?
@@ -92,9 +88,6 @@ public protocol StoreType: DispatchingStoreType {
      ```
      store.dispatch( noteActionCreatore.deleteNote(3) )
      ```
-
-     - returns: By default returns the dispatched action, but middlewares can change the
-     return type, e.g. to return promises
      */
     func dispatch(_ actionCreator: ActionCreator)
 

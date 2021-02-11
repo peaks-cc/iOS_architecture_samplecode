@@ -2,11 +2,6 @@ language: objective-c
 cache:
   directories:
   - Lib/vendor
-  - /usr/local/Homebrew
-  - $HOME/Library/Caches/Homebrew
-before_install:
-- brew update
-- brew outdated carthage || brew upgrade carthage
 install:
 - "(cd Lib && bundle install --path=vendor/bundle --binstubs=vendor/bin)"
 before_script:
@@ -16,26 +11,62 @@ script:
 - "(cd Lib && travis_retry bundle exec rake $ACTION)"
 matrix:
   include:
-  - osx_image: xcode9
+  - osx_image: xcode11
     env: ACTION=build
-  - osx_image: xcode9
+  - osx_image: xcode11
     env: ACTION='build:carthage'
-  - osx_image: xcode9
+  - osx_image: xcode11
     env: ACTION='test:iphonesimulator'
-  - osx_image: xcode9
+  - osx_image: xcode11
     env: ACTION='test:appletvsimulator'
-  - osx_image: xcode9
+  - osx_image: xcode11
+    env: ACTION='test:macosx'
+  # Mac Catalyst requires macOS Catalina. But no CI service supports running tests on Catalina yet.
+  # - osx_image: xcode11
+  #   script: xcodebuild test -workspace KeychainAccess.xcworkspace -scheme KeychainAccess -configuration Debug -enableCodeCoverage YES -derivedDataPath build -hideShellScriptEnvironment -destination 'platform=macOS,arch=x86_64,variant=Mac Catalyst' -only-testing:KeychainAccessTests-MacCatalyst SWIFT_VERSION=5.1 GCC_SYMBOLS_PRIVATE_EXTERN=NO
+
+  - osx_image: xcode10.3
+    env: ACTION=build
+  - osx_image: xcode10.3
+    env: ACTION='build:carthage'
+  - osx_image: xcode10.3
+    env: ACTION='test:iphonesimulator'
+  - osx_image: xcode10.3
+    env: ACTION='test:appletvsimulator'
+  - osx_image: xcode10.3
     env: ACTION='test:macosx'
 
-  - osx_image: xcode8.3
+  - osx_image: xcode10.2
     env: ACTION=build
-  - osx_image: xcode8.3
+  - osx_image: xcode10.2
     env: ACTION='build:carthage'
-  - osx_image: xcode8.3
+  - osx_image: xcode10.2
     env: ACTION='test:iphonesimulator'
-  - osx_image: xcode8.3
+  - osx_image: xcode10.2
     env: ACTION='test:appletvsimulator'
-  - osx_image: xcode8.3
+  - osx_image: xcode10.2
+    env: ACTION='test:macosx'
+
+  - osx_image: xcode10
+    env: ACTION=build
+  - osx_image: xcode10
+    env: ACTION='build:carthage'
+  - osx_image: xcode10
+    env: ACTION='test:iphonesimulator'
+  - osx_image: xcode10
+    env: ACTION='test:appletvsimulator'
+  - osx_image: xcode10
+    env: ACTION='test:macosx'
+
+  - osx_image: xcode9.4
+    env: ACTION=build
+  - osx_image: xcode9.4
+    env: ACTION='build:carthage'
+  - osx_image: xcode9.4
+    env: ACTION='test:iphonesimulator'
+  - osx_image: xcode9.4
+    env: ACTION='test:appletvsimulator'
+  - osx_image: xcode9.4
     env: ACTION='test:macosx'
 env:
   global:

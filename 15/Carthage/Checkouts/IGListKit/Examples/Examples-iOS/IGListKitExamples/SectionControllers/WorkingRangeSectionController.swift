@@ -1,5 +1,5 @@
 /**
- Copyright (c) 2016-present, Facebook, Inc. All rights reserved.
+ Copyright (c) Facebook, Inc. and its affiliates.
 
  The examples provided by Facebook are for non-commercial testing and evaluation
  purposes only. Facebook reserves all rights not expressly granted.
@@ -23,8 +23,9 @@ final class WorkingRangeSectionController: ListSectionController, ListWorkingRan
 
     private var urlString: String? {
         guard let height = height,
-            let width = collectionContext?.containerSize.width
+              let size = collectionContext?.containerSize
             else { return nil }
+        let width = Int(size.width)
         return "https://unsplash.it/" + width.description + "/" + height.description
     }
 

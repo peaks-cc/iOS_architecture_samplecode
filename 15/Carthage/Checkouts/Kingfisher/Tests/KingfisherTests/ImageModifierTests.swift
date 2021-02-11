@@ -1,10 +1,10 @@
 //
-//  ImageProcessorTests.swift
+//  ImageModifierTests.swift
 //  Kingfisher
 //
 //  Created by Ethan Gill on 2017/11/29.
 //
-//  Copyright (c) 2018 Ethan Gill <onevcat@gmail.com>
+//  Copyright (c) 2019 Wei Wang <onevcat@gmail.com>
 //
 //  Permission is hereby granted, free of charge, to any person obtaining a copy
 //  of this software and associated documentation files (the "Software"), to deal
@@ -40,10 +40,10 @@ class ImageModifierTests: XCTestCase {
     }
 
     func testAnyImageModifier() {
-        let m = AnyImageModifier(modify: { image in
+        let m = AnyImageModifier { image in
             return image
-        })
-        let image = Image(data: testImagePNGData)!
+        }
+        let image = KFCrossPlatformImage(data: testImagePNGData)!
         let modifiedImage = m.modify(image)
         XCTAssert(modifiedImage == image)
     }
@@ -52,7 +52,7 @@ class ImageModifierTests: XCTestCase {
 
     func testRenderingModeImageModifier() {
         let m1 = RenderingModeImageModifier(renderingMode: .alwaysOriginal)
-        let image = Image(data: testImagePNGData)!
+        let image = KFCrossPlatformImage(data: testImagePNGData)!
         let alwaysOriginalImage = m1.modify(image)
         XCTAssert(alwaysOriginalImage.renderingMode == .alwaysOriginal)
 
@@ -63,19 +63,15 @@ class ImageModifierTests: XCTestCase {
 
     func testFlipsForRightToLeftLayoutDirectionImageModifier() {
         let m = FlipsForRightToLeftLayoutDirectionImageModifier()
-        let image = Image(data: testImagePNGData)!
+        let image = KFCrossPlatformImage(data: testImagePNGData)!
         let modifiedImage = m.modify(image)
-        if #available(iOS 9.0, *) {
-            XCTAssert(modifiedImage.flipsForRightToLeftLayoutDirection == true)
-        } else {
-            XCTAssert(true)
-        }
+        XCTAssert(modifiedImage.flipsForRightToLeftLayoutDirection == true)
     }
 
     func testAlignmentRectInsetsImageModifier() {
         let insets = UIEdgeInsets(top: 8, left: 8, bottom: 8, right: 8)
         let m = AlignmentRectInsetsImageModifier(alignmentInsets: insets)
-        let image = Image(data: testImagePNGData)!
+        let image = KFCrossPlatformImage(data: testImagePNGData)!
         let modifiedImage = m.modify(image)
         XCTAssert(modifiedImage.alignmentRectInsets == insets)
     }

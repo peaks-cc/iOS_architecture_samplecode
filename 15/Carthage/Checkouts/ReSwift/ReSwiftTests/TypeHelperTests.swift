@@ -3,12 +3,12 @@
 //  ReSwift
 //
 //  Created by Benjamin Encz on 12/20/15.
-//  Copyright © 2015 Benjamin Encz. All rights reserved.
+//  Copyright © 2015 ReSwift Community. All rights reserved.
 //
 
 import XCTest
 /**
- @testable import for internal testing of `withSpecificTypes`
+ @testable import for testing of `withSpecificTypes`
  */
 @testable import ReSwift
 
@@ -28,7 +28,7 @@ class TypeHelperTests: XCTestCase {
             return state ?? AppState1()
         }
 
-        withSpecificTypes(StandardAction(type: ""), state: AppState1(), function: reducerFunction)
+        withSpecificTypes(NoOpAction(), state: AppState1(), function: reducerFunction)
 
         XCTAssertTrue(called)
     }
@@ -44,7 +44,7 @@ class TypeHelperTests: XCTestCase {
             return state ?? AppState1()
         }
 
-        withSpecificTypes(StandardAction(type: ""), state: nil, function: reducerFunction)
+        withSpecificTypes(NoOpAction(), state: nil, function: reducerFunction)
 
         XCTAssertTrue(called)
     }
@@ -60,7 +60,7 @@ class TypeHelperTests: XCTestCase {
             return state ?? AppState1()
         }
 
-        withSpecificTypes(StandardAction(type: ""), state: AppState2(), function: reducerFunction)
+        withSpecificTypes(NoOpAction(), state: AppState2(), function: reducerFunction)
 
         XCTAssertFalse(called)
     }

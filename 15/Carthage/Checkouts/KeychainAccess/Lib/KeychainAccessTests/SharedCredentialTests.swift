@@ -27,7 +27,6 @@ import XCTest
 import KeychainAccess
 
 class SharedCredentialTests: XCTestCase {
-
     override func setUp() {
         super.setUp()
     }
@@ -73,7 +72,11 @@ class SharedCredentialTests: XCTestCase {
             for _ in 0...100_000 {
                 let password = Keychain.generatePassword()
 
+                #if swift(>=4.2)
+                XCTAssertEqual(password.count, "xxx-xxx-xxx-xxx".count)
+                #else
                 XCTAssertEqual(password.characters.count, "xxx-xxx-xxx-xxx".characters.count)
+                #endif
                 XCTAssertFalse(passwords.contains(password))
 
                 passwords.insert(password)
