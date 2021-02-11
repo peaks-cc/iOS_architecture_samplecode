@@ -60,6 +60,7 @@ final class SearchUserPresenter: SearchUserPresenterInput {
                 }
             case .failure(let error):
                 // TODO: Error Handling
+                print(error)
                 ()
             }
         }

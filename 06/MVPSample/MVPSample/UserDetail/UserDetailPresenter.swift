@@ -45,6 +45,7 @@ final class UserDetailPresenter: UserDetailPresenterInput {
                 }
             case .failure(let error):
                 // TODO: Error Handling
+                print(error)
                 ()
             }
         }
