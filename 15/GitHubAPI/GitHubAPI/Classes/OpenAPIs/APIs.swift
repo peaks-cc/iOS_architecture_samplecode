@@ -7,10 +7,10 @@
 import Foundation
 
 open class GitHubAPIAPI {
-    open static var basePath = "https://api.github.com/"
-    open static var credential: URLCredential?
-    open static var customHeaders: [String:String] = [:]
-    open static var requestBuilderFactory: RequestBuilderFactory = AlamofireRequestBuilderFactory()
+    public static var basePath = "https://api.github.com/"
+    public static var credential: URLCredential?
+    public static var customHeaders: [String:String] = [:]
+    public static var requestBuilderFactory: RequestBuilderFactory = AlamofireRequestBuilderFactory()
 }
 
 open class RequestBuilder<T> {
