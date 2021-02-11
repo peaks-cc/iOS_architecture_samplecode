@@ -74,7 +74,7 @@ extension GitHubAPI.DefaultAPI {
 private func requestAsSingle<T: Decodable>(requestBuilder rb: RequestBuilder<T>) -> Single<Response<T>> {
     return RxSwift.Single.create { observer -> Disposable in
         guard let rb = rb as? AlamofireRequestBuilder<T>, let urlRequest = rb.makeDataRequest().request else {
-            observer(.error(APIDomainError.unreachable))
+            observer(.failure(APIDomainError.unreachable))
             return Disposables.create()
         }
 
@@ -84,19 +84,19 @@ private func requestAsSingle<T: Decodable>(requestBuilder rb: RequestBuilder<T>)
                 loggerError(urlRequest, error: error)
                 if let responseError = (error as? GitHubAPI.ErrorResponse)?.responseError {
                     if let networkError = responseError.networkError {
-                        observer(.error(APIDomainError.network(error: networkError)))
+                        observer(.failure(APIDomainError.network(error: networkError)))
                     } else {
-                        observer(.error(APIDomainError.response(error: responseError)))
+                        observer(.failure(APIDomainError.response(error: responseError)))
                     }
                 } else {
-                    observer(.error(APIDomainError.unknownError(error: error)))
+                    observer(.failure(APIDomainError.unknownError(error: error)))
                 }
 
             } else if let body = response?.body {
                 let response = Response(content: body, urlRequest: urlRequest)
                 observer(.success(response))
             } else {
-                observer(.error(APIDomainError.unreachable))
+                observer(.failure(APIDomainError.unreachable))
             }
         }
         return Disposables.create()
@@ -107,7 +107,7 @@ private func requestAsSingle<T: Decodable>(requestBuilder rb: RequestBuilder<T>)
 private func requestAsSingleNoContent(requestBuilder rb: RequestBuilder<Void>) -> Single<Response<NoContent>> {
     return RxSwift.Single.create { observer -> Disposable in
         guard let rb = rb as? AlamofireRequestBuilder<Void>, let urlRequest = rb.makeDataRequest().request else {
-            observer(.error(APIDomainError.unreachable))
+            observer(.failure(APIDomainError.unreachable))
             return Disposables.create()
         }
 
@@ -117,19 +117,19 @@ private func requestAsSingleNoContent(requestBuilder rb: RequestBuilder<Void>) -
                 loggerError(urlRequest, error: error)
                 if let responseError = (error as? GitHubAPI.ErrorResponse)?.responseError {
                     if let networkError = responseError.networkError {
-                        observer(.error(APIDomainError.network(error: networkError)))
+                        observer(.failure(APIDomainError.network(error: networkError)))
                     } else {
-                        observer(.error(APIDomainError.response(error: responseError)))
+                        observer(.failure(APIDomainError.response(error: responseError)))
                     }
                 } else {
-                    observer(.error(APIDomainError.unknownError(error: error)))
+                    observer(.failure(APIDomainError.unknownError(error: error)))
                 }
 
             } else if let response = response, response.statusCode == noContent { // For 204 NoContent
                 let response = Response(content: NoContent(), urlRequest: urlRequest)
                 observer(.success(response))
             } else {
-                observer(.error(APIDomainError.unreachable))
+                observer(.failure(APIDomainError.unreachable))
             }
         }
         return Disposables.create()

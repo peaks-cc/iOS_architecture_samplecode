@@ -62,7 +62,7 @@ public let debugDelayRequestMiddleware: ReSwift.Middleware<AppState> = { dispatc
     return { next in
         return { action in
             if let action = action as? ThunkAction {
-                let single = action.single.delaySubscription(0.5, scheduler: MainScheduler.instance)
+                let single = action.single.delaySubscription(RxTimeInterval.milliseconds(500), scheduler: MainScheduler.instance)
                 let singleAction = ThunkAction(
                                         single, disposeBag:
                                         action.disposeBag,

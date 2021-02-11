@@ -162,7 +162,7 @@ public struct ErrorNotificationTrigger: Identifierable {
 //////////////////////////////////////////////////////////////////////////////////////////
 // MARK: - Action Helper
 //////////////////////////////////////////////////////////////////////////////////////////
-extension PrimitiveSequence where TraitType == SingleTrait, Element == ReSwift.Action {
+extension PrimitiveSequence where Trait == SingleTrait, Element == ReSwift.Action {
     public typealias Handler = (APIDomainError) -> Element
     public func mapError(_ handler: @escaping Handler) -> PrimitiveSequence<Trait, Element> {
         return catchError { (error: Error) -> PrimitiveSequence<Trait, Element> in

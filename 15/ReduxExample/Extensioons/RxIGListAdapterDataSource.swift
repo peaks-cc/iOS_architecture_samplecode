@@ -23,7 +23,7 @@ extension RxListAdapterDataSource {
 extension Reactive where Base: IGListKit.ListAdapter {
     func items<DataSource: RxListAdapterDataSource & IGListKit.ListAdapterDataSource, O: RxSwift.ObservableType>(dataSource: DataSource)
         -> (_ source: O)
-        -> Disposable where DataSource.Element == O.E {
+        -> Disposable where DataSource.Element == O.Element {
             weak var weakBase: IGListKit.ListAdapter? = self.base
             return { source in
                 let subscription = source
