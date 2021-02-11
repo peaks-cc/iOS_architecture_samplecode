@@ -46,9 +46,9 @@ class ViewModelTests: XCTestCase {
         XCTContext.runActivity(named: "バリデーションに失敗する場合") { _ in
             XCTContext.runActivity(named: "idもpasswordも入力されていない場合") { _ in
                 setup()
-                fakeModel.validationResult = .failure(ModelError.invalidIdAndPassword)
+                fakeModel.result = .failure(ModelError.invalidIdAndPassword)
 
-                viewModel.result(id: nil, password: nil)
+                viewModel.idPasswordChanged(id: nil, password: nil)
 
                 XCTAssertEqual("IDとPasswordが未入力です。", changedText)
                 XCTAssertEqual(UIColor.red, changedColor)
