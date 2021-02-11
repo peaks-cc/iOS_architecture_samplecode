@@ -5,7 +5,7 @@
 
 import UIKit
 
-protocol UserDetailViewProtocol: class, Transitioner {
+protocol UserDetailViewProtocol: Transitioner {
     func reloadTableView()
 }
 
