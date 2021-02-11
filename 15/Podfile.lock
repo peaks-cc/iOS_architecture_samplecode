@@ -1,13 +1,13 @@
 PODS:
-  - Alamofire (4.5.1)
+  - Alamofire (5.4.1)
   - GitHubAPI (0.0.1):
-    - Alamofire (~> 4.5.0)
-  - iOSSnapshotTestCase (4.0.0):
-    - iOSSnapshotTestCase/SwiftSupport (= 4.0.0)
-  - iOSSnapshotTestCase/Core (4.0.0)
-  - iOSSnapshotTestCase/SwiftSupport (4.0.0):
+    - Alamofire (~> 5.4.0)
+  - iOSSnapshotTestCase (6.2.0):
+    - iOSSnapshotTestCase/SwiftSupport (= 6.2.0)
+  - iOSSnapshotTestCase/Core (6.2.0)
+  - iOSSnapshotTestCase/SwiftSupport (6.2.0):
     - iOSSnapshotTestCase/Core
-  - MirrorDiffKit (3.1.0)
+  - MirrorDiffKit (5.0.1)
   - Mockingjay (2.0.1):
     - Mockingjay/Core (= 2.0.1)
     - Mockingjay/XCTest (= 2.0.1)
@@ -15,8 +15,8 @@ PODS:
     - URITemplate (~> 2.0)
   - Mockingjay/XCTest (2.0.1):
     - Mockingjay/Core
-  - SwiftGen (5.3.0)
-  - SwiftLint (0.27.0)
+  - SwiftGen (6.4.0)
+  - SwiftLint (0.42.0)
   - URITemplate (2.0.3)
 
 DEPENDENCIES:
@@ -43,13 +43,13 @@ EXTERNAL SOURCES:
     :version: 0.0.1
 
 SPEC CHECKSUMS:
-  Alamofire: 2d95912bf4c34f164fdfc335872e8c312acaea4a
-  GitHubAPI: 740d68cacf80f117cbf09e2d55ccc1b42d3d26e2
-  iOSSnapshotTestCase: 711379b19f69a22c131527df862352c877c2773c
-  MirrorDiffKit: df2d3a2c5c44ba8f8e68c638852b4a5550b6de10
+  Alamofire: 2291f7d21ca607c491dd17642e5d40fdcda0e65c
+  GitHubAPI: a74b24cdf4f7a18298496e6dac82fb2df76bdccb
+  iOSSnapshotTestCase: 9ab44cb5aa62b84d31847f40680112e15ec579a6
+  MirrorDiffKit: 0ee7f2522009144277b31ddbb4fd4261d31ebcc6
   Mockingjay: 11a621880d2887f1775bdcf824341eb68f218450
-  SwiftGen: 4379bd3640b0a212a0f6ea3c494adba385513d10
-  SwiftLint: 3207c1faa2240bf8973b191820a116113cd11073
+  SwiftGen: 67860cc7c3cfc2ed25b9b74cfd55495fc89f9108
+  SwiftLint: 4fa9579c63416865179bc416f0a92d55f009600d
   URITemplate: ace0c4c46dcf8afe6e89b4060621852886b15c3b
 
 PODFILE CHECKSUM: 26ea0712611d03072b6d60c01445633dac6d2d7b

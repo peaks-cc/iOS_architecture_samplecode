@@ -1,6 +1,6 @@
 Pod::Spec.new do |s|
   s.name = 'GitHubAPI'
-  s.ios.deployment_target = '9.0'
+  s.ios.deployment_target = '12.0'
   s.osx.deployment_target = '10.11'
   s.tvos.deployment_target = '9.0'
   s.version = '0.0.1'
@@ -10,5 +10,5 @@ Pod::Spec.new do |s|
   s.homepage = 'https://example.com'
   s.summary = 'GitHubAPIClient'
   s.source_files = 'GitHubAPI/Classes/**/*.swift'
-  s.dependency 'Alamofire', '~> 4.5.0'
+  s.dependency 'Alamofire', '~> 5.4.0'
 end
