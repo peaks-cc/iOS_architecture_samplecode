@@ -24,7 +24,7 @@ $ bundle exec pod install
 ### Carthage
 
 ```sh
-$ carthage bootstrap --platform iOS --cache-builds
+$ carthage bootstrap --platform iOS --cache-builds --use-xcframeworks
 ```
 
 ### Obtaining GitHub API Key
