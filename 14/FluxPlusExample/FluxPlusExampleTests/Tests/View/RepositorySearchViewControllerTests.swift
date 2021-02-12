@@ -57,6 +57,7 @@ final class RepositorySearchViewControllerTests: XCTestCase {
             })
 
         let searchBar: UISearchBar = dependency.viewController.searchBar
+        searchBar.text = query
         searchBar.delegate!.searchBar!(searchBar, textDidChange: query)
         searchBar.delegate!.searchBarSearchButtonClicked!(searchBar)
 
