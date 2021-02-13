@@ -19,7 +19,7 @@ public struct ReponseErrorConcernAction: ReSwift.Action {
 //////////////////////////////////////////////////////////////////////////////////////////
 // MARK: - Middleware
 //////////////////////////////////////////////////////////////////////////////////////////
-public let responseErrorConcernMiddleware: ReSwift.Middleware<AppState> = { dispatch, getState in
+public let responseErrorConcernMiddleware: ReSwift.Middleware<AppState> = { dispatch, _ in
     return { next in
         return { action in
             if let action = action as? ReponseErrorConcernAction {

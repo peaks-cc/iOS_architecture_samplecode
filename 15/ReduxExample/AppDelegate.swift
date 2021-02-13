@@ -33,7 +33,7 @@ final class AppTab {
 
     func prepare(_ reduxStore: RxReduxStore, rootViewController: UIViewController) {
         let vcs: [UIViewController] = {
-            // swiftlint:disable opening_brace
+            // swiftlint:disable superfluous_disable_command
             var vcs: [UIViewController] = [
             {
                 let vc = Router.controller(reduxStore, routingPage: .main)
@@ -90,7 +90,7 @@ final class AppMain {
 
     init(
         store: ReSwift.Store<AppState> = createReSwiftSrore(),
-        router: Routerable = Router(), //DI
+        router: Routerable = Router(), // DI
         keychainStore: KeychainStorable = KeychainStore(KeychainServiceeName), // DI
         userDefaults: UserDefaults = UserDefaults.standard // DI
     ) {

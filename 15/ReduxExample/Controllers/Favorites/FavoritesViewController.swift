@@ -3,7 +3,6 @@ import Redux
 import RxSwift
 import RxCocoa
 import IGListKit
-import Redux
 
 final class FavoritesViewController: UIViewController, HasWeakStateDisposeBag {
     typealias ThisState = FavoritesState
