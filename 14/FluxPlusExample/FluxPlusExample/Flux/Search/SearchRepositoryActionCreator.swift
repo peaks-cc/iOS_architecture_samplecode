@@ -27,7 +27,7 @@ final class SearchRepositoryActionCreator {
             .flatMap { query, page -> Observable<GitHub.Result<([GitHub.Repository], GitHub.Pagination)>> in
                 apiSession.searchRepositories(query: query, page: page)
                     .map { .success($0) }
-                    .catchError { .just(.failure($0)) }
+                    .catch { .just(.failure($0)) }
             }
             .share()
 

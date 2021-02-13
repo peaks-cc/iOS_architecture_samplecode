@@ -4,6 +4,7 @@
 //
 
 import UIKit
+import RxRelay
 import RxSwift
 import XCTest
 @testable import RxSimpleSample
@@ -22,18 +23,11 @@ class FakeModel: ModelProtocol {
 
 class ViewModelTests: XCTestCase {
     func test_changeTextAndColor() {
-        let idTextObservable = Observable<String?>.create { observer in
-            observer.onNext("id")
-            observer.onCompleted()
-            return Disposables.create()
-        }
-        let passwordTextObservable = Observable<String?>.create { observer in
-            observer.onNext("password")
-            observer.onCompleted()
-            return Disposables.create()
-        }
+        let idTextObservable = PublishSubject<String?>()
+        let passwordTextObservable = PublishSubject<String?>()
+        let validationResult = PublishSubject<Void>()
         let model = FakeModel()
-        model.result = Observable.just(())
+        model.result = validationResult
 
         let viewModel = ViewModel(
                 idTextObservable: idTextObservable,
@@ -41,12 +35,35 @@ class ViewModelTests: XCTestCase {
                 model: model
         )
 
-        viewModel.validationText.subscribe { text in
-            XCTAssertEqual("OK!!!", text.element)
-        }.dispose()
+        let validationText = BehaviorRelay<String?>(value: nil)
+        let disposable1 = viewModel.validationText
+            .bind(to: validationText)
+        defer {
+            disposable1.dispose()
+        }
 
-        viewModel.loadLabelColor.subscribe { color in
-            XCTAssertEqual(UIColor.green, color.element)
-        }.dispose()
+        let loadLabelColor = BehaviorRelay<UIColor?>(value: nil)
+        let disposable2 = viewModel.loadLabelColor
+            .bind(to: loadLabelColor)
+        defer {
+            disposable2.dispose()
+        }
+
+        do {
+            // 初回のcombineLatestをskip(1)しているので、イベントが発火しない・もしくは初期値
+            idTextObservable.onNext("id")
+            passwordTextObservable.onNext("password")
+            validationResult.onNext(())
+            XCTAssertEqual("IDとPasswordを入力してください。", validationText.value)
+            XCTAssertNil(loadLabelColor.value)
+        }
+
+        do {
+            // 2回目以降の発火で想定していた値が流れる
+            passwordTextObservable.onNext("password")
+            validationResult.onNext(())
+            XCTAssertEqual("OK!!!", validationText.value)
+            XCTAssertEqual(UIColor.green, loadLabelColor.value)
+        }
     }
 }

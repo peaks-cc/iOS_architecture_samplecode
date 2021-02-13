@@ -1,5 +1,4 @@
-# Uncomment the next line to define a global platform for your project
-# platform :ios, '9.0'
+platform :ios, '12.0'
 
 target 'RxMVVMSample' do
   # Comment the next line if you're not using Swift and don't want to use dynamic frameworks
@@ -7,8 +6,8 @@ target 'RxMVVMSample' do
 
   # Pods for RxMVVMSample
   
-  pod 'RxSwift',    '~> 4.0'
-  pod 'RxCocoa',    '~> 4.0'
+  pod 'RxSwift',    '~> 6.0'
+  pod 'RxCocoa',    '~> 6.0'
 
   target 'RxMVVMSampleTests' do
     inherit! :search_paths

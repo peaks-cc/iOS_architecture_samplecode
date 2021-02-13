@@ -21,7 +21,7 @@ final class GitHubApiSession: GitHubApiRequestable {
         let request = SearchRepositoriesRequest(query: query, sort: .stars, order: .desc, page: page, perPage: nil)
         session.send(request) { result in
             switch result {
-            case let .success(response, pagination):
+            case let .success((response, pagination)):
                 completion(.success((response.items, pagination)))
             case let .failure(error):
                 completion(.failure(error))

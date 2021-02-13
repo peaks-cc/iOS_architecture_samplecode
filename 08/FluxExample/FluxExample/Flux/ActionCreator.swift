@@ -31,7 +31,7 @@ extension ActionCreator {
         dispatcher.dispatch(.isRepositoriesFetching(true))
         apiSession.searchRepositories(query: query, page: page) { [dispatcher] result in
             switch result {
-            case let .success(repositories, pagination):
+            case let .success((repositories, pagination)):
                 dispatcher.dispatch(.searchRepositories(repositories))
                 dispatcher.dispatch(.searchPagination(pagination))
             case let .failure(error):

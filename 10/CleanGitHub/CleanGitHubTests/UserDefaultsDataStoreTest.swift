@@ -17,10 +17,6 @@ class UserDefaultsDataStoreTest: XCTestCase {
         dataStore = UserDefaultsDataStore(userDefaults: UserDefaults.standard)
     }
 
-    override func tearDown() {
-        // Put teardown code here. This method is called after the invocation of each test method in the class.
-    }
-
     func testSaveLike() {
         let repo: GitHubRepo = .init(id: GitHubRepo.ID(rawValue: "foobar"),
                                      fullName: "barbaz",
@@ -29,9 +25,9 @@ class UserDefaultsDataStoreTest: XCTestCase {
                                      stargazersCount: 0)
         dataStore.save(liked: true, for: repo.id) { result in
             if case .success(let isLiked) = result {
-                XCTAssertTrue(isLiked == true)
+                XCTAssertTrue(isLiked)
             } else {
-                XCTAssertTrue(false, "result must be a success.")
+                XCTFail("result must be a success.")
             }
         }
     }
@@ -42,20 +38,12 @@ class UserDefaultsDataStoreTest: XCTestCase {
                                      description: "desc",
                                      language: "Swift",
                                      stargazersCount: 0)
-        dataStore.save(repo: repo) { result in
+        dataStore.save(repos: [repo]) { result in
             if case .success(let repo) = result {
-                XCTAssertTrue(repo.fullName == "barbaz")
+                XCTAssertEqual(repo.map(\.fullName), ["barbaz"])
             } else {
-                XCTAssertTrue(false, "result must be a success.")
+                XCTFail("result must be a success.")
             }
         }
     }
-
-    func testPerformanceExample() {
-        // This is an example of a performance test case.
-        self.measure {
-            // Put the code you want to measure the time of here.
-        }
-    }
-
 }

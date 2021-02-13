@@ -18,7 +18,7 @@ final class RepositoryDetailViewController: UIViewController {
             webviewContainer.addSubview(webview)
             
             let constraints = [.top, .right, .left, .bottom].map {
-                NSLayoutConstraint(item: webviewContainer,
+                NSLayoutConstraint(item: webviewContainer!,
                                    attribute: $0,
                                    relatedBy: .equal,
                                    toItem: webview,

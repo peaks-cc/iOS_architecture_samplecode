@@ -23,10 +23,10 @@ final class GitHubApiSession: GitHubApiRequestable {
             let request = SearchRepositoriesRequest(query: query, sort: .stars, order: .desc, page: page, perPage: nil)
             let task = session.send(request) { result in
                 switch result {
-                case let .success(response, pagination):
+                case let .success((response, pagination)):
                     event(.success((response.items, pagination)))
                 case let .failure(error):
-                    event(.error(error))
+                    event(.failure(error))
                 }
             }
             return Disposables.create {

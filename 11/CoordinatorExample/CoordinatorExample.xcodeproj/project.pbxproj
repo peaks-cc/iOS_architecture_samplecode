@@ -278,17 +278,20 @@
 			isa = PBXProject;
 			attributes = {
 				LastSwiftUpdateCheck = 1000;
-				LastUpgradeCheck = 1000;
+				LastUpgradeCheck = 1240;
 				TargetAttributes = {
 					51DD5325218A0C1600D89039 = {
 						CreatedOnToolsVersion = 10.0;
+						LastSwiftMigration = 1240;
 					};
 					51DD5339218A0C1800D89039 = {
 						CreatedOnToolsVersion = 10.0;
+						LastSwiftMigration = 1240;
 						TestTargetID = 51DD5325218A0C1600D89039;
 					};
 					51DD5344218A0C1800D89039 = {
 						CreatedOnToolsVersion = 10.0;
+						LastSwiftMigration = 1240;
 						TestTargetID = 51DD5325218A0C1600D89039;
 					};
 				};
@@ -429,6 +432,7 @@
 				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
 				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
 				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
 				CLANG_WARN_STRICT_PROTOTYPES = YES;
 				CLANG_WARN_SUSPICIOUS_MOVE = YES;
@@ -490,6 +494,7 @@
 				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
 				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
 				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
 				CLANG_WARN_STRICT_PROTOTYPES = YES;
 				CLANG_WARN_SUSPICIOUS_MOVE = YES;
@@ -531,7 +536,7 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = "com.d-date.CoordinatorExample";
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_VERSION = 4.2;
+				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = Debug;
@@ -548,7 +553,7 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = "com.d-date.CoordinatorExample";
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_VERSION = 4.2;
+				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = Release;
@@ -567,7 +572,7 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = "com.d-date.CoordinatorExampleTests";
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_VERSION = 4.2;
+				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/CoordinatorExample.app/CoordinatorExample";
 			};
@@ -587,7 +592,7 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = "com.d-date.CoordinatorExampleTests";
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_VERSION = 4.2;
+				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/CoordinatorExample.app/CoordinatorExample";
 			};
@@ -606,7 +611,7 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = "com.d-date.CoordinatorExampleUITests";
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_VERSION = 4.2;
+				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 				TEST_TARGET_NAME = CoordinatorExample;
 			};
@@ -625,7 +630,7 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = "com.d-date.CoordinatorExampleUITests";
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_VERSION = 4.2;
+				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 				TEST_TARGET_NAME = CoordinatorExample;
 			};

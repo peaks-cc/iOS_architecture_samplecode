@@ -226,9 +226,11 @@
 				TargetAttributes = {
 					B5C043D0215FDEEE00E6F51E = {
 						CreatedOnToolsVersion = 10.0;
+						LastSwiftMigration = 1240;
 					};
 					B5C043E4215FDEEF00E6F51E = {
 						CreatedOnToolsVersion = 10.0;
+						LastSwiftMigration = 1240;
 						TestTargetID = B5C043D0215FDEEE00E6F51E;
 					};
 				};
@@ -452,7 +454,7 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.peaks.ktanaka117.MVPSample;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_VERSION = 4.2;
+				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = Debug;
@@ -469,7 +471,7 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.peaks.ktanaka117.MVPSample;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_VERSION = 4.2;
+				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = Release;
@@ -488,7 +490,7 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.peaks.ktanaka117.MVPSampleTests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_VERSION = 4.2;
+				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/MVPSample.app/MVPSample";
 			};
@@ -508,7 +510,7 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.peaks.ktanaka117.MVPSampleTests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_VERSION = 4.2;
+				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/MVPSample.app/MVPSample";
 			};

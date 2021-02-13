@@ -120,7 +120,7 @@ private final class LoginWebViewController: UIViewController {
         view.addSubview(webView)
         webView.translatesAutoresizingMaskIntoConstraints = false
         NSLayoutConstraint.activate([.top, .right, .bottom, .left].map {
-            NSLayoutConstraint(item: view, attribute: $0, relatedBy: .equal, toItem: webView, attribute: $0, multiplier: 1, constant: 0)
+            NSLayoutConstraint(item: view!, attribute: $0, relatedBy: .equal, toItem: webView, attribute: $0, multiplier: 1, constant: 0)
         })
 
         view.addSubview(progressView)
@@ -135,7 +135,7 @@ private final class LoginWebViewController: UIViewController {
         view.addSubview(alphaView)
         alphaView.translatesAutoresizingMaskIntoConstraints = false
         NSLayoutConstraint.activate([.top, .right, .bottom, .left].map {
-            NSLayoutConstraint(item: view, attribute: $0, relatedBy: .equal, toItem: alphaView, attribute: $0, multiplier: 1, constant: 0)
+            NSLayoutConstraint(item: view!, attribute: $0, relatedBy: .equal, toItem: alphaView, attribute: $0, multiplier: 1, constant: 0)
         })
 
         webView.navigationDelegate = self
@@ -166,7 +166,7 @@ extension LoginWebViewController: WKNavigationDelegate {
                     self?.activityIndicatorView.stopAnimating()
                 }
                 switch result {
-                case let .success(accessToken, _):
+                case let .success((accessToken, _)):
                     self?.accessTokenHandler?(accessToken)
                 case let .failure(error):
                     self?.errorHandler?(error)

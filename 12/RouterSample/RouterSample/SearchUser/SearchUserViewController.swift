@@ -8,8 +8,7 @@
 
 import UIKit
 
-protocol SearchUserViewProtocol: class,
-                                Transitioner where Self: UIViewController {
+protocol SearchUserViewProtocol: Transitioner {
     func reloadTableView()
 }
 
