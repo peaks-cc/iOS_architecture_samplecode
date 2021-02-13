@@ -7,7 +7,7 @@
 import Foundation
 import XCTest
 /**
- @testable import for internal testing of `Assertions.fatalErrorClosure`
+ @testable import for testing of `Assertions.fatalErrorClosure`
  */
 @testable import ReSwift
 
@@ -25,19 +25,20 @@ public extension XCTestCase {
      - parameter testCase:        The test case to be executed that expected to fire the assertion
      method.
      */
-    public func expectFatalError(expectedMessage: String? = nil, file: StaticString = #file,
-                                 line: UInt = #line, testCase: @escaping () -> Void) {
+    func expectFatalError(expectedMessage: String? = nil, file: StaticString = #file,
+                          line: UInt = #line, testCase: @escaping () -> Void) {
         expectAssertionNoReturnFunction(
             functionName: "fatalError",
             file: file,
             line: line,
             function: { (caller: @escaping (String) -> Void) -> Void in
-
                 Assertions.fatalErrorClosure = { message, _, _ in caller(message) }
-
-        }, expectedMessage: expectedMessage, testCase: testCase) { _ in
-            Assertions.fatalErrorClosure = Assertions.swiftFatalErrorClosure
-        }
+        },
+            expectedMessage: expectedMessage,
+            testCase: testCase,
+            cleanUp: {
+                Assertions.fatalErrorClosure = Assertions.swiftFatalErrorClosure
+        })
     }
 
     // MARK: Private Methods
@@ -53,7 +54,7 @@ public extension XCTestCase {
         cleanUp: @escaping () -> Void) {
 
         let asyncExpectation = futureExpectation(withDescription: funcName + "-Expectation")
-        var assertionMessage: String? = nil
+        var assertionMessage: String?
 
         function { (message) -> Void in
             assertionMessage = message

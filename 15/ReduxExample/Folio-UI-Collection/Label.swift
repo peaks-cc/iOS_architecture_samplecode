@@ -12,7 +12,9 @@ class Label: UILabel {
             self.attributedText = mas
         } else if let text = text {
             attributedText = NSAttributedString(string: text,
-                                    attributes: [NSAttributedString.Key(String(kCTLanguageAttributeName)): "ja", .foregroundColor: textColor, .font: font])
+                                                attributes: [NSAttributedString.Key(String(kCTLanguageAttributeName)): "ja",
+                                                             .foregroundColor: textColor!,
+                                                             .font: font!])
         }
     }
 }

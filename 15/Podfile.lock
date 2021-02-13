@@ -1,57 +1,65 @@
 PODS:
-  - Alamofire (4.5.1)
+  - Alamofire (4.9.1)
   - GitHubAPI (0.0.1):
-    - Alamofire (~> 4.5.0)
-  - iOSSnapshotTestCase (4.0.0):
-    - iOSSnapshotTestCase/SwiftSupport (= 4.0.0)
-  - iOSSnapshotTestCase/Core (4.0.0)
-  - iOSSnapshotTestCase/SwiftSupport (4.0.0):
+    - Alamofire (~> 4.9.1)
+  - iOSSnapshotTestCase (6.2.0):
+    - iOSSnapshotTestCase/SwiftSupport (= 6.2.0)
+  - iOSSnapshotTestCase/Core (6.2.0)
+  - iOSSnapshotTestCase/SwiftSupport (6.2.0):
     - iOSSnapshotTestCase/Core
-  - MirrorDiffKit (3.1.0)
-  - Mockingjay (2.0.1):
-    - Mockingjay/Core (= 2.0.1)
-    - Mockingjay/XCTest (= 2.0.1)
-  - Mockingjay/Core (2.0.1):
-    - URITemplate (~> 2.0)
-  - Mockingjay/XCTest (2.0.1):
+  - MirrorDiffKit (5.0.1)
+  - Mockingjay (3.0.0-alpha.1):
+    - Mockingjay/Core (= 3.0.0-alpha.1)
+    - Mockingjay/XCTest (= 3.0.0-alpha.1)
+  - Mockingjay/Core (3.0.0-alpha.1):
+    - URITemplate (~> 3.0)
+  - Mockingjay/XCTest (3.0.0-alpha.1):
     - Mockingjay/Core
-  - SwiftGen (5.3.0)
-  - SwiftLint (0.27.0)
-  - URITemplate (2.0.3)
+  - SwiftGen (6.4.0)
+  - SwiftLint (0.42.0)
+  - URITemplate (3.0.0)
 
 DEPENDENCIES:
   - GitHubAPI (from `./GitHubAPI`)
   - iOSSnapshotTestCase
   - MirrorDiffKit
-  - Mockingjay
+  - Mockingjay (= 3.0.0-alpha.1)
   - SwiftGen
   - SwiftLint
+  - URITemplate (from `https://github.com/kylef/URITemplate.swift`, branch `master`)
 
 SPEC REPOS:
-  https://github.com/cocoapods/specs.git:
+  trunk:
     - Alamofire
     - iOSSnapshotTestCase
     - MirrorDiffKit
     - Mockingjay
     - SwiftGen
     - SwiftLint
-    - URITemplate
 
 EXTERNAL SOURCES:
   GitHubAPI:
     :path: "./GitHubAPI"
     :version: 0.0.1
+  URITemplate:
+    :branch: master
+    :git: https://github.com/kylef/URITemplate.swift
+
+CHECKOUT OPTIONS:
+  URITemplate:
+    :commit: f26661846c20d134c1e6c57214353565480ace7d
+    :git: https://github.com/kylef/URITemplate.swift
 
 SPEC CHECKSUMS:
-  Alamofire: 2d95912bf4c34f164fdfc335872e8c312acaea4a
-  GitHubAPI: e0f09caccc2e43d23fa5731a34b2e26130653db7
-  iOSSnapshotTestCase: 711379b19f69a22c131527df862352c877c2773c
-  MirrorDiffKit: df2d3a2c5c44ba8f8e68c638852b4a5550b6de10
-  Mockingjay: 11a621880d2887f1775bdcf824341eb68f218450
-  SwiftGen: 4379bd3640b0a212a0f6ea3c494adba385513d10
-  SwiftLint: 3207c1faa2240bf8973b191820a116113cd11073
-  URITemplate: ace0c4c46dcf8afe6e89b4060621852886b15c3b
+  Alamofire: 85e8a02c69d6020a0d734f6054870d7ecb75cf18
+  GitHubAPI: bcb84b45b981ffcba123798020bed7bc574fffd4
+  iOSSnapshotTestCase: 9ab44cb5aa62b84d31847f40680112e15ec579a6
+  MirrorDiffKit: 0ee7f2522009144277b31ddbb4fd4261d31ebcc6
+  Mockingjay: 0f7c5aa49c7f1b95621cee3c79b557141f5a225c
+  SwiftGen: 67860cc7c3cfc2ed25b9b74cfd55495fc89f9108
+  SwiftLint: 4fa9579c63416865179bc416f0a92d55f009600d
+  URITemplate: d1b91b64772d18d6a6645f41c6230c7b2a8914fa
 
-PODFILE CHECKSUM: 26ea0712611d03072b6d60c01445633dac6d2d7b
+PODFILE CHECKSUM: 56d0c0508f9a8027904107425049a654b6ca1579
 
-COCOAPODS: 1.5.3
+COCOAPODS: 1.10.1

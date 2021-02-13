@@ -1,5 +1,5 @@
 /**
- * Copyright (c) 2016-present, Facebook, Inc.
+ * Copyright (c) Facebook, Inc. and its affiliates.
  *
  * This source code is licensed under the MIT license found in the
  * LICENSE file in the root directory of this source tree.
@@ -1165,6 +1165,24 @@ static const CGRect kTestFrame = (CGRect){{0, 0}, {100, 100}};
     ]];
 
     XCTAssertNil([self.layout layoutAttributesForItemAtIndexPath:genIndexPath(0, 4)]);
+}
+
+- (void)test_whenQueryingSupplementaryAttributes_withSizeEmpty_thatReturnsNil {
+    [self setUpWithStickyHeaders:NO topInset:0 stretchToEdge:YES];
+
+    [self prepareWithData:@[
+                            [[IGLayoutTestSection alloc] initWithInsets:UIEdgeInsetsZero
+                                                            lineSpacing:0
+                                                       interitemSpacing:0
+                                                           headerHeight:0
+                                                           footerHeight:0
+                                                                  items:@[
+                                                                          [[IGLayoutTestItem alloc] initWithSize:CGSizeMake(33, 33)],
+                                                                          ]],
+                            ]];
+
+    XCTAssertNil([self.layout layoutAttributesForSupplementaryViewOfKind:UICollectionElementKindSectionHeader atIndexPath:genIndexPath(0, 0)]);
+    XCTAssertNil([self.layout layoutAttributesForSupplementaryViewOfKind:UICollectionElementKindSectionFooter atIndexPath:genIndexPath(0, 0)]);
 }
 
 - (void)test_whenUpdatingSizes_thatLayoutUpdates {

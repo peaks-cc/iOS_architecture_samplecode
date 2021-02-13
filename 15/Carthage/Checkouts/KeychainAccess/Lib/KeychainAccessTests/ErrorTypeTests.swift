@@ -27,7 +27,6 @@ import XCTest
 import KeychainAccess
 
 class ErrorTypeTests: XCTestCase {
-
     override func setUp() {
         super.setUp()
     }
@@ -49,7 +48,7 @@ class ErrorTypeTests: XCTestCase {
         }
         #if os(OSX)
         do {
-            let status = Status(rawValue: errSecDskFull)
+            let status = Status(rawValue: errSecDiskFull)
             XCTAssertEqual(status, .diskFull)
             XCTAssertEqual(status?.description, "The disk is full.")
         }

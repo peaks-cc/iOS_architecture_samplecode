@@ -2,12 +2,12 @@
 //  StoreMiddlewareTests.swift
 //  ReSwift
 //
-//  Created by Benji Encz on 12/24/15.
-//  Copyright © 2015 Benjamin Encz. All rights reserved.
+//  Created by Benjamin Encz on 12/24/15.
+//  Copyright © 2015 ReSwift Community. All rights reserved.
 //
 
 import XCTest
-import ReSwift
+@testable import ReSwift
 
 let firstMiddleware: Middleware<StateType> = { dispatch, getState in
     return { next in
@@ -15,9 +15,9 @@ let firstMiddleware: Middleware<StateType> = { dispatch, getState in
 
             if var action = action as? SetValueStringAction {
                 action.value += " First Middleware"
-                return next(action)
+                next(action)
             } else {
-                return next(action)
+                next(action)
             }
         }
     }
@@ -29,9 +29,9 @@ let secondMiddleware: Middleware<StateType> = { dispatch, getState in
 
             if var action = action as? SetValueStringAction {
                 action.value += " Second Middleware"
-                return next(action)
+                next(action)
             } else {
-                return next(action)
+                next(action)
             }
         }
     }
@@ -45,7 +45,7 @@ let dispatchingMiddleware: Middleware<StateType> = { dispatch, getState in
                 dispatch(SetValueStringAction("\(action.value ?? 0)"))
             }
 
-            return next(action)
+            next(action)
         }
     }
 }
@@ -63,15 +63,24 @@ let stateAccessingMiddleware: Middleware<TestStringAppState> = { dispatch, getSt
                 dispatch(SetValueStringAction("Not OK"))
 
                 // and swallow the current one
-                return next(StandardAction(type: "No-Op-Action"))
+                next(NoOpAction())
+            } else {
+                next(action)
             }
-
-            return next(action)
         }
     }
 }
 
-// swiftlint:disable function_body_length
+func middleware(executing block: @escaping () -> Void) -> Middleware<StateType> {
+    return { dispatch, getState in
+        return { next in
+            return { action in
+                block()
+            }
+        }
+    }
+}
+
 class StoreMiddlewareTests: XCTestCase {
 
     /**
@@ -79,9 +88,15 @@ class StoreMiddlewareTests: XCTestCase {
      */
     func testDecorateDispatch() {
         let reducer = TestValueStringReducer()
+        // Swift 4.1 fails to cast this from Middleware<StateType> to Middleware<TestStringAppState>
+        // as expected during runtime, see: <https://bugs.swift.org/browse/SR-7362>
+        let middleware: [Middleware<TestStringAppState>] = [
+            firstMiddleware,
+            secondMiddleware
+        ]
         let store = Store<TestStringAppState>(reducer: reducer.handleAction,
             state: TestStringAppState(),
-            middleware: [firstMiddleware, secondMiddleware])
+            middleware: middleware)
 
         let subscriber = TestStoreSubscriber<TestStringAppState>()
         store.subscribe(subscriber)
@@ -97,9 +112,16 @@ class StoreMiddlewareTests: XCTestCase {
      */
     func testCanDispatch() {
         let reducer = TestValueStringReducer()
+        // Swift 4.1 fails to cast this from Middleware<StateType> to Middleware<TestStringAppState>
+        // as expected during runtime, see: <https://bugs.swift.org/browse/SR-7362>
+        let middleware: [Middleware<TestStringAppState>] = [
+            firstMiddleware,
+            secondMiddleware,
+            dispatchingMiddleware
+        ]
         let store = Store<TestStringAppState>(reducer: reducer.handleAction,
             state: TestStringAppState(),
-            middleware: [firstMiddleware, secondMiddleware, dispatchingMiddleware])
+            middleware: middleware)
 
         let subscriber = TestStoreSubscriber<TestStringAppState>()
         store.subscribe(subscriber)
@@ -124,5 +146,25 @@ class StoreMiddlewareTests: XCTestCase {
         store.dispatch(SetValueStringAction("Action That Won't Go Through"))
 
         XCTAssertEqual(store.state.testValue, "Not OK")
+    }
+
+    func testCanMutateMiddlewareAfterInit() {
+
+        let reducer = TestValueStringReducer()
+        let state = TestStringAppState()
+        let store = Store<TestStringAppState>(reducer: reducer.handleAction, state: state,
+            middleware: [])
+
+        // Adding
+        var added = false
+        store.middleware.append(middleware(executing: { added = true }))
+        store.dispatch(SetValueStringAction(""))
+        XCTAssertTrue(added)
+
+        // Removing
+        added = false
+        store.middleware = []
+        store.dispatch(SetValueStringAction(""))
+        XCTAssertFalse(added)
     }
 }

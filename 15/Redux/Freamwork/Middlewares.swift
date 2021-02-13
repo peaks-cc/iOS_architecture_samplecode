@@ -7,12 +7,12 @@ import API
 //////////////////////////////////////////////////////////////////////////////////////////
 // MARK: - Thunk
 //////////////////////////////////////////////////////////////////////////////////////////
-public let thunkMiddleware: ReSwift.Middleware<AppState> = { dispatch, getState in
+public let thunkMiddleware: ReSwift.Middleware<AppState> = { _, _ in
     return { next in
         return { action in
             if let action = action as? ThunkAction {
                 action.single
-                    .observeOn(MainScheduler.instance)
+                    .observe(on: MainScheduler.instance)
                     .subscribe(onSuccess: {
                         next($0)
                     })
@@ -24,12 +24,12 @@ public let thunkMiddleware: ReSwift.Middleware<AppState> = { dispatch, getState 
     }
 }
 
-public let thunkStateMapMiddleware: ReSwift.Middleware<AppState> = { dispatch, getState in
+public let thunkStateMapMiddleware: ReSwift.Middleware<AppState> = { _, _ in
     return { next in
         return { action in
           if let s = action as? StateMapAction, let action = s.originalAction as? ThunkAction {
                 action.single
-                    .observeOn(MainScheduler.instance)
+                    .observe(on: MainScheduler.instance)
                     .subscribe(onSuccess: {
                         next(StateMapAction(s.stateIdentifier, action: $0))
                     })
@@ -45,7 +45,7 @@ public let thunkStateMapMiddleware: ReSwift.Middleware<AppState> = { dispatch, g
 // MARK: - For Debug
 //////////////////////////////////////////////////////////////////////////////////////////
 #if DEBUG
-public let debugLoggingMiddleware: ReSwift.Middleware<AppState> = { dispatch, getState in
+public let debugLoggingMiddleware: ReSwift.Middleware<AppState> = { _, _ in
     return { next in
         return { action in
             if let action = action as? ThunkAction {
@@ -58,11 +58,11 @@ public let debugLoggingMiddleware: ReSwift.Middleware<AppState> = { dispatch, ge
     }
 }
 
-public let debugDelayRequestMiddleware: ReSwift.Middleware<AppState> = { dispatch, getState in
+public let debugDelayRequestMiddleware: ReSwift.Middleware<AppState> = { _, _ in
     return { next in
         return { action in
             if let action = action as? ThunkAction {
-                let single = action.single.delaySubscription(0.5, scheduler: MainScheduler.instance)
+                let single = action.single.delaySubscription(RxTimeInterval.milliseconds(500), scheduler: MainScheduler.instance)
                 let singleAction = ThunkAction(
                                         single, disposeBag:
                                         action.disposeBag,

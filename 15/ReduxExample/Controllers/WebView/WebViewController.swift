@@ -73,7 +73,7 @@ final class WebViewController: UIViewController {
 }
 
 extension WebViewController: WKNavigationDelegate {
-    private func webView(_ webView: WKWebView, didFail navigation: WKNavigation!, withError error: Error) {
+    func webView(_ webView: WKWebView, didFail navigation: WKNavigation!, withError error: Error) {
         logger.error(error)
     }
 }

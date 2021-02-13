@@ -7,15 +7,13 @@
 
 import Foundation
 
-
 /** Is present when the repo is a fork. Parent is the repo this repo was forked from. */
-
 public struct Parent: Codable, Equatable, Hashable {
 
     public var cloneUrl: String?
     /** ISO 8601 format: YYYY-MM-DDTHH:MM:SSZ */
     public var createdAt: String?
-    public var _description: String?
+    public var description: String?
     public var fork: Bool?
     public var forks: Int?
     public var forksCount: Int?
@@ -23,7 +21,7 @@ public struct Parent: Codable, Equatable, Hashable {
     public var gitUrl: String?
     public var homepage: String?
     public var htmlUrl: String?
-    public var _id: Int
+    public var id: Int
     public var language: String?
     public var masterBranch: String?
     public var mirrorUrl: String?
@@ -43,10 +41,10 @@ public struct Parent: Codable, Equatable, Hashable {
     public var watchers: Int?
     public var watchersCount: Int?
 
-    public init(cloneUrl: String?, createdAt: String?, _description: String?, fork: Bool?, forks: Int?, forksCount: Int?, fullName: String?, gitUrl: String?, homepage: String?, htmlUrl: String?, _id: Int, language: String?, masterBranch: String?, mirrorUrl: String?, name: String?, openIssues: Int?, openIssuesCount: Int?, owner: Owner?, _private: Bool?, pushedAt: String?, size: Int?, sshUrl: String?, svnUrl: String?, updatedAt: String?, url: String?, watchers: Int?, watchersCount: Int?) {
+    public init(cloneUrl: String? = nil, createdAt: String? = nil, description: String? = nil, fork: Bool? = nil, forks: Int? = nil, forksCount: Int? = nil, fullName: String? = nil, gitUrl: String? = nil, homepage: String? = nil, htmlUrl: String? = nil, id: Int, language: String? = nil, masterBranch: String? = nil, mirrorUrl: String? = nil, name: String? = nil, openIssues: Int? = nil, openIssuesCount: Int? = nil, owner: Owner? = nil, _private: Bool? = nil, pushedAt: String? = nil, size: Int? = nil, sshUrl: String? = nil, svnUrl: String? = nil, updatedAt: String? = nil, url: String? = nil, watchers: Int? = nil, watchersCount: Int? = nil) {
         self.cloneUrl = cloneUrl
         self.createdAt = createdAt
-        self._description = _description
+        self.description = description
         self.fork = fork
         self.forks = forks
         self.forksCount = forksCount
@@ -54,7 +52,7 @@ public struct Parent: Codable, Equatable, Hashable {
         self.gitUrl = gitUrl
         self.homepage = homepage
         self.htmlUrl = htmlUrl
-        self._id = _id
+        self.id = id
         self.language = language
         self.masterBranch = masterBranch
         self.mirrorUrl = mirrorUrl
@@ -73,10 +71,10 @@ public struct Parent: Codable, Equatable, Hashable {
         self.watchersCount = watchersCount
     }
 
-    public enum CodingKeys: String, CodingKey { 
+    public enum CodingKeys: String, CodingKey, CaseIterable {
         case cloneUrl = "clone_url"
         case createdAt = "created_at"
-        case _description = "description"
+        case description
         case fork
         case forks
         case forksCount = "forks_count"
@@ -84,7 +82,7 @@ public struct Parent: Codable, Equatable, Hashable {
         case gitUrl = "git_url"
         case homepage
         case htmlUrl = "html_url"
-        case _id = "id"
+        case id
         case language
         case masterBranch = "master_branch"
         case mirrorUrl = "mirror_url"
@@ -103,6 +101,4 @@ public struct Parent: Codable, Equatable, Hashable {
         case watchersCount = "watchers_count"
     }
 
-
 }
-

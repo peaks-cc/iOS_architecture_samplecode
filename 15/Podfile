@@ -1,5 +1,7 @@
+source 'https://github.com/CocoaPods/Specs.git'
+
 # Uncomment the next line to define a global platform for your project
-platform :ios, '12.0'
+platform :ios, '13.0'
 
 # ignore all warnings from all pods
 inhibit_all_warnings!
@@ -21,20 +23,23 @@ target 'ReduxExample' do
 
   target 'ReduxTests' do
     inherit! :search_paths
-    pod 'Mockingjay'
+    pod 'Mockingjay', '3.0.0-alpha.1'
+    pod 'URITemplate', :git => 'https://github.com/kylef/URITemplate.swift', :branch => 'master'
     pod 'MirrorDiffKit'
   end
 
   target 'ReduxExampleTests' do
     inherit! :search_paths
     pod 'iOSSnapshotTestCase'
-    pod 'Mockingjay'
+    pod 'Mockingjay', '3.0.0-alpha.1'
+    pod 'URITemplate', :git => 'https://github.com/kylef/URITemplate.swift', :branch => 'master'
     pod 'MirrorDiffKit'
   end
 
   target 'ReduxExampleUITests' do
     inherit! :search_paths
-    pod 'Mockingjay'
+    pod 'Mockingjay', '3.0.0-alpha.1'
+    pod 'URITemplate', :git => 'https://github.com/kylef/URITemplate.swift', :branch => 'master'
   end
 end
 
@@ -43,4 +48,10 @@ post_install do |installer|
     config.build_settings.delete('CODE_SIGNING_ALLOWED')
     config.build_settings.delete('CODE_SIGNING_REQUIRED')
   end
+  installer.pods_project.targets.each do |target|
+    target.build_configurations.each do |config|
+      config.build_settings['IPHONEOS_DEPLOYMENT_TARGET'] = '9.0'
+    end
+  end
 end
+

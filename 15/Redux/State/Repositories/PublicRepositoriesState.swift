@@ -174,7 +174,7 @@ extension PublicRepositoriesState {
                 ds.append(AdvertisingElement(ThisState.Action.hideAdvertising))
             }
             if shouldShowMoreRepository || $0.offset < 10 {
-                let isFavorite = favoriteIds.contains($0.element._id)
+                let isFavorite = favoriteIds.contains($0.element.id)
                 ds.append(PublicRepositoryElement($0.element, isFavorite: isFavorite))
             }
         }

@@ -1,6 +1,5 @@
 {
     "xcodebuild_arguments": ["-project", "ReSwift.xcodeproj", "-scheme", "ReSwift-macOS"],
-    "swift_version": "2.2",
     "author": "ReSwift",
     "author_url": "https://github.com/ReSwift/ReSwift",
     "module": "ReSwift",
@@ -44,16 +43,12 @@
         "name": "Actions",
         "children": [
             "Action",
-            "StandardAction",
-            "StandardActionConvertible",
             "ReSwiftInit"
         ]
     }, {
         "name": "Reducers",
         "children": [
-            "Reducer",
-            "AnyReducer",
-            "CombinedReducer"
+            "Reducer"
         ]
     }, {
         "name": "Utilities",

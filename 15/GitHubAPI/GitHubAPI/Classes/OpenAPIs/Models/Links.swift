@@ -7,26 +7,22 @@
 
 import Foundation
 
-
-
 public struct Links: Codable, Equatable, Hashable {
 
     public var git: String?
     public var html: String?
     public var _self: String?
 
-    public init(git: String?, html: String?, _self: String?) {
+    public init(git: String? = nil, html: String? = nil, _self: String? = nil) {
         self.git = git
         self.html = html
         self._self = _self
     }
 
-    public enum CodingKeys: String, CodingKey { 
+    public enum CodingKeys: String, CodingKey, CaseIterable {
         case git
         case html
         case _self = "self"
     }
 
-
 }
-

@@ -1,5 +1,5 @@
 /**
- * Copyright (c) 2016-present, Facebook, Inc.
+ * Copyright (c) Facebook, Inc. and its affiliates.
  * All rights reserved.
  *
  * This source code is licensed under the BSD-style license found in the
@@ -9,13 +9,15 @@
 
 #import <UIKit/UIKit.h>
 
-#import <IGListKit/IGListDiffable.h>
+#import <IGListDiffKit/IGListDiffable.h>
 
 @interface IGSectionObject : NSObject <IGListDiffable>
 
 @property (nonatomic, strong) NSArray *objects;
 
 + (instancetype)sectionWithObjects:(NSArray *)objects;
+
++ (instancetype)sectionWithObjects:(NSArray *)objects identifier:(NSString *)identifier;
 
 @end
 

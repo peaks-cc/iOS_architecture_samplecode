@@ -2,7 +2,6 @@ import UIKit
 import ReSwift
 import RxSwift
 import RxCocoa
-import RxOptional
 import SwiftyBeaver
 import Redux
 import GitHubAPI
@@ -34,7 +33,7 @@ final class AppTab {
 
     func prepare(_ reduxStore: RxReduxStore, rootViewController: UIViewController) {
         let vcs: [UIViewController] = {
-            // swiftlint:disable opening_brace
+            // swiftlint:disable superfluous_disable_command
             var vcs: [UIViewController] = [
             {
                 let vc = Router.controller(reduxStore, routingPage: .main)
@@ -91,7 +90,7 @@ final class AppMain {
 
     init(
         store: ReSwift.Store<AppState> = createReSwiftSrore(),
-        router: Routerable = Router(), //DI
+        router: Routerable = Router(), // DI
         keychainStore: KeychainStorable = KeychainStore(KeychainServiceeName), // DI
         userDefaults: UserDefaults = UserDefaults.standard // DI
     ) {
@@ -116,16 +115,14 @@ final class AppMain {
             .disposed(by: disposeBag)
 
         reduxStore.stateObservable
-            .map { $0.authenticationState.shouldLogoutTriger }
+            .compactMap { $0.authenticationState.shouldLogoutTriger }
             .distinctUntilChanged()
-            .filterNil()
             .bind(to: Binder(self) { me, _ in me.logout() })
             .disposed(by: disposeBag)
 
         reduxStore.stateObservable
-            .map { $0.routingState.shouldShowServiceUnavailableTriger }
+            .compactMap { $0.routingState.shouldShowServiceUnavailableTriger }
             .distinctUntilChanged()
-            .filterNil()
             .bind(to: Binder(self) { me, _ in me.presentServiceUnavailable() })
             .disposed(by: disposeBag)
 

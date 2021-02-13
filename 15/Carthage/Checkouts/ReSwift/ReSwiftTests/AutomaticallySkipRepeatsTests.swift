@@ -3,7 +3,7 @@
 //  ReSwift
 //
 //  Created by Daniel Martín Prieto on 03/11/2017.
-//  Copyright © 2017 Benjamin Encz. All rights reserved.
+//  Copyright © 2017 ReSwift Community. All rights reserved.
 //
 import XCTest
 import ReSwift
@@ -11,7 +11,7 @@ import ReSwift
 class AutomaticallySkipRepeatsTests: XCTestCase {
 
     private var store: Store<State>!
-    fileprivate var subscriptionUpdates: Int = 0
+    private var subscriptionUpdates: Int = 0
 
     override func setUp() {
         super.setUp()
@@ -27,20 +27,39 @@ class AutomaticallySkipRepeatsTests: XCTestCase {
         super.tearDown()
     }
 
-    func testInitialSubscription() {
+    func testInitialSubscriptionWithRegularSubstateSelection() {
         store.subscribe(self) { $0.select { $0.name } }
         XCTAssertEqual(self.subscriptionUpdates, 1)
     }
 
-    func testDispatchUnrelatedActionWithExplicitSkipRepeats() {
+    func testInitialSubscriptionWithKeyPath() {
+        store.subscribe(self) { $0.select(\.name) }
+        XCTAssertEqual(self.subscriptionUpdates, 1)
+    }
+
+    func testDispatchUnrelatedActionWithExplicitSkipRepeatsWithRegularSubstateSelection() {
         store.subscribe(self) { $0.select { $0.name }.skipRepeats() }
         XCTAssertEqual(self.subscriptionUpdates, 1)
         store.dispatch(ChangeAge(newAge: 30))
         XCTAssertEqual(self.subscriptionUpdates, 1)
     }
 
-    func testDispatchUnrelatedActionWithoutExplicitSkipRepeats() {
+    func testDispatchUnrelatedActionWithExplicitSkipRepeatsWithKeyPath() {
+        store.subscribe(self) { $0.select(\.name).skipRepeats() }
+        XCTAssertEqual(self.subscriptionUpdates, 1)
+        store.dispatch(ChangeAge(newAge: 30))
+        XCTAssertEqual(self.subscriptionUpdates, 1)
+    }
+
+    func testDispatchUnrelatedActionWithoutExplicitSkipRepeatsWithRegularSubstateSelection() {
         store.subscribe(self) { $0.select { $0.name } }
+        XCTAssertEqual(self.subscriptionUpdates, 1)
+        store.dispatch(ChangeAge(newAge: 30))
+        XCTAssertEqual(self.subscriptionUpdates, 1)
+    }
+
+    func testDispatchUnrelatedActionWithoutExplicitSkipRepeatsWithKeyPath() {
+        store.subscribe(self) { $0.select(\.name) }
         XCTAssertEqual(self.subscriptionUpdates, 1)
         store.dispatch(ChangeAge(newAge: 30))
         XCTAssertEqual(self.subscriptionUpdates, 1)

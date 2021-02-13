@@ -1,7 +1,6 @@
 import UIKit
 import RxSwift
 import RxCocoa
-import RxOptional
 import IGListKit
 import Redux
 

@@ -1,0 +1,15 @@
+name: GitHubAPI
+targets:
+  GitHubAPI:
+    type: framework
+    platform: iOS
+    deploymentTarget: "9.0"
+    sources: [GitHubAPI]
+    info:
+      path: ./Info.plist
+      version: 0.0.1
+    settings:
+      APPLICATION_EXTENSION_API_ONLY: true
+    scheme: {}
+    dependencies:
+    - carthage: Alamofire

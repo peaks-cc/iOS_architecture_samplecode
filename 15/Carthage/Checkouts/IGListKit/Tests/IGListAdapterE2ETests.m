@@ -1,5 +1,5 @@
 /**
- * Copyright (c) 2016-present, Facebook, Inc.
+ * Copyright (c) Facebook, Inc. and its affiliates.
  *
  * This source code is licensed under the MIT license found in the
  * LICENSE file in the root directory of this source tree.
@@ -242,7 +242,31 @@
 
     IGTestObject *object = self.dataSource.objects[0];
     IGListSectionController *sectionController = [self.adapter sectionControllerForObject:object];
+    
+    XCTestExpectation *expectation = genExpectation;
+    [sectionController.collectionContext performBatchAnimated:YES updates:^(id<IGListBatchContext> batchContext) {
+        object.value = @3;
+        [batchContext reloadSectionController:sectionController];
+    } completion:^(BOOL finished2) {
+        XCTAssertEqual([self.collectionView numberOfSections], 2);
+        XCTAssertEqual([self.collectionView numberOfItemsInSection:0], 3);
+        [expectation fulfill];
+    }];
+    [self waitForExpectationsWithTimeout:30 handler:nil];
+}
 
+- (void)test_whenSectionControllerReloads_withPreferItemReload_thatCountsAreUpdated {
+    [self setupWithObjects:@[
+                             genTestObject(@1, @2),
+                             genTestObject(@2, @2)
+                             ]];
+    
+    IGTestObject *object = self.dataSource.objects[0];
+    IGListSectionController *sectionController = [self.adapter sectionControllerForObject:object];
+    
+    // Prefer to use item reloads for section reloads if available.
+    [(IGListAdapterUpdater *)self.adapter.updater setPreferItemReloadsForSectionReloads:YES];
+    
     XCTestExpectation *expectation = genExpectation;
     [sectionController.collectionContext performBatchAnimated:YES updates:^(id<IGListBatchContext> batchContext) {
         object.value = @3;
@@ -1785,25 +1809,6 @@
     [self waitForExpectationsWithTimeout:30 handler:nil];
 }
 
-- (void)test_whenInsertingItemTwice_withDedupeExperiment_thatSecondInsertGetsDropped {
-    ((IGListAdapterUpdater*)self.updater).experiments = IGListExperimentDedupeItemUpdates;
-
-    IGTestObject *object = genTestObject(@1, @1);
-    [self setupWithObjects:@[object]];
-
-    IGTestDelegateController *controller = [self.adapter sectionControllerForObject:self.dataSource.objects.firstObject];
-    XCTestExpectation *expectation = genExpectation;
-    [controller.collectionContext performBatchAnimated:YES updates:^(id<IGListBatchContext>  _Nonnull batchContext) {
-        object.value = @2;
-        [batchContext insertInSectionController:controller atIndexes:[NSIndexSet indexSetWithIndex:0]];
-        [batchContext insertInSectionController:controller atIndexes:[NSIndexSet indexSetWithIndex:0]];
-    } completion:^(BOOL finished) {
-        [expectation fulfill];
-    }];
-
-    [self waitForExpectationsWithTimeout:30 handler:nil];
-}
-
 - (void)test_whenModifyingInitialAndFinalAttribute_thatLayoutIsCorrect {
     // set up the custom layout
     IGListCollectionViewLayout *layout = [[IGListCollectionViewLayout alloc] initWithStickyHeaders:NO topContentInset:0 stretchToEdge:YES];
@@ -1830,6 +1835,147 @@
 
     IGAssertEqualPoint(initialAttribute.center, attribute.center.x + offset.x, attribute.center.y + offset.y);
     IGAssertEqualPoint(finalAttribute.center, attribute.center.x + offset.x ,attribute.center.y + offset.y);
+}
+
+- (void)test_whenSwappingCollectionViewsAfterUpdate_thatUpdatePerformedOnTheCorrectCollectionView {
+    // BEGIN: setup of FIRST adapter+dataSource+collectionView
+    IGListAdapter *adapter1 = [[IGListAdapter alloc] initWithUpdater:[IGListAdapterUpdater new] viewController:nil];
+    adapter1.experiments |= IGListExperimentGetCollectionViewAtUpdate;
+
+    UICollectionView *collectionView1 = [[UICollectionView alloc] initWithFrame:self.window.frame collectionViewLayout:[UICollectionViewFlowLayout new]];
+    [self.window addSubview:collectionView1];
+    adapter1.collectionView = collectionView1;
+
+    IGTestDelegateDataSource *dataSource1 = [IGTestDelegateDataSource new];
+    dataSource1.objects = @[
+                            genTestObject(@1, @1),
+                            genTestObject(@2, @1)
+                            ];
+    adapter1.dataSource = dataSource1;
+    // END: setup of FIRST adapter+dataSource+collectionView
+
+    // BEGIN: setup of SECOND adapter+dataSource+collectionView
+    IGListAdapter *adapter2 = [[IGListAdapter alloc] initWithUpdater:[IGListAdapterUpdater new] viewController:nil];
+    adapter2.experiments |= IGListExperimentGetCollectionViewAtUpdate;
+
+    UICollectionView *collectionView2 = [[UICollectionView alloc] initWithFrame:self.window.frame collectionViewLayout:[UICollectionViewFlowLayout new]];
+    [self.window addSubview:collectionView2];
+    adapter2.collectionView = collectionView2;
+
+    IGTestDelegateDataSource *dataSource2 = [IGTestDelegateDataSource new];
+    dataSource2.objects = @[
+                            genTestObject(@3, @1)
+                            ];
+    adapter2.dataSource = dataSource2;
+    // END: setup of SECOND adapter+dataSource+collectionView
+
+    // delete the last-most section from the FIRST dataSource
+    dataSource1.objects = @[
+                            genTestObject(@1, @1)
+                            ];
+
+    XCTestExpectation *expectation = genExpectation;
+    [adapter1 performUpdatesAnimated:YES completion:^(BOOL finished) {
+        [expectation fulfill];
+    }];
+
+    // simulate a collectionView swap (e.g. cell reuse) immediately after an async update is queued
+    adapter1.collectionView = collectionView2;
+    adapter2.collectionView = collectionView1;
+
+    [self waitForExpectationsWithTimeout:30 handler:nil];
+}
+
+- (void)test_whenCollectionViewBecomesNilDuringPerformUpdates_thatStateCleanedCorrectly {
+    [self setupWithObjects:@[
+                             genTestObject(@1, @1)
+                             ]];
+    self.adapter.experiments |= IGListExperimentGetCollectionViewAtUpdate;
+
+    // perform update on listAdapter
+    XCTestExpectation *expectation1 = genExpectation;
+    [self.adapter performUpdatesAnimated:NO completion:^(BOOL finished) {
+        [expectation1 fulfill];
+    }];
+    [self waitForExpectationsWithTimeout:30 handler:nil];
+
+    // update the underlying contents before performing another update
+    self.dataSource.objects = @[
+                                genTestObject(@1, @1),
+                                genTestObject(@2, @1)
+                                ];
+
+    // perform update, but set the listAdapter's collectionView to nil during the update
+    XCTestExpectation *expectation2 = genExpectation;
+    [self.adapter performUpdatesAnimated:NO completion:^(BOOL finished) {
+        [expectation2 fulfill];
+    }];
+    self.adapter.collectionView = nil;
+    [self waitForExpectationsWithTimeout:30 handler:nil];
+
+    // add a new collectionView to the listAdapter
+    UICollectionView *collectionView2 = [[UICollectionView alloc] initWithFrame:self.window.frame collectionViewLayout:[UICollectionViewFlowLayout new]];
+    [self.window addSubview:collectionView2];
+    self.adapter.collectionView = collectionView2;
+
+    // update the underlying contents before performing update
+    self.dataSource.objects = @[
+                                genTestObject(@1, @1),
+                                genTestObject(@2, @1),
+                                genTestObject(@3, @1)
+                                ];
+
+    // perform update on listAdapter (now with a non-nil collectionView)
+    XCTestExpectation *expectation3 = genExpectation;
+    [self.adapter performUpdatesAnimated:NO completion:^(BOOL finished) {
+        [expectation3 fulfill];
+    }];
+    [self waitForExpectationsWithTimeout:30 handler:nil];
+}
+
+- (void)test_whenCollectionViewBecomesNilDuringReloadData_thatStateCleanedCorrectly {
+    [self setupWithObjects:@[
+                             genTestObject(@1, @1)
+                             ]];
+    self.adapter.experiments |= IGListExperimentGetCollectionViewAtUpdate;
+
+    // reload data on listAdapter
+    XCTestExpectation *expectation1 = genExpectation;
+    [self.adapter reloadDataWithCompletion:^(BOOL finished) {
+        [expectation1 fulfill];
+    }];
+    [self waitForExpectationsWithTimeout:30 handler:nil];
+
+    // update the underlying contents before reloading again
+    self.dataSource.objects = @[
+                                genTestObject(@1, @1),
+                                genTestObject(@2, @1)
+                                ];
+
+    // reload data, but set the listAdapter's collectionView to nil during the update
+    XCTestExpectation *expectation2 = genExpectation;
+    [self.adapter reloadDataWithCompletion:^(BOOL finished) {
+        [expectation2 fulfill];
+    }];
+    self.adapter.collectionView = nil;
+    [self waitForExpectationsWithTimeout:30 handler:nil];
+
+    // add a new collectionView to the listAdapter
+    UICollectionView *collectionView2 = [[UICollectionView alloc] initWithFrame:self.window.frame collectionViewLayout:[UICollectionViewFlowLayout new]];
+    [self.window addSubview:collectionView2];
+    self.adapter.collectionView = collectionView2;
+    self.dataSource.objects = @[
+                                genTestObject(@1, @1),
+                                genTestObject(@2, @1),
+                                genTestObject(@3, @1)
+                                ];
+
+    // reload data on listAdapter (now with a non-nil collectionView)
+    XCTestExpectation *expectation3 = genExpectation;
+    [self.adapter reloadDataWithCompletion:^(BOOL finished) {
+        [expectation3 fulfill];
+    }];
+    [self waitForExpectationsWithTimeout:30 handler:nil];
 }
 
 @end

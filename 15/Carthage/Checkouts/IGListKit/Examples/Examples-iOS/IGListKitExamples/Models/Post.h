@@ -1,5 +1,5 @@
 /**
- Copyright (c) 2016-present, Facebook, Inc. All rights reserved.
+ Copyright (c) Facebook, Inc. and its affiliates.
 
  The examples provided by Facebook are for non-commercial testing and evaluation
  purposes only. Facebook reserves all rights not expressly granted.
@@ -14,7 +14,7 @@
 
 #import <Foundation/Foundation.h>
 
-#import <IGListKit/IGListDiffable.h>
+#import <IGListDiffKit/IGListDiffable.h>
 
 @interface Post : NSObject <IGListDiffable>
 

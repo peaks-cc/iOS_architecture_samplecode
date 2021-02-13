@@ -1,7 +1,6 @@
 import UIKit
 import RxSwift
 import RxCocoa
-import RxOptional
 import IGListKit
 import Redux
 
@@ -64,15 +63,13 @@ final class PublicRepositoriesViewController: UIViewController, HasWeakStateDisp
             .bind(to: refreshControl.rx.isRefreshing)
             .disposed(by: disposeBag)
         state
-            .map { $0.shouldRequestTrigger }
+            .compactMap { $0.shouldRequestTrigger }
             .distinctUntilChanged()
-            .filterNil()
             .bind(to: Binder(self) { $0.request($1.connectionType) })
             .disposed(by: disposeBag)
         state
-            .map { $0.shouldShowErrorNotificationTrigger }
+            .compactMap { $0.shouldShowErrorNotificationTrigger }
             .distinctUntilChanged()
-            .filterNil()
             .bind(to: Binder(self) { $0.showErrorNotification($1) })
             .disposed(by: disposeBag)
 

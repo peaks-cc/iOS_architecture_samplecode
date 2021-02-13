@@ -6,8 +6,9 @@ export PATH=${JAVA_HOME}/bin:$PATH
 rm -rf ./GitHubAPI
 java -jar openapi-generator-cli.jar generate \
     -i openapi-github.yaml \
-    -g swift4 \
+    -g swift5 \
     -o ./GitHubAPI \
+    --library alamofire \
     --additional-properties projectName='GitHubAPI' \
     --additional-properties podAuthors='susieyy' \
     --additional-properties podHomepage='https://example.com' \

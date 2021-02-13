@@ -1,5 +1,5 @@
 /**
- Copyright (c) 2016-present, Facebook, Inc. All rights reserved.
+ Copyright (c) Facebook, Inc. and its affiliates.
 
  The examples provided by Facebook are for non-commercial testing and evaluation
  purposes only. Facebook reserves all rights not expressly granted.
@@ -51,8 +51,6 @@ final class DemosViewController: UIViewController, ListAdapterDataSource {
                  controllerClass: SelfSizingCellsViewController.self),
         DemoItem(name: "Display delegate",
                  controllerClass: DisplayViewController.self),
-        DemoItem(name: "Stacked Section Controllers",
-                 controllerClass: StackedViewController.self),
         DemoItem(name: "Objc Demo",
                  controllerClass: ObjcDemoViewController.self),
         DemoItem(name: "Objc Generated Model Demo",
@@ -62,9 +60,7 @@ final class DemosViewController: UIViewController, ListAdapterDataSource {
         DemoItem(name: "Dependency Injection",
                  controllerClass: AnnouncingDepsViewController.self),
         DemoItem(name: "Reorder Cells",
-                 controllerClass: ReorderableViewController.self),
-        DemoItem(name: "Reorder Stacked Section Controllers",
-                 controllerClass: ReorderableStackedViewController.self)
+                 controllerClass: ReorderableViewController.self)
     ]
 
     override func viewDidLoad() {

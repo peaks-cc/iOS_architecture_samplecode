@@ -28,7 +28,7 @@ extension XCTestCase {
         return data
     }
 
-    func fixtureObject<T>(_ resource: String) -> T where T: Decodable {
-        return CodableHelper.decode(T.self, from: fixtureData(resource)).decodableObj!
+    func fixtureObject<T>(_ resource: String)-> Swift.Result<T, Error> where T: Decodable {
+        return CodableHelper.decode(T.self, from: fixtureData(resource))
     }
 }

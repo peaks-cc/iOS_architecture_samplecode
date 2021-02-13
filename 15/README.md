@@ -7,10 +7,10 @@ This is a sample App to learn redux architecture.
 
 ## Requirements
 
-- Xcode 10+
-- Swift 4.2
+- Xcode 12+
+- Swift 5.3
 - Ruby 2.3+
-- Carthage
+- Carthage 0.37.0
 
 ## Getting Started
 
@@ -24,7 +24,7 @@ $ bundle exec pod install
 ### Carthage
 
 ```sh
-$ carthage bootstrap --platform iOS --cache-builds
+$ carthage bootstrap --platform iOS --cache-builds --use-xcframeworks
 ```
 
 ### Obtaining GitHub API Key

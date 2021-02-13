@@ -28,7 +28,7 @@ class RequestTestsWithThunkBlocking: ReduxTestCase {
     }
 
     func testPublicRepositoriesStateActionRequestAsyncCreator() {
-        let expect: [GitHubAPI.PublicRepo] = fixtureObject("repositories.json")
+        let expect: [GitHubAPI.PublicRepo] = try! fixtureObject("repositories.json").get()
         stub(uri("/repositories"), jsonData(fixtureData("repositories.json")))
 
         // Execute request

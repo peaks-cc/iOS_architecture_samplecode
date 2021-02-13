@@ -1,5 +1,5 @@
 /**
- Copyright (c) 2016-present, Facebook, Inc. All rights reserved.
+ Copyright (c) Facebook, Inc. and its affiliates.
  
  The examples provided by Facebook are for non-commercial testing and evaluation
  purposes only. Facebook reserves all rights not expressly granted.
@@ -30,7 +30,7 @@ final class UsersProvider {
             throw UsersError.invalidData
         }
 
-        self.users = dicts.enumerated().flatMap { index, dict in
+        self.users = dicts.enumerated().compactMap { index, dict in
             guard let name = dict["name"] else { return nil }
 
             return User(pk: index, name: name.capitalized)

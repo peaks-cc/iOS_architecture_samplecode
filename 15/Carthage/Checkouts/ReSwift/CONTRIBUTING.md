@@ -61,11 +61,11 @@ In particular paying attention to:
 
 See [NSHipster Swift Documentation](http://nshipster.com/swift-documentation/) for a good reference on writing documentation in Swift.
 
-## Generating documentation
+### Generating documentation
 
-The documentation at `reswift.github.io/ReSwift` is generated from by combining the markdown documentation files with generated documentation using [jazzy](https://github.com/realm/jazzy).
+The documentation at `reswift.github.io/ReSwift` is generated from by combining the Markdown documentation files with generated documentation using [jazzy](https://github.com/realm/jazzy).
 
-The markdown files used to generated documentation are:
+The Markdown files used to generated documentation are:
 
 - README.md
 - CONTRIBUTING.md
@@ -86,7 +86,7 @@ Along with the Documentation sections, API sections also support extra documenta
     - Stores.md
     - Utilities.md
 
-Each of the markdown files are processed by the `generate_docs.sh` script and saved into `Docs/tmp/` ready for jazzy to generate the final documentation.
+Each of the Markdown files are processed by the `generate_docs.sh` script and saved into `Docs/tmp/` ready for jazzy to generate the final documentation.
 
 The processing of each file can include:
 
@@ -94,8 +94,6 @@ The processing of each file can include:
 - Adding a title
 - Replacing \{\{version\}\} with the current version
 - Ad-hoc string replacements (found in .jazzy.json under "string-replacements")
-
-A forked version of Jazzy is currently used to support individual markdown sections and injecting markdown into API section headers. It can be installed from [https://github.com/agentk/jazzy/](https://github.com/agentk/jazzy/tree/integrated-markdown).
 
 The documentation is hosted by GitHub pages under the [ReSwift gh-pages](https://github.com/ReSwift/ReSwift/tree/gh-pages) branch. The `build.sh` script in the `gh-pages` branch, installs / updates jazzy, checks out the latest master branch of ReSwift, and calls the `generated_docs.sh` script to generate docs into the master folder. Docs changes can then be committed and pushed to the `gh-pages` branch.
 
@@ -119,4 +117,28 @@ cd ReSwift-gh-pages
 ./build.sh
 # Documentation is ready to be committed.
 ```
+
+## Pull Request Technicalities
+
+You're always welcome to open Pull Requests, even if the result is not quite finished or you need feedback!
+
+Here's a checklist for you about what makes Pull Requests to ReSwift shine:
+
+* Run [SwiftLint](https://github.com/realm/SwiftLint) locally to ensure your code-style is consistent with the rest of the codebase.
+* Keep your Pull Requests focused. Rather be opening multiple PRs than making a dozen unrelated but discussion worthy changes in a single PR.
+* You can propose PRs to merge with the `master` branch directly. We don't use any complex branching strategies.
+
+As a contributor, choose the "squash & merge" strategy to merge PRs with a single commit, keeping the commit history clean. (That's an upside of focused Pull Requests: you don't lose extra information.)
+
+## Publishing New Releases
+
+Members of the [@ReSwift/releases](https://github.com/orgs/ReSwift/teams/releases) team have the necessary permissions to publish a new version to CocoaPods. If you want a new version of ReSwift to be published you should ping these folks.
+
+To create a new release, create a pull request targeting either `master`, or a separate release branch for hot-fixes, with the following:
+
+- [ ] Bump version number in `ReSwift.podspec` and `Info.plist` (We follow [semver](https://semver.org/) - most importantly any breaking API change should result in a major API version bump)
+- [ ] Add the new version number and the release date to `Changelog.md`
+- [ ] Create a tag off of the relevant branch (`master` for regular release) and add the relevant changelog entries to the [release list on GitHub](https://github.com/ReSwift/ReSwift/releases) 
+- [ ] Publish the new version to the CocoaPods trunk
+- [ ] ✨✨Bonus points ✨✨: for major version`ReSwift` releases, update `ReSwiftRouter` and `GitHubBrowserExample` to use the latest version of `ReSwift`
 
