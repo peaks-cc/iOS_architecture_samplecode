@@ -1,31 +1,32 @@
 PODS:
-  - Alamofire (5.4.1)
+  - Alamofire (4.9.1)
   - GitHubAPI (0.0.1):
-    - Alamofire (~> 5.4.0)
+    - Alamofire (~> 4.9.1)
   - iOSSnapshotTestCase (6.2.0):
     - iOSSnapshotTestCase/SwiftSupport (= 6.2.0)
   - iOSSnapshotTestCase/Core (6.2.0)
   - iOSSnapshotTestCase/SwiftSupport (6.2.0):
     - iOSSnapshotTestCase/Core
   - MirrorDiffKit (5.0.1)
-  - Mockingjay (2.0.1):
-    - Mockingjay/Core (= 2.0.1)
-    - Mockingjay/XCTest (= 2.0.1)
-  - Mockingjay/Core (2.0.1):
-    - URITemplate (~> 2.0)
-  - Mockingjay/XCTest (2.0.1):
+  - Mockingjay (3.0.0-alpha.1):
+    - Mockingjay/Core (= 3.0.0-alpha.1)
+    - Mockingjay/XCTest (= 3.0.0-alpha.1)
+  - Mockingjay/Core (3.0.0-alpha.1):
+    - URITemplate (~> 3.0)
+  - Mockingjay/XCTest (3.0.0-alpha.1):
     - Mockingjay/Core
   - SwiftGen (6.4.0)
   - SwiftLint (0.42.0)
-  - URITemplate (2.0.3)
+  - URITemplate (3.0.0)
 
 DEPENDENCIES:
   - GitHubAPI (from `./GitHubAPI`)
   - iOSSnapshotTestCase
   - MirrorDiffKit
-  - Mockingjay
+  - Mockingjay (= 3.0.0-alpha.1)
   - SwiftGen
   - SwiftLint
+  - URITemplate (from `https://github.com/kylef/URITemplate.swift`, branch `master`)
 
 SPEC REPOS:
   trunk:
@@ -35,23 +36,30 @@ SPEC REPOS:
     - Mockingjay
     - SwiftGen
     - SwiftLint
-    - URITemplate
 
 EXTERNAL SOURCES:
   GitHubAPI:
     :path: "./GitHubAPI"
     :version: 0.0.1
+  URITemplate:
+    :branch: master
+    :git: https://github.com/kylef/URITemplate.swift
+
+CHECKOUT OPTIONS:
+  URITemplate:
+    :commit: f26661846c20d134c1e6c57214353565480ace7d
+    :git: https://github.com/kylef/URITemplate.swift
 
 SPEC CHECKSUMS:
-  Alamofire: 2291f7d21ca607c491dd17642e5d40fdcda0e65c
-  GitHubAPI: a74b24cdf4f7a18298496e6dac82fb2df76bdccb
+  Alamofire: 85e8a02c69d6020a0d734f6054870d7ecb75cf18
+  GitHubAPI: bcb84b45b981ffcba123798020bed7bc574fffd4
   iOSSnapshotTestCase: 9ab44cb5aa62b84d31847f40680112e15ec579a6
   MirrorDiffKit: 0ee7f2522009144277b31ddbb4fd4261d31ebcc6
-  Mockingjay: 11a621880d2887f1775bdcf824341eb68f218450
+  Mockingjay: 0f7c5aa49c7f1b95621cee3c79b557141f5a225c
   SwiftGen: 67860cc7c3cfc2ed25b9b74cfd55495fc89f9108
   SwiftLint: 4fa9579c63416865179bc416f0a92d55f009600d
-  URITemplate: ace0c4c46dcf8afe6e89b4060621852886b15c3b
+  URITemplate: d1b91b64772d18d6a6645f41c6230c7b2a8914fa
 
-PODFILE CHECKSUM: 26ea0712611d03072b6d60c01445633dac6d2d7b
+PODFILE CHECKSUM: f173e7138260a2af28a38ec0d737b222b87c707c
 
-COCOAPODS: 1.10.1
+COCOAPODS: 1.9.2

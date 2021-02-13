@@ -1,7 +1,6 @@
 github "Instagram/IGListKit" "4.0.0"
 github "ReSwift/ReSwift" "6.0.0"
 github "ReactiveX/RxSwift" "6.0.0"
-github "RxSwiftCommunity/RxOptional" "v5.0.1"
 github "SwiftyBeaver/SwiftyBeaver" "1.9.3"
 github "keitaoouchi/MarkdownView" "1.7.1"
 github "kishikawakatsumi/KeychainAccess" "v4.2.1"

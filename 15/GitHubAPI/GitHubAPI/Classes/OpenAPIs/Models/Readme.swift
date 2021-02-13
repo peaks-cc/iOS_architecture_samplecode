@@ -7,8 +7,6 @@
 
 import Foundation
 
-
-
 public struct Readme: Codable, Equatable, Hashable {
 
     public var links: Links?
@@ -23,7 +21,7 @@ public struct Readme: Codable, Equatable, Hashable {
     public var type: String
     public var url: String
 
-    public init(links: Links?, content: String, encoding: String, gitUrl: String, htmlUrl: String, name: String, path: String, sha: String, size: Int, type: String, url: String) {
+    public init(links: Links? = nil, content: String, encoding: String, gitUrl: String, htmlUrl: String, name: String, path: String, sha: String, size: Int, type: String, url: String) {
         self.links = links
         self.content = content
         self.encoding = encoding
@@ -37,7 +35,7 @@ public struct Readme: Codable, Equatable, Hashable {
         self.url = url
     }
 
-    public enum CodingKeys: String, CodingKey { 
+    public enum CodingKeys: String, CodingKey, CaseIterable {
         case links = "_links"
         case content
         case encoding
@@ -51,6 +49,4 @@ public struct Readme: Codable, Equatable, Hashable {
         case url
     }
 
-
 }
-

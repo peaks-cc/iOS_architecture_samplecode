@@ -204,7 +204,7 @@ extension RepositoryState {
         ds.append(PublicUserElement(response.1.content))
 
         // Repository
-        let isFavorite = favoriteIds.contains(response.0.content._id)
+        let isFavorite = favoriteIds.contains(response.0.content.id)
         ds.append(RepositoryElement(response.0.content, isFavorite: isFavorite))
 
         // Readme
@@ -235,7 +235,7 @@ public struct PublicUserElement: Diffable {
     public let login: String
 
     init(_ user: GitHubAPI.PublicUser) {
-        self.identifier = .init(user._id)
+        self.identifier = .init(user.id)
         self.avatarUrl = URL(string: user.avatarUrl ?? "")
         self.login = user.login
     }

@@ -7,32 +7,28 @@
 
 import Foundation
 
-
-
 public struct Owner: Codable, Equatable, Hashable {
 
     public var avatarUrl: String?
     public var gravatarId: String?
-    public var _id: Int
+    public var id: Int
     public var login: String
     public var url: String
 
-    public init(avatarUrl: String?, gravatarId: String?, _id: Int, login: String, url: String) {
+    public init(avatarUrl: String? = nil, gravatarId: String? = nil, id: Int, login: String, url: String) {
         self.avatarUrl = avatarUrl
         self.gravatarId = gravatarId
-        self._id = _id
+        self.id = id
         self.login = login
         self.url = url
     }
 
-    public enum CodingKeys: String, CodingKey { 
+    public enum CodingKeys: String, CodingKey, CaseIterable {
         case avatarUrl = "avatar_url"
         case gravatarId = "gravatar_id"
-        case _id = "id"
+        case id
         case login
         case url
     }
 
-
 }
-

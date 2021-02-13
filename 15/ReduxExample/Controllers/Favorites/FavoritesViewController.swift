@@ -2,7 +2,6 @@ import UIKit
 import Redux
 import RxSwift
 import RxCocoa
-import RxOptional
 import IGListKit
 import Redux
 

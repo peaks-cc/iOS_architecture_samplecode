@@ -12,17 +12,17 @@ class AlamofireRequestBuilderFactory: RequestBuilderFactory {
         return AlamofireRequestBuilder<T>.self
     }
 
-    func getBuilder<T:Decodable>() -> RequestBuilder<T>.Type {
+    func getBuilder<T: Decodable>() -> RequestBuilder<T>.Type {
         return AlamofireDecodableRequestBuilder<T>.self
     }
 }
 
 // Store manager to retain its reference
-private var managerStore: [String: Alamofire.SessionManager] = [:]
+private var managerStore = SynchronizedDictionary<String, Alamofire.SessionManager>()
 
 open class AlamofireRequestBuilder<T>: RequestBuilder<T> {
-    required public init(method: String, URLString: String, parameters: [String : Any]?, isBody: Bool, headers: [String : String] = [:]) {
-        super.init(method: method, URLString: URLString, parameters: parameters, isBody: isBody, headers: headers)
+    required public init(method: String, URLString: String, parameters: [String: Any]?, headers: [String: String] = [:]) {
+        super.init(method: method, URLString: URLString, parameters: parameters, headers: headers)
     }
 
     /**
@@ -33,6 +33,28 @@ open class AlamofireRequestBuilder<T>: RequestBuilder<T> {
         let configuration = URLSessionConfiguration.default
         configuration.httpAdditionalHeaders = buildHeaders()
         return Alamofire.SessionManager(configuration: configuration)
+    }
+
+    /**
+     May be overridden by a subclass if you want to custom request constructor.
+     */
+    open func createURLRequest() -> URLRequest? {
+        guard let xMethod = Alamofire.HTTPMethod(rawValue: method) else {
+            fatalError("Unsuported Http method - \(method)")
+        }
+
+        let encoding: ParameterEncoding
+
+        switch xMethod {
+        case .get, .head:
+            encoding = URLEncoding()
+
+        case .options, .post, .put, .patch, .delete, .trace, .connect:
+            encoding = JSONDataEncoding()
+        }
+
+        guard let originalRequest = try? URLRequest(url: URLString, method: HTTPMethod(rawValue: method)!, headers: buildHeaders()) else { return nil }
+        return try? encoding.encode(originalRequest, with: parameters)
     }
 
     /**
@@ -50,96 +72,106 @@ open class AlamofireRequestBuilder<T>: RequestBuilder<T> {
      May be overridden by a subclass if you want to control the request
      configuration (e.g. to override the cache policy).
      */
-    open func makeRequest(manager: SessionManager, method: HTTPMethod, encoding: ParameterEncoding, headers: [String:String]) -> DataRequest {
+    open func makeRequest(manager: SessionManager, method: HTTPMethod, encoding: ParameterEncoding, headers: [String: String]) -> DataRequest {
         return manager.request(URLString, method: method, parameters: parameters, encoding: encoding, headers: headers)
     }
 
-    override open func execute(_ completion: @escaping (_ response: Response<T>?, _ error: Error?) -> Void) {
-        let managerId:String = UUID().uuidString
+    override open func execute(_ apiResponseQueue: DispatchQueue = GitHubAPIAPI.apiResponseQueue, _ completion: @escaping (_ result: Swift.Result<Response<T>, Error>) -> Void) {
+        let managerId = UUID().uuidString
         // Create a new manager for each request to customize its request header
         let manager = createSessionManager()
         managerStore[managerId] = manager
 
-        let encoding:ParameterEncoding = isBody ? JSONDataEncoding() : URLEncoding()
+        guard let xMethod = Alamofire.HTTPMethod(rawValue: method) else {
+            fatalError("Unsuported Http method - \(method)")
+        }
 
-        let xMethod = Alamofire.HTTPMethod(rawValue: method)
-        let fileKeys = parameters == nil ? [] : parameters!.filter { $1 is NSURL }
-                                                           .map { $0.0 }
+        let encoding: ParameterEncoding?
 
-        if fileKeys.count > 0 {
-            manager.upload(multipartFormData: { mpForm in
-                for (k, v) in self.parameters! {
-                    switch v {
-                    case let fileURL as URL:
-                        if let mimeType = self.contentTypeForFormPart(fileURL: fileURL) {
-                            mpForm.append(fileURL, withName: k, fileName: fileURL.lastPathComponent, mimeType: mimeType)
+        switch xMethod {
+        case .get, .head:
+            encoding = URLEncoding()
+
+        case .options, .post, .put, .patch, .delete, .trace, .connect:
+            let contentType = headers["Content-Type"] ?? "application/json"
+
+            if contentType == "application/json" {
+                encoding = JSONDataEncoding()
+            } else if contentType == "multipart/form-data" {
+                encoding = nil
+
+                manager.upload(multipartFormData: { mpForm in
+                    for (k, v) in self.parameters! {
+                        switch v {
+                        case let fileURL as URL:
+                            if let mimeType = self.contentTypeForFormPart(fileURL: fileURL) {
+                                mpForm.append(fileURL, withName: k, fileName: fileURL.lastPathComponent, mimeType: mimeType)
+                            } else {
+                                mpForm.append(fileURL, withName: k)
+                            }
+                        case let string as String:
+                            mpForm.append(string.data(using: String.Encoding.utf8)!, withName: k)
+                        case let number as NSNumber:
+                            mpForm.append(number.stringValue.data(using: String.Encoding.utf8)!, withName: k)
+                        default:
+                            fatalError("Unprocessable value \(v) with key \(k)")
                         }
-                        else {
-                            mpForm.append(fileURL, withName: k)
+                    }
+                }, to: URLString, method: xMethod, headers: nil, encodingCompletion: { encodingResult in
+                    switch encodingResult {
+                    case let .success(upload, _, _):
+                        if let onProgressReady = self.onProgressReady {
+                            onProgressReady(upload.uploadProgress)
                         }
-                    case let string as String:
-                        mpForm.append(string.data(using: String.Encoding.utf8)!, withName: k)
-                    case let number as NSNumber:
-                        mpForm.append(number.stringValue.data(using: String.Encoding.utf8)!, withName: k)
-                    default:
-                        fatalError("Unprocessable value \(v) with key \(k)")
+                        self.processRequest(request: upload, managerId, apiResponseQueue, completion)
+                    case let .failure(encodingError):
+                        apiResponseQueue.async {
+                            completion(.failure(ErrorResponse.error(415, nil, nil, encodingError)))
+                        }
                     }
-                }
-                }, to: URLString, method: xMethod!, headers: nil, encodingCompletion: { encodingResult in
-                switch encodingResult {
-                case .success(let upload, _, _):
-                    if let onProgressReady = self.onProgressReady {
-                        onProgressReady(upload.uploadProgress)
-                    }
-                    self.processRequest(request: upload, managerId, completion)
-                case .failure(let encodingError):
-                    completion(nil, ErrorResponse.error(415, nil, encodingError))
-                }
-            })
-        } else {
-            let request = makeRequest(manager: manager, method: xMethod!, encoding: encoding, headers: headers)
+                })
+            } else if contentType == "application/x-www-form-urlencoded" {
+                encoding = URLEncoding(destination: .httpBody)
+            } else {
+                fatalError("Unsuported Media Type - \(contentType)")
+            }
+        }
+
+        if let encoding = encoding {
+            let request = makeRequest(manager: manager, method: xMethod, encoding: encoding, headers: headers)
             if let onProgressReady = self.onProgressReady {
                 onProgressReady(request.progress)
             }
-            processRequest(request: request, managerId, completion)
+            processRequest(request: request, managerId, apiResponseQueue, completion)
         }
-
     }
 
-    fileprivate func processRequest(request: DataRequest, _ managerId: String, _ completion: @escaping (_ response: Response<T>?, _ error: Error?) -> Void) {
+    fileprivate func processRequest(request: DataRequest, _ managerId: String, _ apiResponseQueue: DispatchQueue, _ completion: @escaping (_ result: Swift.Result<Response<T>, Error>) -> Void) {
         if let credential = self.credential {
             request.authenticate(usingCredential: credential)
         }
 
         let cleanupRequest = {
-            _ = managerStore.removeValue(forKey: managerId)
+            managerStore[managerId] = nil
         }
 
         let validatedRequest = request.validate()
 
         switch T.self {
         case is String.Type:
-            validatedRequest.responseString(completionHandler: { (stringResponse) in
+            validatedRequest.responseString(queue: apiResponseQueue, completionHandler: { stringResponse in
                 cleanupRequest()
 
-                if stringResponse.result.isFailure {
-                    completion(
-                        nil,
-                        ErrorResponse.error(stringResponse.response?.statusCode ?? 500, stringResponse.data, stringResponse.result.error as! Error)
-                    )
-                    return
+                switch stringResponse.result {
+                case let .success(value):
+                    completion(.success(Response(response: stringResponse.response!, body: value as? T)))
+                case let .failure(error):
+                    completion(.failure(ErrorResponse.error(stringResponse.response?.statusCode ?? 500, stringResponse.data, stringResponse.response, error)))
                 }
 
-                completion(
-                    Response(
-                        response: stringResponse.response!,
-                        body: ((stringResponse.result.value ?? "") as! T)
-                    ),
-                    nil
-                )
             })
         case is URL.Type:
-            validatedRequest.responseData(completionHandler: { (dataResponse) in
+            validatedRequest.responseData(queue: apiResponseQueue, completionHandler: { dataResponse in
                 cleanupRequest()
 
                 do {
@@ -173,72 +205,51 @@ open class AlamofireRequestBuilder<T>: RequestBuilder<T> {
                     try fileManager.createDirectory(atPath: directoryPath, withIntermediateDirectories: true, attributes: nil)
                     try data.write(to: filePath, options: .atomic)
 
-                    completion(
-                        Response(
-                            response: dataResponse.response!,
-                            body: (filePath as! T)
-                        ),
-                        nil
-                    )
+                    completion(.success(Response(response: dataResponse.response!, body: filePath as? T)))
 
                 } catch let requestParserError as DownloadException {
-                    completion(nil, ErrorResponse.error(400, dataResponse.data, requestParserError))
-                } catch let error {
-                    completion(nil, ErrorResponse.error(400, dataResponse.data, error))
+                    completion(.failure(ErrorResponse.error(400, dataResponse.data, dataResponse.response, requestParserError)))
+                } catch {
+                    completion(.failure(ErrorResponse.error(400, dataResponse.data, dataResponse.response, error)))
                 }
                 return
             })
         case is Void.Type:
-            validatedRequest.responseData(completionHandler: { (voidResponse) in
+            validatedRequest.responseData(queue: apiResponseQueue, completionHandler: { voidResponse in
                 cleanupRequest()
 
-                if voidResponse.result.isFailure {
-                    completion(
-                        nil,
-                        ErrorResponse.error(voidResponse.response?.statusCode ?? 500, voidResponse.data, voidResponse.result.error!)
-                    )
-                    return
+                switch voidResponse.result {
+                case .success:
+                    completion(.success(Response(response: voidResponse.response!, body: nil)))
+                case let .failure(error):
+                    completion(.failure(ErrorResponse.error(voidResponse.response?.statusCode ?? 500, voidResponse.data, voidResponse.response, error)))
                 }
 
-                completion(
-                    Response(
-                        response: voidResponse.response!,
-                        body: nil),
-                    nil
-                )
             })
         default:
-            validatedRequest.responseData(completionHandler: { (dataResponse) in
+            validatedRequest.responseData(queue: apiResponseQueue, completionHandler: { dataResponse in
                 cleanupRequest()
 
-                if dataResponse.result.isFailure {
-                    completion(
-                        nil,
-                        ErrorResponse.error(dataResponse.response?.statusCode ?? 500, dataResponse.data, dataResponse.result.error!)
-                    )
-                    return
+                switch dataResponse.result {
+                case .success:
+                    completion(.success(Response(response: dataResponse.response!, body: dataResponse.data as? T)))
+                case let .failure(error):
+                    completion(.failure(ErrorResponse.error(dataResponse.response?.statusCode ?? 500, dataResponse.data, dataResponse.response, error)))
                 }
 
-                completion(
-                    Response(
-                        response: dataResponse.response!,
-                        body: (dataResponse.data as! T)
-                    ),
-                    nil
-                )
             })
         }
     }
 
     open func buildHeaders() -> [String: String] {
         var httpHeaders = SessionManager.defaultHTTPHeaders
-        for (key, value) in self.headers {
+        for (key, value) in headers {
             httpHeaders[key] = value
         }
         return httpHeaders
     }
 
-    fileprivate func getFileName(fromContentDisposition contentDisposition : String?) -> String? {
+    fileprivate func getFileName(fromContentDisposition contentDisposition: String?) -> String? {
 
         guard let contentDisposition = contentDisposition else {
             return nil
@@ -246,7 +257,7 @@ open class AlamofireRequestBuilder<T>: RequestBuilder<T> {
 
         let items = contentDisposition.components(separatedBy: ";")
 
-        var filename : String? = nil
+        var filename: String?
 
         for contentItem in items {
 
@@ -257,7 +268,7 @@ open class AlamofireRequestBuilder<T>: RequestBuilder<T> {
 
             filename = contentItem
             return filename?
-                .replacingCharacters(in: range, with:"")
+                .replacingCharacters(in: range, with: "")
                 .replacingOccurrences(of: "\"", with: "")
                 .trimmingCharacters(in: .whitespacesAndNewlines)
         }
@@ -266,7 +277,7 @@ open class AlamofireRequestBuilder<T>: RequestBuilder<T> {
 
     }
 
-    fileprivate func getPath(from url : URL) throws -> String {
+    fileprivate func getPath(from url: URL) throws -> String {
 
         guard var path = URLComponents(url: url, resolvingAgainstBaseURL: true)?.path else {
             throw DownloadException.requestMissingPath
@@ -280,7 +291,7 @@ open class AlamofireRequestBuilder<T>: RequestBuilder<T> {
 
     }
 
-    fileprivate func getURL(from urlRequest : URLRequest) throws -> URL {
+    fileprivate func getURL(from urlRequest: URLRequest) throws -> URL {
 
         guard let url = urlRequest.url else {
             throw DownloadException.requestMissingURL
@@ -291,123 +302,106 @@ open class AlamofireRequestBuilder<T>: RequestBuilder<T> {
 
 }
 
-fileprivate enum DownloadException : Error {
-    case responseDataMissing
-    case responseFailed
-    case requestMissing
-    case requestMissingPath
-    case requestMissingURL
-}
+open class AlamofireDecodableRequestBuilder<T: Decodable>: AlamofireRequestBuilder<T> {
 
-public enum AlamofireDecodableRequestBuilderError: Error {
-    case emptyDataResponse
-    case nilHTTPResponse
-    case jsonDecoding(DecodingError)
-    case generalError(Error)
-}
-
-open class AlamofireDecodableRequestBuilder<T:Decodable>: AlamofireRequestBuilder<T> {
-
-    override fileprivate func processRequest(request: DataRequest, _ managerId: String, _ completion: @escaping (_ response: Response<T>?, _ error: Error?) -> Void) {
+    override fileprivate func processRequest(request: DataRequest, _ managerId: String, _ apiResponseQueue: DispatchQueue, _ completion: @escaping (_ result: Swift.Result<Response<T>, Error>) -> Void) {
         if let credential = self.credential {
             request.authenticate(usingCredential: credential)
         }
 
         let cleanupRequest = {
-            _ = managerStore.removeValue(forKey: managerId)
+            managerStore[managerId] = nil
         }
 
         let validatedRequest = request.validate()
 
         switch T.self {
         case is String.Type:
-            validatedRequest.responseString(completionHandler: { (stringResponse) in
+            validatedRequest.responseString(queue: apiResponseQueue, completionHandler: { stringResponse in
                 cleanupRequest()
 
-                if stringResponse.result.isFailure {
-                    completion(
-                        nil,
-                        ErrorResponse.error(stringResponse.response?.statusCode ?? 500, stringResponse.data, stringResponse.result.error as! Error)
-                    )
-                    return
+                switch stringResponse.result {
+                case let .success(value):
+                    completion(.success(Response(response: stringResponse.response!, body: value as? T)))
+                case let .failure(error):
+                    completion(.failure(ErrorResponse.error(stringResponse.response?.statusCode ?? 500, stringResponse.data, stringResponse.response, error)))
                 }
 
-                completion(
-                    Response(
-                        response: stringResponse.response!,
-                        body: ((stringResponse.result.value ?? "") as! T)
-                    ),
-                    nil
-                )
             })
         case is Void.Type:
-            validatedRequest.responseData(completionHandler: { (voidResponse) in
+            validatedRequest.responseData(queue: apiResponseQueue, completionHandler: { voidResponse in
                 cleanupRequest()
 
-                if voidResponse.result.isFailure {
-                    completion(
-                        nil,
-                        ErrorResponse.error(voidResponse.response?.statusCode ?? 500, voidResponse.data, voidResponse.result.error!)
-                    )
-                    return
+                switch voidResponse.result {
+                case .success:
+                    completion(.success(Response(response: voidResponse.response!, body: nil)))
+                case let .failure(error):
+                    completion(.failure(ErrorResponse.error(voidResponse.response?.statusCode ?? 500, voidResponse.data, voidResponse.response, error)))
                 }
 
-                completion(
-                    Response(
-                        response: voidResponse.response!,
-                        body: nil),
-                    nil
-                )
             })
         case is Data.Type:
-            validatedRequest.responseData(completionHandler: { (dataResponse) in
+            validatedRequest.responseData(queue: apiResponseQueue, completionHandler: { dataResponse in
                 cleanupRequest()
 
-                if dataResponse.result.isFailure {
-                    completion(
-                        nil,
-                        ErrorResponse.error(dataResponse.response?.statusCode ?? 500, dataResponse.data, dataResponse.result.error!)
-                    )
-                    return
+                switch dataResponse.result {
+                case .success:
+                    completion(.success(Response(response: dataResponse.response!, body: dataResponse.data as? T)))
+                case let .failure(error):
+                    completion(.failure(ErrorResponse.error(dataResponse.response?.statusCode ?? 500, dataResponse.data, dataResponse.response, error)))
                 }
 
-                completion(
-                    Response(
-                        response: dataResponse.response!,
-                        body: (dataResponse.data as! T)
-                    ),
-                    nil
-                )
             })
         default:
-            validatedRequest.responseData(completionHandler: { (dataResponse: DataResponse<Data>) in
+            validatedRequest.responseData(queue: apiResponseQueue, completionHandler: { (dataResponse: DataResponse<Data>) in
                 cleanupRequest()
 
                 guard dataResponse.result.isSuccess else {
-                    completion(nil, ErrorResponse.error(dataResponse.response?.statusCode ?? 500, dataResponse.data, dataResponse.result.error!))
+                    completion(.failure(ErrorResponse.error(dataResponse.response?.statusCode ?? 500, dataResponse.data, dataResponse.response, dataResponse.result.error!)))
                     return
                 }
 
                 guard let data = dataResponse.data, !data.isEmpty else {
-                    completion(nil, ErrorResponse.error(-1, nil, AlamofireDecodableRequestBuilderError.emptyDataResponse))
+                    completion(.failure(ErrorResponse.error(-1, nil, dataResponse.response, DecodableRequestBuilderError.emptyDataResponse)))
                     return
                 }
 
                 guard let httpResponse = dataResponse.response else {
-                    completion(nil, ErrorResponse.error(-2, nil, AlamofireDecodableRequestBuilderError.nilHTTPResponse))
+                    completion(.failure(ErrorResponse.error(-2, nil, dataResponse.response, DecodableRequestBuilderError.nilHTTPResponse)))
                     return
                 }
 
-                var responseObj: Response<T>? = nil
+                let decodeResult = CodableHelper.decode(T.self, from: data)
 
-                let decodeResult: (decodableObj: T?, error: Error?) = CodableHelper.decode(T.self, from: data)
-                if decodeResult.error == nil {
-                    responseObj = Response(response: httpResponse, body: decodeResult.decodableObj)
+                switch decodeResult {
+                case let .success(decodableObj):
+                    completion(.success(Response(response: httpResponse, body: decodableObj)))
+                case let .failure(error):
+                    completion(.failure(ErrorResponse.error(httpResponse.statusCode, data, httpResponse, error)))
                 }
 
-                completion(responseObj, decodeResult.error)
             })
         }
     }
 
+}
+
+extension JSONDataEncoding: ParameterEncoding {
+
+    // MARK: Encoding
+
+    /// Creates a URL request by encoding parameters and applying them onto an existing request.
+    ///
+    /// - parameter urlRequest: The request to have parameters applied.
+    /// - parameter parameters: The parameters to apply. This should have a single key/value
+    ///                         pair with "jsonData" as the key and a Data object as the value.
+    ///
+    /// - throws: An `Error` if the encoding process encounters an error.
+    ///
+    /// - returns: The encoded request.
+    public func encode(_ urlRequest: URLRequestConvertible, with parameters: Parameters?) throws -> URLRequest {
+        let urlRequest = try urlRequest.asURLRequest()
+
+        return encode(urlRequest, with: parameters)
+    }
 }

@@ -80,12 +80,12 @@ public struct RepositoryElement: Diffable {
     public var fullName: String { return "\(owner)/\(name)" }
 
     init(_ repo: GitHubAPI.Repo, isFavorite: Bool) {
-        self.identifier = .init("\(String(describing: RepositoryElement.self))-\(repo._id)")
-        self.id = repo._id
+        self.identifier = .init("\(String(describing: RepositoryElement.self))-\(repo.id)")
+        self.id = repo.id
         self.updatedAt = repo.updatedAt
         self.owner = repo.owner.login
         self.name = repo.name
-        self.descriptionForRepository = repo._description ?? ""
+        self.descriptionForRepository = repo.description ?? ""
         self.launguage = repo.language ?? "N/A"
         self.openIssuesCount = String(describing: repo.openIssuesCount)
         self.forkCount = String(describing: repo.forksCount)
@@ -114,11 +114,11 @@ public struct PublicRepositoryElement: Diffable {
     public var fullName: String { return "\(owner)/\(name)" }
 
     init(_ repo: GitHubAPI.PublicRepo, isFavorite: Bool) {
-        self.identifier = .init("\(String(describing: PublicRepositoryElement.self))-\(repo._id)")
-        self.id = repo._id
+        self.identifier = .init("\(String(describing: PublicRepositoryElement.self))-\(repo.id)")
+        self.id = repo.id
         self.owner = repo.owner.login
         self.name = repo.name
-        self.descriptionForRepository = repo._description ?? ""
+        self.descriptionForRepository = repo.description ?? ""
         self.routingPage = .repository((owner: repo.owner.login, repo: repo.name))
         self.isFavorite = isFavorite
     }

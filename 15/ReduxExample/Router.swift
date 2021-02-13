@@ -117,8 +117,7 @@ final class Router: Routerable, Transitionable {
 
     static func mapToState<State: ReSwift.StateType>(_ reduxStore: RxReduxStore, transform: @escaping (AppState) throws -> State?) -> Observable<State> {
         return reduxStore.stateObservable
-            .map(transform)
-            .filterNil()
+            .compactMap(transform)
             .share(replay: 1)
     }
 

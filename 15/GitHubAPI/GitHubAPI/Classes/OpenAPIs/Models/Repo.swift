@@ -7,14 +7,12 @@
 
 import Foundation
 
-
-
 public struct Repo: Codable, Equatable, Hashable {
 
     public var cloneUrl: String
     /** ISO 8601 format: YYYY-MM-DDTHH:MM:SSZ */
     public var createdAt: String
-    public var _description: String?
+    public var description: String?
     public var fork: Bool
     public var forks: Int
     public var forksCount: Int
@@ -25,7 +23,7 @@ public struct Repo: Codable, Equatable, Hashable {
     public var hasWiki: Bool
     public var homepage: String?
     public var htmlUrl: String
-    public var _id: Int
+    public var id: Int
     public var language: String?
     public var masterBranch: String?
     public var mirrorUrl: String?
@@ -48,10 +46,10 @@ public struct Repo: Codable, Equatable, Hashable {
     public var watchers: Int
     public var watchersCount: Int
 
-    public init(cloneUrl: String, createdAt: String, _description: String?, fork: Bool, forks: Int, forksCount: Int, fullName: String, gitUrl: String, hasDownloads: Bool, hasIssues: Bool, hasWiki: Bool, homepage: String?, htmlUrl: String, _id: Int, language: String?, masterBranch: String?, mirrorUrl: String?, name: String, openIssues: Int, openIssuesCount: Int, organization: Organization?, owner: Owner, parent: Parent?, _private: Bool, pushedAt: String, size: Int, source: Source?, sshUrl: String, svnUrl: String?, updatedAt: String, url: String, watchers: Int, watchersCount: Int) {
+    public init(cloneUrl: String, createdAt: String, description: String? = nil, fork: Bool, forks: Int, forksCount: Int, fullName: String, gitUrl: String, hasDownloads: Bool, hasIssues: Bool, hasWiki: Bool, homepage: String? = nil, htmlUrl: String, id: Int, language: String? = nil, masterBranch: String? = nil, mirrorUrl: String? = nil, name: String, openIssues: Int, openIssuesCount: Int, organization: Organization? = nil, owner: Owner, parent: Parent? = nil, _private: Bool, pushedAt: String, size: Int, source: Source? = nil, sshUrl: String, svnUrl: String? = nil, updatedAt: String, url: String, watchers: Int, watchersCount: Int) {
         self.cloneUrl = cloneUrl
         self.createdAt = createdAt
-        self._description = _description
+        self.description = description
         self.fork = fork
         self.forks = forks
         self.forksCount = forksCount
@@ -62,7 +60,7 @@ public struct Repo: Codable, Equatable, Hashable {
         self.hasWiki = hasWiki
         self.homepage = homepage
         self.htmlUrl = htmlUrl
-        self._id = _id
+        self.id = id
         self.language = language
         self.masterBranch = masterBranch
         self.mirrorUrl = mirrorUrl
@@ -84,10 +82,10 @@ public struct Repo: Codable, Equatable, Hashable {
         self.watchersCount = watchersCount
     }
 
-    public enum CodingKeys: String, CodingKey { 
+    public enum CodingKeys: String, CodingKey, CaseIterable {
         case cloneUrl = "clone_url"
         case createdAt = "created_at"
-        case _description = "description"
+        case description
         case fork
         case forks
         case forksCount = "forks_count"
@@ -98,7 +96,7 @@ public struct Repo: Codable, Equatable, Hashable {
         case hasWiki = "has_wiki"
         case homepage
         case htmlUrl = "html_url"
-        case _id = "id"
+        case id
         case language
         case masterBranch = "master_branch"
         case mirrorUrl = "mirror_url"
@@ -120,6 +118,4 @@ public struct Repo: Codable, Equatable, Hashable {
         case watchersCount = "watchers_count"
     }
 
-
 }
-

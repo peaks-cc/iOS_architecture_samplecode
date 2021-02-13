@@ -62,7 +62,7 @@ extension FBSnapshotTestCase {
 
             let modelIdentifier = ProcessInfo.processInfo.environment["SIMULATOR_MODEL_IDENTIFIER"]!
             let suffixes = NSOrderedSet(array: ["_\(modelIdentifier)_\(UIDevice.current.systemVersion)"])
-            FBSnapshotVerifyView(view, identifier: identifier, suffixes: suffixes, tolerance: 0.05)
+            FBSnapshotVerifyView(view, identifier: identifier, suffixes: suffixes, perPixelTolerance: 0.05)
         } else {
             XCTFail("Can not find viewController.view")
         }
@@ -71,7 +71,7 @@ extension FBSnapshotTestCase {
     func verifyView(_ view: UIView, identifier: String = "") {
         let modelIdentifier = ProcessInfo.processInfo.environment["SIMULATOR_MODEL_IDENTIFIER"]!
         let suffixes = NSOrderedSet(array: ["_\(modelIdentifier)_\(UIDevice.current.systemVersion)"])
-        FBSnapshotVerifyView(view, identifier: identifier, suffixes: suffixes, tolerance: 0.05)
+        FBSnapshotVerifyView(view, identifier: identifier, suffixes: suffixes, perPixelTolerance: 0.05)
     }
 }
 

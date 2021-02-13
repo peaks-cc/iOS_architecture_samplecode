@@ -79,8 +79,16 @@ private func requestAsSingle<T: Decodable>(requestBuilder rb: RequestBuilder<T>)
         }
 
         loggerInfo(urlRequest)
-        rb.execute { (response, error) -> Void in
-            if let error = error {
+        rb.execute { (result: Swift.Result<GitHubAPI.Response<T>, Swift.Error>) -> Void in
+            switch result {
+            case let .success(response):
+                if let body = response.body {
+                    let response = Response(content: body, urlRequest: urlRequest)
+                    observer(.success(response))
+                } else {
+                    observer(.failure(APIDomainError.unreachable))
+                }
+            case let .failure(error):
                 loggerError(urlRequest, error: error)
                 if let responseError = (error as? GitHubAPI.ErrorResponse)?.responseError {
                     if let networkError = responseError.networkError {
@@ -91,12 +99,6 @@ private func requestAsSingle<T: Decodable>(requestBuilder rb: RequestBuilder<T>)
                 } else {
                     observer(.failure(APIDomainError.unknownError(error: error)))
                 }
-
-            } else if let body = response?.body {
-                let response = Response(content: body, urlRequest: urlRequest)
-                observer(.success(response))
-            } else {
-                observer(.failure(APIDomainError.unreachable))
             }
         }
         return Disposables.create()
@@ -112,8 +114,16 @@ private func requestAsSingleNoContent(requestBuilder rb: RequestBuilder<Void>) -
         }
 
         loggerInfo(urlRequest)
-        rb.execute { (response, error) -> Void in
-            if let error = error {
+        rb.execute { (result: Swift.Result<GitHubAPI.Response<Void>, Swift.Error>) -> Void in
+            switch result {
+            case let .success(response):
+                if response.statusCode == noContent { // For 204 NoContent
+                    let response = Response(content: NoContent(), urlRequest: urlRequest)
+                    observer(.success(response))
+                } else {
+                    observer(.failure(APIDomainError.unreachable))
+                }
+            case let .failure(error):
                 loggerError(urlRequest, error: error)
                 if let responseError = (error as? GitHubAPI.ErrorResponse)?.responseError {
                     if let networkError = responseError.networkError {
@@ -124,12 +134,6 @@ private func requestAsSingleNoContent(requestBuilder rb: RequestBuilder<Void>) -
                 } else {
                     observer(.failure(APIDomainError.unknownError(error: error)))
                 }
-
-            } else if let response = response, response.statusCode == noContent { // For 204 NoContent
-                let response = Response(content: NoContent(), urlRequest: urlRequest)
-                observer(.success(response))
-            } else {
-                observer(.failure(APIDomainError.unreachable))
             }
         }
         return Disposables.create()

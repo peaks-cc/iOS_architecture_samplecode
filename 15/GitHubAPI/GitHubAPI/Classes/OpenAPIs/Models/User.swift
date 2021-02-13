@@ -7,8 +7,6 @@
 
 import Foundation
 
-
-
 public struct User: Codable, Equatable, Hashable {
 
     public var avatarUrl: String?
@@ -25,7 +23,7 @@ public struct User: Codable, Equatable, Hashable {
     public var gravatarId: String?
     public var hireable: Bool?
     public var htmlUrl: String?
-    public var _id: Int
+    public var id: Int
     public var location: String?
     public var login: String
     public var name: String?
@@ -37,7 +35,7 @@ public struct User: Codable, Equatable, Hashable {
     public var type: String
     public var url: String
 
-    public init(avatarUrl: String?, bio: String?, blog: String?, collaborators: Int?, company: String?, createdAt: String, diskUsage: Int?, email: String, followers: Int, following: Int, gravatarId: String?, hireable: Bool?, htmlUrl: String?, _id: Int, location: String?, login: String, name: String?, ownedPrivateRepos: Int?, privateGists: Int?, publicGists: Int, publicRepos: Int, totalPrivateRepos: Int?, type: String, url: String) {
+    public init(avatarUrl: String? = nil, bio: String? = nil, blog: String? = nil, collaborators: Int? = nil, company: String? = nil, createdAt: String, diskUsage: Int? = nil, email: String, followers: Int, following: Int, gravatarId: String? = nil, hireable: Bool? = nil, htmlUrl: String? = nil, id: Int, location: String? = nil, login: String, name: String? = nil, ownedPrivateRepos: Int? = nil, privateGists: Int? = nil, publicGists: Int, publicRepos: Int, totalPrivateRepos: Int? = nil, type: String, url: String) {
         self.avatarUrl = avatarUrl
         self.bio = bio
         self.blog = blog
@@ -51,7 +49,7 @@ public struct User: Codable, Equatable, Hashable {
         self.gravatarId = gravatarId
         self.hireable = hireable
         self.htmlUrl = htmlUrl
-        self._id = _id
+        self.id = id
         self.location = location
         self.login = login
         self.name = name
@@ -64,7 +62,7 @@ public struct User: Codable, Equatable, Hashable {
         self.url = url
     }
 
-    public enum CodingKeys: String, CodingKey { 
+    public enum CodingKeys: String, CodingKey, CaseIterable {
         case avatarUrl = "avatar_url"
         case bio
         case blog
@@ -78,7 +76,7 @@ public struct User: Codable, Equatable, Hashable {
         case gravatarId = "gravatar_id"
         case hireable
         case htmlUrl = "html_url"
-        case _id = "id"
+        case id
         case location
         case login
         case name
@@ -91,6 +89,4 @@ public struct User: Codable, Equatable, Hashable {
         case url
     }
 
-
 }
-

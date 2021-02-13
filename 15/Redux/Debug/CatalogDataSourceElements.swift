@@ -80,20 +80,20 @@ func createPublicUser() -> GitHubAPI.PublicUser {
     return GitHubAPI.PublicUser(
         avatarUrl: "https://assets-cdn.github.com/images/modules/logos_page/GitHub-Mark.png",
         gravatarId: nil,
-        _id: 1,
+        id: 1,
         login: "LoginName",
         url: "https://github.com")
 }
 
 func createPublicRepo() -> GitHubAPI.PublicRepo {
     return GitHubAPI.PublicRepo(
-        _description: "Blazing fast Markdown rendering in Swift, built upon cmark.",
+        description: "Blazing fast Markdown rendering in Swift, built upon cmark.",
         fork: false,
         fullName: "FullName",
         htmlUrl: nil,
-        _id: 1,
+        id: 1,
         name: "Name",
-        owner: Owner(avatarUrl: nil, gravatarId: nil, _id: 1, login: "Owner", url: ""),
+        owner: Owner(avatarUrl: nil, gravatarId: nil, id: 1, login: "Owner", url: ""),
         _private: false,
         url: "")
 }
@@ -102,7 +102,7 @@ func createRepo() -> GitHubAPI.Repo {
     return GitHubAPI.Repo(
         cloneUrl: "",
         createdAt: "",
-        _description: "Blazing fast Markdown rendering in Swift, built upon cmark.",
+        description: "Blazing fast Markdown rendering in Swift, built upon cmark.",
         fork: false,
         forks: 999,
         forksCount: 999,
@@ -113,7 +113,7 @@ func createRepo() -> GitHubAPI.Repo {
         hasWiki: false,
         homepage: nil,
         htmlUrl: "",
-        _id: 1,
+        id: 1,
         language: "Swift",
         masterBranch: nil,
         mirrorUrl: nil,
@@ -121,7 +121,7 @@ func createRepo() -> GitHubAPI.Repo {
         openIssues: 999,
         openIssuesCount: 999,
         organization: nil,
-        owner: Owner(avatarUrl: nil, gravatarId: nil, _id: 1, login: "Owner", url: ""),
+        owner: Owner(avatarUrl: nil, gravatarId: nil, id: 1, login: "Owner", url: ""),
         parent: nil,
         _private: false,
         pushedAt: "",

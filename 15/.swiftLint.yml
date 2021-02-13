@@ -11,6 +11,7 @@ excluded:
 - GitHubAPIAll
 - vendor
 - openapi-patch-swift
+- Tests
 
 line_length: 160
 cyclomatic_complexity:

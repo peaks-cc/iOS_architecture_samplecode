@@ -28,8 +28,6 @@
 		902A354725D5641800B7A218 /* RxTest.xcframework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 902A353325D5641800B7A218 /* RxTest.xcframework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		902A354825D5641800B7A218 /* RxRelay.xcframework in Frameworks */ = {isa = PBXBuildFile; fileRef = 902A353425D5641800B7A218 /* RxRelay.xcframework */; };
 		902A354925D5641800B7A218 /* RxRelay.xcframework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 902A353425D5641800B7A218 /* RxRelay.xcframework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
-		902A354A25D5641800B7A218 /* RxOptional.xcframework in Frameworks */ = {isa = PBXBuildFile; fileRef = 902A353525D5641800B7A218 /* RxOptional.xcframework */; };
-		902A354B25D5641800B7A218 /* RxOptional.xcframework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 902A353525D5641800B7A218 /* RxOptional.xcframework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		902A354C25D5641800B7A218 /* RxSwift.xcframework in Frameworks */ = {isa = PBXBuildFile; fileRef = 902A353625D5641800B7A218 /* RxSwift.xcframework */; };
 		902A354D25D5641900B7A218 /* RxSwift.xcframework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 902A353625D5641800B7A218 /* RxSwift.xcframework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		902A354E25D5641900B7A218 /* MarkdownView.xcframework in Frameworks */ = {isa = PBXBuildFile; fileRef = 902A353725D5641800B7A218 /* MarkdownView.xcframework */; };
@@ -283,7 +281,6 @@
 				902A354925D5641800B7A218 /* RxRelay.xcframework in Embed Frameworks */,
 				902A353B25D5641800B7A218 /* RxCocoa.xcframework in Embed Frameworks */,
 				902A353D25D5641800B7A218 /* Kingfisher.xcframework in Embed Frameworks */,
-				902A354B25D5641800B7A218 /* RxOptional.xcframework in Embed Frameworks */,
 				902A354325D5641800B7A218 /* IGListDiffKit.xcframework in Embed Frameworks */,
 				902A354125D5641800B7A218 /* SwiftyBeaver.xcframework in Embed Frameworks */,
 				902A354D25D5641900B7A218 /* RxSwift.xcframework in Embed Frameworks */,
@@ -532,7 +529,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				902A353E25D5641800B7A218 /* IGListKit.xcframework in Frameworks */,
-				902A354A25D5641800B7A218 /* RxOptional.xcframework in Frameworks */,
 				902A354425D5641800B7A218 /* KeychainAccess.xcframework in Frameworks */,
 				902A354E25D5641900B7A218 /* MarkdownView.xcframework in Frameworks */,
 				902A354825D5641800B7A218 /* RxRelay.xcframework in Frameworks */,
@@ -590,13 +586,6 @@
 				5519F4A431FA5C840D504DF0 /* Pods-ReduxExample-Redux.release.xcconfig */,
 			);
 			name = Pods;
-			sourceTree = "<group>";
-		};
-		AA2C2993212B09C8000C000B /* Views */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = Views;
 			sourceTree = "<group>";
 		};
 		AA38CB2121258C94004D10A7 /* Controllers */ = {
@@ -974,7 +963,6 @@
 				AABC60E7214BD19F00644C99 /* main.swift */,
 				AA6264252140173F00A2FD3D /* Protocol */,
 				AA38CB2121258C94004D10A7 /* Controllers */,
-				AA2C2993212B09C8000C000B /* Views */,
 				AAB52303213BBB7A002DCF42 /* Folio-UI-Collection */,
 				AA38CE502125A0C8004D10A7 /* Extensioons */,
 				AA9B21C4214694660096066D /* Generated */,

@@ -8,7 +8,7 @@ let Unreachable = "UnreachableCode"
 
 extension GitHubAPI.ErrorResponse {
     public var responseError: ResponseError? {
-        if case .error(let statusCode, let data, let error) = self {
+        if case .error(let statusCode, let data, _, let error) = self {
             return ResponseError(statusCode: statusCode, data: data, error: error)
         }
         return nil
@@ -162,10 +162,10 @@ public struct ResponseError: Error, Equatable {
         self.error = error
     }
 
-    public func decodeBadRequest<T>(_ type: T.Type) -> T? where T: Decodable {
-        guard statusCode == badRequest else { return nil }
-        guard let data = data else { return nil }
-        return GitHubAPI.CodableHelper.decode(type, from: data).decodableObj
+    public func decodeBadRequest<T>(_ type: T.Type) -> Swift.Result<T, Error> where T: Decodable {
+        guard statusCode == badRequest else { return .failure(APIDomainError.unknownError) }
+        guard let data = data else { return .failure(APIDomainError.unknownError) }
+        return GitHubAPI.CodableHelper.decode(type, from: data)
     }
 }
 

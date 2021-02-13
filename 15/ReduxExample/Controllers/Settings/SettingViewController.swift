@@ -1,7 +1,7 @@
 import UIKit
 import RxSwift
 import RxCocoa
-import RxOptional
+
 import Kingfisher
 import Redux
 
@@ -54,9 +54,8 @@ final class SettingViewController: UIViewController, HasWeakStateDisposeBag {
             .bind(to: Binder(self) { $0.setAvatarImage(with: $1) })
             .disposed(by: disposeBag)
         state
-            .map { $0.shouldRequestTrigger }
+            .compactMap { $0.shouldRequestTrigger }
             .distinctUntilChanged()
-            .filterNil()
             .bind(to: Binder(self) { $0.request($1.connectionType) })
             .disposed(by: disposeBag)
 

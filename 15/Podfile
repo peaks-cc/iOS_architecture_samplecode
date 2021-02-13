@@ -1,5 +1,5 @@
 # Uncomment the next line to define a global platform for your project
-platform :ios, '12.0'
+platform :ios, '13.0'
 
 # ignore all warnings from all pods
 inhibit_all_warnings!
@@ -21,20 +21,23 @@ target 'ReduxExample' do
 
   target 'ReduxTests' do
     inherit! :search_paths
-    pod 'Mockingjay'
+    pod 'Mockingjay', '3.0.0-alpha.1'
+    pod 'URITemplate', :git => 'https://github.com/kylef/URITemplate.swift', :branch => 'master'
     pod 'MirrorDiffKit'
   end
 
   target 'ReduxExampleTests' do
     inherit! :search_paths
     pod 'iOSSnapshotTestCase'
-    pod 'Mockingjay'
+    pod 'Mockingjay', '3.0.0-alpha.1'
+    pod 'URITemplate', :git => 'https://github.com/kylef/URITemplate.swift', :branch => 'master'
     pod 'MirrorDiffKit'
   end
 
   target 'ReduxExampleUITests' do
     inherit! :search_paths
-    pod 'Mockingjay'
+    pod 'Mockingjay', '3.0.0-alpha.1'
+    pod 'URITemplate', :git => 'https://github.com/kylef/URITemplate.swift', :branch => 'master'
   end
 end
 
