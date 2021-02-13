@@ -10,7 +10,7 @@ This is a sample App to learn redux architecture.
 - Xcode 12+
 - Swift 5.3
 - Ruby 2.3+
-- Carthage
+- Carthage 0.37.0
 
 ## Getting Started
 
